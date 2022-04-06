@@ -11,9 +11,12 @@
   "dependencies": {
     "@emotion/babel-plugin": "^11.7.2",
     "@emotion/react": "^11.9.0",
+    "framer-motion": "^6.2.9",
     "next": "12.1.4",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "recoil": "^0.7.0",
+    "swr": "^1.2.2"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
