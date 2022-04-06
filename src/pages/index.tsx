@@ -1,3 +1,7 @@
 export default function Root() {
-  return <div></div>;
+  return (
+    <div>
+      <h1>영감탱</h1>
+    </div>
+  );
 }
