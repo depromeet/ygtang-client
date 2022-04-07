@@ -29,9 +29,21 @@ module.exports = {
     'react/jsx-no-target-blank': 'error',
     'import/no-duplicates': 'error',
     'import/newline-after-import': 'error',
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
 
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          // react > next > @ > ~ > a~z
+          ['^react$', '^next', '^@', '^~', '^[a-z]'],
+          // `../` > './'
+          ['^\\.\\.(?!/?$)', '^\\.\\./?$', '^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+          // Side effect imports
+          ['^\\u0000'],
+        ],
+      },
+    ],
+    'simple-import-sort/exports': 'error',
     'import/default': 'off',
   },
 };
