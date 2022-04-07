@@ -1,6 +1,6 @@
-import '@emotion/react';
-
 import CustomTheme from './Theme';
+
+import '@emotion/react';
 
 type CustomThemeType = typeof CustomTheme;
 
