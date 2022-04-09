@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { UrlObject } from 'url';
 
-type RouterPathType = `/` | '/test';
+export type RouterPathType = `/` | '/test';
 
 export default function useInternalRouter() {
   const router = useRouter();
