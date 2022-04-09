@@ -1,5 +1,5 @@
-import { ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';
+import { ThemeProvider } from '@emotion/react';
 import { RecoilRoot } from 'recoil';
 
 import Theme from '../styles/Theme';
