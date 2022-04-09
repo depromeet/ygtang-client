@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { RouterPathType } from '~/hooks/common/useInternalRouter';
 
-interface Props extends ComponentProps<typeof Link> {
+interface InternalLinkProps extends ComponentProps<typeof Link> {
   href: RouterPathType;
 }
 
@@ -12,7 +12,7 @@ interface Props extends ComponentProps<typeof Link> {
  * 
  * 내부 링크를 type safe하게 사용할 수 있는 컴포넌트입니다.
  * 
- * @param {Props} {@link Props}
+ * @param {InternalLinkProps} {@link InternalLinkProps}
  * 
  * @example ```tsx
     <InternalLink href="/">
@@ -26,6 +26,6 @@ interface Props extends ComponentProps<typeof Link> {
     </InternalLink>
  * ```
  */
-export default function InternalLink(props: Props) {
+export default function InternalLink(props: InternalLinkProps) {
   return <Link {...props}>{props.children}</Link>;
 }
