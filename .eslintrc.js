@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['next', 'prettier', 'plugin:import/recommended', 'plugin:import/typescript'],
-  plugins: ['prettier', 'import', '@typescript-eslint', 'simple-import-sort'],
+  plugins: ['prettier', 'import', '@typescript-eslint', 'simple-import-sort', 'ygt-rules'],
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -46,5 +46,7 @@ module.exports = {
     ],
     'simple-import-sort/exports': 'error',
     'import/default': 'off',
+
+    'ygt-rules/internal-router-passhref': 'warn',
   },
 };
