@@ -9,7 +9,11 @@ export default function ContentHeader() {
   );
 }
 
-const ContentHeaderCss = css``;
+const ContentHeaderCss = css`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+`;
 
 const HeaderButtonCss = () => css`
   width: 32px;
@@ -17,4 +21,8 @@ const HeaderButtonCss = () => css`
   border: 0.5px solid #e6e6e6;
   font-weight: 700;
   font-size: 10px;
+
+  :not(:last-child) {
+    margin-right: 8px;
+  }
 `;

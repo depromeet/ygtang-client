@@ -7,8 +7,20 @@ export default function ContentView() {
     <div css={ContentViewCss}>
       <ContentThumbnail />
       <ContentThumbnail />
+      <ContentThumbnail />
+      <ContentThumbnail />
+      <ContentThumbnail />
+      <ContentThumbnail />
+      <ContentThumbnail />
+      <ContentThumbnail />
+      <ContentThumbnail />
+      <ContentThumbnail />
     </div>
   );
 }
 
-const ContentViewCss = css``;
+const ContentViewCss = css`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+`;
