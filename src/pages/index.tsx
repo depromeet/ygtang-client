@@ -1,23 +1,15 @@
-import { css, Theme } from '@emotion/react';
-import { motion } from 'framer-motion';
+import { css } from '@emotion/react';
+
+import ContentHeader from '~/components/home/ContentHeader';
+import ContentView from '~/components/home/ContentView';
 
 export default function Root() {
   return (
-    <div>
-      <h1 css={titleCss}>영감탱</h1>
-      <div css={sampleCss}></div>
-      <motion.h2 drag>드래그해보세용</motion.h2>
-    </div>
+    <article css={pageCss}>
+      <ContentHeader />
+      <ContentView />
+    </article>
   );
 }
 
-const titleCss = css`
-  color: red;
-`;
-
-const sampleCss = (theme: Theme) => css`
-  width: 100px;
-  height: 100px;
-  color: white;
-  background-color: ${theme.color.black};
-`;
+const pageCss = css``;
