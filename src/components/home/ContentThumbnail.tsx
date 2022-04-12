@@ -21,8 +21,8 @@ export default function ContentThumbnail() {
         </p>
         <div css={contentTagsCss}>
           <Tag text="영감" />
-          <Tag text="브랜드 디자인 레퍼런스 모음집" />
           <Tag text="UX/UI" />
+          <Tag text="브랜드 디자인 레퍼런스 모음집" />
           <Tag text="디자인인사이트" />
         </div>
       </div>
@@ -37,7 +37,9 @@ const contentThumbnailBoxCss = (theme: Theme) => css`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 12px;
+  padding: ${contentThumbnailPadding};
+  padding-right: 0;
+  padding-bottom: 0;
   background: ${theme.color.gray};
   border-radius: 4px;
 
@@ -51,12 +53,14 @@ const contentThumbnailBoxCss = (theme: Theme) => css`
 const contentThumbnailCss = css`
   position: absolute;
   overflow: hidden;
-  width: calc(100% - ${contentThumbnailPadding} * 2);
-  height: calc(100% - ${contentThumbnailPadding} * 2);
+
+  height: calc(100% - ${contentThumbnailPadding});
 `;
 
 const contentText = css`
-  height: calc(100% - ${contentThumbnailPadding} * 2 - ${contentTagHeight});
+  width: calc(100% - ${contentThumbnailPadding});
+  height: calc(100% - ${contentTagHeight});
+  background: #fbfbfb;
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;

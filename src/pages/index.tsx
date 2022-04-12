@@ -12,4 +12,6 @@ export default function Root() {
   );
 }
 
-const pageCss = css``;
+const pageCss = css`
+  padding: 16px;
+`;
