@@ -66,9 +66,4 @@ const contentTagsCss = css`
   gap: 8px;
   height: ${contentTagHeight};
   overflow-x: scroll;
-  -ms-overflow-style: none;
-
-  ::-webkit-scrollbar {
-    display: none !important;
-  }
 `;
