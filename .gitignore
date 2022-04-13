@@ -36,7 +36,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 # editor
-.vscode/*
-!.vscode/extensions.json
-!.vscode/*.code-snippets
 .idea
+/.vscode
