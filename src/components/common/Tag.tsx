@@ -13,8 +13,4 @@ const tagCss = css`
   font-size: 12px;
   line-height: 14px;
   flex-shrink: 0;
-
-  :not(:last-child) {
-    margin-right: 8px;
-  }
 `;

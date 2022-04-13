@@ -1,28 +1,25 @@
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 
 export default function ContentHeader() {
   return (
-    <div css={ContentHeaderCss}>
+    <header css={ContentHeaderCss}>
       <button css={HeaderButtonCss}>태그</button>
       <button css={HeaderButtonCss}>설정</button>
-    </div>
+    </header>
   );
 }
 
 const ContentHeaderCss = css`
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
   margin-bottom: 20px;
 `;
 
-const HeaderButtonCss = () => css`
+const HeaderButtonCss = (theme: Theme) => css`
   width: 32px;
   height: 32px;
-  border: 0.5px solid #e6e6e6;
+  background: ${theme.color.gray};
   font-weight: 700;
   font-size: 10px;
-
-  :not(:last-child) {
-    margin-right: 8px;
-  }
 `;
