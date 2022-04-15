@@ -7,6 +7,7 @@ export default function WithRouterGard({ children }: Props): JSX.Element {
 
   useEffect(() => {
     authCheck(router.asPath);
+    router.events.on('routeChangeStart', hideContent);
     router.events.on('routeChangeComplete', authCheck);
 
     return () => {
