@@ -1,0 +1,1 @@
+export const PUBLIC_ROUTES = ['/login', '/password', '/signup'];
