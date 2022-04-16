@@ -17,7 +17,6 @@ export default function WithRouterGard({ children }: Props): JSX.Element {
   }, []);
 
   const hideContent = () => {
-    router.events.on('routeChangeStart', hideContent);
     setAuthorized(false);
   };
 
