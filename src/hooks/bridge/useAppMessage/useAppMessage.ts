@@ -2,14 +2,14 @@ import { useCallback } from 'react';
 
 type MessageAction = 'TestAction';
 
-interface MessageData {
+export interface AppMessageData {
   action: MessageAction;
   data: any;
 }
 
 export function useAppMessage() {
   const listener = useCallback(({ data: rawData }: MessageEvent) => {
-    const { action, data } = JSON.parse(rawData) as MessageData;
+    const { action, data } = JSON.parse(rawData) as AppMessageData;
     switch (action) {
       case 'TestAction':
         console.log('[TEST] TestAction을 받았어요!!');
