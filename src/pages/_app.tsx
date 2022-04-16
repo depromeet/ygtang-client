@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import { css, ThemeProvider } from '@emotion/react';
 import { RecoilRoot } from 'recoil';
 
+import GlobalStyle from '~/styles/GlobalStyle';
 import Theme from '~/styles/Theme';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -10,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <ThemeProvider theme={Theme}>
         <Layout>
+          <GlobalStyle />
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>
