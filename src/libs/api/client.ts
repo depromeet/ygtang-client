@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '개발할 때 쓸 주소' : '프로덕트 주소',
+  baseURL: process.env.NODE_ENV === 'development' ? ' http://localhost:3004/' : 'production API',
   withCredentials: true,
 });
 
@@ -10,7 +10,7 @@ function interceptorRequestFulfilled(config: AxiosRequestConfig) {
   return {
     ...config,
     headers: {
-      Authorization: `Bearer 어쩌구토큰`,
+      Authorization: `Bearer token`,
     },
   };
 }
@@ -27,8 +27,7 @@ function interceptorResponseFulfilled(res: AxiosResponse) {
 }
 
 function interceptorResponseRejected(error: AxiosError) {
-  // todo: error api spec에 맞춰서 수정해야함
-  return Promise.reject(new Error(error.response?.data.에러메세지 ?? error));
+  return Promise.reject(new Error(error.response?.data?.message ?? error));
 }
 
 instance.interceptors.response.use(interceptorResponseFulfilled, interceptorResponseRejected);
