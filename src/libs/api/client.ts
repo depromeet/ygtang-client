@@ -27,10 +27,6 @@ function interceptorResponseFulfilled(res: AxiosResponse) {
 }
 
 function interceptorResponseRejected(error: AxiosError) {
-  if (error.response?.data?.message != null) {
-    return { message: error.response?.data?.message };
-  }
-
   return Promise.reject(new Error(error.response?.data?.message ?? error));
 }
 
