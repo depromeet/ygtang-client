@@ -1,24 +1,24 @@
 import { useCallback } from 'react';
 
-type MessageAction = 'TestAction';
-
 export interface AppMessageData {
-  action: MessageAction;
+  action: string;
   data: any;
 }
 
-export function useAppMessage() {
-  const listener = useCallback(({ data: rawData }: MessageEvent) => {
-    const { action, data } = JSON.parse(rawData) as AppMessageData;
-    switch (action) {
-      case 'TestAction':
-        console.log('[TEST] TestAction을 받았어요!!');
-        console.log('data: ', data);
-        break;
-      default:
-        throw Error('정의되지 않은 action 입니다.');
-    }
-  }, []);
+export interface AppMessageArgs {
+  handler: (action: string, data?: any) => void;
+}
+
+export function useAppMessage({ handler }: AppMessageArgs) {
+  const listener = useCallback(
+    ({ data: rawData }: MessageEvent) => {
+      if (handler) {
+        const { action, data } = JSON.parse(rawData) as AppMessageData;
+        handler(action, data);
+      }
+    },
+    [handler]
+  );
 
   const startListening = () => {
     if (window.ReactNativeWebView) {
