@@ -1,9 +1,9 @@
 import { PropsWithChildren, useEffect } from 'react';
 
-import { useAppMessage } from './useAppMessage';
+import { AppMessageArgs, useAppMessage } from './useAppMessage';
 
-export function AppMessageListener({ children }: PropsWithChildren<unknown>) {
-  const { startListening, stopListening } = useAppMessage();
+export function AppMessageListener({ children, handler }: PropsWithChildren<AppMessageArgs>) {
+  const { startListening, stopListening } = useAppMessage({ handler });
 
   useEffect(() => {
     if (startListening) {
