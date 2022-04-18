@@ -18,7 +18,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["@emotion/react/types/css-prop"]
+    "types": ["@emotion/react/types/css-prop"],
+    "typeRoots": ["@types"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "mock-server", "eslint"]
