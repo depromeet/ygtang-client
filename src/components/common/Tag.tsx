@@ -20,7 +20,7 @@ export default function Tag({ text, deletable = false, onDelete = () => {} }: Pr
   );
 }
 
-const selectColorByRandom = (theme: Theme) => {
+const selectRandomColor = (theme: Theme) => {
   const randomNumber = Math.floor(Math.random() * 3 + 1);
 
   switch (randomNumber) {
@@ -40,7 +40,7 @@ const tagCss = (theme: Theme) => css`
   height: 28px;
   padding: 0 6px;
   border-radius: 4px;
-  background-color: ${selectColorByRandom(theme)};
+  background-color: ${selectRandomColor(theme)};
   font-weight: 500;
   font-size: 10px;
   line-height: 150%;
