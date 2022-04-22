@@ -1,6 +1,6 @@
 import { css, Theme } from '@emotion/react';
 
-import Thumbnail from '~/components/common/ThumbnailTag';
+import ThumbnailTag from '~/components/common/ThumbnailTag';
 
 export type ContentThumbnailType = 'image' | 'text' | 'link';
 
@@ -20,10 +20,10 @@ export default function ContentThumbnail() {
           콘텐츠의 텍스트는 다음과 같이 삽입됩니다. 콘텐츠의 텍스트는 다음과 같이 삽입됩니다.
         </p>
         <div css={contentTagsCss}>
-          <Thumbnail text="영감" />
-          <Thumbnail text="UX/UI" />
-          <Thumbnail text="브랜드 디자인 레퍼런스 모음집" />
-          <Thumbnail text="디자인인사이트" />
+          <ThumbnailTag text="영감" />
+          <ThumbnailTag text="UX/UI" />
+          <ThumbnailTag text="브랜드 디자인 레퍼런스 모음집" />
+          <ThumbnailTag text="디자인인사이트" />
         </div>
       </div>
     </section>

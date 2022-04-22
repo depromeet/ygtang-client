@@ -1,6 +1,11 @@
 import { css, Theme } from '@emotion/react';
 
-export default function Tag({ text }: { text: string }) {
+// TODO: Tag에 대한 프로퍼티가 정의되면 text은 변경될 예정입니다.
+interface Props {
+  text: string;
+}
+
+export default function ThumbnailTag({ text }: Props) {
   return <button css={tagCss}>#{text}</button>;
 }
 
