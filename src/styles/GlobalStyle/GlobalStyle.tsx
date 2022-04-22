@@ -21,7 +21,7 @@ const globalCss = (theme: Theme) => css`
   }
 
   :root {
-    color: ${theme.color.black};
+    color: ${theme.color.gray06};
 
     body {
       -webkit-user-select: none;
