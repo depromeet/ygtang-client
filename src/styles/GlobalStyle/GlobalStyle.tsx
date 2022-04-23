@@ -9,19 +9,11 @@ export default function GlobalStyle() {
 const globalCss = (theme: Theme) => css`
   ${resetCss}
 
-  * {
-    box-sizing: border-box;
-    word-break: keep-all;
-    word-wrap: break-word;
-    -ms-overflow-style: none;
-
-    ::-webkit-scrollbar {
-      display: none !important;
-    }
-  }
-
   :root {
     color: ${theme.color.gray06};
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+      'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+      'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 
     body {
       -webkit-user-select: none;
@@ -34,6 +26,18 @@ const globalCss = (theme: Theme) => css`
         -moz-user-select: all;
         -ms-user-select: all;
         user-select: all;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: inherit;
+      word-break: keep-all;
+      word-wrap: break-word;
+      -ms-overflow-style: none;
+
+      ::-webkit-scrollbar {
+        display: none !important;
       }
     }
   }
