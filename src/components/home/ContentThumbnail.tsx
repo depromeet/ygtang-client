@@ -41,7 +41,7 @@ const contentThumbnailBoxCss = (theme: Theme) => css`
   padding: ${contentThumbnailPadding};
   padding-right: 0;
   padding-bottom: 0;
-  background: ${theme.color.gray};
+  background: ${theme.color.background};
   border-radius: 4px;
 `;
 

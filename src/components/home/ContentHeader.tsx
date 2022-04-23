@@ -19,7 +19,7 @@ const ContentHeaderCss = css`
 const HeaderButtonCss = (theme: Theme) => css`
   width: 32px;
   height: 32px;
-  background: ${theme.color.gray};
+  background: ${theme.color.background};
   font-weight: 700;
   font-size: 10px;
 `;
