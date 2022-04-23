@@ -1,8 +1,6 @@
-import { PropsWithChildren } from 'react';
-
 import Svg, { SvgProps } from '~/components/common/Svg';
 
-export function SearchIcon({ ...props }: PropsWithChildren<SvgProps>) {
+export function SearchIcon({ ...props }: SvgProps) {
   return (
     <Svg viewBox={24} {...props}>
       <path
