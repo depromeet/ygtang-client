@@ -6,7 +6,7 @@ interface ModalWrapperProps {
   isShowing: boolean;
 }
 
-export default function ModalWrapper({
+export default function PortalWrapper({
   children,
   isShowing,
 }: PropsWithChildren<ModalWrapperProps>) {
