@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 
-export type SvgProps = {
+export interface SvgProps {
   /**
    * width, height 값입니다. 사전 지정된 width, height이 존재한다면 무시됩니다.
    */
@@ -29,9 +29,9 @@ export type SvgProps = {
    * 보통은 사용되지 않으나 SVG의 구성이 특이하여 parent의 fill로는 해결되지 않을 때에 사용합니다.
    */
   isUsingFill?: boolean;
-};
+}
 
-export type SvgComponentProps = {
+export interface SvgComponentProps {
   /**
    * SVG의 `viewBox` 옵션입니다.
    *
@@ -40,7 +40,7 @@ export type SvgComponentProps = {
    * 2. "0 0 24 24" 처럼 width, height가 동일한 경우 `24`만 입력해도 됩니다.
    */
   viewBox?: [number, number, number, number] | number;
-};
+}
 
 export default function Svg({
   size,
