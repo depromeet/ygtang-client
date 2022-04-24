@@ -18,5 +18,6 @@ const buttonCss = (theme: Theme) => css`
   border-radius: ${theme.borderRadius.default};
   color: ${theme.color.background};
   background-color: ${theme.color.gray05};
-  font-size: '12px';
+  font-size: 12px;
+  height: 26px;
 `;
