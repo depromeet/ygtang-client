@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import { css, Theme, ThemeProvider } from '@emotion/react';
 import { RecoilRoot } from 'recoil';
 
-import { ToastSection } from '~/components/common/ToastSection';
+import ToastSection from '~/components/common/ToastSection';
 import GlobalStyle from '~/styles/GlobalStyle';
 import CustomTheme from '~/styles/Theme';
 
