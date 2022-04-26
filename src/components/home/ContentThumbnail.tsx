@@ -35,6 +35,7 @@ const contentTagHeight = '40px';
 
 const contentThumbnailBoxCss = (theme: Theme) => css`
   position: relative;
+  /* TODO: 상대적인 크기 필요 */
   width: 100%;
   height: 100%;
   aspect-ratio: 1;
