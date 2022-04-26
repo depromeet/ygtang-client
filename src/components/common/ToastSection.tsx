@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { defaultFadeInUpVariants } from '~/constants/motions';
 import { useToast } from '~/store/Toast';
 
-export function ToastSection() {
+export default function ToastSection() {
   const { currentToast } = useToast();
 
   return (
