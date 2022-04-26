@@ -15,6 +15,14 @@ const theme = {
     dim02: 'rgba(0, 0, 0, 0.3)',
     dim03: 'rgba(0, 0, 0, 0.6)', //screen dim
   },
+  borderRadius: {
+    default: '4px',
+    outer: '6px',
+  },
+  size: {
+    maxWidth: '480px',
+    layoutPadding: '0 16px',
+  },
 };
 
 export default theme;
