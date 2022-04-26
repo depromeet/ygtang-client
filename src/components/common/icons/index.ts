@@ -1,3 +1,4 @@
+export { CancelIcon } from './CancelIcon';
 export { CheckCircleIcon } from './CheckCircleIcon';
 export { CheckIcon } from './CheckIcon';
 export { ChevronIcon } from './ChevronIcon';
