@@ -46,6 +46,7 @@ module.exports = {
     ],
     'simple-import-sort/exports': 'error',
     'import/default': 'off',
+    'import/namespace': 'off',
 
     'ygt-rules/internal-router-passhref': 'warn',
   },
