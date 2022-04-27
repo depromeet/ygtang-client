@@ -1,9 +1,11 @@
 import Button, { CTAButton, FilledButton, GhostButton } from '~/components/common/Button';
+import { useToast } from '~/store/Toast';
 
 export default function Test() {
+  const { fireToast } = useToast();
+
   return (
     <div>
-      <h2>버튼</h2>
       <Button>텍스트 버튼</Button>
 
       <GhostButton>고스트 라지</GhostButton>
@@ -15,6 +17,8 @@ export default function Test() {
 
       <FilledButton>Filled 버튼</FilledButton>
       <FilledButton colorType="light">Filled 버튼 라이트</FilledButton>
+
+      <Button onClick={() => fireToast({ content: '토스트 메세지' })}>토스트 발사 버튼</Button>
     </div>
   );
 }

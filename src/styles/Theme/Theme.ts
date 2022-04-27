@@ -19,6 +19,10 @@ const theme = {
     default: '4px',
     outer: '6px',
   },
+  size: {
+    maxWidth: '480px',
+    layoutPadding: '0 16px',
+  },
 };
 
 export default theme;
