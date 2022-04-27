@@ -27,9 +27,11 @@ export default function ToastSection() {
   );
 }
 
+const BOTTOM_HEIGHT = '64px';
+
 const wrapperCss = (theme: Theme) => css`
   position: fixed;
-  bottom: 20px;
+  bottom: ${BOTTOM_HEIGHT};
   left: 0;
   right: 0;
   width: 100%;
