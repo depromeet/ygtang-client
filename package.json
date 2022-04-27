@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@emotion/babel-plugin": "^11.7.2",
@@ -42,7 +44,10 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-ygt-rules": "file:eslint",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^28.0.2",
+    "jest-environment-jsdom": "^28.0.2",
+    "jest-watch-typeahead": "^1.1.0",
     "prettier": "^2.6.2",
     "typescript": "4.6.3"
   }
