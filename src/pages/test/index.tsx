@@ -1,4 +1,5 @@
 import Button, { CTAButton, FilledButton, GhostButton } from '~/components/common/Button';
+import { CheckCircleIcon } from '~/components/common/icons';
 import { Input } from '~/components/common/TextField/Input';
 import { useToast } from '~/store/Toast';
 
@@ -25,7 +26,7 @@ export default function Test() {
 
       <hr />
 
-      <Input placeholder={'이것은 input 이랍니다'} />
+      <Input placeholder={'이것은 input 이랍니다'} append={<CheckCircleIcon />} />
       <br />
       <Input as="textarea" placeholder={'이것은 textarea 에요'} rows={10} />
     </div>

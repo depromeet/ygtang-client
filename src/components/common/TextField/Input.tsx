@@ -14,7 +14,7 @@ export function Input({ as = 'input', append, ...props }: InputProps) {
   return (
     <div ref={inputWrapperRef} css={inputWrapperCss}>
       {jsx(as, { css: inputElementCss, ...props }, null)}
-      {append}
+      {append && <div css={appendWrapperCss}>{append}</div>}
     </div>
   );
 }
@@ -44,4 +44,11 @@ const inputElementCss = (theme: Theme) => css`
   &::placeholder {
     color: ${theme.color.gray03};
   }
+`;
+
+const appendWrapperCss = css`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
 `;
