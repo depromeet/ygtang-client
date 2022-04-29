@@ -18,7 +18,7 @@
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "recoil": "^0.7.0",
+    "recoil": "^0.7.2",
     "swr": "^1.2.2"
   },
   "devDependencies": {
