@@ -18,7 +18,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["@emotion/react/types/css-prop"],
+    "types": [
+      "@emotion/react/types/css-prop",
+      "@types/jest",
+      "@testing-library/jest-dom",
+      "cypress"
+    ],
     "typeRoots": ["@types"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
