@@ -80,6 +80,6 @@ const inputElementCss = (theme: Theme, fixedHeight?: number, isAppend?: boolean)
 
 const appendWrapperCss = css`
   position: absolute;
-  top: 10px;
+  top: 14px;
   right: 10px;
 `;
