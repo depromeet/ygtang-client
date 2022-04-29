@@ -32,11 +32,14 @@ export function TextField({ label, isSuccess, feedback, ...props }: TextFieldPro
   const id = useId();
   return (
     <div css={wrapperCss}>
-      {label && (
-        <label htmlFor={'input-' + id} css={labelCss}>
-          {label}
-        </label>
-      )}
+      {label &&
+        (typeof label === 'string' ? (
+          <label htmlFor={'input-' + id} css={labelCss}>
+            {label}
+          </label>
+        ) : (
+          label
+        ))}
       <Input
         id={'input-' + id}
         {...props}
@@ -48,7 +51,8 @@ export function TextField({ label, isSuccess, feedback, ...props }: TextFieldPro
           )
         }
       />
-      {feedback && <p css={feedbackMessageCss}>{feedback}</p>}
+      {feedback &&
+        (typeof feedback === 'string' ? <p css={feedbackMessageCss}>{feedback}</p> : feedback)}
     </div>
   );
 }
