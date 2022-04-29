@@ -11,7 +11,7 @@ export interface TextFieldProps extends InputProps {
    *
    * `string`을 제공하는 경우 디자인 시스템의 라벨 스타일로 표시됩니다.
    */
-  label?: string | ReactNode;
+  label?: ReactNode;
 
   /**
    * 성공 상태의 여부입니다.
@@ -25,7 +25,7 @@ export interface TextFieldProps extends InputProps {
    *
    * `string`을 제공하는 경우 디자인 시스템의 "에러 메세지"의 스타일로 표시됩니다.
    */
-  feedback?: string | ReactNode;
+  feedback?: ReactNode;
 }
 
 export function TextField({ label, isSuccess, feedback, ...props }: TextFieldProps) {
