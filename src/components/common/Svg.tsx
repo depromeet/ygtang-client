@@ -29,6 +29,11 @@ export interface SvgProps {
    * 보통은 사용되지 않으나 SVG의 구성이 특이하여 parent의 fill로는 해결되지 않을 때에 사용합니다.
    */
   isUsingFill?: boolean;
+
+  /**
+   * emotion의 style의 적용을 위해 사용됩니다.
+   */
+  className?: string;
 }
 
 export interface SvgComponentProps {
@@ -50,9 +55,11 @@ export default function Svg({
   color,
   isUsingFill = true,
   children,
+  className,
 }: PropsWithChildren<SvgProps & SvgComponentProps>) {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width={width ?? size ?? 24}
       height={height ?? size ?? 24}
