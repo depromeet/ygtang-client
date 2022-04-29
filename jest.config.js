@@ -11,6 +11,7 @@ const customJestConfig = {
   testRegex: '(/__tests__/.*|(\\.|/)(test))\\.[jt]sx?$',
   collectCoverageFrom: ['**/src/**/*.{js,ts,jsx,tsx}'],
   moduleNameMapper: {
+    '~/(.*)': '<rootDir>/src/$1',
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|ico)$': 'identity-obj-proxy',
   },
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
