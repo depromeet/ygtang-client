@@ -1,4 +1,10 @@
-import Button, { CTAButton, FilledButton, GhostButton } from '~/components/common/Button';
+import Button, {
+  CTAButton,
+  FilledButton,
+  GhostButton,
+  IconButton,
+} from '~/components/common/Button';
+import NavigationBar from '~/components/common/NavigationBar';
 import { useToast } from '~/store/Toast';
 
 export default function Test() {
@@ -6,6 +12,8 @@ export default function Test() {
 
   return (
     <div>
+      <NavigationBar title="Title" rightElement={<IconButton iconName="DeleteIcon" light />} />
+
       <Button>텍스트 버튼</Button>
 
       <GhostButton>고스트 라지</GhostButton>
