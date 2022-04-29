@@ -4,9 +4,9 @@ import { css, useTheme } from '@emotion/react';
 import { CheckCircleIcon, ChevronIcon } from './icons';
 
 export interface Props {
-  isChecked?: boolean;
-  onToggle?: () => void;
-  onClickChevron?: () => void;
+  isChecked: boolean;
+  onToggle: VoidFunction;
+  onClickChevron?: VoidFunction;
 }
 
 export default function CheckList({
