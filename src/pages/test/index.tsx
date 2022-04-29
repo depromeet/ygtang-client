@@ -26,14 +26,25 @@ export default function Test() {
       <Button onClick={() => fireToast({ content: '토스트 메세지' })}>토스트 발사 버튼</Button>
 
       <hr />
-
-      <Input placeholder={'이것은 input 이랍니다'} append={<CheckCircleIcon />} />
-      <br />
-      <Input as="textarea" placeholder={'이것은 textarea 에요'} rows={10} />
-      <br />
       <TextField label={'라벨라벨'} placeholder={'플레이스 홀더'} />
       <br />
+      <TextField
+        label={'라벨라벨'}
+        placeholder={'플레이스 홀더'}
+        value={'성공한 상태의 input'}
+        isSuccess
+      />
+      <br />
       <TextField as={'textarea'} rows={10} label={'라벨라벨'} placeholder={'플레이스 홀더'} />
+      <br />
+      <TextField
+        as={'textarea'}
+        rows={10}
+        label={'라벨라벨'}
+        placeholder={'플레이스 홀더'}
+        value={'성공한 상태의 textArea'}
+        isSuccess
+      />
     </div>
   );
 }
