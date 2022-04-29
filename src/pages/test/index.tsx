@@ -4,6 +4,7 @@ import Button, {
   GhostButton,
   IconButton,
 } from '~/components/common/Button';
+import CheckList from '~/components/common/CheckList';
 import NavigationBar from '~/components/common/NavigationBar';
 import { useToast } from '~/store/Toast';
 
@@ -27,6 +28,13 @@ export default function Test() {
       <FilledButton colorType="light">Filled 버튼 라이트</FilledButton>
 
       <Button onClick={() => fireToast({ content: '토스트 메세지' })}>토스트 발사 버튼</Button>
+
+      <CheckList isChecked={true} onToggle={() => {}}>
+        체크 리스트
+      </CheckList>
+      <CheckList isChecked={false} onToggle={() => {}} onClickChevron={() => {}}>
+        체크 리스트
+      </CheckList>
     </div>
   );
 }
