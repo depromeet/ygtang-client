@@ -1,7 +1,5 @@
 import Button, { CTAButton, FilledButton, GhostButton } from '~/components/common/Button';
-import { CheckCircleIcon } from '~/components/common/icons';
 import TextField from '~/components/common/TextField';
-import { Input } from '~/components/common/TextField/Input';
 import { useToast } from '~/store/Toast';
 
 export default function Test() {
@@ -32,6 +30,7 @@ export default function Test() {
         label={'라벨라벨'}
         placeholder={'플레이스 홀더'}
         value={'성공한 상태의 input'}
+        feedback={'피드백 메시지입니다. 디자인 시스템에선 에러 메세지로 표시되어 있어요.'}
         isSuccess
       />
       <br />

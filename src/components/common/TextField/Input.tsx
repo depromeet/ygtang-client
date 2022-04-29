@@ -67,7 +67,7 @@ const inputElementCss = (theme: Theme, fixedHeight?: number, isAppend?: boolean)
   font-weight: 500;
   font-size: 14px;
   outline: none;
-  line-height: 150%;
+  line-height: 2;
 
   &:focus {
     border-color: ${theme.color.gray03};
