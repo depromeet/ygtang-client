@@ -17,7 +17,7 @@ export default function ImageContent({ src, alt, width = '100%', height }: Image
       <button css={closeIconCss}>
         <CancelIcon isUsingFill color={Theme.color.gray05} />
       </button>
-      <img src={src} css={imgCss} alt={alt} />
+      <img src={src} css={imgBoxCss({ width, height })} alt={alt} />
     </div>
   );
 }
@@ -29,15 +29,12 @@ const imgBoxCss = ({ width, height }: { width: string; height?: string }) => css
   max-height: ${height ?? '450px'};
   overflow: hidden;
   border-radius: 4px;
-`;
-
-const imgCss = css`
-  z-index: 1;
+  object-fit: cover;
 `;
 
 const closeIconCss = css`
   position: absolute;
   top: 16px;
   right: 16px;
-  z-index: 2;
+  z-index: 1;
 `;
