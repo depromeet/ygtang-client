@@ -29,7 +29,6 @@ module.exports = {
     'react/jsx-no-target-blank': 'error',
     'import/no-duplicates': 'error',
     'import/newline-after-import': 'error',
-
     'simple-import-sort/imports': [
       'error',
       {
@@ -47,7 +46,8 @@ module.exports = {
     'simple-import-sort/exports': 'error',
     'import/default': 'off',
     'import/namespace': 'off',
-
+    '@next/next/no-img-element': 'off',
+    
     'ygt-rules/internal-router-passhref': 'warn',
   },
   overrides: [

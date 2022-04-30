@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { css } from '@emotion/react';
 
 import Theme from '~/styles/Theme';
@@ -18,7 +17,7 @@ export default function ImageContent({ src, alt, width = '100%', height }: Image
       <button css={closeIconCss}>
         <CancelIcon isUsingFill color={Theme.color.gray05} />
       </button>
-      <Image src={src} css={imgCss} alt={alt} layout="fill" objectFit="cover" />
+      <img src={src} css={imgCss} alt={alt} />
     </div>
   );
 }
