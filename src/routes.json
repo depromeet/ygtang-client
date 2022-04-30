@@ -1,5 +1,0 @@
-{
-  "/users/login": "/users-login",
-  "/users/emails/:email/exists": "/emails-exists",
-  "/users/nicknames/:nickname/exists": "/nicknames-exists"
-}
