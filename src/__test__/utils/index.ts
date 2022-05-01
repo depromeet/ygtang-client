@@ -1,0 +1,1 @@
+export { customRender } from './customRender';
