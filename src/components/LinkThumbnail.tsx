@@ -27,6 +27,7 @@ export default function LinkThumbnail({ edit = false, thumbnail }: Props) {
     }
   };
 
+  // NOTE: 추후에 API 나오면 여기서 그냥 Delete 실행
   const onDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -50,17 +51,18 @@ export default function LinkThumbnail({ edit = false, thumbnail }: Props) {
 
 const linkThumbnailUrlSize = 100;
 
-const linkThumbnailBoxCss = (theme: Theme) => css`
+const linkThumbnailBoxCss = () => css`
   display: flex;
   position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100px;
-  background-color: ${theme.color.gray01};
   border-radius: 4px;
 `;
-const linkThumbnailContentCss = (hasImage: boolean) => () =>
+const linkThumbnailContentCss = (hasImage: boolean) => (theme: Theme) =>
   css`
     padding: 16px;
+    background-color: ${theme.color.gray01};
     width: calc(100% - ${hasImage ? linkThumbnailUrlSize : 0}px);
   `;
 
@@ -84,7 +86,6 @@ const linkThumbnailUrlCss = (theme: Theme) => css`
 const linkThumbnailImageCss = (theme: Theme) => css`
   width: ${linkThumbnailUrlSize}px;
   height: 100%;
-  border-radius: 0px 4px 4px 0px;
   background-color: ${theme.color.gray02};
   object-fit: contain;
 `;
@@ -96,7 +97,6 @@ const closeButtonCss = (edit: boolean) => css`
   z-index: 1;
   right: 8px;
   top: 8px;
-  background-color: initial;
 `;
 
 const linkThumbnailLinkCss = css`
