@@ -29,10 +29,23 @@ export default function Test() {
 
       <Button onClick={() => fireToast({ content: '토스트 메세지' })}>토스트 발사 버튼</Button>
 
-      <CheckList isChecked={true} onToggle={() => {}}>
+      <CheckList
+        id="checkbox_1"
+        isChecked={true}
+        onToggle={checked => {
+          console.log(checked);
+        }}
+      >
         체크 리스트
       </CheckList>
-      <CheckList isChecked={false} onToggle={() => {}} onClickChevron={() => {}}>
+      <CheckList
+        id="checkbox_2"
+        isChecked={false}
+        onToggle={checked => {
+          console.log(checked);
+        }}
+        onClick={() => {}}
+      >
         체크 리스트
       </CheckList>
     </div>
