@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import Svg, { SvgProps } from '~/components/common/Svg';
 
-export interface Props extends SvgProps {
+export interface ChevronIconProps extends SvgProps {
   direction?: 'up' | 'right' | 'down' | 'left';
 }
 
