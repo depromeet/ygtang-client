@@ -7,6 +7,9 @@ import Button, {
 import TextField from '~/components/common/TextField';
 import NavigationBar from '~/components/common/NavigationBar';
 import { useToast } from '~/store/Toast';
+import { CheckIcon, SearchIcon } from '~/components/common/icons';
+import { css } from '@emotion/react';
+import theme from '~/styles/Theme';
 
 export default function Test() {
   const { fireToast } = useToast();
@@ -39,6 +42,23 @@ export default function Test() {
         placeholder={'플레이스 홀더'}
         value={'성공한 상태의 input'}
         feedback={'피드백 메시지입니다. 디자인 시스템에선 에러 메세지로 표시되어 있어요.'}
+        isSuccess
+      />
+      <br />
+      <TextField
+        label={'라벨벨'}
+        placeholder={'검색'}
+        feedback={'검색을 만들 땐 이렇게 사용하겠죠?'}
+        preAppend={
+          <div
+            css={css`
+              padding: 1px;
+              color: ${theme.color.gray04};
+            `}
+          >
+            <SearchIcon size={24} />
+          </div>
+        }
         isSuccess
       />
       <br />

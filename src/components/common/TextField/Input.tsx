@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes, useRef } from 'react';
+import { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from 'react';
 import { css, jsx, Theme, useTheme } from '@emotion/react';
 
 type InputAndTextarea = InputHTMLAttributes<HTMLInputElement> &
@@ -13,6 +13,13 @@ export interface InputProps extends InputAndTextarea {
   as?: 'input' | 'textarea';
 
   /**
+   * input 앞에 붙을 요소입니다. 보통 아이콘 삽입을 위해 사용합니다.
+   *
+   * preAppend가 존재하면 input에 `padding-left: 40px` 이 주어집니다.
+   */
+  preAppend?: ReactNode;
+
+  /**
    * input 뒤에 붙을 요소입니다. 보통 아이콘 삽입을 위해 사용합니다.
    *
    * append가 존재하면 input에 `padding-right: 40px` 이 주어집니다.
@@ -25,26 +32,26 @@ export interface InputProps extends InputAndTextarea {
   fixedHeight?: number;
 }
 
-export function Input({ as = 'input', append, fixedHeight, ...props }: InputProps) {
-  const inputWrapperRef = useRef<HTMLDivElement>(null);
+export function Input({ as = 'input', preAppend, append, fixedHeight, ...props }: InputProps) {
   const theme = useTheme();
 
   return (
-    <div ref={inputWrapperRef} css={inputWrapperCss}>
+    <div css={inputWrapperCss}>
+      {preAppend && <div css={appendWrapperCss('left')}>{preAppend}</div>}
       {jsx(
         as,
         {
           // textarea 일 경우에 330 설정, fixedHeight 가 정해져 있다면 우선
-          css: inputElementCss(
-            theme,
-            fixedHeight ?? (as === 'textarea' ? 330 : undefined),
-            typeof append !== 'undefined'
-          ),
+          css: inputElementCss(theme, {
+            fixedHeight: fixedHeight ?? (as === 'textarea' ? 330 : undefined),
+            isPreAppend: typeof preAppend !== 'undefined',
+            isAppend: typeof append !== 'undefined',
+          }),
           ...props,
         },
         null
       )}
-      {append && <div css={appendWrapperCss}>{append}</div>}
+      {append && <div css={appendWrapperCss('right')}>{append}</div>}
     </div>
   );
 }
@@ -53,10 +60,22 @@ const inputWrapperCss = css`
   position: relative;
 `;
 
-const inputElementCss = (theme: Theme, fixedHeight?: number, isAppend?: boolean) => css`
+const inputElementCss = (
+  theme: Theme,
+  {
+    fixedHeight,
+    isPreAppend,
+    isAppend,
+  }: {
+    fixedHeight?: number;
+    isPreAppend?: boolean;
+    isAppend?: boolean;
+  }
+) => css`
   width: 100%;
   ${fixedHeight && `height: ${fixedHeight}px;`}
   padding: 12px;
+  ${isPreAppend && `padding-left: 40px;`}
   ${isAppend && `padding-right: 40px;`}
 
   background: ${theme.color.gray01};
@@ -78,8 +97,8 @@ const inputElementCss = (theme: Theme, fixedHeight?: number, isAppend?: boolean)
   }
 `;
 
-const appendWrapperCss = css`
+const appendWrapperCss = (dim = 'right') => css`
   position: absolute;
   top: 14px;
-  right: 10px;
+  ${dim}: 10px;
 `;
