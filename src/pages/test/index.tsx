@@ -5,6 +5,7 @@ import Button, {
   IconButton,
 } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
+import LinkThumbnail from '~/components/LinkThumbnail';
 import { useToast } from '~/store/Toast';
 
 export default function Test() {
@@ -27,6 +28,37 @@ export default function Test() {
       <FilledButton colorType="light">Filled 버튼 라이트</FilledButton>
 
       <Button onClick={() => fireToast({ content: '토스트 메세지' })}>토스트 발사 버튼</Button>
+      <LinkThumbnail
+        thumbnail={{
+          title: '네이버',
+          url: 'https://www.naver.com',
+        }}
+      />
+      <LinkThumbnail
+        edit
+        thumbnail={{
+          title: '네이버',
+          url: 'https://www.naver.com',
+        }}
+      />
+      <LinkThumbnail
+        thumbnail={{
+          imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Naver_Logotype.svg/2560px-Naver_Logotype.svg.png',
+          title: '네이버',
+          url: 'https://www.naver.com',
+        }}
+      />
+      <LinkThumbnail
+        edit
+        thumbnail={{
+          imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Naver_Logotype.svg/2560px-Naver_Logotype.svg.png',
+          title:
+            '네이버 fjdsklfjdsalk;jdskajfkds dfkjdsakfj;dskfj;asdjfkl;dsjfkkldsajflkdsafkld;sjaf;lkjsdl;jfsdkl;fjdsl;jlk;sdjklfdsa;kl;fjsdaklfjkldsfjkldsfjkldsfjkldsfjkljklsdfjkldsklfdsjklfjkdlsfjklsdafjldsjkljkls',
+          url: 'https://www.naver.com',
+        }}
+      />
     </div>
   );
 }
