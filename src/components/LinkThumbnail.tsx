@@ -11,12 +11,12 @@ export interface LinkThumbnailMetaData {
   alt?: string;
 }
 
-export interface Props {
+export interface LinkThumbnailProps {
   edit?: boolean;
   thumbnail: LinkThumbnailMetaData;
 }
 
-export default function LinkThumbnail({ edit = false, thumbnail }: Props) {
+export default function LinkThumbnail({ edit = false, thumbnail }: LinkThumbnailProps) {
   const hasImage = () => {
     return Boolean(thumbnail?.imageUrl);
   };
