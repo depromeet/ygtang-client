@@ -3,7 +3,7 @@ import { css, useTheme } from '@emotion/react';
 
 import { CheckCircleIcon, ChevronIcon } from './icons';
 
-export interface Props {
+export interface CheckListProps {
   id: string;
   isChecked: boolean;
   onToggle: (checked: boolean) => void;
