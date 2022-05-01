@@ -16,7 +16,7 @@ export default function CheckList({
   isChecked,
   onToggle,
   onClick,
-}: PropsWithChildren<Props>) {
+}: PropsWithChildren<CheckListProps>) {
   const theme = useTheme();
 
   const [checked, setChecked] = useState(isChecked);
