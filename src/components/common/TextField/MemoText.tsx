@@ -8,11 +8,38 @@ import { EditIcon } from '../icons';
 import { TextField } from './TextField';
 
 export interface MemoTextProps {
+  /**
+   * 라벨에 들어갈 내용입니다.
+   *
+   * @default '메모'
+   */
   label?: string;
+
+  /**
+   * placeholder에 들어갈 내용입니다.
+   *
+   * @default '어떤 것이 영감을 주었나요?'
+   */
   placeholder?: string;
+
+  /**
+   * 수정 가능 여부입니다.
+   */
   editable?: boolean;
+
+  /**
+   * 글자 수 제한입니다. 지정하지 않을 경우 사용하지 않습니다.
+   */
   wordLimit?: number;
+
+  /**
+   * onChange 핸들링 함수입니다. 주입해주어야 합니다.
+   */
   onChange?: (value: string) => void;
+
+  /**
+   * 수정(저장) 아이콘을 누르면 실행되는 함수입니다. 주입해주어야 합니다.
+   */
   onSaveClick?: () => void;
 }
 
