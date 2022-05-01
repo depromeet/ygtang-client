@@ -4,7 +4,7 @@ import Button, {
   GhostButton,
   IconButton,
 } from '~/components/common/Button';
-import TextField from '~/components/common/TextField';
+import CheckList from '~/components/common/CheckList';
 import NavigationBar from '~/components/common/NavigationBar';
 import { useToast } from '~/store/Toast';
 import { CheckIcon, SearchIcon } from '~/components/common/icons';
@@ -72,6 +72,25 @@ export default function Test() {
         value={'성공한 상태의 textArea'}
         isSuccess
       />
+      <CheckList
+        id="checkbox_1"
+        isChecked={true}
+        onToggle={checked => {
+          console.log(checked);
+        }}
+      >
+        체크 리스트
+      </CheckList>
+      <CheckList
+        id="checkbox_2"
+        isChecked={false}
+        onToggle={checked => {
+          console.log(checked);
+        }}
+        onClick={() => {}}
+      >
+        체크 리스트
+      </CheckList>
     </div>
   );
 }
