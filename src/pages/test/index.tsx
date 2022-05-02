@@ -10,8 +10,8 @@ import Button, {
 import CheckList from '~/components/common/CheckList';
 import { SearchIcon } from '~/components/common/icons';
 import NavigationBar from '~/components/common/NavigationBar';
-import LinkThumbnail from '~/components/LinkThumbnail';
 import TextField from '~/components/common/TextField';
+import LinkThumbnail from '~/components/LinkThumbnail';
 import { useToast } from '~/store/Toast';
 import theme from '~/styles/Theme';
 
