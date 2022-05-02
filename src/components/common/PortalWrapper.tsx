@@ -14,7 +14,9 @@ export default function PortalWrapper({
 
   return container ? (
     createPortal(
-      <AnimatePresence exitBeforeEnter>{isShowing && children}</AnimatePresence>,
+      <AnimatePresence exitBeforeEnter>
+        <>{isShowing && children}</>
+      </AnimatePresence>,
       container
     )
   ) : (
