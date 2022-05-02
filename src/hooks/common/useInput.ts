@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import debounce from 'lodash/debounce';
 
 export interface UseInputHookType {
@@ -34,8 +34,13 @@ export default function useInput({
   const [value, setValue] = useState<InputAcceptType>(initialValue ?? '');
   const [debouncedValue, setDebouncedValue] = useState<InputAcceptType>(initialValue ?? '');
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const handleSetDebounceValue = useCallback(debounce(setDebouncedValue, debounceTimeout), []);
+  const handleSetDebounceValue = useMemo(
+    () =>
+      debounce((value: string) => {
+        setDebouncedValue(value);
+      }, debounceTimeout),
+    [debounceTimeout]
+  );
 
   const handleSetValue = useCallback(
     (value: InputAcceptType) => {
