@@ -1,22 +1,28 @@
 import { css, Theme } from '@emotion/react';
 
+import { CloseIcon } from './icons';
+
 // TODO: Tag에 대한 프로퍼티가 정의되면 text, onDelete은 변경될 예정입니다.
-interface Props {
-  text: string;
+export interface TagType {
+  id: number;
+  content: string;
+}
+export interface TagProps {
+  tag: TagType;
   deletable?: boolean;
   onDelete?: () => void;
 }
 
-export default function Tag({ text, deletable = false, onDelete = () => {} }: Props) {
+export default function Tag({ tag, deletable = false, onDelete = () => {} }: TagProps) {
   return (
-    <button css={tagCss}>
-      #{text}
+    <div css={tagCss}>
+      #{tag.content}
       {deletable && (
-        <div css={iconCss} onClick={() => onDelete()}>
-          X
-        </div>
+        <button css={closeButtonCss} onClick={() => onDelete()}>
+          <CloseIcon size={15} />
+        </button>
       )}
-    </button>
+    </div>
   );
 }
 
@@ -37,7 +43,7 @@ const tagCss = (theme: Theme) => css`
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
-  height: 28px;
+  height: 24px;
   padding: 0 6px;
   border-radius: 4px;
   background-color: ${selectRandomColor(theme)};
@@ -46,13 +52,8 @@ const tagCss = (theme: Theme) => css`
   line-height: 150%;
 `;
 
-// TODO: ICON 추가 되면 제거되야 됩니다.
-const iconCss = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const closeButtonCss = css`
+  padding: 0;
+  line-height: 0;
   margin-left: 4px;
-  font-size: 14px;
-  width: 16px;
-  height: 16px;
 `;

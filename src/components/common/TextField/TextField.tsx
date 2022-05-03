@@ -2,6 +2,7 @@ import { ReactNode, useId } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import { CheckIcon } from '~/components/common/icons';
+import { labelCss } from '~/components/common/TextField/styles';
 
 import { Input, InputProps } from './Input';
 
@@ -26,22 +27,29 @@ export interface TextFieldProps extends InputProps {
    * `string`을 제공하는 경우 디자인 시스템의 "에러 메세지"의 스타일로 표시됩니다.
    */
   feedback?: ReactNode;
+
+  /**
+   * id 입니다. 입력하지 않을 경우 임의의 값이 제공됩니다.
+   *
+   * 의존 컴포넌트를 위한 옵션입니다.
+   */
+  customId?: string;
 }
 
-export function TextField({ label, isSuccess, feedback, ...props }: TextFieldProps) {
+export function TextField({ label, isSuccess, feedback, customId, ...props }: TextFieldProps) {
   const id = useId();
   return (
     <div css={wrapperCss}>
       {label &&
         (typeof label === 'string' ? (
-          <label htmlFor={'input-' + id} css={labelCss}>
+          <label htmlFor={customId ?? 'input-' + id} css={labelCss}>
             {label}
           </label>
         ) : (
           label
         ))}
       <Input
-        id={'input-' + id}
+        id={customId ?? 'input-' + id}
         {...props}
         append={
           isSuccess && (
@@ -61,14 +69,6 @@ const wrapperCss = css`
   display: flex;
   flex-direction: column;
   gap: 6px;
-`;
-
-const labelCss = (theme: Theme) => css`
-  display: block;
-  color: ${theme.color.gray05};
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 150%;
 `;
 
 const feedbackMessageCss = (theme: Theme) => css`
