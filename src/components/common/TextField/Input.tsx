@@ -30,9 +30,23 @@ export interface InputProps extends InputAndTextarea {
    * input 요소가 고정적인 높이를 가지고 있어야 할 때 사용합니다. (단위: px)
    */
   fixedHeight?: number;
+
+  /**
+   * padding 요소가 변경되어야 할 때 사용합니다. (단위: px)
+   *
+   * @default 12
+   */
+  padding?: number;
 }
 
-export function Input({ as = 'input', preAppend, append, fixedHeight, ...props }: InputProps) {
+export function Input({
+  as = 'input',
+  preAppend,
+  append,
+  fixedHeight,
+  padding,
+  ...props
+}: InputProps) {
   const theme = useTheme();
 
   return (
@@ -46,6 +60,7 @@ export function Input({ as = 'input', preAppend, append, fixedHeight, ...props }
             fixedHeight: fixedHeight ?? (as === 'textarea' ? 330 : undefined),
             isPreAppend: typeof preAppend !== 'undefined',
             isAppend: typeof append !== 'undefined',
+            padding,
           }),
           ...props,
         },
@@ -66,15 +81,17 @@ const inputElementCss = (
     fixedHeight,
     isPreAppend,
     isAppend,
+    padding = 12,
   }: {
     fixedHeight?: number;
     isPreAppend?: boolean;
     isAppend?: boolean;
+    padding?: number;
   }
 ) => css`
   width: 100%;
   ${fixedHeight && `height: ${fixedHeight}px;`}
-  padding: 12px;
+  padding: ${padding}px;
   ${isPreAppend && `padding-left: 40px;`}
   ${isAppend && `padding-right: 40px;`}
 
