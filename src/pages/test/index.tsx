@@ -126,7 +126,6 @@ export default function Test() {
         isSuccess
       />
       <CheckList
-        id="checkbox_1"
         isChecked={true}
         onToggle={checked => {
           console.log(checked);
@@ -135,7 +134,6 @@ export default function Test() {
         체크 리스트
       </CheckList>
       <CheckList
-        id="checkbox_2"
         isChecked={false}
         onToggle={checked => {
           console.log(checked);
