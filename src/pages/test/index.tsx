@@ -10,7 +10,7 @@ import Button, {
 import CheckList from '~/components/common/CheckList';
 import { SearchIcon } from '~/components/common/icons';
 import NavigationBar from '~/components/common/NavigationBar';
-import TextField from '~/components/common/TextField';
+import TextField, { MemoText } from '~/components/common/TextField';
 import LinkThumbnail from '~/components/LinkThumbnail';
 import { useToast } from '~/store/Toast';
 import theme from '~/styles/Theme';
@@ -143,6 +143,7 @@ export default function Test() {
       >
         체크 리스트
       </CheckList>
+      <MemoText editable wordLimit={150} />
     </div>
   );
 }
