@@ -21,11 +21,17 @@ export default function App({ Component, pageProps }: AppProps) {
   );
 }
 
+/**
+ * 레이아웃 컴포넌트입니다.
+ *
+ * `_app`에서만 사용되는 컴포넌트이기에, 인라인으로 작성되었습니다.
+ */
 function Layout({ children }: PropsWithChildren<{}>) {
   return <div css={layoutCss}>{children}</div>;
 }
 
 const layoutCss = (theme: Theme) => css`
+  background: ${theme.color.background};
   max-width: ${theme.size.maxWidth};
   width: 100%;
   margin: 0 auto;

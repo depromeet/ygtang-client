@@ -10,6 +10,7 @@ const globalCss = (theme: Theme) => css`
   ${resetCss}
 
   :root {
+    background-color: ${theme.color.background};
     color: ${theme.color.gray06};
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
       'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
