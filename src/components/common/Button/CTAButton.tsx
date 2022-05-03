@@ -19,6 +19,7 @@ const ctaButtonCss = (theme: Theme) => css`
   width: 100%;
   height: 56px;
   font-size: 16px;
+  font-weight: ${theme.font.weight.semiBold};
   color: ${theme.color.background};
   background-color: ${theme.color.primary};
 

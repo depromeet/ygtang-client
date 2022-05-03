@@ -27,6 +27,7 @@ const ghostButtonCss = (theme: Theme, size: SizeType) => css`
 
   color: ${theme.color.gray05};
   background-color: inherit;
+  font-weight: ${theme.font.weight.semiBold};
 `;
 
 const largeCss = css`
