@@ -23,6 +23,7 @@ export default function Login() {
           required
         />
         <TextField
+          type={'password'}
           label={'비밀번호'}
           placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
           feedback={<>&nbsp;</>}
