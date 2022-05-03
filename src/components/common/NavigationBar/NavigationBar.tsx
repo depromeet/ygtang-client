@@ -23,7 +23,7 @@ export default function NavigationBar({ backLink, title, rightElement }: Navigat
 
   return (
     <nav css={navCss}>
-      <IconButton iconName="ChevronIcon" light onClick={onClickBackButton} />
+      {backLink && <IconButton iconName="ChevronIcon" light onClick={onClickBackButton} />}
       {title && <h1 css={headingCss}>{title}</h1>}
       {rightElement && <>{rightElement}</>}
     </nav>
