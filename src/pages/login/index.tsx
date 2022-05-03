@@ -13,7 +13,7 @@ export default function Login() {
     <article css={loginCss}>
       <NavigationBar />
       <div css={loginIntroCardCss}></div>
-      <form css={loginFieldSet}>
+      <form css={loginFieldSetCss}>
         <TextField
           label={'이메일 아이디'}
           placeholder={'이메일을 입력해주세요'}
@@ -51,7 +51,7 @@ const loginIntroCardCss = css`
   height: 104px;
 `;
 
-const loginFieldSet = css`
+const loginFieldSetCss = css`
   display: flex;
   flex-direction: column;
   gap: 36px;
