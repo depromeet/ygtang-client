@@ -86,7 +86,7 @@ export function MemoText({
           <div />
           <span css={textLimitCss}>
             <span css={editable && textLimitCurrentCss}>{debouncedValue.length}</span>
-            {wordLimit && `/150`}
+            {`/${wordLimit ?? 150}`}
           </span>
         </div>
       }
