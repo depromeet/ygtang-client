@@ -6,6 +6,8 @@ import PortalWrapper from '~/components/common/PortalWrapper';
 import { defaultEasing, defaultFadeInVariants } from '~/constants/motions';
 import useToggle from '~/hooks/common/useToggle';
 
+import AppendTooltip from './AppendTooltip';
+
 export default function AppendButton() {
   const [isShowing, toggleIsShowing] = useToggle(false);
 
@@ -24,13 +26,14 @@ export default function AppendButton() {
 
       <PortalWrapper isShowing={isShowing}>
         <motion.div
-          key="asdf"
           css={backdropCss}
           variants={defaultFadeInVariants}
           initial="initial"
           animate="animate"
           exit="exit"
-        ></motion.div>
+        >
+          <AppendTooltip />
+        </motion.div>
       </PortalWrapper>
     </>
   );
