@@ -9,15 +9,16 @@ export default function SignupSentEmail() {
       <NavigationBar title={'회원가입'} />
       <div css={introCardCss}>
         <p css={introTextWrapper}>
-          자주쓰는 이메일을
-          <br />딱 한번만 인증하면,
+          회원님의 이메일로
           <br />
-          영감을 차곡차곡 쌓아갈 수 있어요.
+          인증 링크가 전송되었습니다
+          <br />
+          확인 후 아래의 &apos;인증완료&apos; 버튼을 눌러주세요.
         </p>
       </div>
       <div css={emailWrapperCss}>
         <p css={emailText}>yeonggam@gmail.com</p>
-        <CTAButton type={'submit'}>로그인</CTAButton>
+        <CTAButton type={'submit'}>인증완료</CTAButton>
       </div>
       <div css={signUpTextWrapperCss}>
         입력한 이메일은 홍보/마케팅 용으로 사용되지 않고,
