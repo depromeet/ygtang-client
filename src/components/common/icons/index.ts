@@ -7,6 +7,8 @@ export { DeleteIcon } from './DeleteIcon';
 export { EditIcon } from './EditIcon';
 export { FilterIcon } from './FilterIcon';
 export { HomeIcon } from './HomeIcon';
+export { ImageIcon } from './ImageIcon';
+export { LinkIcon } from './LinkIcon';
 export { PlusIcon } from './PlusIcon';
 export { RemoveCircleIcon } from './RemoveCircleIcon';
 export { SearchIcon } from './SearchIcon';
