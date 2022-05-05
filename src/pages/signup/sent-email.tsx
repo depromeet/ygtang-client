@@ -20,11 +20,6 @@ export default function SignupSentEmail() {
         <p css={emailText}>yeonggam@gmail.com</p>
         <CTAButton type={'submit'}>인증완료</CTAButton>
       </div>
-      <div css={signUpTextWrapperCss}>
-        입력한 이메일은 홍보/마케팅 용으로 사용되지 않고,
-        <br />
-        로그인과 회원가입, 비밀번호 찾기에만 사용되니 안심하세요.
-      </div>
     </article>
   );
 }
@@ -66,12 +61,4 @@ const emailText = (theme: Theme) => css`
   line-height: 150%;
 
   margin-bottom: 74px;
-`;
-
-const signUpTextWrapperCss = (theme: Theme) => css`
-  color: ${theme.color.gray03};
-  font-weight: ${theme.font.weight.regular};
-  font-size: 10px;
-  line-height: 150%;
-  text-align: center;
 `;
