@@ -32,19 +32,19 @@ export const defaultFadeInUpVariants: Variants = {
   initial: {
     opacity: 0,
     y: 30,
-    transition: { duration: 0.5, ease: defaultEasing },
+    transition: { duration: 0.3, ease: defaultEasing },
     willChange: 'opacity, transform',
   },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: defaultEasing },
+    transition: { duration: 0.3, ease: defaultEasing },
     willChange: 'opacity, transform',
   },
   exit: {
     opacity: 0,
     y: 30,
-    transition: { duration: 0.5, ease: defaultEasing },
+    transition: { duration: 0.3, ease: defaultEasing },
     willChange: 'opacity, transform',
   },
 };
