@@ -28,6 +28,11 @@ export interface MemoTextProps {
   editable?: boolean;
 
   /**
+   * 작성 가능 여부입니다. (영감 추가)
+   */
+  writable?: boolean;
+
+  /**
    * 글자 수 제한입니다. 지정하지 않을 경우 사용하지 않습니다.
    */
   wordLimit?: number;
@@ -47,6 +52,7 @@ export function MemoText({
   label,
   placeholder,
   editable,
+  writable,
   wordLimit,
   onChange: onValueChange,
   onSaveClick,
@@ -85,12 +91,12 @@ export function MemoText({
         <div css={flexBetweenWrapper}>
           <div />
           <span css={textLimitCss}>
-            <span css={editable && textLimitCurrentCss}>{debouncedValue.length}</span>
+            <span css={(editable || writable) && textLimitCurrentCss}>{debouncedValue.length}</span>
             {`/${wordLimit ?? 150}`}
           </span>
         </div>
       }
-      disabled={!editable}
+      disabled={!editable && !writable}
     />
   );
 }

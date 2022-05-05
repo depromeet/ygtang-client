@@ -16,7 +16,7 @@ export default function AddImage() {
             alt="mock"
           />
         </div>
-        <MemoText />
+        <MemoText writable />
       </section>
       <section css={addImageBottomCss}>
         <CTAButton type="submit">Tang!</CTAButton>
