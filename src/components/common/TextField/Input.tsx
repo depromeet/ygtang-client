@@ -105,6 +105,8 @@ const inputElementCss = (
   outline: none;
   line-height: 2;
 
+  resize: none;
+
   &:focus {
     border-color: ${theme.color.gray03};
   }
