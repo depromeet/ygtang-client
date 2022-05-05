@@ -14,7 +14,7 @@ export default function AddText() {
     <article css={addTextCss}>
       <NavigationBar title="글 추가" />
       <section css={addTextTopCss}>
-        <div css={imgBoxCss}>
+        <div css={textBoxCss}>
           <Input
             as="textarea"
             placeholder="영감을 작성해 보세요."
@@ -49,6 +49,6 @@ const addTextBottomCss = css`
   margin: 8px 0 16px 0;
 `;
 
-const imgBoxCss = css`
+const textBoxCss = css`
   margin: 16px 0;
 `;
