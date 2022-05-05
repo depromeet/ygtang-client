@@ -34,6 +34,7 @@ const layoutCss = (theme: Theme) => css`
   background: ${theme.color.background};
   max-width: ${theme.size.maxWidth};
   width: 100%;
+  height: 100%;
   margin: 0 auto;
   padding: ${theme.size.layoutPadding};
 `;
