@@ -5,7 +5,7 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-export function replaceRequestInstanceAuthorization(token: string) {
+export function replaceAccessTokenForRequestInstance(token: string) {
   // Request interceptor
   function interceptorRequestFulfilled(config: AxiosRequestConfig) {
     return {
