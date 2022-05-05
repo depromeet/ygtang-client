@@ -1,7 +1,6 @@
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton, GhostButton } from '~/components/common/Button';
-import NavigationBar from '~/components/common/NavigationBar';
 import TextField from '~/components/common/TextField';
 import useInput from '~/hooks/common/useInput';
 
@@ -11,7 +10,7 @@ export default function Login() {
 
   return (
     <article css={loginCss}>
-      <NavigationBar />
+      <div css={navMockupCss} />
       <div css={loginIntroCardCss}></div>
       <form css={loginFieldSetCss}>
         <TextField
@@ -40,6 +39,10 @@ export default function Login() {
     </article>
   );
 }
+
+const navMockupCss = css`
+  height: 44px;
+`;
 
 const loginCss = css`
   display: flex;
