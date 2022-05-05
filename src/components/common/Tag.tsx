@@ -1,5 +1,7 @@
 import { css, Theme } from '@emotion/react';
 
+import { selectRandomColor } from '~/utils/selectRandomColor';
+
 import { CloseIcon } from './icons';
 
 // TODO: Tag에 대한 프로퍼티가 정의되면 text, onDelete은 변경될 예정입니다.
@@ -26,19 +28,6 @@ export default function Tag({ tag, deletable = false, onDelete = () => {} }: Tag
   );
 }
 
-const selectRandomColor = (theme: Theme) => {
-  const randomNumber = Math.floor(Math.random() * 3 + 1);
-
-  switch (randomNumber) {
-    case 1:
-      return theme.color.gray01;
-    case 2:
-      return theme.color.gray02;
-    case 3:
-      return theme.color.gray03;
-  }
-};
-
 const tagCss = (theme: Theme) => css`
   display: inline-flex;
   flex-shrink: 0;
@@ -46,7 +35,7 @@ const tagCss = (theme: Theme) => css`
   height: 24px;
   padding: 0 6px;
   border-radius: 4px;
-  background-color: ${selectRandomColor(theme)};
+  background-color: ${selectRandomColor(theme, ['gray01', 'gray02', 'gray03'])};
   font-weight: 500;
   font-size: 10px;
   line-height: 150%;
