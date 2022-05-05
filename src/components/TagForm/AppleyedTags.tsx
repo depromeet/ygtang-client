@@ -16,6 +16,7 @@ export default function AppleyedTags({
   // TODO:  스크롤 animation 논의 필요
   const $container = useRef<HTMLDivElement>(null);
   const [previousTags, setPreviousTags] = useState<TagType[]>([]);
+
   const scrollToLeftMax = () => {
     if (!$container?.current) return;
     $container.current.scroll({
@@ -25,11 +26,12 @@ export default function AppleyedTags({
   };
 
   useEffect(() => {
+    if (previousTags.length === applyedTags.length) return;
     if (previousTags.length && previousTags.length < applyedTags.length) {
       scrollToLeftMax();
     }
     setPreviousTags([...applyedTags]);
-  }, [applyedTags]);
+  }, [applyedTags, previousTags]);
 
   return useMemo(
     () => (
