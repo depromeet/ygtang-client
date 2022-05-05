@@ -9,14 +9,18 @@ export default function AddImage() {
   return (
     <article css={addImageCss}>
       <NavigationBar title="이미지 추가" />
-      <div css={imgBoxCss}>
-        <ImageContent
-          src="https://i.pinimg.com/564x/89/c5/4d/89c54d90c325a8c310363f4e9773a041.jpg"
-          alt="mock"
-        />
-      </div>
-      <MemoText />
-      <CTAButton type="submit">Tang!</CTAButton>
+      <section css={addImageTopCss}>
+        <div css={imgBoxCss}>
+          <ImageContent
+            src="https://i.pinimg.com/564x/89/c5/4d/89c54d90c325a8c310363f4e9773a041.jpg"
+            alt="mock"
+          />
+        </div>
+        <MemoText />
+      </section>
+      <section css={addImageBottomCss}>
+        <CTAButton type="submit">Tang!</CTAButton>
+      </section>
     </article>
   );
 }
@@ -24,6 +28,17 @@ export default function AddImage() {
 const addImageCss = css`
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+`;
+
+const addImageTopCss = css`
+  flex-grow: 1;
+  overflow-y: auto;
+`;
+
+const addImageBottomCss = css`
+  margin: 8px 0 16px 0;
 `;
 
 const imgBoxCss = css`
