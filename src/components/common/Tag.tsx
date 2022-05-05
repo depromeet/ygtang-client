@@ -6,15 +6,25 @@ import { CloseIcon } from './icons';
 
 export interface TagProps extends Pick<TagInterface, 'content'> {
   deletable?: boolean;
-  onDelete?: () => void;
+  onDelete?: VoidFunction;
+  onClick?: VoidFunction;
 }
 
-export default function Tag({ content, deletable = false, onDelete = () => {} }: TagProps) {
+export default function Tag({
+  content,
+  deletable = false,
+  onDelete = () => {},
+  onClick = () => {},
+}: TagProps) {
+  const onClickCloseIcon = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    onDelete();
+  };
   return (
-    <div css={tagCss}>
+    <div css={tagCss} onClick={onClick}>
       #{content}
       {deletable && (
-        <button css={closeButtonCss} onClick={() => onDelete()}>
+        <button css={closeButtonCss} onClick={onClickCloseIcon}>
           <CloseIcon size={15} />
         </button>
       )}
@@ -33,6 +43,7 @@ const tagCss = (theme: Theme) => css`
   font-weight: 500;
   font-size: 10px;
   line-height: 150%;
+  width: fit-content;
 `;
 
 const closeButtonCss = css`
