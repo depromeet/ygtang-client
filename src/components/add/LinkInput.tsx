@@ -4,6 +4,7 @@ import { css, Theme } from '@emotion/react';
 import { PlusIcon } from '~/components/common/icons';
 import useInput from '~/hooks/common/useInput';
 import { useToast } from '~/store/Toast';
+import { validator } from '~/utils/validator';
 
 import { Input } from '../common/TextField/Input';
 import LinkThumbnail from '../LinkThumbnail';
@@ -40,7 +41,7 @@ export default function LinkInput() {
   const showErrorMessage = () => fireToast({ content: '유효하지 않은 주소입니다.' });
 
   const getOpenGraph = () => {
-    url.value ? setOpenGraph(TEMP_OG) : showErrorMessage();
+    validator({ value: url.value, type: 'url' }) ? setOpenGraph(TEMP_OG) : showErrorMessage();
   };
 
   return (
