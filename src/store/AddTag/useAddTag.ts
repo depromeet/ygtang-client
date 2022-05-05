@@ -15,7 +15,7 @@ export function useAddTag() {
 
   const addTag = (tag: TagType) => {
     if (hasTag(tag)) {
-      fireToast({ content: '리스트에 테그가 이미 존재합니다.' });
+      fireToast({ content: '리스트에 태그가 이미 존재합니다.' });
       return;
     }
     setTags([...tags, tag]);
