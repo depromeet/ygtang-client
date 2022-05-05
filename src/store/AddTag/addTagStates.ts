@@ -1,11 +1,8 @@
 import { atom } from 'recoil';
 
-export interface Tag {
-  id: string;
-  content: string;
-}
+import { TagType } from '~/components/common/Tag';
 
-export const addTagState = atom<Tag[]>({
+export const addTagState = atom<TagType[]>({
   key: 'addTagState',
   default: [],
 });
