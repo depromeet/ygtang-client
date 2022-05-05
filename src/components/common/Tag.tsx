@@ -1,24 +1,31 @@
-import { css, Theme } from '@emotion/react';
+import { css, Theme, useTheme } from '@emotion/react';
 
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
 import { CloseIcon } from './icons';
 
-// TODO: Tag에 대한 프로퍼티가 정의되면 text, onDelete은 변경될 예정입니다.
-export interface TagType {
-  id: number;
-  content: string;
-}
-export interface TagProps {
-  tag: TagType;
+export interface TagProps extends Pick<TagInterface, 'content'> {
+  /**
+   * @default '24px'
+   */
+  height?: string;
+  // TODO: 홈 화면에서 배경색을 지정해주어야하는 경우일 시 backgroundColor 속성을 추가해야합니다.
+  // 혹은 홈 화면에서 스타일링만하는 방식으로 사용하고, height 속성을 삭제하는 방향으로 진행
   deletable?: boolean;
   onDelete?: () => void;
 }
 
-export default function Tag({ tag, deletable = false, onDelete = () => {} }: TagProps) {
+export default function Tag({
+  content,
+  height = '24px',
+  deletable = false,
+  onDelete = () => {},
+}: TagProps) {
+  const theme = useTheme();
+
   return (
-    <div css={tagCss}>
-      #{tag.content}
+    <div css={tagCss(theme, height)}>
+      #{content}
       {deletable && (
         <button css={closeButtonCss} onClick={() => onDelete()}>
           <CloseIcon size={15} />
@@ -28,11 +35,11 @@ export default function Tag({ tag, deletable = false, onDelete = () => {} }: Tag
   );
 }
 
-const tagCss = (theme: Theme) => css`
+const tagCss = (theme: Theme, height: string) => css`
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
-  height: 24px;
+  height: ${height};
   padding: 0 6px;
   border-radius: 4px;
   background-color: ${selectRandomColor(theme, ['gray01', 'gray02', 'gray03'])};

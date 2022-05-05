@@ -12,7 +12,6 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@emotion/babel-plugin": "^11.7.2",
     "@emotion/react": "^11.9.0",
     "axios": "^0.26.1",
     "framer-motion": "^6.3.3",
@@ -24,6 +23,7 @@
     "swr": "^1.2.2"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.7.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/react-hooks": "^8.0.0",
