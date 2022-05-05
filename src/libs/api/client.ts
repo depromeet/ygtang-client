@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? ' http://localhost:3004/' : 'production API',
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://13.125.36.7/' : 'production API',
   withCredentials: true,
 });
 
