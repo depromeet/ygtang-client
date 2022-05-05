@@ -9,24 +9,24 @@ export default function Root() {
         <ContentThumbnail
           type="TEXT"
           content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
-          tagResponse={[]}
+          tags={[]}
         />
         <ContentThumbnail
           type="IMAGE"
           content="https://avatars.githubusercontent.com/u/26461307?v=4"
-          tagResponse={[]}
+          tags={[]}
         />
         <ContentThumbnail
           type="TEXT"
           content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
-          tagResponse={TEST_TAGS}
+          tags={TEST_TAGS}
         />
         <ContentThumbnail
           type="IMAGE"
           content="https://avatars.githubusercontent.com/u/26461307?v=4"
-          tagResponse={TEST_TAGS}
+          tags={TEST_TAGS}
         />
-        <ContentThumbnail type="TEXT" content="asdf" tagResponse={[]} />
+        <ContentThumbnail type="TEXT" content="asdf" tags={[]} />
       </section>
     </article>
   );
@@ -48,42 +48,42 @@ const TEST_TAGS = [
     updatedDatetime: '',
   },
   {
-    id: 1,
+    id: 2,
     memberResponse: { id: 1, nickName: '', email: '' },
     content: '저쩌구태그',
     createdDatetime: '',
     updatedDatetime: '',
   },
   {
-    id: 1,
+    id: 3,
     memberResponse: { id: 1, nickName: '', email: '' },
     content: 'tag1',
     createdDatetime: '',
     updatedDatetime: '',
   },
   {
-    id: 1,
+    id: 4,
     memberResponse: { id: 1, nickName: '', email: '' },
     content: 'tag1',
     createdDatetime: '',
     updatedDatetime: '',
   },
   {
-    id: 1,
+    id: 5,
     memberResponse: { id: 1, nickName: '', email: '' },
     content: 'tag1',
     createdDatetime: '',
     updatedDatetime: '',
   },
   {
-    id: 1,
+    id: 6,
     memberResponse: { id: 1, nickName: '', email: '' },
     content: 'tag1',
     createdDatetime: '',
     updatedDatetime: '',
   },
   {
-    id: 1,
+    id: 7,
     memberResponse: { id: 1, nickName: '', email: '' },
     content: 'tag1',
     createdDatetime: '',

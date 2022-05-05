@@ -1,6 +1,5 @@
 import { css, Theme } from '@emotion/react';
 
-import Tag from '~/components/common/Tag';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
 interface ContentThumbnailProps extends Pick<InspirationInterface, 'type' | 'content'> {
@@ -66,7 +65,9 @@ function Tags({ tags }: Pick<ContentThumbnailProps, 'tags'>) {
     return (
       <div css={tagWrapperCss}>
         {tags.map(eachTag => (
-          <Tag key={eachTag.id} content={eachTag.content} height="16px" />
+          <small css={tagCss} key={eachTag.id}>
+            #{eachTag.content}
+          </small>
         ))}
       </div>
     );
@@ -75,11 +76,19 @@ function Tags({ tags }: Pick<ContentThumbnailProps, 'tags'>) {
 }
 
 const tagWrapperCss = css`
-  width: 100%;
   height: 16px;
 
   display: flex;
   align-items: center;
   gap: 2px;
   overflow-x: scroll;
+`;
+
+const tagCss = (theme: Theme) => css`
+  flex-shrink: 0;
+  padding: 2px 4px;
+  background-color: ${theme.color.dim02};
+  border-radius: ${theme.borderRadius.default};
+  font-weight: ${theme.font.weight.medium};
+  font-size: 10px;
 `;
