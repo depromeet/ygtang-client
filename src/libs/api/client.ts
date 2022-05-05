@@ -5,17 +5,19 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-// Request interceptor
-function interceptorRequestFulfilled(config: AxiosRequestConfig) {
-  return {
-    ...config,
-    headers: {
-      Authorization: `Bearer token`,
-    },
-  };
-}
+export function replaceRequestInstanceAuthorization(token: string) {
+  // Request interceptor
+  function interceptorRequestFulfilled(config: AxiosRequestConfig) {
+    return {
+      ...config,
+      headers: {
+        accessToken: `${token}`,
+      },
+    };
+  }
 
-instance.interceptors.request.use(interceptorRequestFulfilled);
+  instance.interceptors.request.use(interceptorRequestFulfilled);
+}
 
 // Response interceptor
 function interceptorResponseFulfilled(res: AxiosResponse) {

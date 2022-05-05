@@ -1,4 +1,5 @@
 import { useRecoilState } from 'recoil';
+
 import { userLoggedInState, userNameState } from './userStates';
 
 export function useUser() {
