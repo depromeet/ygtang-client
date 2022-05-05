@@ -122,6 +122,9 @@ export const resetCss = `
     cursor: pointer;
     background-color: unset;
   }
+  a {
+    cursor: pointer;
+  }
   table {
     border-collapse: collapse;
     border-spacing: 0;
