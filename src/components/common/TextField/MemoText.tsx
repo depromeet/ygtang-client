@@ -68,7 +68,7 @@ export function MemoText({
       onChange={onChange}
       placeholder={placeholder ?? '어떤 것이 영감을 주었나요?'}
       maxLength={wordLimit}
-      fixedHeight={405}
+      fixedHeight={100}
       label={
         <div css={flexBetweenWrapper}>
           <label htmlFor={'input-' + id} css={labelCss}>
