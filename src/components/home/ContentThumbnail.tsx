@@ -3,17 +3,18 @@ import { css, Theme } from '@emotion/react';
 import Tag from '~/components/common/Tag';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
-export interface ContentThumbnailProps
-  extends Pick<InspirationInterface, 'type' | 'tagResponse' | 'content'> {}
+interface ContentThumbnailProps extends Pick<InspirationInterface, 'type' | 'content'> {
+  tags: InspirationInterface['tagResponse'];
+}
 
-export default function ContentThumbnail({ type, tagResponse, content }: ContentThumbnailProps) {
+export default function ContentThumbnail({ type, tags, content }: ContentThumbnailProps) {
   return (
     <section css={wrapperCss}>
       <div css={contentWrapperCss}>
         <Content type={type} content={content} />
       </div>
 
-      <Tags tagResponse={tagResponse} />
+      <Tags tags={tags} />
     </section>
   );
 }
@@ -60,11 +61,11 @@ const textCss = css`
   line-height: 150%;
 `;
 
-function Tags({ tagResponse }: Pick<ContentThumbnailProps, 'tagResponse'>) {
-  if (tagResponse && tagResponse.length > 0)
+function Tags({ tags }: Pick<ContentThumbnailProps, 'tags'>) {
+  if (tags && tags.length > 0)
     return (
       <div css={tagWrapperCss}>
-        {tagResponse.map(eachTag => (
+        {tags.map(eachTag => (
           <Tag key={eachTag.id} content={eachTag.content} height="16px" />
         ))}
       </div>
