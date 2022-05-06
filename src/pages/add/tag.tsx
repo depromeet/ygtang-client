@@ -3,10 +3,10 @@ import { css } from '@emotion/react';
 import NavigationBar from '~/components/common/NavigationBar';
 import { TagType } from '~/components/common/Tag';
 import TagFrom from '~/components/TagForm';
-import { useAddTag } from '~/store/AddTag';
+import { useAppliedTags } from '~/store/AppliedTags';
 
 export default function AddTag() {
-  const { tags, removeTag, addTag } = useAddTag();
+  const { tags, removeTag, addTag } = useAppliedTags();
 
   const tagsB: TagType[] = [
     { id: 1, content: 'hi hihi hi hi hi hi hi ' },
