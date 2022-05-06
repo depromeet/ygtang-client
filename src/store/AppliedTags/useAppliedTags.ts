@@ -3,10 +3,10 @@ import { useRecoilState } from 'recoil';
 import { TagType } from '~/components/common/Tag';
 import { useToast } from '~/store/Toast';
 
-import { addTagState } from './addTagStates';
+import { appliedTagsState } from './appliedTagsStates';
 
-export function useAddTag() {
-  const [tags, setTags] = useRecoilState(addTagState);
+export function useAppliedTags() {
+  const [tags, setTags] = useRecoilState(appliedTagsState);
   const { fireToast } = useToast();
 
   const hasTag = (tag: TagType) => {
@@ -18,7 +18,7 @@ export function useAddTag() {
       fireToast({ content: '리스트에 태그가 이미 존재합니다.' });
       return;
     }
-    setTags([...tags, tag]);
+    setTags(preTags => [...preTags, tag]);
   };
 
   const removeTag = (id: number) => {

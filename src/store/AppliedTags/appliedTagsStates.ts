@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 import { TagType } from '~/components/common/Tag';
 
-export const addTagState = atom<TagType[]>({
+export const appliedTagsState = atom<TagType[]>({
   key: 'addTagState',
   default: [],
 });
