@@ -6,7 +6,7 @@ import useDidMount from './useDidMount';
 
 const STATE_BUTTON = 'setState';
 
-describe('hooks/common/useDidMount', () => {
+describe('hooks/common/useDidMount/useDidMount', () => {
   let App: () => JSX.Element;
   const mockCallback = jest.fn();
 
