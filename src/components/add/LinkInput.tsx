@@ -12,7 +12,7 @@ import { validator } from '~/utils/validator';
 const TEMP_OG: OpenGraph = {
   description: '네이버 메인에서 다양한 정보와 유용한 컨텐츠를 만나 보세요',
   title: '네이버',
-  site_name: 'naver',
+  siteName: 'naver',
   url: 'https://www.naver.com',
   imageUrl: 'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
 };

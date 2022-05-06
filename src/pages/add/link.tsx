@@ -8,7 +8,7 @@ import { MemoText } from '~/components/common/TextField';
 
 export interface OpenGraph {
   description: string;
-  site_name: string;
+  siteName: string;
   title: string;
   url: string;
   imageUrl?: string;
