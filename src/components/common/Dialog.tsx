@@ -25,7 +25,7 @@ export default function Dialog({
     return <></>;
   }
 
-  if (!isSSR && isShowing) {
+  if (!isSSR) {
     return (
       <PortalWrapper isShowing={true}>
         <motion.div
