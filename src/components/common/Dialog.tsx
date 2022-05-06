@@ -21,11 +21,8 @@ export default function Dialog({
     setIsSSR(false);
   }, []);
 
-  if (!isShowing) {
-    return <></>;
-  }
-
-  if (!isSSR) {
+  // NOTE: https://github.com/vercel/next.js/discussions/35773
+  if (!isSSR && isShowing) {
     return (
       <PortalWrapper isShowing={true}>
         <motion.div
@@ -35,13 +32,7 @@ export default function Dialog({
           animate="animate"
           exit="exit"
         >
-          <motion.div
-            css={dialogCss}
-            variants={defaultFadeInUpVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-          >
+          <motion.div css={dialogCss} variants={defaultFadeInUpVariants}>
             <div css={dialogContentWrapperCss}>{children}</div>
             <div css={dialogButtonWrapperCss}>{actionButtons}</div>
           </motion.div>
