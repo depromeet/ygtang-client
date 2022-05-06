@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 
-import Tag, { TagType } from '~/components/common/Tag';
+import Tag from '~/components/common/Tag';
 
 export default function AppliedTags({
   applyedTags = [],
@@ -39,7 +39,7 @@ export default function AppliedTags({
         {applyedTags.map(tag => (
           <Tag
             key={tag.id}
-            tag={tag}
+            content={tag.content}
             deletable
             onDelete={() => {
               onRemove(tag.id);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { TagType } from '~/components/common/Tag';
 import { SearchBar } from '~/components/common/TextField';
 import useInput from '~/hooks/common/useInput';
 

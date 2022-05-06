@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import NavigationBar from '~/components/common/NavigationBar';
-import { TagType } from '~/components/common/Tag';
 import TagFrom from '~/components/TagForm';
 import { useAppliedTags } from '~/store/AppliedTags';
 

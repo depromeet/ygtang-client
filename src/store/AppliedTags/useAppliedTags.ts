@@ -1,6 +1,5 @@
 import { useRecoilState } from 'recoil';
 
-import { TagType } from '~/components/common/Tag';
 import { useToast } from '~/store/Toast';
 
 import { appliedTagsState } from './appliedTagsStates';

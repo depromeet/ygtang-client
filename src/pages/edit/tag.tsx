@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
 
 import NavigationBar from '~/components/common/NavigationBar';
-import { TagType } from '~/components/common/Tag';
 import TagFrom from '~/components/TagForm';
 import { useToast } from '~/store/Toast';
 
 export interface EditTagProps {
   contentId: number;
-  contentTags: TagType[];
+  contentTags: TagInterface[];
 }
 
 export default function EditTag({ contentId, contentTags }: EditTagProps) {

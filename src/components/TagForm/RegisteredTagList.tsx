@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { css, Theme } from '@emotion/react';
 
-import Tag, { TagType } from '~/components/common/Tag';
+import Tag from '~/components/common/Tag';
 
 function RegisteredTagList({
   registeredTags = [],
@@ -18,7 +18,7 @@ function RegisteredTagList({
           registeredTags.map(tag => (
             <Tag
               key={tag.id}
-              tag={tag}
+              content={tag.content}
               onClick={() => {
                 onClick(tag);
               }}
