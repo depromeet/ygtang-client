@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import Tag, { TagType } from '~/components/common/Tag';
 
-export default function AppleyedTags({
+export default function AppliedTags({
   applyedTags = [],
   onRemove,
 }: {

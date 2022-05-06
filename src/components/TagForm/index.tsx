@@ -5,7 +5,7 @@ import { TagType } from '~/components/common/Tag';
 import { SearchBar } from '~/components/common/TextField';
 import useInput from '~/hooks/common/useInput';
 
-import AppleyedTags from './AppleyedTags';
+import AppliedTags from './AppliedTags';
 import RegisteredTagList from './RegisteredTagList';
 
 export default function TagFrom({
@@ -50,7 +50,7 @@ export default function TagFrom({
       <form onSubmit={onFormReturn}>
         <SearchBar value={value} onChange={onChange} />
       </form>
-      <AppleyedTags applyedTags={applyedTags} onRemove={onRemove} />
+      <AppliedTags applyedTags={applyedTags} onRemove={onRemove} />
       <RegisteredTagList registeredTags={registeredTags} onClick={onSave} />
     </div>
   );
