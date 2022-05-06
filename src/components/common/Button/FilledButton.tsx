@@ -7,25 +7,21 @@ type ColorType = 'light' | 'dark';
 
 interface FilledButtonProps extends ComponentProps<typeof Button> {
   colorType?: ColorType;
-  width?: string;
 }
 
 export function FilledButton(props: FilledButtonProps) {
-  const { colorType = 'dark', width, children, ...rest } = props;
+  const { colorType = 'dark', children, ...rest } = props;
   const theme = useTheme();
 
   return (
-    <Button css={filledButtonCss(theme, { colorType, width })} {...rest}>
+    <Button css={filledButtonCss(theme, colorType)} {...rest}>
       {children}
     </Button>
   );
 }
 
-const filledButtonCss = (
-  theme: Theme,
-  { colorType, width }: { colorType: ColorType; width?: string }
-) => css`
-  width: ${width ?? '100%'};
+const filledButtonCss = (theme: Theme, colorType: ColorType) => css`
+  width: 100%;
   height: 37px;
   font-size: 14px;
   font-weight: ${theme.font.weight.semiBold};
