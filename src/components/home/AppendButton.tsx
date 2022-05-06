@@ -80,7 +80,7 @@ const buttonRotateVariants: Variants = {
   true: {
     opacity: 1,
     y: 0,
-    rotateZ: '135deg',
+    rotateZ: '45deg',
     transition: { duration: 0.3, ease: defaultEasing },
   },
   exit: {
