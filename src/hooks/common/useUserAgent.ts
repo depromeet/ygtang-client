@@ -21,7 +21,7 @@ const getMobileDetect = (userAgent: string): IUseUserAgent => {
   };
 };
 
-export const useUserAgent = (): IUseUserAgent => {
+export function useUserAgent(): IUseUserAgent {
   const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent;
   return getMobileDetect(userAgent);
-};
+}
