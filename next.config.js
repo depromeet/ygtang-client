@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    NODE_ENV: process.env.NODE_ENV,
+    APP_ENV: process.env.NODE_ENV,
   },
 };
 
