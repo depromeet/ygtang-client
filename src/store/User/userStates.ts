@@ -1,12 +1,12 @@
 import { atom } from 'recoil';
 
 export const userAccessTokenState = atom<string | undefined>({
-  key: 'userLoggedIn',
+  key: 'userAccessToken',
   default: undefined,
 });
 
 export const userRefreshTokenState = atom<string | undefined>({
-  key: 'userLoggedIn',
+  key: 'userRefreshToken',
   default: undefined,
 });
 
