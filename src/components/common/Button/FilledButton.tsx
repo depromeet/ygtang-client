@@ -24,6 +24,7 @@ const filledButtonCss = (theme: Theme, colorType: ColorType) => css`
   width: 100%;
   height: 37px;
   font-size: 14px;
+  font-weight: ${theme.font.weight.semiBold};
   color: ${colorType === 'dark' ? theme.color.background : theme.color.gray05};
   background-color: ${colorType === 'dark' ? theme.color.gray05 : theme.color.gray02};
 `;

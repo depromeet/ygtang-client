@@ -41,5 +41,10 @@ const globalCss = (theme: Theme) => css`
         display: none !important;
       }
     }
+
+    body,
+    #__next {
+      height: 100vh;
+    }
   }
 `;
