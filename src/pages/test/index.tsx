@@ -48,8 +48,7 @@ export default function Test() {
         <CTAButton>CTA 버튼</CTAButton>
         <CTAButton disabled>CTA 버튼 비활성화</CTAButton>
 
-        <CTABottomButton>CTA Bottom 버튼(ios)</CTABottomButton>
-        <CTABottomButton>CTA Bottom 버튼(그 외)</CTABottomButton>
+        <CTABottomButton>CTA Bottom 버튼(ios일 때 패딩 변화)</CTABottomButton>
 
         <FilledButton>Filled 버튼</FilledButton>
         <FilledButton colorType="light">Filled 버튼 라이트</FilledButton>

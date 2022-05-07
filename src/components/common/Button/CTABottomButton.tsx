@@ -1,29 +1,25 @@
 import { ComponentProps } from 'react';
-import { css, Theme } from '@emotion/react';
+import { css, Theme, useTheme } from '@emotion/react';
+
+import { useUserAgent } from '~/hooks/common/useUserAgent';
 
 import { CTAButton } from './CTAButton';
 
 interface CTABottomButtonProps extends ComponentProps<typeof CTAButton> {}
 
 export function CTABottomButton(props: CTABottomButtonProps) {
+  const { isIos } = useUserAgent();
+  const theme = useTheme();
   const { children, ...rest } = props;
 
   return (
-    <CTAButton css={ctaButtonCss} {...rest}>
-      {children}
-    </CTAButton>
+    <div css={ctaBottomButtonCss(isIos(), theme)}>
+      <CTAButton {...rest}>{children}</CTAButton>
+    </div>
   );
 }
 
-const ctaButtonCss = (theme: Theme) => css`
-  width: 100%;
-  height: 56px;
-  font-size: 16px;
-  font-weight: ${theme.font.weight.semiBold};
-  color: ${theme.color.background};
-  background-color: ${theme.color.primary};
-
-  &:disabled {
-    background-color: ${theme.color.primary_disabled};
-  }
+const ctaBottomButtonCss = (isIos: boolean, theme: Theme) => css`
+  padding: ${isIos ? `8px 0 0 0` : `8px 0`};
+  background: ${theme.color.background};
 `;
