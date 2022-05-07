@@ -20,8 +20,6 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
       const storedAccessToken = cookieGet(cookieAccessTokenName);
       const storedRefreshToken = cookieGet(cookieRefreshTokenName);
 
-      console.log(storedAccessToken, storedRefreshToken);
-
       if (storedAccessToken && storedRefreshToken) {
         reissueMutate({
           accessToken: storedAccessToken,
