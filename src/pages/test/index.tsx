@@ -13,15 +13,23 @@ import NavigationBar from '~/components/common/NavigationBar';
 import TextField, { MemoText } from '~/components/common/TextField';
 import { SearchBar } from '~/components/common/TextField/SearchBar';
 import LinkThumbnail from '~/components/LinkThumbnail';
+import { useUserAgent } from '~/hooks/common/useUserAgent';
 import { useToast } from '~/store/Toast';
 import theme from '~/styles/Theme';
 
 export default function Test() {
   const { fireToast } = useToast();
+  const { isMobile, isIos, isAndroid, isDesktop } = useUserAgent();
 
   return (
     <div>
       <NavigationBar title="Title" rightElement={<IconButton iconName="DeleteIcon" light />} />
+      <TestItem name="UserAgent">
+        <p>isMobile: {isMobile() ? 'true' : 'false'}</p>
+        <p>isIos: {isIos() ? 'true' : 'false'}</p>
+        <p>isAndroid: {isAndroid() ? 'true' : 'false'}</p>
+        <p>isDesktop: {isDesktop() ? 'true' : 'false'}</p>
+      </TestItem>
       <TestItem name="Button">
         <Button>텍스트 버튼</Button>
 
