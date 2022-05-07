@@ -6179,6 +6179,18 @@ urix@^0.1.0:
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
 
+use-mutation@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/use-mutation/-/use-mutation-2.2.1.tgz#bfc057cc1e659ff53fd2a353c2c2cb0af58f7d34"
+  integrity sha512-qGvtQpVgj2Ekcrrykiq4rOlOhUrlebaO/sVVGpXjrb0IEOBtZqNzq8hKJwrYGkyUWqu3pBPpOEyss8OHRhS3Ow==
+  dependencies:
+    use-safe-callback "^1.0.2"
+
+use-safe-callback@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/use-safe-callback/-/use-safe-callback-1.0.2.tgz#1e112c144bccccb39d308ac983f4589ea113bed5"
+  integrity sha512-RVeoyxgjJNfu9baNwulBM+HuPQGlcE1MJtrA1w50B5Hd0tyeKvrBIPdCfRx4Trrrxe34M6qRTys/bfpqsKRcyA==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
