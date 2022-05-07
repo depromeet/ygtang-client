@@ -2,35 +2,39 @@ import { css } from '@emotion/react';
 
 import AppendButton from '~/components/home/AppendButton';
 import ContentThumbnail from '~/components/home/ContentThumbnail';
+import HomeNavigationBar from '~/components/home/HomeNavigationBar';
 
 export default function Root() {
   return (
-    <article>
-      <section css={thumbnailWrapperCss}>
-        <ContentThumbnail
-          type="TEXT"
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
-          tags={[]}
-        />
-        <ContentThumbnail
-          type="IMAGE"
-          content="https://avatars.githubusercontent.com/u/26461307?v=4"
-          tags={[]}
-        />
-        <ContentThumbnail
-          type="TEXT"
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
-          tags={TEST_TAGS}
-        />
-        <ContentThumbnail
-          type="IMAGE"
-          content="https://avatars.githubusercontent.com/u/26461307?v=4"
-          tags={TEST_TAGS}
-        />
-        <ContentThumbnail type="TEXT" content="asdf" tags={[]} />
-      </section>
-      <AppendButton />
-    </article>
+    <>
+      <HomeNavigationBar />
+      <article>
+        <section css={thumbnailWrapperCss}>
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="IMAGE"
+            content="https://avatars.githubusercontent.com/u/26461307?v=4"
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={TEST_TAGS}
+          />
+          <ContentThumbnail
+            type="IMAGE"
+            content="https://avatars.githubusercontent.com/u/26461307?v=4"
+            tags={TEST_TAGS}
+          />
+          <ContentThumbnail type="TEXT" content="asdf" tags={[]} />
+        </section>
+        <AppendButton />
+      </article>
+    </>
   );
 }
 
