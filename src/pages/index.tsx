@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 
+import AppendButton from '~/components/home/AppendButton';
 import ContentThumbnail from '~/components/home/ContentThumbnail';
 
 export default function Root() {
@@ -28,6 +29,7 @@ export default function Root() {
         />
         <ContentThumbnail type="TEXT" content="asdf" tags={[]} />
       </section>
+      <AppendButton />
     </article>
   );
 }
