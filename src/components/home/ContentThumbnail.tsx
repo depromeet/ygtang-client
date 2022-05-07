@@ -139,6 +139,7 @@ const tagWrapperCss = css`
   align-items: center;
   gap: 2px;
   overflow-x: scroll;
+  overflow-y: hidden;
 `;
 
 const tagCss = (theme: Theme) => css`
