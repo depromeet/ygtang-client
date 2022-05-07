@@ -7,6 +7,11 @@ import Tag from '../Tag';
 export interface TagContentProps {
   label?: string;
   tags: TagType[];
+  /**
+   * 영감 추가일 경우, 추가 기능을 수행합니다.
+   *
+   * 영감 편집일 경우, 편집 기능을 수행합니다.
+   */
   onEdit: VoidFunction;
   onClickTag?: (tagId: number) => void;
 }
