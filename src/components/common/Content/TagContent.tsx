@@ -13,6 +13,9 @@ export interface TagContentProps {
    * 영감 편집일 경우, 편집 기능을 수행합니다.
    */
   onEdit: VoidFunction;
+  /**
+   * 단일 Tag 클릭 할 경우, Action을 넘겨 줍니다.
+   */
   onClickTag?: (tagId: number) => void;
 }
 
