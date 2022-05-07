@@ -14,9 +14,14 @@ export interface LinkThumbnailMetaData {
 export interface LinkThumbnailProps {
   edit?: boolean;
   thumbnail: LinkThumbnailMetaData;
+  onDelete?: VoidFunction;
 }
 
-export default function LinkThumbnail({ edit = false, thumbnail }: LinkThumbnailProps) {
+export default function LinkThumbnail({
+  edit = false,
+  thumbnail,
+  onDelete: _onDelete,
+}: LinkThumbnailProps) {
   const hasImage = () => {
     return Boolean(thumbnail?.imageUrl);
   };
@@ -43,7 +48,12 @@ export default function LinkThumbnail({ edit = false, thumbnail }: LinkThumbnail
         {hasImage() && (
           <img css={linkThumbnailImageCss} src={thumbnail.imageUrl} alt={thumbnail.alt} />
         )}
-        <IconButton light iconName="CancelIcon" css={closeButtonCss(edit)} onClick={onDelete} />
+        <IconButton
+          light
+          iconName="CancelIcon"
+          css={closeButtonCss(edit)}
+          onClick={_onDelete ?? onDelete}
+        />
       </article>
     </a>
   );
