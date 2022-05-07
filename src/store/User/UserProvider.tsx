@@ -1,8 +1,49 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
+
+import { useReissueMutation } from '~/hooks/api/reissue/useReissueMutation';
+import useCookie from '~/hooks/common/useCookie';
 
 import { useUser } from './';
 
+const cookieAccessTokenName = 'ygt_access';
+const cookieRefreshTokenName = 'ygt_refresh';
+
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
-  const {} = useUser();
-  return <>{children}</>;
+  const { isLoaded, setIsLoaded, userLogin } = useUser();
+  const [reissueMutate, { data: reissueMutationData, error: reissueMutationError }] =
+    useReissueMutation();
+  const { get: cookieGet } = useCookie();
+
+  // 컴포넌트 마운트 시
+  useEffect(() => {
+    if (!isLoaded) {
+      const storedAccessToken = cookieGet(cookieAccessTokenName);
+      const storedRefreshToken = cookieGet(cookieRefreshTokenName);
+
+      console.log(storedAccessToken, storedRefreshToken);
+
+      if (storedAccessToken && storedRefreshToken) {
+        reissueMutate({
+          accessToken: storedAccessToken,
+          refreshToken: storedRefreshToken,
+        });
+      } else {
+        setIsLoaded(true);
+      }
+    }
+  }, [cookieGet, isLoaded, reissueMutate, setIsLoaded]);
+
+  useEffect(() => {
+    if (reissueMutationData && reissueMutationData.data) {
+      const { accessToken, refreshToken } = reissueMutationData.data;
+      userLogin({ accessToken, refreshToken });
+      setIsLoaded(true);
+    }
+  }, [reissueMutationData, setIsLoaded, userLogin]);
+
+  useEffect(() => {
+    // TODO: 에러 발생 핸들링
+  }, [reissueMutationError]);
+
+  return <>{isLoaded ? children : <>로그인 대기 중...</>}</>;
 }
