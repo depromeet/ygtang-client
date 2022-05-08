@@ -52,7 +52,7 @@ const buttonCss = (theme: Theme) => css`
   background-color: ${theme.color.primary};
   border-radius: 50%;
   color: ${theme.color.gray06};
-  z-index: 9999;
+  z-index: 900;
 `;
 
 const backdropCss = (theme: Theme) => css`
@@ -62,7 +62,7 @@ const backdropCss = (theme: Theme) => css`
   width: 100vw;
   height: 100vh;
   background-color: ${theme.color.dim03};
-  z-index: 1000;
+  z-index: 800;
 `;
 
 const buttonRotateVariants: Variants = {

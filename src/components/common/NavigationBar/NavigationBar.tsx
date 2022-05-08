@@ -6,16 +6,23 @@ import useInternalRouter, { RouterPathType } from '~/hooks/common/useInternalRou
 
 interface NavigationBarProps {
   backLink?: RouterPathType;
+  backLinkScrollOption?: boolean;
   title?: string;
   rightElement?: ReactElement;
 }
 
-export default function NavigationBar({ backLink, title, rightElement }: NavigationBarProps) {
+export default function NavigationBar({
+  backLink,
+  backLinkScrollOption = true,
+  title,
+  rightElement,
+}: NavigationBarProps) {
   const router = useInternalRouter();
 
+  // NOTE: 1. router option을 전체적으로 받을 수 있게? 2. onClickBackButton callback을 받을 수 있게?
   const onClickBackButton = () => {
     if (backLink) {
-      router.push(backLink);
+      router.push(backLink, undefined, { scroll: backLinkScrollOption });
       return;
     }
     router.back();

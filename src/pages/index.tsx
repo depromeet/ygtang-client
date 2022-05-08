@@ -1,62 +1,90 @@
+import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import AppendButton from '~/components/home/AppendButton';
 import ContentThumbnail from '~/components/home/ContentThumbnail';
+import HomeNavigationBar from '~/components/home/HomeNavigationBar';
+
+const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRouteAsModal'));
 
 export default function Root() {
   return (
-    <article>
-      <section css={thumbnailWrapperCss}>
-        <ContentThumbnail
-          type="TEXT"
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
-          tags={[]}
-        />
-        <ContentThumbnail
-          type="IMAGE"
-          content="https://avatars.githubusercontent.com/u/26461307?v=4"
-          tags={[]}
-        />
-        <ContentThumbnail
-          type="TEXT"
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
-          tags={TEST_TAGS}
-        />
-        <ContentThumbnail
-          type="IMAGE"
-          content="https://avatars.githubusercontent.com/u/26461307?v=4"
-          tags={TEST_TAGS}
-        />
-        <ContentThumbnail
-          type="LINK"
-          content="https://avatars.githubusercontent.com/u/26461307?v=4"
-          tags={[]}
-          openGraph={{
-            code: 200,
-            description: 'I like to share my knowledge for those who wandering in issue.',
-            siteName: null,
-            title: "Cometin' - hyesungoh overflow test",
-            url: 'https://avatars.githubusercontent.com/',
-            image: '/u/26461307?v=4',
-          }}
-        />
-        <ContentThumbnail
-          type="LINK"
-          content="https://avatars.githubusercontent.com/u/26461307?v=4"
-          tags={TEST_TAGS}
-          openGraph={{
-            code: 200,
-            description: 'I like to share my knowledge for those who wandering in issue.',
-            siteName: null,
-            title: "Cometin' - hyesungoh",
-            url: 'https://avatars.githubusercontent.com/',
-            image: '/u/26461307?v=4',
-          }}
-        />
-        <ContentThumbnail type="TEXT" content="asdf" tags={[]} />
-      </section>
-      <AppendButton />
-    </article>
+    <>
+      <HomeNavigationBar />
+      <article>
+        <section css={thumbnailWrapperCss}>
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="IMAGE"
+            content="https://avatars.githubusercontent.com/u/26461307?v=4"
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={TEST_TAGS}
+          />
+          <ContentThumbnail
+            type="IMAGE"
+            content="https://avatars.githubusercontent.com/u/26461307?v=4"
+            tags={TEST_TAGS}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="IMAGE"
+            content="https://avatars.githubusercontent.com/u/26461307?v=4"
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={TEST_TAGS}
+          />
+          <ContentThumbnail
+            type="IMAGE"
+            content="https://avatars.githubusercontent.com/u/26461307?v=4"
+            tags={TEST_TAGS}
+          />
+          <ContentThumbnail
+            type="LINK"
+            content="https://avatars.githubusercontent.com/u/26461307?v=4"
+            tags={[]}
+            openGraph={{
+              code: 200,
+              description: 'I like to share my knowledge for those who wandering in issue.',
+              siteName: null,
+              title: "Cometin' - hyesungoh overflow test",
+              url: 'https://avatars.githubusercontent.com/',
+              image: '/u/26461307?v=4',
+            }}
+          />
+          <ContentThumbnail
+            type="LINK"
+            content="https://avatars.githubusercontent.com/u/26461307?v=4"
+            tags={TEST_TAGS}
+            openGraph={{
+              code: 200,
+              description: 'I like to share my knowledge for those who wandering in issue.',
+              siteName: null,
+              title: "Cometin' - hyesungoh",
+              url: 'https://avatars.githubusercontent.com/',
+              image: '/u/26461307?v=4',
+            }}
+          />
+          <ContentThumbnail type="TEXT" content="asdf" tags={[]} />
+        </section>
+        <AppendButton />
+        <TagFormRouteAsModal />
+      </article>
+    </>
   );
 }
 
