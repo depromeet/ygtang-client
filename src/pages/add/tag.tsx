@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import NavigationBar from '~/components/common/NavigationBar';
-import TagFrom from '~/components/TagForm';
+import TagForm from '~/components/TagForm';
 import { useAppliedTags } from '~/store/AppliedTags';
 
 export default function AddTag() {
@@ -19,7 +19,7 @@ export default function AddTag() {
   return (
     <article css={addTagCss}>
       <NavigationBar title="영감 추가" />
-      <TagFrom applyedTags={tags} registeredTags={tagsB} onSave={addTag} onRemove={removeTag} />
+      <TagForm applyedTags={tags} registeredTags={tagsB} onSave={addTag} onRemove={removeTag} />
     </article>
   );
 }

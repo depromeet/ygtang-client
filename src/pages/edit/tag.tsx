@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import NavigationBar from '~/components/common/NavigationBar';
-import TagFrom from '~/components/TagForm';
+import TagForm from '~/components/TagForm';
 import { useToast } from '~/store/Toast';
 
 export interface EditTagProps {
@@ -42,7 +42,7 @@ export default function EditTag({ contentId, contentTags }: EditTagProps) {
   return (
     <article css={editTagCss}>
       <NavigationBar title="영감 편집" />
-      <TagFrom
+      <TagForm
         applyedTags={contentTags}
         registeredTags={tagsB}
         onSave={saveTag}

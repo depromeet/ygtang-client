@@ -7,7 +7,8 @@ import useInput from '~/hooks/common/useInput';
 import AppliedTags from './AppliedTags';
 import RegisteredTagList from './RegisteredTagList';
 
-export default function TagFrom({
+// NOTE: Props들을 컴포넌트내에서 관리할 수도 있지 않을까
+export default function TagForm({
   applyedTags = [],
   registeredTags = [],
   onSave,
