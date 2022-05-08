@@ -12,6 +12,7 @@ const getMobileDetect = (userAgent: string): IUseUserAgent => {
   const isMobile = (): boolean => Boolean(isAndroid() || isIos());
   const isSSR = (): boolean => Boolean(userAgent.match(/SSR/i));
   const isDesktop = (): boolean => Boolean(!isMobile() && !isSSR());
+
   return {
     isAndroid,
     isIos,

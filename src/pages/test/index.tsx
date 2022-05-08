@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
 import Button, {
@@ -7,6 +7,7 @@ import Button, {
   GhostButton,
   IconButton,
 } from '~/components/common/Button';
+import { CTABottomButton } from '~/components/common/Button/CTABottomButton';
 import CheckList from '~/components/common/CheckList';
 import { SearchIcon } from '~/components/common/icons';
 import NavigationBar from '~/components/common/NavigationBar';
@@ -20,6 +21,13 @@ import theme from '~/styles/Theme';
 export default function Test() {
   const { fireToast } = useToast();
   const { isMobile, isIos, isAndroid, isDesktop } = useUserAgent();
+  const [isSSR, setIsSSR] = useState(true);
+
+  useEffect(() => {
+    setIsSSR(false);
+  }, []);
+
+  if (isSSR) return null;
 
   return (
     <div>
@@ -39,6 +47,8 @@ export default function Test() {
 
         <CTAButton>CTA 버튼</CTAButton>
         <CTAButton disabled>CTA 버튼 비활성화</CTAButton>
+
+        <CTABottomButton>CTA Bottom 버튼(ios일 때 패딩 변화)</CTABottomButton>
 
         <FilledButton>Filled 버튼</FilledButton>
         <FilledButton colorType="light">Filled 버튼 라이트</FilledButton>
@@ -96,9 +106,10 @@ export default function Test() {
       <Button onClick={() => fireToast({ content: '토스트 메세지' })}>토스트 발사 버튼</Button>
 
       <hr />
-      <TextField label={'라벨라벨'} placeholder={'플레이스 홀더'} />
+      <TextField readOnly label={'라벨라벨'} placeholder={'플레이스 홀더'} />
       <br />
       <TextField
+        readOnly
         label={'라벨라벨'}
         placeholder={'플레이스 홀더'}
         value={'성공한 상태의 input'}
@@ -107,6 +118,7 @@ export default function Test() {
       />
       <br />
       <TextField
+        readOnly
         label={'라벨벨'}
         placeholder={'검색'}
         feedback={'검색을 만들 땐 이렇게 사용하겠죠?'}
@@ -123,9 +135,16 @@ export default function Test() {
         isSuccess
       />
       <br />
-      <TextField as={'textarea'} rows={10} label={'라벨라벨'} placeholder={'플레이스 홀더'} />
+      <TextField
+        readOnly
+        as={'textarea'}
+        rows={10}
+        label={'라벨라벨'}
+        placeholder={'플레이스 홀더'}
+      />
       <br />
       <TextField
+        readOnly
         as={'textarea'}
         rows={10}
         label={'라벨라벨'}
@@ -150,7 +169,7 @@ export default function Test() {
       >
         체크 리스트
       </CheckList>
-      <SearchBar value={'asdasdasd'} />
+      <SearchBar readOnly value={'asdasdasd'} />
       <MemoText editable wordLimit={150} />
     </div>
   );
