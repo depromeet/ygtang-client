@@ -1,6 +1,6 @@
 import { css, Theme } from '@emotion/react';
 
-import { CTAButton } from '~/components/common/Button';
+import { CTABottomButton } from '~/components/common/Button';
 import CheckList from '~/components/common/CheckList';
 import NavigationBar from '~/components/common/NavigationBar';
 import TextField from '~/components/common/TextField';
@@ -50,7 +50,7 @@ export default function SignUpEmailVerified() {
             </CheckList>
           </div>
         </fieldset>
-        <CTAButton type={'submit'}>Start Tang!</CTAButton>
+        <CTABottomButton type={'submit'}>Start Tang!</CTABottomButton>
       </form>
     </article>
   );
