@@ -3,13 +3,12 @@ import { useRecoilState } from 'recoil';
 
 import { replaceAccessTokenForRequestInstance } from '~/libs/api/client';
 
-import { userAccessTokenState, userNameState, userRefreshTokenState } from './userStates';
+import { userAccessTokenState, userRefreshTokenState } from './userStates';
 
 export function useUser() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [accessToken, setAccessToken] = useRecoilState(userAccessTokenState);
   const [refreshToken, setRefreshToken] = useRecoilState(userRefreshTokenState);
-  const [name, setName] = useRecoilState(userNameState);
 
   /**
    * 유저 로그인 시에 사용합니다.
@@ -40,8 +39,6 @@ export function useUser() {
     isLoggedIn: accessToken !== undefined && refreshToken !== undefined,
     isLoaded,
     setIsLoaded,
-    name,
-    setName,
     userLogin,
   };
 }
