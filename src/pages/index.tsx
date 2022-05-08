@@ -1,9 +1,11 @@
+import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import AppendButton from '~/components/home/AppendButton';
 import ContentThumbnail from '~/components/home/ContentThumbnail';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
-import TagFormRouteAsModal from '~/components/home/TagFormRouteAsModal';
+
+const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRouteAsModal'));
 
 export default function Root() {
   return (
