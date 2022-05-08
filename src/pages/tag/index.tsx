@@ -1,6 +1,6 @@
 import NavigationBar from '~/components/common/NavigationBar';
 import TagForm from '~/components/TagForm';
-import { useAppliedTags } from '~/store/AppliedTags';
+import { useFilteredTags } from '~/store/FilteredTags';
 
 // TODO: 비동기 요청으로 대체
 const mockTags: TagType[] = [
@@ -13,12 +13,17 @@ const mockTags: TagType[] = [
 ];
 
 export default function TagPage() {
-  const { tags, removeTag, addTag } = useAppliedTags();
+  const { filteredTags, addTag, removeTag } = useFilteredTags({});
 
   return (
     <article>
       <NavigationBar title="태그 추가" backLink="/" backLinkScrollOption={false} />
-      <TagForm applyedTags={tags} registeredTags={mockTags} onSave={addTag} onRemove={removeTag} />
+      <TagForm
+        applyedTags={filteredTags}
+        registeredTags={mockTags}
+        onSave={addTag}
+        onRemove={removeTag}
+      />
     </article>
   );
 }
