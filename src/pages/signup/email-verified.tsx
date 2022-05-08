@@ -15,7 +15,7 @@ export default function SignUpEmailVerified() {
     <article css={containerCss}>
       <NavigationBar title={'회원가입'} />
       <p css={introTextWrapper}>마지막 단계입니다!</p>
-      <form css={formCss}>
+      <form>
         <fieldset css={fieldSetCss}>
           <TextField
             label={'닉네임'}
@@ -73,19 +73,10 @@ const introTextWrapper = (theme: Theme) => css`
   margin-bottom: 32px;
 `;
 
-const formCss = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  height: 100%;
-`;
-
 const fieldSetCss = css`
   display: flex;
   flex-direction: column;
   gap: 16px; // (original 36px) - (label height 20px)
-  margin-bottom: 52px;
 `;
 
 const checkListWrapperCss = css`
