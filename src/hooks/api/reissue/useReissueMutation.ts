@@ -10,7 +10,12 @@ interface ReissueMutationRequest {
 
 // NOTE: /v1/reissue endpoint는 커스텀 헤더를 요구합니다.
 async function customFetcher(input: ReissueMutationRequest) {
-  return post('/v1/reissue', input);
+  return post('/v1/reissue', undefined, {
+    headers: {
+      'X-AUTH-TOKEN': input.accessToken,
+      'REFRESH-TOKEN': input.refreshToken,
+    },
+  });
 }
 
 export function useReissueMutation() {
