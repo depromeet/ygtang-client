@@ -23,9 +23,9 @@ interface CTABottomButtonProps extends ComponentProps<typeof CTAButton> {
  * ```
  */
 export function CTABottomButton(props: CTABottomButtonProps) {
+  const { children, bottom = '0', ...rest } = props;
   const { isIos } = useUserAgent();
   const theme = useTheme();
-  const { children, bottom = '0', ...rest } = props;
 
   return (
     <div css={ctaBottomButtonCss({ theme, isIos: isIos(), bottom })}>
@@ -35,12 +35,12 @@ export function CTABottomButton(props: CTABottomButtonProps) {
 }
 
 const ctaBottomButtonCss = ({
-  isIos,
   theme,
+  isIos,
   bottom,
 }: {
-  isIos: boolean;
   theme: Theme;
+  isIos: boolean;
   bottom: string;
 }) => css`
   position: absolute;
