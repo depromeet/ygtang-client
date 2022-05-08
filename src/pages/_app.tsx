@@ -1,9 +1,11 @@
 import { PropsWithChildren } from 'react';
 import { AppProps } from 'next/app';
 import { css, Theme, ThemeProvider } from '@emotion/react';
+import { QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 
 import ToastSection from '~/components/common/ToastSection';
+import { queryClient } from '~/libs/api/queryClient';
 import { UserProvider } from '~/store/User/UserProvider';
 import GlobalStyle from '~/styles/GlobalStyle';
 import CustomTheme from '~/styles/Theme';
@@ -12,13 +14,15 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <ThemeProvider theme={CustomTheme}>
-        <UserProvider>
-          <Layout>
-            <GlobalStyle />
-            <Component {...pageProps} />
-            <ToastSection />
-          </Layout>
-        </UserProvider>
+        <QueryClientProvider client={queryClient}>
+          <UserProvider>
+            <Layout>
+              <GlobalStyle />
+              <Component {...pageProps} />
+              <ToastSection />
+            </Layout>
+          </UserProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </RecoilRoot>
   );
