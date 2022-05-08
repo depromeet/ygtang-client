@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
 
-import { useReissueMutation } from '~/hooks/api/reissue/useReissueMutation';
+import useReissueMutation from '~/hooks/api/reissue/useReissueMutation';
 import useCookie from '~/hooks/common/useCookie';
 
 import { useUser } from './';
@@ -10,8 +10,11 @@ const cookieRefreshTokenName = 'ygt_refresh';
 
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
   const { isLoaded, setIsLoaded, userLogin } = useUser();
-  const [reissueMutate, { data: reissueMutationData, error: reissueMutationError }] =
-    useReissueMutation();
+  const {
+    mutate: reissueMutate,
+    data: reissueMutationData,
+    error: reissueMutationError,
+  } = useReissueMutation();
   const { get: cookieGet } = useCookie();
 
   // 컴포넌트 마운트 시
