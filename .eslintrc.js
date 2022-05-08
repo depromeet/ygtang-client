@@ -21,7 +21,10 @@ module.exports = {
     ],
     'no-implicit-coercion': 'error',
     '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
-    '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { ignoreRestSiblings: true, argsIgnorePattern: '_', varsIgnorePattern: '_' },
+    ],
     'prefer-const': 'error',
     'no-var': 'error',
     'react-hooks/rules-of-hooks': 'error',
@@ -47,7 +50,7 @@ module.exports = {
     'import/default': 'off',
     'import/namespace': 'off',
     '@next/next/no-img-element': 'off',
-    
+
     'ygt-rules/internal-router-passhref': 'warn',
   },
   overrides: [
@@ -63,6 +66,7 @@ module.exports = {
           'off',
           { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] },
         ],
+        'react/display-name': 'off',
       },
     },
   ],
