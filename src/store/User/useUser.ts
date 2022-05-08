@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
+import { replaceAccessTokenForRequestInstance } from '~/libs/api/client';
+
 import { userAccessTokenState, userNameState, userRefreshTokenState } from './userStates';
 
 export function useUser() {
@@ -28,6 +30,8 @@ export function useUser() {
 
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
+
+      replaceAccessTokenForRequestInstance(accessToken);
     },
     [setAccessToken, setRefreshToken]
   );
