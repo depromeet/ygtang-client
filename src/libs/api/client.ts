@@ -1,7 +1,9 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
+const developmentApiUrl = process.env.API_DEVELOPMENT ?? 'http://localhost:5500/api';
+
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? 'http://13.125.36.7/api' : 'production API',
+  baseURL: process.env.NODE_ENV === 'development' ? developmentApiUrl : 'production API',
   withCredentials: true,
 });
 
