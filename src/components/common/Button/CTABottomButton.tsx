@@ -44,9 +44,12 @@ const ctaBottomButtonCss = ({
   bottom: string;
 }) => css`
   position: absolute;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: ${bottom};
+
   padding: ${isIos ? `8px 16px 0 16px` : `8px 16px`};
   background: ${theme.color.background};
   width: 100%;
+  max-width: ${theme.size.maxWidth};
 `;
