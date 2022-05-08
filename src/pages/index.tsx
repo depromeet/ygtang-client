@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import AppendButton from '~/components/home/AppendButton';
 import ContentThumbnail from '~/components/home/ContentThumbnail';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
+import TagFormRouteAsModal from '~/components/home/TagFormRouteAsModal';
 
 export default function Root() {
   return (
@@ -10,6 +11,81 @@ export default function Root() {
       <HomeNavigationBar />
       <article>
         <section css={thumbnailWrapperCss}>
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
+          <ContentThumbnail
+            type="TEXT"
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
+            tags={[]}
+          />
           <ContentThumbnail
             type="TEXT"
             content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis."
@@ -34,6 +110,7 @@ export default function Root() {
         </section>
         <AppendButton />
       </article>
+      <TagFormRouteAsModal />
     </>
   );
 }
