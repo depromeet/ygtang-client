@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { css } from '@emotion/react';
 
 import BottomSheetModal from '~/components/common/BottomSheetModal';
@@ -20,6 +21,10 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
     }
     setValue('');
   };
+
+  useEffect(() => {
+    setValue('');
+  }, [isShowing, setValue]);
 
   return (
     <BottomSheetModal
