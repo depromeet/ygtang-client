@@ -27,6 +27,7 @@ export default function AppendButton() {
       <PortalWrapper isShowing={isShowing}>
         <motion.div
           css={backdropCss}
+          onClick={toggleIsShowing}
           variants={defaultFadeInVariants}
           initial="initial"
           animate="animate"
