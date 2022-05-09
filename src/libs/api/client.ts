@@ -1,21 +1,25 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
+const developmentApiUrl = process.env.API_DEVELOPMENT ?? 'http://localhost:5500/api';
+
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? ' http://localhost:3004/' : 'production API',
+  baseURL: process.env.NODE_ENV === 'development' ? developmentApiUrl : 'production API',
   withCredentials: true,
 });
 
-// Request interceptor
-function interceptorRequestFulfilled(config: AxiosRequestConfig) {
-  return {
-    ...config,
-    headers: {
-      Authorization: `Bearer token`,
-    },
-  };
-}
+export function replaceAccessTokenForRequestInstance(token: string) {
+  // Request interceptor
+  function interceptorRequestFulfilled(config: AxiosRequestConfig) {
+    return {
+      ...config,
+      headers: {
+        accessToken: `${token}`,
+      },
+    };
+  }
 
-instance.interceptors.request.use(interceptorRequestFulfilled);
+  instance.interceptors.request.use(interceptorRequestFulfilled);
+}
 
 // Response interceptor
 function interceptorResponseFulfilled(res: AxiosResponse) {

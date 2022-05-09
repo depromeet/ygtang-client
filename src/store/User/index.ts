@@ -1,2 +1,2 @@
-export { userLoggedInState, userNameState } from './userStates';
+export { userAccessTokenState, userRefreshTokenState } from './userStates';
 export { useUser } from './useUser';
