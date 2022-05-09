@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 
 import LinkInput from '~/components/add/LinkInput';
 import { CTAButton } from '~/components/common/Button';
-import { contentWrapperCss } from '~/components/common/Content/styles';
 import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
@@ -57,4 +56,8 @@ const addLinkTopCss = css`
 
 const addLinkBottomCss = css`
   margin: 8px 0 16px 0;
+`;
+
+const contentWrapperCss = css`
+  padding: 16px 0;
 `;

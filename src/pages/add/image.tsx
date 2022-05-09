@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
-import { contentWrapperCss } from '~/components/common/Content/styles';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
 import NavigationBar from '~/components/common/NavigationBar';
@@ -63,4 +62,8 @@ const addImageTopCss = css`
 
 const addImageBottomCss = css`
   margin: 8px 0 16px 0;
+`;
+
+const contentWrapperCss = css`
+  padding: 16px 0;
 `;
