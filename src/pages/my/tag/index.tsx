@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
-import { CTAButton, GhostButton } from '~/components/common/Button';
+import { GhostButton } from '~/components/common/Button';
+import { CTABottomButton } from '~/components/common/Button/CTABottomButton';
 import NavigationBar from '~/components/common/NavigationBar';
 import MyTagItem from '~/components/my/tag/MyTagItem';
 
@@ -38,17 +39,11 @@ export default function MyTag() {
       />
       <ul css={myTagItemListCss}>
         {tags.map(tag => (
-          <MyTagItem
-            key={tag.id}
-            tag={tag}
-            onDelete={id => {
-              id;
-            }}
-          />
+          <MyTagItem key={tag.id} tag={tag} />
         ))}
       </ul>
       {/* TODO: CTAButton PR 적용되면 업데이트 예정  */}
-      <CTAButton css={myTagRegisterCss}>태그등록</CTAButton>
+      <CTABottomButton>태그등록</CTABottomButton>
     </article>
   );
 }
@@ -63,8 +58,4 @@ const myTagItemListCss = css`
   margin-top: 20px;
   flex: 1;
   overflow-y: scroll;
-`;
-const myTagRegisterCss = css`
-  position: absolute;
-  bottom: 34px;
 `;
