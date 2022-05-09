@@ -6,23 +6,18 @@ import textEllipisCss from '~/styles/utils/textEllipisCss';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
 interface ContentThumbnailProps extends Pick<InspirationInterface, 'type' | 'content'> {
-  index?: number; // for animation delay
   tags: InspirationInterface['tagResponse'];
   openGraph?: InspirationInterface['openGraphResponse'];
 }
 
 export default function ContentThumbnail({
-  index = 0,
   type,
   tags,
   content,
   openGraph,
 }: ContentThumbnailProps) {
   return (
-    <motion.section
-      css={wrapperCss}
-      variants={index % 2 == 0 ? contentFadeInUp : evenContentFadeInUpVariants}
-    >
+    <motion.section css={wrapperCss} variants={contentFadeInUp}>
       <div css={contentWrapperCss}>
         <Content type={type} content={content} openGraph={openGraph} />
       </div>
@@ -57,27 +52,6 @@ const contentWrapperCss = (theme: Theme) => css`
 `;
 
 export const contentFadeInUp: Variants = {
-  initial: {
-    opacity: 0,
-    y: 30,
-    transition: { duration: 1, ease: defaultEasing },
-    willChange: 'opacity, transform',
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, ease: defaultEasing },
-    willChange: 'opacity, transform',
-  },
-  exit: {
-    opacity: 0,
-    y: 30,
-    transition: { duration: 1, ease: defaultEasing },
-    willChange: 'opacity, transform',
-  },
-};
-
-export const evenContentFadeInUpVariants: Variants = {
   initial: {
     opacity: 0,
     y: 30,

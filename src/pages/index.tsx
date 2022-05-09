@@ -5,17 +5,28 @@ import { motion } from 'framer-motion';
 import AppendButton from '~/components/home/AppendButton';
 import ContentThumbnail from '~/components/home/ContentThumbnail';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
+import AppliedTags from '~/components/TagForm/AppliedTags';
 import { staggerHalf } from '~/constants/motions';
+import { useFilteredTags } from '~/store/FilteredTags';
 
 const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRouteAsModal'));
 
 export default function Root() {
+  const { filteredTags, removeTag } = useFilteredTags({});
+
   return (
     <>
       <HomeNavigationBar />
-      <article>
+      <motion.article layout>
+        {filteredTags.length > 0 && (
+          <motion.section css={filteredSectionCss} layoutId="filteredTagsSection">
+            <AppliedTags applyedTags={filteredTags} onRemove={removeTag} />
+          </motion.section>
+        )}
+
         <motion.section
           css={thumbnailWrapperCss}
+          layoutId="thumbnailSection"
           variants={staggerHalf}
           initial="initial"
           animate="animate"
@@ -24,7 +35,6 @@ export default function Root() {
           {MOCK_CONTENT.map(({ type, content, tagResponse, openGraphResponse }, index) => (
             <ContentThumbnail
               key={index}
-              index={index}
               type={type as InspirationType}
               content={content}
               tags={tagResponse}
@@ -32,18 +42,23 @@ export default function Root() {
             />
           ))}
         </motion.section>
-        <AppendButton />
-        <TagFormRouteAsModal />
-      </article>
+      </motion.article>
+      <AppendButton />
+      <TagFormRouteAsModal />
     </>
   );
 }
 
 const thumbnailWrapperCss = css`
   width: 100%;
+  padding-top: 16px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+`;
+
+const filteredSectionCss = css`
+  margin: 2px 0;
 `;
 
 const TEST_TAGS = [
