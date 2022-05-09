@@ -39,5 +39,11 @@ export default function useTagQuery() {
     },
   });
 
-  return { query, createTag: createTagMutation.mutate, deleteTag: deleteTagMutation.mutate };
+  return {
+    tags: query.data ? query.data.data.tagResponse : [],
+    isLoading: query.isLoading,
+    query,
+    createTag: createTagMutation.mutate,
+    deleteTag: deleteTagMutation.mutate,
+  };
 }
