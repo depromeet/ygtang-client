@@ -69,24 +69,24 @@ const backdropCss = (theme: Theme) => css`
 const buttonRotateVariants: Variants = {
   initial: {
     opacity: 0,
-    y: 30,
-    transition: { duration: 0.3, ease: defaultEasing },
+    y: 10,
+    transition: { duration: 0.5, ease: defaultEasing },
   },
   false: {
     opacity: 1,
     y: 0,
     rotateZ: '0deg',
-    transition: { duration: 0.3, ease: defaultEasing },
+    transition: { duration: 0.5, ease: defaultEasing },
   },
   true: {
     opacity: 1,
     y: 0,
     rotateZ: '45deg',
-    transition: { duration: 0.3, ease: defaultEasing },
+    transition: { duration: 0.5, ease: defaultEasing },
   },
   exit: {
     opacity: 0,
-    y: 30,
-    transition: { duration: 0.3, ease: defaultEasing },
+    y: 10,
+    transition: { duration: 0.5, ease: defaultEasing },
   },
 };
