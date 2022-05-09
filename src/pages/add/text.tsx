@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
+import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
@@ -14,7 +15,7 @@ export default function AddText() {
     <article css={addTextCss}>
       <NavigationBar title="글 추가" />
       <section css={addTextTopCss}>
-        <div css={textBoxCss}>
+        <div css={contentWrapperCss}>
           <Input
             as="textarea"
             placeholder="영감을 작성해 보세요."
@@ -22,7 +23,12 @@ export default function AddText() {
             onChange={inspiringText.onChange}
           />
         </div>
-        <MemoText writable />
+        <div css={contentWrapperCss}>
+          <TagContent onEdit={() => {}} tags={[]} />
+        </div>
+        <div css={contentWrapperCss}>
+          <MemoText writable />
+        </div>
       </section>
       <section css={addTextBottomCss}>
         <CTAButton type="submit" disabled={isEmptyText}>
@@ -49,6 +55,6 @@ const addTextBottomCss = css`
   margin: 8px 0 16px 0;
 `;
 
-const textBoxCss = css`
-  margin: 16px 0;
+const contentWrapperCss = css`
+  padding: 16px 0;
 `;

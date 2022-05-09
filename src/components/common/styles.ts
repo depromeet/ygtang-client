@@ -1,7 +1,7 @@
 import { css, Theme } from '@emotion/react';
 
 /**
- * TextField 에서 공용으로 사용되는 라벨 스타일입니다.
+ * 공용으로 사용되는 라벨 스타일입니다.
  */
 export const labelCss = (theme: Theme) => css`
   display: block;

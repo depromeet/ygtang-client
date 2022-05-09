@@ -1,7 +1,7 @@
 import { useEffect, useId } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 
-import { labelCss } from '~/components/common/TextField/styles';
+import { labelCss } from '~/components/common/styles';
 import useInput from '~/hooks/common/useInput';
 
 import { EditIcon } from '../icons';

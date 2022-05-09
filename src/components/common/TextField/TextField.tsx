@@ -2,7 +2,7 @@ import { ReactNode, useId } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import { CheckIcon } from '~/components/common/icons';
-import { labelCss } from '~/components/common/TextField/styles';
+import { labelCss } from '~/components/common/styles';
 
 import { Input, InputProps } from './Input';
 

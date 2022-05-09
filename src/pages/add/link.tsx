@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 
 import LinkInput from '~/components/add/LinkInput';
 import { CTAButton } from '~/components/common/Button';
+import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 
@@ -21,10 +22,15 @@ export default function AddLink() {
     <article css={addLinkCss}>
       <NavigationBar title="링크 추가" />
       <section css={addLinkTopCss}>
-        <div css={linkBoxCss}>
+        <div css={contentWrapperCss}>
           <LinkInput openGraph={openGraph} setOpenGraph={setOpenGraph} />
         </div>
-        <MemoText writable />
+        <div css={contentWrapperCss}>
+          <TagContent onEdit={() => {}} tags={[]} />
+        </div>
+        <div css={contentWrapperCss}>
+          <MemoText writable />
+        </div>
       </section>
 
       <section css={addLinkBottomCss}>
@@ -52,6 +58,6 @@ const addLinkBottomCss = css`
   margin: 8px 0 16px 0;
 `;
 
-const linkBoxCss = css`
-  margin: 16px 0;
+const contentWrapperCss = css`
+  padding: 16px 0;
 `;
