@@ -19,10 +19,10 @@ export interface TagContentProps {
   onClickTag?: (tagId: number) => void;
 }
 
-export default function TagContent({ tags, label, onEdit, onClickTag }: TagContentProps) {
+export default function TagContent({ tags, label = '태그', onEdit, onClickTag }: TagContentProps) {
   return (
     <div css={tagContentWrapperCss}>
-      <span css={tagContentLabelCss}>{label ? label : '태그'}</span>
+      <span css={tagContentLabelCss}>{label}</span>
       <div css={tagContentCss}>
         {tags.map(tag => (
           <Tag
