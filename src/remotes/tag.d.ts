@@ -7,3 +7,5 @@ interface TagInterface {
   createdDatetime: string;
   updatedDatetime: string;
 }
+
+type TagType = Pick<TagInterface, 'content' | 'id'>;
