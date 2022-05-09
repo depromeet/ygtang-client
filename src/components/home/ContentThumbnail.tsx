@@ -1,5 +1,7 @@
 import { css, Theme } from '@emotion/react';
+import { motion, Variants } from 'framer-motion';
 
+import { defaultEasing } from '~/constants/motions';
 import textEllipisCss from '~/styles/utils/textEllipisCss';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
@@ -15,13 +17,13 @@ export default function ContentThumbnail({
   openGraph,
 }: ContentThumbnailProps) {
   return (
-    <section css={wrapperCss}>
+    <motion.section css={wrapperCss} variants={contentFadeInUp}>
       <div css={contentWrapperCss}>
         <Content type={type} content={content} openGraph={openGraph} />
       </div>
 
       <Tags tags={tags} />
-    </section>
+    </motion.section>
   );
 }
 
@@ -48,6 +50,27 @@ const contentWrapperCss = (theme: Theme) => css`
   overflow: hidden;
   border-radius: ${theme.borderRadius.default};
 `;
+
+export const contentFadeInUp: Variants = {
+  initial: {
+    opacity: 0,
+    y: 30,
+    transition: { duration: 1, ease: defaultEasing },
+    willChange: 'opacity, transform',
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, ease: defaultEasing },
+    willChange: 'opacity, transform',
+  },
+  exit: {
+    opacity: 0,
+    y: 30,
+    transition: { duration: 1, ease: defaultEasing },
+    willChange: 'opacity, transform',
+  },
+};
 
 function Content({
   type,
