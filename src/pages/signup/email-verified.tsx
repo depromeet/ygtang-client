@@ -1,6 +1,6 @@
 import { css, Theme } from '@emotion/react';
 
-import { CTAButton } from '~/components/common/Button';
+import { CTABottomButton } from '~/components/common/Button';
 import CheckList from '~/components/common/CheckList';
 import NavigationBar from '~/components/common/NavigationBar';
 import TextField from '~/components/common/TextField';
@@ -50,7 +50,7 @@ export default function SignUpEmailVerified() {
             </CheckList>
           </div>
         </fieldset>
-        <CTAButton type={'submit'}>Start Tang!</CTAButton>
+        <CTABottomButton type={'submit'}>Start Tang!</CTABottomButton>
       </form>
     </article>
   );
@@ -60,7 +60,7 @@ const containerCss = css`
   display: flex;
   flex-direction: column;
 
-  height: 100%;
+  height: 100vh;
 `;
 
 const introTextWrapper = (theme: Theme) => css`
@@ -74,18 +74,17 @@ const introTextWrapper = (theme: Theme) => css`
 `;
 
 const formCss = css`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
-  height: 100%;
 `;
 
 const fieldSetCss = css`
   display: flex;
   flex-direction: column;
   gap: 16px; // (original 36px) - (label height 20px)
-  margin-bottom: 52px;
+
+  flex-grow: 1;
 `;
 
 const checkListWrapperCss = css`
