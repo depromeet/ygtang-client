@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import { GhostButton } from '~/components/common/Button';
 import { CTABottomButton } from '~/components/common/Button/CTABottomButton';
 import NavigationBar from '~/components/common/NavigationBar';
 import MyTagItem from '~/components/my/tag/MyTagItem';
+
+import AddTagBottomSheet from './AddTagBottomSheet';
 
 export default function MyTag() {
   const tags: TagType[] = [
@@ -31,6 +34,8 @@ export default function MyTag() {
     { id: 211, content: '안녕!!하세요!' },
   ];
 
+  const [isShowing, setIsShowing] = useState(false);
+
   return (
     <article css={myTagCss}>
       <NavigationBar
@@ -43,7 +48,19 @@ export default function MyTag() {
         ))}
       </ul>
       {/* TODO: CTAButton PR 적용되면 업데이트 예정  */}
-      <CTABottomButton>태그등록</CTABottomButton>
+      <CTABottomButton
+        onClick={() => {
+          setIsShowing(true);
+        }}
+      >
+        태그등록
+      </CTABottomButton>
+      <AddTagBottomSheet
+        isShowing={isShowing}
+        onClose={() => {
+          setIsShowing(false);
+        }}
+      />
     </article>
   );
 }
