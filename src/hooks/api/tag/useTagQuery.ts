@@ -21,19 +21,19 @@ export default function useTagQuery() {
   };
 
   // NOTE: useInfiniteQuery 사용?
-  const query = useQuery<TagResponseInterface>('/api/v1/tag/list', () =>
-    get<TagResponseInterface>('/api/v1/tag/list')
+  const query = useQuery<TagResponseInterface>('/v1/tag/list', () =>
+    get<TagResponseInterface>('/v1/tag/list')
   );
 
   // TODO: 제너릭 타입 설정
-  const createTagMutation = useMutation((content: string) => post('/api/v1/tag/add', { content }), {
+  const createTagMutation = useMutation((content: string) => post('/v1/tag/add', { content }), {
     onSuccess: () => {
       refresh();
     },
   });
 
   // TODO: 제너릭 타입 설정
-  const deleteTagMutation = useMutation((id: number) => del(`/api/v1/tag/remove/${id}`), {
+  const deleteTagMutation = useMutation((id: number) => del(`/v1/tag/remove/${id}`), {
     onSuccess: () => {
       refresh();
     },
