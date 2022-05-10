@@ -1,9 +1,9 @@
 import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 import { css, Theme } from '@emotion/react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import PortalWrapper from '~/components/common/PortalWrapper';
-import { defaultEasing, defaultFadeInUpVariants } from '~/constants/motions';
+import { defaultFadeInUpVariants, defaultFadeInVariants } from '~/constants/motions';
 
 export interface DialogProps {
   isShowing?: boolean;
@@ -27,7 +27,7 @@ export default function Dialog({
       <PortalWrapper isShowing={true}>
         <motion.div
           css={dimBackdropCss}
-          variants={backgroundFadeInOutVariants}
+          variants={defaultFadeInVariants}
           initial="initial"
           animate="animate"
           exit="exit"
@@ -95,21 +95,3 @@ const dialogButtonWrapperCss = css`
   width: 100%;
   padding: 16px;
 `;
-
-export const backgroundFadeInOutVariants: Variants = {
-  initial: {
-    opacity: 0,
-    transition: { duration: 0.2, ease: defaultEasing },
-    willChange: 'opacity',
-  },
-  animate: {
-    opacity: 1,
-    transition: { duration: 0.2, ease: defaultEasing },
-    willChange: 'opacity',
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 0.2, ease: defaultEasing },
-    willChange: 'opacity',
-  },
-};
