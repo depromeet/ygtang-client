@@ -5,16 +5,18 @@ import { motion, Variants } from 'framer-motion';
 import PortalWrapper from '~/components/common/PortalWrapper';
 import { defaultEasing, defaultFadeInUpVariants } from '~/constants/motions';
 
-export interface DialogProps {
+export interface IllustDialogProps {
   isShowing?: boolean;
+  image: string;
   actionButtons: ReactNode;
 }
 
-export default function Dialog({
+export default function IllustDialog({
   isShowing,
+  image,
   children,
   actionButtons,
-}: PropsWithChildren<DialogProps>) {
+}: PropsWithChildren<IllustDialogProps>) {
   const [isSSR, setIsSSR] = useState(true);
 
   useEffect(() => {
@@ -32,9 +34,12 @@ export default function Dialog({
           animate="animate"
           exit="exit"
         >
-          <motion.div css={dialogCss} variants={defaultFadeInUpVariants}>
-            <div css={dialogContentWrapperCss}>{children}</div>
-            <div css={dialogButtonWrapperCss}>{actionButtons}</div>
+          <motion.div css={IllustDialogCss} variants={defaultFadeInUpVariants}>
+            <div css={IllustContentContainerCss}>
+              <img src={image} alt="일러스트 이미지" css={IllustImageCss} />
+              <div css={IllustDialogContentWrapperCss}>{children}</div>
+            </div>
+            <div css={IllustDialogButtonWrapperCss}>{actionButtons}</div>
           </motion.div>
         </motion.div>
       </PortalWrapper>
@@ -49,7 +54,7 @@ const dimBackdropCss = (theme: Theme) => css`
   align-items: center;
   justify-content: center;
 
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100vw;
@@ -61,12 +66,26 @@ const dimBackdropCss = (theme: Theme) => css`
   overflow: hidden;
 `;
 
-const dialogCss = (theme: Theme) => css`
-  position: relative;
+const IllustContentContainerCss = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  gap: 16px;
+  margin-top: -88px;
+  margin-bottom: 24px;
+`;
+
+const IllustImageCss = css`
+  width: 240px;
+  height: 160px;
+`;
+
+const IllustDialogCss = (theme: Theme) => css`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 288px;
 
   width: 311px;
   min-height: 200px;
@@ -75,19 +94,15 @@ const dialogCss = (theme: Theme) => css`
   border-radius: ${theme.borderRadius.default};
 `;
 
-const dialogContentWrapperCss = (theme: Theme) => css`
-  white-space: pre;
+const IllustDialogContentWrapperCss = (theme: Theme) => css`
   font-weight: ${theme.font.weight.bold};
-  font-style: normal;
   color: ${theme.color.gray05};
   font-size: 16px;
   line-height: 150%;
   text-align: center;
-
-  margin: 24px 16px;
 `;
 
-const dialogButtonWrapperCss = css`
+const IllustDialogButtonWrapperCss = css`
   display: flex;
   flex-direction: row;
   gap: 16px;
