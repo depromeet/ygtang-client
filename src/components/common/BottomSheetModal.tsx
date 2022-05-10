@@ -2,9 +2,8 @@ import React, { ReactNode } from 'react';
 import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
-import { backgroundFadeInOutVariants } from '~/components/common/Dialog';
 import PortalWrapper from '~/components/common/PortalWrapper';
-import { defaultEasing } from '~/constants/motions';
+import { defaultEasing, defaultFadeInVariants } from '~/constants/motions';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
 
 export interface BottomSheetModalProps {
@@ -26,7 +25,7 @@ export default function BottomSheetModal({ isShowing, children, onClose }: Botto
       <motion.div
         css={dimBackdropCss}
         onClick={onDeleteHandler}
-        variants={backgroundFadeInOutVariants}
+        variants={defaultFadeInVariants}
         initial="initial"
         animate="animate"
         exit="exit"
