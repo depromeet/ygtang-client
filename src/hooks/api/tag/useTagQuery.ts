@@ -2,12 +2,12 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { del, get, post } from '~/libs/api/client';
 
-// TODO: 서버 스펙 확인 후 수정
 interface TagResponseInterface {
   message: string;
-  data: {
-    tagResponse: TagInterface[];
-  };
+  data: TagDataResponseInterface;
+}
+interface TagDataResponseInterface extends PaginationInterface {
+  content: TagInterface[];
 }
 
 // TODO: constants로 묶어서 관리?
@@ -21,9 +21,14 @@ export default function useTagQuery() {
   };
 
   // NOTE: useInfiniteQuery 사용?
-  const query = useQuery<TagResponseInterface>('/v1/tag/list', () =>
-    get<TagResponseInterface>('/v1/tag/list')
+  const query = useQuery<TagResponseInterface>(TAG_LIST_QUERY_KEY, () =>
+    get<TagResponseInterface>('/api/v1/tag/list?offset=20&pageSize=20&pageNumber=1')
   );
+
+  // const fetchTags = ({ pageNumber = 1 }: { pageNumber?: number }) =>
+  //   get<TagResponseInterface>(`/api/v1/tag/list?offset=20&pageSize=20&pageNumber=${pageNumber}`);
+
+  // const infiniteQuery = useInfiniteQuery('projects', () => fetchTags);
 
   // TODO: 제너릭 타입 설정
   const createTagMutation = useMutation((content: string) => post('/v1/tag/add', { content }), {
@@ -40,7 +45,7 @@ export default function useTagQuery() {
   });
 
   return {
-    tags: query.data ? query.data.data.tagResponse : [],
+    tags: query.data ? query.data.data.content : [],
     isLoading: query.isLoading,
     query,
     createTag: createTagMutation.mutate,
