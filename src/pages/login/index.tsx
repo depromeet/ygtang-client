@@ -62,7 +62,6 @@ export default function Login() {
         refreshToken: loginMutationData.data.refreshToken,
       });
       setIsPending(false);
-      fireToast({ content: '로그인되었습니다. 환영합니다!' }); // >> 무한 리렌더의 원인... 왜 그럴까요...
       push('/');
     }
   }, [loginMutationData]);
