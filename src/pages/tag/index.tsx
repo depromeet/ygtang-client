@@ -1,11 +1,11 @@
 import NavigationBar from '~/components/common/NavigationBar';
 import TagForm from '~/components/TagForm';
-import useTagQuery from '~/hooks/api/tag/useTagQuery';
+import useGetTagWithPagination from '~/hooks/api/tag/useGetTagWithPagination';
 import { useFilteredTags } from '~/store/FilteredTags';
 
 export default function TagPage() {
   const { filteredTags, addTag, removeTag } = useFilteredTags({});
-  const { tags } = useTagQuery({ pageNumber: 1 });
+  const { tags } = useGetTagWithPagination({});
 
   return (
     <article>
