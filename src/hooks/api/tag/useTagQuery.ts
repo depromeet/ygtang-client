@@ -6,6 +6,7 @@ interface TagResponseInterface {
   message: string;
   data: TagDataResponseInterface;
 }
+
 interface TagDataResponseInterface extends PaginationInterface {
   content: TagInterface[];
 }
@@ -13,7 +14,11 @@ interface TagDataResponseInterface extends PaginationInterface {
 // TODO: constants로 묶어서 관리?
 const TAG_LIST_QUERY_KEY = 'tags';
 
-export default function useTagQuery() {
+interface UseTagQueryProps {
+  pageNumber: number;
+}
+
+export default function useTagQuery({ pageNumber }: UseTagQueryProps) {
   const queryClient = useQueryClient();
 
   const refresh = () => {
@@ -21,23 +26,25 @@ export default function useTagQuery() {
   };
 
   // NOTE: useInfiniteQuery 사용?
-  const query = useQuery<TagResponseInterface>(TAG_LIST_QUERY_KEY, () =>
-    get<TagResponseInterface>('/api/v1/tag/list?offset=20&pageSize=20&pageNumber=1')
+  const fetchTags = (pageNumber: number = 1) =>
+    get<TagResponseInterface>(
+      `/v1/tag/list?paged=true&offset=20&pageSize=20&pageNumber=${pageNumber}`
+    );
+
+  const query = useQuery<TagResponseInterface>(
+    [TAG_LIST_QUERY_KEY, pageNumber],
+    () => fetchTags(pageNumber),
+    {
+      keepPreviousData: true,
+    }
   );
 
-  // const fetchTags = ({ pageNumber = 1 }: { pageNumber?: number }) =>
-  //   get<TagResponseInterface>(`/api/v1/tag/list?offset=20&pageSize=20&pageNumber=${pageNumber}`);
-
-  // const infiniteQuery = useInfiniteQuery('projects', () => fetchTags);
-
-  // TODO: 제너릭 타입 설정
   const createTagMutation = useMutation((content: string) => post('/v1/tag/add', { content }), {
     onSuccess: () => {
       refresh();
     },
   });
 
-  // TODO: 제너릭 타입 설정
   const deleteTagMutation = useMutation((id: number) => del(`/v1/tag/remove/${id}`), {
     onSuccess: () => {
       refresh();
