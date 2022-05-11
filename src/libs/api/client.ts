@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-const developmentApiUrl = process.env.API_DEVELOPMENT ?? 'http://localhost:5500/api';
+const developmentApiUrl = process.env.API_DEVELOPMENT ?? 'https://ygtang.kr/api';
 
 const instance = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? developmentApiUrl : 'production API',

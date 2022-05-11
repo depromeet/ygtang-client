@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
+import { COOKIE_REFRESH } from '~/constants/common';
+import useCookie from '~/hooks/common/useCookie';
 import { replaceAccessTokenForRequestInstance } from '~/libs/api/client';
 
 import { userAccessTokenState, userRefreshTokenState } from './userStates';
@@ -9,6 +11,7 @@ export function useUser() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [accessToken, setAccessToken] = useRecoilState(userAccessTokenState);
   const [refreshToken, setRefreshToken] = useRecoilState(userRefreshTokenState);
+  const { set: cookieSet } = useCookie();
 
   /**
    * 유저 로그인 시에 사용합니다.
@@ -29,7 +32,7 @@ export function useUser() {
 
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
-
+      cookieSet(COOKIE_REFRESH, refreshToken);
       replaceAccessTokenForRequestInstance(accessToken);
     },
     [setAccessToken, setRefreshToken]

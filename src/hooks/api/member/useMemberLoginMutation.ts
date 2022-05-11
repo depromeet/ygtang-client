@@ -9,7 +9,6 @@ export interface MemberLoginMutationRequest {
 
 export default function useMemberLoginMutation() {
   return useMutation<AuthTokenResponseInterface, { message?: string }, MemberLoginMutationRequest>(
-    (data: MemberLoginMutationRequest) =>
-      post<AuthTokenResponseInterface>('/v1/members/login', data)
+    (data: MemberLoginMutationRequest) => post<AuthTokenResponseInterface>('/v1/auth/login', data)
   );
 }
