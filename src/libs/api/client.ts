@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 const developmentApiUrl = process.env.API_DEVELOPMENT ?? 'https://ygtang.kr/api';
 
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? developmentApiUrl : 'production API',
+  baseURL: process.env.NODE_ENV === 'development' ? developmentApiUrl : 'https://ygtang.kr/api',
   withCredentials: true,
 });
 
