@@ -6,6 +6,7 @@ import TextField from '~/components/common/TextField';
 import useMemberLoginMutation from '~/hooks/api/member/useMemberLoginMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useToast } from '~/store/Toast';
 import { useUser } from '~/store/User';
 import { validator } from '~/utils/validator';
@@ -18,6 +19,7 @@ export default function Login() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const { userLogin } = useUser();
+  const { push } = useInternalRouter();
 
   const {
     mutate: loginMutate,
@@ -35,6 +37,8 @@ export default function Login() {
       email: email.value,
       password: password.value,
     });
+    fireToast({ content: '로그인되었습니다. 환영합니다!' });
+    push('/');
   };
 
   useDidUpdate(() => {
