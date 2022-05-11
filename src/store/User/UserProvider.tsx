@@ -1,12 +1,10 @@
 import { PropsWithChildren, useEffect } from 'react';
 
+import { COOKIE_REFRESH } from '~/constants/common';
 import useReissueMutation from '~/hooks/api/reissue/useReissueMutation';
 import useCookie from '~/hooks/common/useCookie';
 
 import { useUser } from './';
-
-const cookieAccessTokenName = 'ygt_access';
-const cookieRefreshTokenName = 'ygt_refresh';
 
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
   const { isLoaded, setIsLoaded, userLogin } = useUser();
@@ -20,12 +18,10 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
   // 컴포넌트 마운트 시
   useEffect(() => {
     if (!isLoaded) {
-      const storedAccessToken = cookieGet(cookieAccessTokenName);
-      const storedRefreshToken = cookieGet(cookieRefreshTokenName);
+      const storedRefreshToken = cookieGet(COOKIE_REFRESH);
 
-      if (storedAccessToken && storedRefreshToken) {
+      if (storedRefreshToken) {
         reissueMutate({
-          accessToken: storedAccessToken,
           refreshToken: storedRefreshToken,
         });
       } else {

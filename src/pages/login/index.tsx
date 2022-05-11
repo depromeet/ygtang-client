@@ -6,6 +6,7 @@ import TextField from '~/components/common/TextField';
 import useMemberLoginMutation from '~/hooks/api/member/useMemberLoginMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useToast } from '~/store/Toast';
 import { useUser } from '~/store/User';
 import { validator } from '~/utils/validator';
@@ -18,6 +19,7 @@ export default function Login() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const { userLogin } = useUser();
+  const { push } = useInternalRouter();
 
   const {
     mutate: loginMutate,
@@ -53,20 +55,21 @@ export default function Login() {
     }
   }, [password.debouncedValue]);
 
-  useEffect(() => {
+  useDidUpdate(() => {
     if (loginMutationData && loginMutationData.data) {
       userLogin({
         accessToken: loginMutationData.data.accessToken,
         refreshToken: loginMutationData.data.refreshToken,
       });
       setIsPending(false);
+      push('/');
     }
-  }, [loginMutationData, userLogin]);
+  }, [loginMutationData]);
 
   useEffect(() => {
     if (loginMutationError) {
-      fireToast({ content: loginMutationError.message ?? '알 수 없는 오류가 발생했습니다.' });
       setIsPending(false);
+      fireToast({ content: loginMutationError.message ?? '알 수 없는 오류가 발생했습니다.' });
     }
   }, [fireToast, loginMutationError]);
 
