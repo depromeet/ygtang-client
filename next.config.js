@@ -14,7 +14,7 @@ const nextConfig = {
 };
 
 const sentryWebpackPluginOptions = {
-  silent: true,
+  silent: process.env.NODE_ENV === 'development' ? true : false,
 };
 
 module.exports = withPlugins(
