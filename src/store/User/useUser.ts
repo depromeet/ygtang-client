@@ -35,7 +35,7 @@ export function useUser() {
       cookieSet(COOKIE_REFRESH, refreshToken);
       replaceAccessTokenForRequestInstance(accessToken);
     },
-    [setAccessToken, setRefreshToken]
+    [cookieSet, setAccessToken, setRefreshToken]
   );
 
   return {

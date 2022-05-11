@@ -37,8 +37,6 @@ export default function Login() {
       email: email.value,
       password: password.value,
     });
-    fireToast({ content: '로그인되었습니다. 환영합니다!' });
-    push('/');
   };
 
   useDidUpdate(() => {
@@ -57,20 +55,22 @@ export default function Login() {
     }
   }, [password.debouncedValue]);
 
-  useEffect(() => {
+  useDidUpdate(() => {
     if (loginMutationData && loginMutationData.data) {
       userLogin({
         accessToken: loginMutationData.data.accessToken,
         refreshToken: loginMutationData.data.refreshToken,
       });
       setIsPending(false);
+      fireToast({ content: '로그인되었습니다. 환영합니다!' }); // >> 무한 리렌더의 원인... 왜 그럴까요...
+      push('/');
     }
-  }, [loginMutationData, userLogin]);
+  }, [loginMutationData]);
 
   useEffect(() => {
     if (loginMutationError) {
-      fireToast({ content: loginMutationError.message ?? '알 수 없는 오류가 발생했습니다.' });
       setIsPending(false);
+      fireToast({ content: loginMutationError.message ?? '알 수 없는 오류가 발생했습니다.' });
     }
   }, [fireToast, loginMutationError]);
 
