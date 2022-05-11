@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 import { AppProps } from 'next/app';
 import { css, Theme, ThemeProvider } from '@emotion/react';
 import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 
 import ToastSection from '~/components/common/ToastSection';
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <ToastSection />
             </Layout>
           </UserProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeProvider>
     </RecoilRoot>
