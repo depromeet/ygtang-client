@@ -29,8 +29,6 @@ export default function AppendTooltip() {
     const { files } = target;
 
     if (files) {
-      const formData = new FormData();
-      formData.append('file', files[0]);
       getBase64(files[0], result => {
         if (typeof result === 'string') uploadImg(result);
       });
