@@ -2,10 +2,12 @@ import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 import { motion } from 'framer-motion';
 
-import { INSPIRATION_EMPTY_IMAGE_SRC, INSPIRATION_EMPTY_TEXT_IMAGE_SRC } from '~/assets/constants';
+import LoadingHandler from '~/components/common/LoadingHandler';
+import { FixedSpinner } from '~/components/common/Spinner';
 import AppendButton from '~/components/home/AppendButton';
-import ContentThumbnail from '~/components/home/ContentThumbnail';
+import EmptyImageSection from '~/components/home/EmptyImageSection';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
+import Thumbnail from '~/components/home/Thumbnail';
 import AppliedTags from '~/components/TagForm/AppliedTags';
 import { staggerHalf } from '~/constants/motions';
 import useGetInspirationListWithInfinite from '~/hooks/api/inspiration/useGetInspirationListWIthInfinite';
@@ -15,9 +17,7 @@ const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRoute
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
-  const { inspirations } = useGetInspirationListWithInfinite();
-
-  console.log(inspirations);
+  const { inspirations, isLoading } = useGetInspirationListWithInfinite();
 
   return (
     <>
@@ -29,28 +29,30 @@ export default function Root() {
           </motion.section>
         )}
 
-        <EmptyImageSection />
-
-        <motion.section
-          css={thumbnailWrapperCss}
-          layoutId="thumbnailSection"
-          variants={staggerHalf}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
-          {/* {inspirations.length === 0 && <EmptyImageSection />} */}
-
-          {/* {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
-            <ContentThumbnail
-              key={id}
-              type={type as InspirationType}
-              content={content}
-              tags={tagResponse}
-              openGraph={openGraphResponse}
-            />
-          ))} */}
-        </motion.section>
+        <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
+          {inspirations.length === 0 ? (
+            <EmptyImageSection />
+          ) : (
+            <motion.section
+              css={thumbnailWrapperCss}
+              layoutId="thumbnailSection"
+              variants={staggerHalf}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
+                <Thumbnail
+                  key={id}
+                  type={type as InspirationType}
+                  content={content}
+                  tags={tagResponse}
+                  openGraph={openGraphResponse}
+                />
+              ))}
+            </motion.section>
+          )}
+        </LoadingHandler>
       </motion.article>
       <AppendButton />
       <TagFormRouteAsModal />
@@ -68,37 +70,4 @@ const thumbnailWrapperCss = css`
 
 const filteredSectionCss = css`
   margin: 2px 0;
-`;
-
-function EmptyImageSection() {
-  return (
-    <div css={imageWrapperCss}>
-      <img css={emptyImageCss} src={INSPIRATION_EMPTY_IMAGE_SRC} alt="empty inspiration" />
-      <img css={emptyTextImageCss} src={INSPIRATION_EMPTY_TEXT_IMAGE_SRC} alt="empty inspiration" />
-    </div>
-  );
-}
-
-const imageWrapperCss = css`
-  padding-top: 15vh;
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  & img {
-    object-fit: contain;
-  }
-`;
-
-const emptyImageCss = css`
-  width: 100%;
-`;
-
-const emptyTextImageCss = css`
-  margin-top: 28px;
-  width: 54%;
 `;
