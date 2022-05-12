@@ -5,12 +5,10 @@ import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
+import { useUploadedImg } from '~/store/UploadedImage';
 
 export default function AddImage() {
-  // 이 페이지로 오는 순간 이미지 업로드 인풋 기능 실행
-  // 이미지 선택 시에 해당 이미지 콘텐트 채우기
-  // 완료 후 api 연결
-  // 취소 시에 다시 전 페이지로 돌아가기
+  const { uploadedImg } = useUploadedImg();
 
   const tags = [{ id: 1, content: '1111' }];
 
@@ -19,10 +17,7 @@ export default function AddImage() {
       <NavigationBar title="이미지 추가" />
       <section css={addImageTopCss}>
         <div css={contentWrapperCss}>
-          <ImageContent
-            // src="https://i.pinimg.com/564x/89/c5/4d/89c54d90c325a8c310363f4e9773a041.jpg"
-            alt="mock"
-          />
+          {uploadedImg && <ImageContent src={uploadedImg} alt="uploadedImg" />}
         </div>
         <div css={contentWrapperCss}>
           <TagContent onEdit={() => {}} tags={tags} />

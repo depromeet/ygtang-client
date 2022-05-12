@@ -5,14 +5,40 @@ import { motion, Variants } from 'framer-motion';
 import { EditIcon, ImageIcon, LinkIcon } from '~/components/common/icons';
 import InternalLink from '~/components/common/InternalLink';
 import { defaultEasing } from '~/constants/motions';
-import { RouterPathType } from '~/hooks/common/useInternalRouter';
+import useInternalRouter, { RouterPathType } from '~/hooks/common/useInternalRouter';
+import { useUploadedImg } from '~/store/UploadedImage';
 
 export default function AppendTooltip() {
+  const { uploadImg, uploadedImg } = useUploadedImg();
+  const { push } = useInternalRouter();
   const imgInputRef = useRef<HTMLInputElement>(null);
+
   const openInputFile = () => {
     if (!imgInputRef.current) return;
     imgInputRef.current.click();
   };
+
+  const getBase64 = (file: Blob, onload: (file: unknown) => void) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => onload(reader.result);
+    reader.onerror = error => console.log(error);
+  };
+
+  const imgInputUploader = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = target;
+
+    if (files) {
+      const formData = new FormData();
+      formData.append('file', files[0]);
+      getBase64(files[0], result => {
+        if (typeof result === 'string') uploadImg(result);
+      });
+
+      uploadedImg && push('/add/image');
+    }
+  };
+
   return (
     <motion.div css={wrapperCss} variants={tooltipVariants}>
       <AnchorElement href="/add/text" icon={<EditIcon />} title="글" />
@@ -26,6 +52,7 @@ export default function AppendTooltip() {
       <input
         ref={imgInputRef}
         css={imgInputCss}
+        onChange={imgInputUploader}
         type="file"
         accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.jpeg,.tiff,.heif"
       />
