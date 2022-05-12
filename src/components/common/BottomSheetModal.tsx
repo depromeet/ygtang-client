@@ -51,7 +51,7 @@ const dimBackdropCss = (theme: Theme) => css`
   left: 0;
 
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 
   background-color: ${theme.color.dim03};
 
@@ -62,7 +62,7 @@ const MARGIN_TOP = 54;
 const MIN_HIEGHT = 208;
 const contentWrapperCss = (theme: Theme) => css`
   position: absolute;
-  top: 100vh;
+  top: calc(var(--vh, 1vh) * 100);
   transform: translateY(-100%);
 
   width: 100%;

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { AppProps } from 'next/app';
 import { css, Theme, ThemeProvider } from '@emotion/react';
 import { QueryClientProvider } from 'react-query';
@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 
 import ToastSection from '~/components/common/ToastSection';
+import { useWindowSize } from '~/hooks/common/useWindowSize';
 import { queryClient } from '~/libs/api/queryClient';
 import { UserProvider } from '~/store/User/UserProvider';
 import GlobalStyle from '~/styles/GlobalStyle';
@@ -35,7 +36,16 @@ export default function App({ Component, pageProps }: AppProps) {
  *
  * `_app`에서만 사용되는 컴포넌트이기에, 인라인으로 작성되었습니다.
  */
+let vh = 0;
+
 function Layout({ children }: PropsWithChildren<{}>) {
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    vh = window.innerHeight * 0.01;
+    document && document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }, [windowSize.height]);
+
   return <div css={layoutCss}>{children}</div>;
 }
 

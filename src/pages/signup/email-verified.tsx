@@ -60,7 +60,7 @@ const containerCss = css`
   display: flex;
   flex-direction: column;
 
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 `;
 
 const introTextWrapper = (theme: Theme) => css`
