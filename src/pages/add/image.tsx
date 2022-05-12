@@ -7,22 +7,12 @@ import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 
 export default function AddImage() {
-  const tags = [
-    { id: 1, content: '1111' },
-    { id: 22, content: '22222' },
-    { id: 21, content: '13333' },
-    { id: 32, content: '27777' },
-    { id: 31, content: '1231321' },
-    { id: 42, content: '243241324' },
-    { id: 41, content: '1413241234234321' },
-    { id: 52, content: '243214324' },
-    { id: 51, content: '1234' },
-    { id: 62, content: '2423' },
-    { id: 61, content: '1432' },
-    { id: 72, content: '2423' },
-    { id: 81, content: '1423' },
-    { id: 92, content: '2423423' },
-  ];
+  // 이 페이지로 오는 순간 이미지 업로드 인풋 기능 실행
+  // 이미지 선택 시에 해당 이미지 콘텐트 채우기
+  // 완료 후 api 연결
+  // 취소 시에 다시 전 페이지로 돌아가기
+
+  const tags = [{ id: 1, content: '1111' }];
 
   return (
     <article css={addImageCss}>
@@ -30,7 +20,7 @@ export default function AddImage() {
       <section css={addImageTopCss}>
         <div css={contentWrapperCss}>
           <ImageContent
-            src="https://i.pinimg.com/564x/89/c5/4d/89c54d90c325a8c310363f4e9773a041.jpg"
+            // src="https://i.pinimg.com/564x/89/c5/4d/89c54d90c325a8c310363f4e9773a041.jpg"
             alt="mock"
           />
         </div>

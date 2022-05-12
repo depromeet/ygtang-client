@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useRef } from 'react';
 import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
@@ -8,11 +8,27 @@ import { defaultEasing } from '~/constants/motions';
 import { RouterPathType } from '~/hooks/common/useInternalRouter';
 
 export default function AppendTooltip() {
+  const imgInputRef = useRef<HTMLInputElement>(null);
+  const openInputFile = () => {
+    if (!imgInputRef.current) return;
+    imgInputRef.current.click();
+  };
   return (
     <motion.div css={wrapperCss} variants={tooltipVariants}>
       <AnchorElement href="/add/text" icon={<EditIcon />} title="글" />
-      <AnchorElement href="/add/image" icon={<ImageIcon />} title="이미지" />
+      <AnchorElement
+        href="/add/image"
+        onClick={openInputFile}
+        icon={<ImageIcon />}
+        title="이미지"
+      />
       <AnchorElement href="/add/link" icon={<LinkIcon />} title="링크" />
+      <input
+        ref={imgInputRef}
+        css={imgInputCss}
+        type="file"
+        accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.jpeg,.tiff,.heif"
+      />
     </motion.div>
   );
 }
@@ -34,9 +50,19 @@ interface AnchorElementProps {
   href: RouterPathType;
   icon: ReactNode;
   title: string;
+  onClick?: VoidFunction;
 }
 
-function AnchorElement({ href, icon, title }: AnchorElementProps) {
+function AnchorElement({ href, onClick, icon, title }: AnchorElementProps) {
+  if (onClick) {
+    return (
+      <a css={anchorCss} onClick={onClick}>
+        {icon}
+        <span>{title}</span>
+      </a>
+    );
+  }
+
   return (
     <InternalLink href={href}>
       <a css={anchorCss}>
@@ -84,3 +110,7 @@ const tooltipVariants: Variants = {
     willChange: 'opacity, transform',
   },
 };
+
+const imgInputCss = css`
+  display: none;
+`;
