@@ -157,7 +157,7 @@ function Tags({ tags }: Pick<ContentThumbnailProps, 'tags'>) {
 
 const tagWrapperCss = css`
   height: 16px;
-
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -166,10 +166,11 @@ const tagWrapperCss = css`
 `;
 
 const tagCss = (theme: Theme) => css`
-  flex-shrink: 0;
+  height: 100%;
   padding: 2px 4px;
   background-color: ${theme.color.dim02};
   border-radius: ${theme.borderRadius.default};
   font-weight: ${theme.font.weight.medium};
   font-size: 10px;
+  line-height: 1.2;
 `;

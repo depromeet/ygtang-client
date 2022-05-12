@@ -21,6 +21,18 @@ export function replaceAccessTokenForRequestInstance(token: string) {
   instance.interceptors.request.use(interceptorRequestFulfilled);
 }
 
+// TODO: 로그인 로직 보수 후 삭제
+// 로그인 로직 보수 전, 브라우저 쿠키를 읽는
+function interceptorRequestFulfilled(config: AxiosRequestConfig) {
+  return {
+    ...config,
+    headers: {
+      accessToken: localStorage.getItem('accessToken'),
+    },
+  };
+}
+instance.interceptors.request.use(interceptorRequestFulfilled);
+
 // Response interceptor
 function interceptorResponseFulfilled(res: AxiosResponse) {
   if (200 <= res.status && res.status < 300) {
