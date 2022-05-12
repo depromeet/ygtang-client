@@ -27,7 +27,7 @@ export default function useGetInspirationListWithInfinite({
       return post<InspirationListResponseInterface>(`/v1/inspiration/tag/?size=20&page=${page}`, [
         ...filteredTags.map(eachTag => eachTag.id),
       ]);
-    return get<InspirationListResponseInterface>(`/v1/inspiration/list?size=10&page=${page}`);
+    return get<InspirationListResponseInterface>(`/v1/inspiration/list?size=20&page=${page}`);
   };
 
   const query = useInfiniteQuery<InspirationListResponseInterface>(
