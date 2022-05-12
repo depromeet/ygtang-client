@@ -1,7 +1,7 @@
 import { flatten } from 'lodash';
 import { useInfiniteQuery } from 'react-query';
 
-import { get } from '~/libs/api/client';
+import { get, post } from '~/libs/api/client';
 
 interface InspirationListResponseInterface {
   message: string;
@@ -12,15 +12,26 @@ interface InspirationResponseInterface extends PaginationInterface {
   content: InspirationInterface[];
 }
 
+// TODO: 추가, 삭제, 수정 등 Mutation과 맞추기
 const INSPIRATION_LIST_QUERY_KEY = 'inspirationList';
 
-export default function useGetInspirationListWithInfinite() {
+interface UseGetInspirationListWithInfiniteProps {
+  filteredTags: TagType[];
+}
+
+export default function useGetInspirationListWithInfinite({
+  filteredTags,
+}: UseGetInspirationListWithInfiniteProps) {
   const fetchInsipirations = (page: number = 0) => {
+    if (filteredTags.length > 0)
+      return post<InspirationListResponseInterface>(`/v1/inspiration/tag/?size=20&page=${page}`, [
+        ...filteredTags.map(eachTag => eachTag.id),
+      ]);
     return get<InspirationListResponseInterface>(`/v1/inspiration/list?size=20&page=${page}`);
   };
 
   const query = useInfiniteQuery<InspirationListResponseInterface>(
-    [INSPIRATION_LIST_QUERY_KEY],
+    [INSPIRATION_LIST_QUERY_KEY, ...filteredTags],
     async ({ pageParam = 0 }) => await fetchInsipirations(pageParam),
     {
       getNextPageParam: lastPage => {

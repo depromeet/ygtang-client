@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
@@ -17,7 +17,8 @@ const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRoute
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
-  const { inspirations, isLoading } = useGetInspirationListWithInfinite();
+  const { inspirations, isLoading } = useGetInspirationListWithInfinite({ filteredTags });
+  console.log(filteredTags);
 
   return (
     <>
@@ -29,30 +30,32 @@ export default function Root() {
           </motion.section>
         )}
 
-        <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
-          {inspirations.length === 0 ? (
-            <EmptyImageSection />
-          ) : (
-            <motion.section
-              css={thumbnailWrapperCss}
-              layoutId="thumbnailSection"
-              variants={staggerHalf}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
-                <Thumbnail
-                  key={id}
-                  type={type as InspirationType}
-                  content={content}
-                  tags={tagResponse}
-                  openGraph={openGraphResponse}
-                />
-              ))}
-            </motion.section>
-          )}
-        </LoadingHandler>
+        <AnimatePresence exitBeforeEnter>
+          <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
+            {inspirations.length === 0 ? (
+              <EmptyImageSection key="fuck" />
+            ) : (
+              <motion.section
+                css={thumbnailWrapperCss}
+                layoutId="thumbnailSection"
+                variants={staggerHalf}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
+                  <Thumbnail
+                    key={id}
+                    type={type as InspirationType}
+                    content={content}
+                    tags={tagResponse}
+                    openGraph={openGraphResponse}
+                  />
+                ))}
+              </motion.section>
+            )}
+          </LoadingHandler>
+        </AnimatePresence>
       </motion.article>
       <AppendButton />
       <TagFormRouteAsModal />
