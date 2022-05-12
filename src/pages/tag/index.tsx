@@ -5,7 +5,7 @@ import { useFilteredTags } from '~/store/FilteredTags';
 
 export default function TagPage() {
   const { filteredTags, addTag, removeTag } = useFilteredTags({});
-  const { tags } = useGetTagListWithInfinite();
+  const { tags } = useGetTagListWithInfinite({});
 
   return (
     <article>
