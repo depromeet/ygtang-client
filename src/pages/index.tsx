@@ -7,12 +7,16 @@ import ContentThumbnail from '~/components/home/ContentThumbnail';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
 import AppliedTags from '~/components/TagForm/AppliedTags';
 import { staggerHalf } from '~/constants/motions';
+import useGetInspirationListWithInfinite from '~/hooks/api/inspiration/useGetInspirationListWIthInfinite';
 import { useFilteredTags } from '~/store/FilteredTags';
 
 const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRouteAsModal'));
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
+  const { inspirations } = useGetInspirationListWithInfinite();
+
+  console.log(inspirations);
 
   return (
     <>
@@ -32,9 +36,9 @@ export default function Root() {
           animate="animate"
           exit="exit"
         >
-          {MOCK_CONTENT.map(({ type, content, tagResponse, openGraphResponse }, index) => (
+          {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
             <ContentThumbnail
-              key={index}
+              key={id}
               type={type as InspirationType}
               content={content}
               tags={tagResponse}
