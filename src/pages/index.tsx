@@ -11,15 +11,24 @@ import Thumbnail from '~/components/home/Thumbnail';
 import AppliedTags from '~/components/TagForm/AppliedTags';
 import { staggerHalf } from '~/constants/motions';
 import useGetInspirationListWithInfinite from '~/hooks/api/inspiration/useGetInspirationListWIthInfinite';
+import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import { useFilteredTags } from '~/store/FilteredTags';
 
 const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRouteAsModal'));
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
-  const { inspirations, isLoading } = useGetInspirationListWithInfinite({ filteredTags });
-  console.log(filteredTags);
+  const { inspirations, isLoading, hasNextPage, fetchNextPage } = useGetInspirationListWithInfinite(
+    {
+      filteredTags,
+    }
+  );
 
+  const { setTarget } = useIntersectionObserver({
+    onIntersect: ([{ isIntersecting }]) => {
+      if (isIntersecting && hasNextPage) fetchNextPage();
+    },
+  });
   return (
     <>
       <HomeNavigationBar />
@@ -30,13 +39,15 @@ export default function Root() {
           </motion.section>
         )}
 
+        {/* 태그 변경시를 위한 Presence */}
         <AnimatePresence exitBeforeEnter>
           <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
             {inspirations.length === 0 ? (
-              <EmptyImageSection key="fuck" />
+              <EmptyImageSection key="empty inspiration section" />
             ) : (
               <motion.section
                 css={thumbnailWrapperCss}
+                layout
                 layoutId="thumbnailSection"
                 variants={staggerHalf}
                 initial="initial"
@@ -46,12 +57,14 @@ export default function Root() {
                 {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
                   <Thumbnail
                     key={id}
+                    id={id}
                     type={type as InspirationType}
                     content={content}
                     tags={tagResponse}
                     openGraph={openGraphResponse}
                   />
                 ))}
+                {hasNextPage && <div ref={setTarget}></div>}
               </motion.section>
             )}
           </LoadingHandler>

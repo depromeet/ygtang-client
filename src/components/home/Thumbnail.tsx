@@ -1,3 +1,4 @@
+import React from 'react';
 import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
@@ -6,14 +7,15 @@ import { selectRandomColor } from '~/utils/selectRandomColor';
 
 import ThumbnailContent from './ThumbnailContent';
 
-export interface ContentThumbnailProps extends Pick<InspirationInterface, 'type' | 'content'> {
+export interface ContentThumbnailProps
+  extends Pick<InspirationInterface, 'type' | 'content' | 'id'> {
   tags: InspirationInterface['tagResponse'];
   openGraph?: InspirationInterface['openGraphResponse'];
 }
 
-export default function Thumbnail({ type, tags, content, openGraph }: ContentThumbnailProps) {
+function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps) {
   return (
-    <motion.section css={wrapperCss} variants={contentFadeInUp}>
+    <motion.section css={wrapperCss} variants={contentFadeInUp} layoutId={`${id}`}>
       <div css={contentWrapperCss}>
         <ThumbnailContent type={type} content={content} openGraph={openGraph} />
       </div>
@@ -22,6 +24,8 @@ export default function Thumbnail({ type, tags, content, openGraph }: ContentThu
     </motion.section>
   );
 }
+
+export default React.memo(Thumbnail);
 
 const wrapperCss = (theme: Theme) => css`
   /* grid child width 설정 */
