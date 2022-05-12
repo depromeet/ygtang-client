@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 import { motion } from 'framer-motion';
 
+import { INSPIRATION_EMPTY_IMAGE_SRC, INSPIRATION_EMPTY_TEXT_IMAGE_SRC } from '~/assets/constants';
 import AppendButton from '~/components/home/AppendButton';
 import ContentThumbnail from '~/components/home/ContentThumbnail';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
@@ -28,6 +29,8 @@ export default function Root() {
           </motion.section>
         )}
 
+        <EmptyImageSection />
+
         <motion.section
           css={thumbnailWrapperCss}
           layoutId="thumbnailSection"
@@ -36,7 +39,9 @@ export default function Root() {
           animate="animate"
           exit="exit"
         >
-          {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
+          {/* {inspirations.length === 0 && <EmptyImageSection />} */}
+
+          {/* {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
             <ContentThumbnail
               key={id}
               type={type as InspirationType}
@@ -44,7 +49,7 @@ export default function Root() {
               tags={tagResponse}
               openGraph={openGraphResponse}
             />
-          ))}
+          ))} */}
         </motion.section>
       </motion.article>
       <AppendButton />
@@ -65,105 +70,35 @@ const filteredSectionCss = css`
   margin: 2px 0;
 `;
 
-const TEST_TAGS = [
-  {
-    id: 1,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: '어쩌구태그',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 2,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: '저쩌구태그',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 3,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 4,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 5,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 6,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 7,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-];
+function EmptyImageSection() {
+  return (
+    <div css={imageWrapperCss}>
+      <img css={emptyImageCss} src={INSPIRATION_EMPTY_IMAGE_SRC} alt="empty inspiration" />
+      <img css={emptyTextImageCss} src={INSPIRATION_EMPTY_TEXT_IMAGE_SRC} alt="empty inspiration" />
+    </div>
+  );
+}
 
-const MOCK_CONTENT = [
-  {
-    type: 'TEXT',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis.',
-    tagResponse: TEST_TAGS,
-  },
-  {
-    type: 'TEXT',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis.',
-    tagResponse: [],
-  },
-  {
-    type: 'IMAGE',
-    content: 'https://avatars.githubusercontent.com/u/26461307?v=4',
-    tagResponse: TEST_TAGS,
-  },
-  {
-    type: 'IMAGE',
-    content: 'https://avatars.githubusercontent.com/u/26461307?v=4',
-    tagResponse: [],
-  },
-  {
-    type: 'LINK',
-    content: '',
-    tagResponse: TEST_TAGS,
-    openGraphResponse: {
-      code: 200,
-      description: 'I like to share my knowledge for those who wandering in issue.',
-      siteName: null,
-      title: "Cometin' - hyesungoh",
-      url: 'https://avatars.githubusercontent.com/',
-      image: '/u/26461307?v=4',
-    },
-  },
-  {
-    type: 'LINK',
-    content: '',
-    tagResponse: [],
-    openGraphResponse: {
-      code: 200,
-      description: 'I like to share my knowledge for those who wandering in issue.',
-      siteName: null,
-      title: "Cometin' - hyesungoh",
-      url: 'https://avatars.githubusercontent.com/',
-      image: '/u/26461307?v=4',
-    },
-  },
-];
+const imageWrapperCss = css`
+  padding-top: 15vh;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & img {
+    object-fit: contain;
+  }
+`;
+
+const emptyImageCss = css`
+  width: 100%;
+`;
+
+const emptyTextImageCss = css`
+  margin-top: 28px;
+  width: 54%;
+`;
