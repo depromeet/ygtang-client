@@ -55,6 +55,7 @@ export default function TextView() {
             </div>
             <div css={contentWrapperCss}>
               <MemoText
+                editable
                 onChange={memoText.onChange}
                 debouncedValue={memoText.debouncedValue}
                 value={memo}
