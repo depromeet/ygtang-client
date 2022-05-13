@@ -28,7 +28,7 @@ const wrapperCss = (theme: Theme) => css`
 
   width: 100%;
   max-width: ${theme.size.maxWidth};
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100%;
   background-color: ${theme.color.background};
   padding: ${theme.size.layoutPadding};
   z-index: 1000;

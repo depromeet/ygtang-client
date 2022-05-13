@@ -58,7 +58,7 @@ const dimBackdropCss = (theme: Theme) => css`
   top: 0;
   left: 0;
   width: 100vw;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100%;
 
   background-color: ${theme.color.dim03};
 
