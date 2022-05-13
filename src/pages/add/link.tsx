@@ -6,8 +6,13 @@ import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
+import useInspirationMutation, {
+  InspirationMutationRequest,
+} from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
+
+import { formCss } from './image';
 
 export interface OpenGraph {
   description: string;
@@ -24,33 +29,49 @@ export default function AddLink() {
     value: memoValue,
   } = useInput({ useDebounce: true });
   const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
+  const { createInspiration } = useInspirationMutation();
   const { tags } = useAppliedTags();
+
+  const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!openGraph || !openGraph.url) return;
+    const linkData: InspirationMutationRequest = {
+      memo: memoValue,
+      content: openGraph.url,
+      tagIds: [1],
+      type: 'LINK',
+    };
+    createInspiration(linkData);
+  };
 
   return (
     <article css={addLinkCss}>
       <NavigationBar title="링크 추가" />
-      <section css={addLinkTopCss}>
-        <div css={contentWrapperCss}>
-          <LinkInput openGraph={openGraph} setOpenGraph={setOpenGraph} />
-        </div>
-        <div css={contentWrapperCss}>
-          <TagContent tags={tags} />
-        </div>
-        <div css={contentWrapperCss}>
-          <MemoText
-            onChange={onMemoChange}
-            debouncedValue={memoDebouncedValue}
-            value={memoValue}
-            writable
-          />
-        </div>
-      </section>
 
-      <section css={addLinkBottomCss}>
-        <CTAButton disabled={!Boolean(openGraph)} type="submit">
-          Tang!
-        </CTAButton>
-      </section>
+      <form onSubmit={submitLink} css={formCss}>
+        <section css={addLinkTopCss}>
+          <div css={contentWrapperCss}>
+            <LinkInput openGraph={openGraph} setOpenGraph={setOpenGraph} />
+          </div>
+          <div css={contentWrapperCss}>
+            <TagContent tags={tags} />
+          </div>
+          <div css={contentWrapperCss}>
+            <MemoText
+              onChange={onMemoChange}
+              debouncedValue={memoDebouncedValue}
+              value={memoValue}
+              writable
+            />
+          </div>
+        </section>
+
+        <section css={addLinkBottomCss}>
+          <CTAButton disabled={!Boolean(openGraph)} type="submit">
+            Tang!
+          </CTAButton>
+        </section>
+      </form>
     </article>
   );
 }
