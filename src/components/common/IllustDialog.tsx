@@ -54,7 +54,7 @@ const dimBackdropCss = (theme: Theme) => css`
   align-items: center;
   justify-content: center;
 
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
