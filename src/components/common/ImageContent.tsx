@@ -1,28 +1,41 @@
-import { css } from '@emotion/react';
-
-import Theme from '~/styles/Theme';
+import { css, Theme, useTheme } from '@emotion/react';
 
 import { CancelIcon } from './icons';
 
 interface ImageContentProps {
-  src: string;
+  src?: string;
   alt: string;
   width?: string;
   height?: string;
 }
 
-export default function ImageContent({ src, alt, width = '100%', height }: ImageContentProps) {
+export default function ImageContent({
+  src,
+  alt = 'blank',
+  width = '100%',
+  height,
+}: ImageContentProps) {
+  const theme = useTheme();
+
   return (
-    <div css={imgBoxCss({ width, height })}>
+    <div css={imgBoxCss({ width, height, theme })}>
       <button css={closeIconCss}>
-        <CancelIcon isUsingFill color={Theme.color.gray05} />
+        <CancelIcon isUsingFill color={theme.color.gray05} />
       </button>
-      <img src={src} css={imgBoxCss({ width, height })} alt={alt} />
+      {src && <img src={src} css={imgBoxCss({ width, height, theme })} alt={alt} />}
     </div>
   );
 }
 
-const imgBoxCss = ({ width, height }: { width: string; height?: string }) => css`
+const imgBoxCss = ({
+  width,
+  height,
+  theme,
+}: {
+  width: string;
+  height?: string;
+  theme: Theme;
+}) => css`
   position: relative;
   width: ${width};
   min-height: ${height ?? '343px'};
@@ -30,6 +43,7 @@ const imgBoxCss = ({ width, height }: { width: string; height?: string }) => css
   overflow: hidden;
   border-radius: 4px;
   object-fit: cover;
+  background-color: ${theme.color.gray01};
 `;
 
 const closeIconCss = css`

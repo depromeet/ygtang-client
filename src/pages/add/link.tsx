@@ -45,7 +45,7 @@ export default function AddLink() {
 const addLinkCss = css`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 `;
 
