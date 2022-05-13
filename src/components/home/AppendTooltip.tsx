@@ -22,8 +22,8 @@ export default function AppendTooltip() {
         icon={<ImageIcon />}
         title="이미지"
       />
-      <AnchorElement href="/add/link" icon={<LinkIcon />} title="링크" />
       <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
+      <AnchorElement href="/add/link" icon={<LinkIcon />} title="링크" />
     </motion.div>
   );
 }
