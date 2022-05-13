@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import LinkInput from '~/components/add/LinkInput';
@@ -14,6 +15,7 @@ import { useAppliedTags } from '~/store/AppliedTags';
 
 import { formCss } from './image';
 
+const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 export interface OpenGraph {
   description: string;
   siteName: string;
@@ -45,34 +47,37 @@ export default function AddLink() {
   };
 
   return (
-    <article css={addLinkCss}>
-      <NavigationBar title="링크 추가" />
+    <>
+      <article css={addLinkCss}>
+        <NavigationBar title="링크 추가" />
 
-      <form onSubmit={submitLink} css={formCss}>
-        <section css={addLinkTopCss}>
-          <div css={contentWrapperCss}>
-            <LinkInput openGraph={openGraph} setOpenGraph={setOpenGraph} />
-          </div>
-          <div css={contentWrapperCss}>
-            <TagContent tags={tags} />
-          </div>
-          <div css={contentWrapperCss}>
-            <MemoText
-              onChange={onMemoChange}
-              debouncedValue={memoDebouncedValue}
-              value={memoValue}
-              writable
-            />
-          </div>
-        </section>
+        <form onSubmit={submitLink} css={formCss}>
+          <section css={addLinkTopCss}>
+            <div css={contentWrapperCss}>
+              <LinkInput openGraph={openGraph} setOpenGraph={setOpenGraph} />
+            </div>
+            <div css={contentWrapperCss}>
+              <TagContent tags={tags} />
+            </div>
+            <div css={contentWrapperCss}>
+              <MemoText
+                onChange={onMemoChange}
+                debouncedValue={memoDebouncedValue}
+                value={memoValue}
+                writable
+              />
+            </div>
+          </section>
 
-        <section css={addLinkBottomCss}>
-          <CTAButton disabled={!Boolean(openGraph)} type="submit">
-            Tang!
-          </CTAButton>
-        </section>
-      </form>
-    </article>
+          <section css={addLinkBottomCss}>
+            <CTAButton disabled={!Boolean(openGraph)} type="submit">
+              Tang!
+            </CTAButton>
+          </section>
+        </form>
+      </article>
+      <AddTagFormRouteAsModal />
+    </>
   );
 }
 
