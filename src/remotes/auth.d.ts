@@ -6,5 +6,3 @@ interface AuthTokenResponseInterface {
     accessTokenExpireDate: string;
   };
 }
-
-interface AuthEmailStatusInterface {}
