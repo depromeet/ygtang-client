@@ -12,7 +12,7 @@ import { validator } from '~/utils/validator';
 
 interface LinkInputProps {
   openGraph: OpenGraph | null;
-  saveOpenGraph: (og: OpenGraph | null) => void;
+  saveOpenGraph?: (og: OpenGraph | null) => void;
 }
 
 export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) {
@@ -41,13 +41,17 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   useEffect(() => {
     if (isFetching || !og) return;
     if (og.url === null) return showErrorMessage();
-    saveOpenGraph(og);
+    saveOpenGraph && saveOpenGraph(og);
   }, [isFetching, og, saveOpenGraph, showErrorMessage]);
 
   return (
     <div css={LinkInputCss}>
       {openGraph ? (
-        <LinkThumbnail thumbnail={openGraph} edit onDelete={() => saveOpenGraph(null)} />
+        <LinkThumbnail
+          thumbnail={openGraph}
+          edit
+          onDelete={() => saveOpenGraph && saveOpenGraph(null)}
+        />
       ) : (
         <section>
           <Input
