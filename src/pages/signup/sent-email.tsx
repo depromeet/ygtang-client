@@ -1,42 +1,134 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton, FilledButton } from '~/components/common/Button';
 import Dialog from '~/components/common/Dialog';
+import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
+import { FixedSpinner } from '~/components/common/Spinner';
+import useCheckEmailVerifiedStatusMutation from '~/hooks/api/auth/useCheckEmailVerifiedStatusMutation';
+import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
+import { useToast } from '~/store/Toast';
+import { validator } from '~/utils/validator';
 
 export default function SignupSentEmail() {
+  const { query, push } = useRouter();
+  const { fireToast } = useToast();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    mutate: checkEmailStatusMutate,
+    data: checkEmailStatusData,
+    error: checkEmailStatusError,
+    isLoading: checkEmailStatusLoading,
+  } = useCheckEmailVerifiedStatusMutation();
+  const {
+    mutate: emailSendMutate,
+    error: emailSendedError,
+    isSuccess: emailSendingSuccess,
+    isLoading: emailSendingLoading,
+  } = useSignupSendEmailMutation();
+
+  const handleEmailChecking = () => {
+    if (query.email !== undefined && validator({ type: 'email', value: query.email as string })) {
+      checkEmailStatusMutate({ email: query.email as string });
+    } else {
+      fireToast({ content: '제공 된 이메일이 올바르지 않습니다. 다시 시도해 보세요.' });
+    }
+  };
+
+  const handleEmailResend = () => {
+    emailSendMutate({ email: query.email as string });
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (checkEmailStatusData) {
+      if (checkEmailStatusData.data) {
+        push({
+          pathname: '/signup/email-verified',
+          query: {
+            email: query.email,
+          },
+        });
+      } else {
+        setIsModalOpen(true);
+      }
+    }
+  }, [checkEmailStatusData, push, query.email]);
+
+  useEffect(() => {
+    if (emailSendingSuccess) {
+      fireToast({ content: '인증 이메일을 재전송했어요. 메일함을 확인해주세요.' });
+    }
+  }, [emailSendingSuccess, fireToast]);
+
+  useEffect(() => {
+    if (emailSendedError) {
+      fireToast({
+        content: '이메일 전송 도중 오류가 발생했어요.',
+      });
+    }
+  }, [emailSendedError, fireToast]);
+
+  useEffect(() => {
+    if (checkEmailStatusError) {
+      fireToast({
+        content: '이메일 확인 도중 오류가 발생했어요.',
+      });
+    }
+  }, [checkEmailStatusError, fireToast]);
+
   return (
-    <article css={loginCss}>
-      <NavigationBar title={'회원가입'} />
-      <div css={introCardCss}>
-        <p css={introTextWrapper}>
-          회원님의 이메일로
+    <LoadingHandler
+      isLoading={!query || !Boolean(query.email) || query.email === undefined}
+      loadingComponent={<FixedSpinner />}
+    >
+      <article css={loginCss}>
+        <NavigationBar title={'회원가입'} />
+        <div css={introCardCss}>
+          <p css={introTextWrapper}>
+            회원님의 이메일로
+            <br />
+            인증 링크가 전송되었습니다
+            <br />
+            확인 후 아래의 &apos;인증완료&apos; 버튼을 눌러주세요.
+          </p>
+        </div>
+        <div css={emailWrapperCss}>
+          <p css={emailText}>{query.email}</p>
+          <CTAButton
+            onClick={handleEmailChecking}
+            disabled={checkEmailStatusLoading || emailSendingLoading}
+          >
+            인증완료
+          </CTAButton>
+        </div>
+        <Dialog
+          isShowing={isModalOpen}
+          actionButtons={
+            <>
+              <FilledButton colorType="light" onClick={() => setIsModalOpen(false)}>
+                취소
+              </FilledButton>
+              <div css={dialogLongButtonCss}>
+                <FilledButton
+                  colorType="dark"
+                  onClick={handleEmailResend}
+                  disabled={emailSendingLoading}
+                >
+                  다시 전송
+                </FilledButton>
+              </div>
+            </>
+          }
+        >
+          이메일 인증이 완료되지 않았습니다.
           <br />
-          인증 링크가 전송되었습니다
-          <br />
-          확인 후 아래의 &apos;인증완료&apos; 버튼을 눌러주세요.
-        </p>
-      </div>
-      <div css={emailWrapperCss}>
-        <p css={emailText}>yeonggam@gmail.com</p>
-        <CTAButton type={'submit'}>인증완료</CTAButton>
-      </div>
-      <Dialog
-        isShowing={true}
-        actionButtons={
-          <>
-            <FilledButton colorType="light">취소</FilledButton>
-            <div css={dialogLongButtonCss}>
-              <FilledButton colorType="dark">다시 인증</FilledButton>
-            </div>
-          </>
-        }
-      >
-        이메일 인증이 완료되지 않았습니다.
-        <br />
-        인증을 다시 받으시겠어요?
-      </Dialog>
-    </article>
+          인증을 다시 받으시겠어요?
+        </Dialog>
+      </article>
+    </LoadingHandler>
   );
 }
 

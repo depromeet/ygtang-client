@@ -81,8 +81,8 @@ export default function Login() {
         <TextField
           label={'이메일 아이디'}
           placeholder={'이메일을 입력해주세요'}
-          feedback={emailError || <>&nbsp;</>}
-          isSuccess={!emailError}
+          feedback={email.value !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
+          isSuccess={emailError === ''}
           value={email.value}
           onChange={email.onChange}
           required
@@ -91,8 +91,8 @@ export default function Login() {
           type={'password'}
           label={'비밀번호'}
           placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
-          feedback={passwordError || <>&nbsp;</>}
-          isSuccess={!passwordError}
+          feedback={password.value !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
+          isSuccess={passwordError === ''}
           value={password.value}
           onChange={password.onChange}
           required
@@ -103,7 +103,10 @@ export default function Login() {
       </form>
       <GhostButton>비밀번호 찾기</GhostButton>
       <div css={signUpTextWrapperCss}>
-        계정이 없으신가요? <GhostButton size={'small'}>빠르게 가입하기</GhostButton>
+        계정이 없으신가요?{' '}
+        <GhostButton size={'small'} onClick={() => push('/signup')}>
+          빠르게 가입하기
+        </GhostButton>
       </div>
     </article>
   );
