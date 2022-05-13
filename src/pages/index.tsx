@@ -55,13 +55,13 @@ export default function Root() {
                 animate="animate"
                 exit="exit"
               >
-                {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
+                {inspirations.map(({ id, type, content, tagResponses, openGraphResponse }) => (
                   <Thumbnail
                     key={id}
                     id={id}
                     type={type as InspirationType}
                     content={content}
-                    tags={tagResponse}
+                    tags={tagResponses}
                     openGraph={openGraphResponse}
                   />
                 ))}

@@ -12,7 +12,7 @@ interface OpenGraphResonse {
 interface InspirationInterface {
   id: number;
   memberResponse: MemberResponseInterface;
-  tagResponse: TagInterface[];
+  tagResponses: TagInterface[];
   type: InspirationType;
   content: string;
   memo: string;
