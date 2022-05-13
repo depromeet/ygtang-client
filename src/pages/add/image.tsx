@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { css } from '@emotion/react';
 
+import { ImgUploader } from '~/components/add/ImgUploader';
 import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
@@ -9,10 +10,12 @@ import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation, {
   InspirationMutationRequest,
 } from '~/hooks/api/inspiration/useInspirationMutation';
+import useImgUpload from '~/hooks/common/useImgUpload';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useUploadedImg } from '~/store/UploadedImage';
 
 export default function AddImage() {
+  const { imgInputRef, openFileInput, imgInputUploader } = useImgUpload({});
   const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
   const { createInspiration } = useInspirationMutation();
@@ -40,9 +43,10 @@ export default function AddImage() {
       <NavigationBar title="이미지 추가" />
 
       <form onSubmit={submitImg} css={formCss}>
+        <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
         <section css={addImageTopCss}>
           <div css={contentWrapperCss}>
-            {uploadedImg && <ImageContent src={uploadedImg} alt="uploadedImg" />}
+            {<ImageContent clickXbtn={openFileInput} src={uploadedImg} alt="uploadedImg" />}
           </div>
           <div css={contentWrapperCss}>
             <TagContent onEdit={() => {}} tags={tags} />

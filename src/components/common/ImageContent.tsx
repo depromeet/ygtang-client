@@ -3,8 +3,9 @@ import { css, Theme, useTheme } from '@emotion/react';
 import { CancelIcon } from './icons';
 
 interface ImageContentProps {
-  src?: string;
+  clickXbtn: VoidFunction;
   alt: string;
+  src: string | null;
   width?: string;
   height?: string;
 }
@@ -14,12 +15,13 @@ export default function ImageContent({
   alt = 'blank',
   width = '100%',
   height,
+  clickXbtn,
 }: ImageContentProps) {
   const theme = useTheme();
 
   return (
     <div css={imgBoxCss({ width, height, theme })}>
-      <button css={closeIconCss}>
+      <button onClick={clickXbtn} css={closeIconCss}>
         <CancelIcon isUsingFill color={theme.color.gray05} />
       </button>
       {src && <img src={src} css={imgBoxCss({ width, height, theme })} alt={alt} />}
