@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import { ImgUploader } from '~/components/add/ImgUploader';
-import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
 import { MemoText } from '~/components/common/TextField';
@@ -64,10 +63,6 @@ export default function ImageView() {
               />
             </div>
           </section>
-
-          <section css={addImageBottomCss}>
-            <CTAButton type="submit">Tang!</CTAButton>
-          </section>
         </form>
       </article>
       <AddTagFormRouteAsModal />
@@ -92,10 +87,6 @@ export const formCss = css`
 const addImageTopCss = css`
   flex-grow: 1;
   overflow-y: auto;
-`;
-
-const addImageBottomCss = css`
-  margin: 8px 0 16px 0;
 `;
 
 const contentWrapperCss = css`
