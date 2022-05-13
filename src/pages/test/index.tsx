@@ -79,7 +79,7 @@ export default function Test() {
         />
         <LinkThumbnail
           thumbnail={{
-            imageUrl:
+            image:
               'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Naver_Logotype.svg/2560px-Naver_Logotype.svg.png',
             title: '이미지 있는 경우',
             url: 'https://www.naver.com',
@@ -88,7 +88,7 @@ export default function Test() {
         <LinkThumbnail
           edit
           thumbnail={{
-            imageUrl:
+            image:
               'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Naver_Logotype.svg/2560px-Naver_Logotype.svg.png',
             title: '이미지 있는 경우, 수정',
             url: 'https://www.naver.com',
@@ -97,7 +97,7 @@ export default function Test() {
         <LinkThumbnail
           edit
           thumbnail={{
-            imageUrl:
+            image:
               'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Naver_Logotype.svg/2560px-Naver_Logotype.svg.png',
             title:
               '텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, 네이버 텍스트가 넘치는 경우, ',

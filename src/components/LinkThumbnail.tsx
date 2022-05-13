@@ -5,7 +5,7 @@ import textEllipisCss from '~/styles/utils/textEllipisCss';
 import { IconButton } from './common/Button';
 
 export interface LinkThumbnailMetaData {
-  imageUrl?: string;
+  image?: string;
   title: string;
   url: string;
   alt?: string;
@@ -23,7 +23,7 @@ export default function LinkThumbnail({
   onDelete: _onDelete,
 }: LinkThumbnailProps) {
   const hasImage = () => {
-    return Boolean(thumbnail?.imageUrl);
+    return Boolean(thumbnail?.image);
   };
 
   const onOpenUrl = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -46,7 +46,7 @@ export default function LinkThumbnail({
           <span css={linkThumbnailUrlCss}>{thumbnail.url}</span>
         </section>
         {hasImage() && (
-          <img css={linkThumbnailImageCss} src={thumbnail.imageUrl} alt={thumbnail.alt} />
+          <img css={linkThumbnailImageCss} src={thumbnail.image} alt={thumbnail.alt} />
         )}
         <IconButton
           light
