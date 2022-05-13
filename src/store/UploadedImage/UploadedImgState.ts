@@ -1,6 +1,8 @@
 import { atom } from 'recoil';
 
-export const uploadedImgState = atom<string | null>({
+import { UploadedImg } from './useUploadedImg';
+
+export const uploadedImgState = atom<UploadedImg | null>({
   key: 'uploadedImgState',
   default: null,
 });

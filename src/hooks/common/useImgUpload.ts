@@ -35,9 +35,9 @@ export default function useImgUpload({ isUploadPage = true }: UseImgUploadType) 
     if (files) {
       getBase64(files[0], result => {
         if (typeof result === 'string') {
-          uploadImg(result);
-          !isUploadPage && push('/add/image');
+          uploadImg({ blob: files[0], base64: result });
         }
+        !isUploadPage && push('/add/image');
       });
     }
   };
