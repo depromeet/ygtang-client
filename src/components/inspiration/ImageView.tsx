@@ -5,7 +5,6 @@ import { ImgUploader } from '~/components/add/ImgUploader';
 import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
-import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useImgUpload from '~/hooks/common/useImgUpload';

@@ -1,20 +1,17 @@
-import { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import LinkInput from '~/components/add/LinkInput';
 import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
-import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
-import { useAppliedTags } from '~/store/AppliedTags';
+import { useInspirationDetail } from '~/store/Inspiration';
 
 import { formCss } from './ImageView';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
-// TODO: code 200임에도 response가 null로 오는 경우가 있어서 백엔드 문의 필요
 export interface OpenGraph {
   description: string;
   siteName: string;
@@ -25,18 +22,13 @@ export interface OpenGraph {
 }
 
 export default function LinkView() {
+  const { inspirationDetail } = useInspirationDetail();
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
     value: memoValue,
   } = useInput({ useDebounce: true });
-  const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
   const { createInspiration } = useInspirationMutation();
-  const { tags } = useAppliedTags();
-
-  const saveOpenGraph = useCallback((og: OpenGraph | null) => {
-    setOpenGraph(og);
-  }, []);
 
   const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,16 +42,33 @@ export default function LinkView() {
 
     createInspiration(linkData);
   };
+  if (!inspirationDetail) return <></>;
+  const { tags, openGraph } = inspirationDetail;
+
+  if (!openGraph) return <></>;
+  const { description, siteName, title, url, code, image } = openGraph;
 
   return (
     <>
       <article css={addLinkCss}>
-        <NavigationBar title="링크 추가" />
-
         <form onSubmit={submitLink} css={formCss}>
           <section css={addLinkTopCss}>
             <div css={contentWrapperCss}>
-              <LinkInput openGraph={openGraph} saveOpenGraph={saveOpenGraph} />
+              <LinkInput
+                // TODO: 오픈그래프 type refactoring 필요
+                openGraph={
+                  openGraph
+                    ? ({
+                        description,
+                        siteName,
+                        title,
+                        url,
+                        code,
+                        image,
+                      } as OpenGraph)
+                    : null
+                }
+              />
             </div>
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />

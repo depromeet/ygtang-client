@@ -3,22 +3,21 @@ import { css } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
-import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
-import { useAppliedTags } from '~/store/AppliedTags';
+import { useInspirationDetail } from '~/store/Inspiration';
 
 import { formCss } from './ImageView';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function TextView() {
+  const { inspirationDetail } = useInspirationDetail();
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
-  const { tags } = useAppliedTags();
   const { createInspiration } = useInspirationMutation();
 
   const submitText = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,18 +33,20 @@ export default function TextView() {
     createInspiration(textData);
   };
 
+  if (!inspirationDetail) return <></>;
+
+  const { tags, content } = inspirationDetail;
+
   return (
     <>
       <article css={addTextCss}>
-        <NavigationBar title="글 추가" />
-
         <form onSubmit={submitText} css={formCss}>
           <section css={addTextTopCss}>
             <div css={contentWrapperCss}>
               <Input
                 as="textarea"
                 placeholder="영감을 작성해 보세요."
-                value={inspiringText.value}
+                value={content}
                 onChange={inspiringText.onChange}
               />
             </div>
@@ -54,7 +55,6 @@ export default function TextView() {
             </div>
             <div css={contentWrapperCss}>
               <MemoText
-                writable
                 onChange={memoText.onChange}
                 debouncedValue={memoText.debouncedValue}
                 value={memoText.value}
