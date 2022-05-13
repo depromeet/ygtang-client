@@ -105,4 +105,5 @@ const tagCss = (theme: Theme) => css`
   font-weight: ${theme.font.weight.medium};
   font-size: 10px;
   line-height: 1.2;
+  white-space: nowrap;
 `;
