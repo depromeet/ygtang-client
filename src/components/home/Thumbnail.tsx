@@ -9,7 +9,7 @@ import ThumbnailContent from './ThumbnailContent';
 
 export interface ContentThumbnailProps
   extends Pick<InspirationInterface, 'type' | 'content' | 'id'> {
-  tags: InspirationInterface['tagResponse'];
+  tags: InspirationInterface['tagResponses'];
   openGraph?: InspirationInterface['openGraphResponse'];
 }
 
