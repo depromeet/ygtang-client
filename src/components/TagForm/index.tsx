@@ -51,6 +51,7 @@ export default function TagForm({
       }
       setValue('');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   const onFormReturn = async (e: React.FormEvent) => {
