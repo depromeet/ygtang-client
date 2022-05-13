@@ -41,7 +41,6 @@ export default function TagForm({
   };
 
   useEffect(() => {
-    console.log('keyword', keyword, 'keyword');
     if (!isLoading) onSearch && onSearch(keyword);
     if (!isLoading && keyword) {
       if (!tags.length) {

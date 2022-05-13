@@ -32,7 +32,6 @@ export default function TagPage() {
             onRemove={removeTag}
             onSearch={keyword => {
               setKeyword(keyword);
-              console.log(keyword);
             }}
           />
         </motion.div>
