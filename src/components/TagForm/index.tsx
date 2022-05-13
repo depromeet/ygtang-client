@@ -9,6 +9,15 @@ import useInput from '~/hooks/common/useInput';
 import AppliedTags from './AppliedTags';
 import RegisteredTagList from './RegisteredTagList';
 
+export interface TagFormProps {
+  applyedTags: TagType[];
+  registeredTags: TagType[];
+  onSave: (tag: TagType) => void;
+  onRemove: (id: number) => void;
+  onSearch?: (keyword: string) => void;
+  readOnly?: boolean;
+}
+
 // NOTE: Props들을 컴포넌트내에서 관리할 수도 있지 않을까
 export default function TagForm({
   applyedTags = [],
@@ -16,13 +25,8 @@ export default function TagForm({
   onSave,
   onRemove,
   onSearch,
-}: {
-  applyedTags: TagType[];
-  registeredTags: TagType[];
-  onSave: (tag: TagType) => void;
-  onRemove: (id: number) => void;
-  onSearch?: (keyword: string) => void;
-}) {
+  readOnly = false,
+}: TagFormProps) {
   const { value, setValue, onChange } = useInput({ useDebounce: false });
   const [keyword, setKeyword] = useState('');
   const lastKeyword = useRef<string | null>(null);
@@ -48,15 +52,15 @@ export default function TagForm({
     if (keyword === lastKeyword.current) return;
     if (!isLoading) onSearch && onSearch(keyword);
     if (!isLoading && keyword) {
-      if (!tags.length) {
+      if (!tags.length && !readOnly) {
         saveCreatedTag(keyword);
-      } else {
+      } else if (tags.length) {
         onSave(tags[0]);
       }
       lastKeyword.current = keyword;
       setValue('');
     }
-  }, [isLoading, keyword, onSave, onSearch, saveCreatedTag, setValue, tags]);
+  }, [isLoading, keyword, onSave, onSearch, saveCreatedTag, setValue, tags, readOnly]);
 
   const onFormReturn = async (e: React.FormEvent) => {
     e.preventDefault();

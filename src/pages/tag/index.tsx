@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
@@ -10,7 +11,8 @@ import { useFilteredTags } from '~/store/FilteredTags';
 
 export default function TagPage() {
   const { filteredTags, addTag, removeTag } = useFilteredTags({});
-  const { tags, isLoading } = useGetTagListWithInfinite({});
+  const [keyword, setKeyword] = useState('');
+  const { tags, isLoading } = useGetTagListWithInfinite({ keyword });
 
   return (
     <article>
@@ -28,6 +30,10 @@ export default function TagPage() {
             registeredTags={tags}
             onSave={addTag}
             onRemove={removeTag}
+            onSearch={keyword => {
+              setKeyword(keyword);
+            }}
+            readOnly
           />
         </motion.div>
       </LoadingHandler>
