@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { motion } from 'framer-motion';
 
-import { INSPIRATION_EMPTY_IMAGE_SRC, INSPIRATION_EMPTY_TEXT_IMAGE_SRC } from '~/assets/constants';
+import { INSPIRATION_EMPTY_IMAGE_SRC, INSPIRATION_EMPTY_TEXT_IMAGE_SRC } from '~/constants/assets';
 import { defaultFadeInScaleVariants, staggerOne } from '~/constants/motions';
 
 export default function EmptyImageSection() {
