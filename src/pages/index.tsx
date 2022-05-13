@@ -58,16 +58,19 @@ export default function Root() {
                 animate="animate"
                 exit="exit"
               >
-                {inspirations.map(({ id, type, content, tagResponses, openGraphResponse }) => (
-                  <Thumbnail
-                    key={id}
-                    id={id}
-                    type={type as InspirationType}
-                    content={content}
-                    tags={tagResponses}
-                    openGraph={openGraphResponse}
-                  />
-                ))}
+                {inspirations.map(
+                  ({ id, type, content, tagResponses, openGraphResponse, memo }) => (
+                    <Thumbnail
+                      key={id}
+                      id={id}
+                      type={type as InspirationType}
+                      content={content}
+                      tags={tagResponses}
+                      openGraph={openGraphResponse}
+                      memo={memo}
+                    />
+                  )
+                )}
                 {hasNextPage && <div ref={setTarget}></div>}
               </motion.section>
             )}

@@ -35,7 +35,7 @@ export default function TextView() {
 
   if (!inspirationDetail) return <></>;
 
-  const { tags, content } = inspirationDetail;
+  const { tags, content, memo } = inspirationDetail;
 
   return (
     <>
@@ -55,9 +55,10 @@ export default function TextView() {
             </div>
             <div css={contentWrapperCss}>
               <MemoText
+                editable
                 onChange={memoText.onChange}
                 debouncedValue={memoText.debouncedValue}
-                value={memoText.value}
+                value={memo}
               />
             </div>
           </section>

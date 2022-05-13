@@ -13,14 +13,15 @@ export interface ContentThumbnailProps
   extends Pick<InspirationInterface, 'type' | 'content' | 'id'> {
   tags: InspirationInterface['tagResponses'];
   openGraph?: InspirationInterface['openGraphResponse'];
+  memo: InspirationInterface['memo'];
 }
 
-function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps) {
+function Thumbnail({ id, type, tags, content, openGraph, memo }: ContentThumbnailProps) {
   const { saveInspirationDetail } = useInspirationDetail();
   const { push } = useRouter();
 
   const moveToInspirationView = (id: number) => {
-    saveInspirationDetail({ id, type, tags, content, openGraph });
+    saveInspirationDetail({ id, type, tags, content, memo, openGraph });
     push('?modal=inspirationView', `/content/${id}`, { scroll: false });
   };
 
