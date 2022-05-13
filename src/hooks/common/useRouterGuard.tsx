@@ -3,41 +3,44 @@ import { useRouter } from 'next/router';
 
 import { PUBLIC_ROUTES } from '~/constants/common';
 
-export default function useRouterGuard() {
-  const router = useRouter();
+interface UseRouterGuardProps {
+  isLoaded: boolean;
+  isLoggedIn: boolean;
+}
 
-  // TODO: 추후에 인증관련은 store의 것으로 대체합니다.
-  const [authorized, setAuthorized] = useState(false);
+export default function useRouterGuard({ isLoaded, isLoggedIn }: UseRouterGuardProps) {
+  const [isRouterGuardPassed, setIsRouterGuardPassed] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     const authCheck = (url: string) => {
-      const path = url.split('?')[0];
+      if (!isLoaded) return;
 
+      if (isLoggedIn) {
+        // 로그인 시 모든 route 접근 가능
+        setIsRouterGuardPassed(true);
+        return;
+      }
+
+      const path = url.split('?')[0];
       if (!PUBLIC_ROUTES.includes(path)) {
-        setAuthorized(false);
         router.push({
           pathname: '/login',
           query: { returnUrl: router.asPath },
         });
       } else {
-        setAuthorized(true);
+        // 로그인을 하지 않았으며, 퍼블릭 route에 방문시 패스 인증
+        setIsRouterGuardPassed(true);
       }
     };
+
     authCheck(router.asPath);
-    router.events.on('routeChangeStart', hideContent);
-    router.events.on('routeChangeComplete', authCheck);
+    router.events.on('routeChangeStart', authCheck);
 
     return () => {
-      router.events.off('routeChangeStart', hideContent);
-      router.events.off('routeChangeComplete', authCheck);
+      router.events.off('routeChangeStart', authCheck);
     };
-  }, [router]);
+  }, [isLoaded, isLoggedIn, router]);
 
-  const hideContent = () => {
-    setAuthorized(false);
-  };
-
-  return {
-    authorized,
-  };
+  return { isRouterGuardPassed };
 }
