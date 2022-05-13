@@ -47,7 +47,15 @@ export interface MemoTextProps {
    * 수정(저장) 아이콘을 누르면 실행되는 함수입니다. 주입해주어야 합니다.
    */
   onSaveClick?: () => void;
+
+  /**
+   * 메모 value 입니다.
+   */
   value: string;
+
+  /**
+   * 메모 debouncedValue 입니다.
+   */
   debouncedValue: string;
 }
 
@@ -64,11 +72,6 @@ export function MemoText({
 }: MemoTextProps) {
   const id = useId();
   const theme = useTheme();
-
-  // useEffect(() => {
-  //   if (!onValueChange) return;
-  //   onValueChange(debouncedValue);
-  // }, [debouncedValue, onValueChange]);
 
   return (
     <TextField
