@@ -45,6 +45,7 @@ const navCss = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 900;
 `;
 
 const headingCss = (theme: Theme) => css`
