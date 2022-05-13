@@ -1,4 +1,4 @@
-import { flatten } from 'lodash';
+import flatten from 'lodash/flatten';
 import { useInfiniteQuery } from 'react-query';
 
 import { get } from '~/libs/api/client';
@@ -31,9 +31,8 @@ interface Props {
 export default function useGetTagListWithInfinite({ keyword, isExactlySame = false }: Props) {
   const fetchTags = (page: number = 0) => {
     if (keyword && keyword.length > 0) {
-      // 일치하는 검색 API
       if (isExactlySame)
-        return get<TagResponseInterface>(`/v1/tag/search/${keyword}?size=20&page=${page}`);
+        return get<TagResponseInterface>(`/v1/tag/search/${keyword}?size=1&page=0`);
       // 유사한 검색 API
       return get<TagResponseInterface>(`/v1/tag/index/${keyword}?size=20&page=${page}`);
     }
