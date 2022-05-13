@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 
 import Tag from '~/components/common/Tag';
 
-export default function AppliedTags({
+function AppliedTags({
   applyedTags = [],
   onRemove,
 }: {
@@ -33,24 +33,23 @@ export default function AppliedTags({
     setPreviousTags([...applyedTags]);
   }, [applyedTags, previousTags]);
 
-  return useMemo(
-    () => (
-      <div ref={$container} css={applyedTagsCss}>
-        {applyedTags.map(tag => (
-          <Tag
-            key={tag.id}
-            content={tag.content}
-            deletable
-            onDelete={() => {
-              onRemove(tag.id);
-            }}
-          />
-        ))}
-      </div>
-    ),
-    [applyedTags, onRemove]
+  return (
+    <div ref={$container} css={applyedTagsCss}>
+      {applyedTags.map(tag => (
+        <Tag
+          key={tag.id}
+          content={tag.content}
+          deletable
+          onDelete={() => {
+            onRemove(tag.id);
+          }}
+        />
+      ))}
+    </div>
   );
 }
+
+export default React.memo(AppliedTags);
 
 const applyedTagsCss = css`
   display: flex;
