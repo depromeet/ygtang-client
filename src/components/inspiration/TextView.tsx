@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
-import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
@@ -17,7 +16,6 @@ export default function TextView() {
   const { inspirationDetail } = useInspirationDetail();
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
-  const isEmptyText = !Boolean(inspiringText.debouncedValue);
   const { createInspiration } = useInspirationMutation();
 
   const submitText = (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,12 +60,6 @@ export default function TextView() {
               />
             </div>
           </section>
-
-          <section css={addTextBottomCss}>
-            <CTAButton type="submit" disabled={isEmptyText}>
-              Tang!
-            </CTAButton>
-          </section>
         </form>
       </article>
       <AddTagFormRouteAsModal />
@@ -85,10 +77,6 @@ const addTextCss = css`
 const addTextTopCss = css`
   flex-grow: 1;
   overflow-y: auto;
-`;
-
-const addTextBottomCss = css`
-  margin: 8px 0 16px 0;
 `;
 
 const contentWrapperCss = css`

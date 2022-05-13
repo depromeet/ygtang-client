@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import LinkInput from '~/components/add/LinkInput';
-import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
@@ -82,12 +81,6 @@ export default function LinkView() {
               />
             </div>
           </section>
-
-          <section css={addLinkBottomCss}>
-            <CTAButton disabled={!Boolean(openGraph)} type="submit">
-              Tang!
-            </CTAButton>
-          </section>
         </form>
       </article>
       <AddTagFormRouteAsModal />
@@ -105,10 +98,6 @@ const addLinkCss = css`
 const addLinkTopCss = css`
   flex-grow: 1;
   overflow-y: auto;
-`;
-
-const addLinkBottomCss = css`
-  margin: 8px 0 16px 0;
 `;
 
 const contentWrapperCss = css`
