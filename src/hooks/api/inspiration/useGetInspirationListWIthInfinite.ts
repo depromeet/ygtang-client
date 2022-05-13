@@ -13,7 +13,7 @@ interface InspirationResponseInterface extends PaginationInterface {
 }
 
 // TODO: 추가, 삭제, 수정 등 Mutation과 맞추기
-const INSPIRATION_LIST_QUERY_KEY = 'inspirationList';
+export const INSPIRATION_LIST_QUERY_KEY = 'inspirationList';
 
 interface UseGetInspirationListWithInfiniteProps {
   filteredTags: TagType[];

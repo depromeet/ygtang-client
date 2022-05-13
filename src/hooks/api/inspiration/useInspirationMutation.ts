@@ -1,8 +1,10 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { post } from '~/libs/api/client';
 import { useToast } from '~/store/Toast';
+
+import { INSPIRATION_LIST_QUERY_KEY } from './useGetInspirationListWIthInfinite';
 
 export interface InspirationMutationRequest {
   content?: string;
@@ -13,14 +15,19 @@ export interface InspirationMutationRequest {
 }
 
 export default function useInspirationMutation() {
+  const queryClient = useQueryClient();
   const { push } = useInternalRouter();
   const { fireToast } = useToast();
+  const resetInspirationList = () => {
+    queryClient.resetQueries(INSPIRATION_LIST_QUERY_KEY);
+  };
+
   const createInspirationMutation = useMutation(
     (data: FormData) => post('/v1/inspiration/add', data),
     {
       onSuccess: () => {
         fireToast({ content: '영감이 등록되었습니다!' });
-        // TODO: main 전체 invalidate (tag?)
+        resetInspirationList();
         push('/');
       },
       onError: (error, variable, context) => {
