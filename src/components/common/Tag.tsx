@@ -1,4 +1,5 @@
-import { css, Theme } from '@emotion/react';
+import React, { useRef } from 'react';
+import { css, Theme, useTheme } from '@emotion/react';
 
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
@@ -9,19 +10,16 @@ export interface TagProps extends Pick<TagInterface, 'content'> {
   onDelete?: VoidFunction;
   onClick?: VoidFunction;
 }
+function Tag({ content, deletable = false, onDelete = () => {}, onClick = () => {} }: TagProps) {
+  const theme = useTheme();
+  const backGroundColor = useRef(selectRandomColor(theme, ['gray01', 'gray02', 'gray03']));
 
-export default function Tag({
-  content,
-  deletable = false,
-  onDelete = () => {},
-  onClick = () => {},
-}: TagProps) {
   const onClickCloseIcon = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     onDelete();
   };
   return (
-    <div css={tagCss} onClick={onClick}>
+    <div css={tagCss(theme, backGroundColor.current)} onClick={onClick}>
       #{content}
       {deletable && (
         <button css={closeButtonCss} onClick={onClickCloseIcon}>
@@ -32,14 +30,16 @@ export default function Tag({
   );
 }
 
-const tagCss = (theme: Theme) => css`
+export default React.memo(Tag);
+
+const tagCss = (theme: Theme, backGroundColor: string) => css`
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   height: 24px;
   padding: 0 6px;
   border-radius: ${theme.borderRadius.default};
-  background-color: ${selectRandomColor(theme, ['gray01', 'gray02', 'gray03'])};
+  background-color: ${backGroundColor};
   font-weight: 500;
   font-size: 10px;
   line-height: 150%;
