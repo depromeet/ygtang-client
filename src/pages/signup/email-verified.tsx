@@ -121,7 +121,7 @@ export default function SignUpEmailVerified() {
               label={'닉네임'}
               placeholder={'닉네임을 입력해주세요'}
               feedback={nickname.value !== '' ? nicknameError || <>&nbsp;</> : <>&nbsp;</>}
-              isSuccess={nicknameError === ''}
+              isSuccess={nickname.value.length > 0 && nicknameError === ''}
               value={nickname.value}
               onChange={nickname.onChange}
               required
@@ -131,7 +131,7 @@ export default function SignUpEmailVerified() {
               label={'비밀번호'}
               placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
               feedback={password.value !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
-              isSuccess={passwordError === ''}
+              isSuccess={password.value.length > 0 && passwordError === ''}
               value={password.value}
               onChange={password.onChange}
               required
@@ -143,7 +143,7 @@ export default function SignUpEmailVerified() {
               feedback={
                 passwordRepeat.value !== '' ? passwordRepeatError || <>&nbsp;</> : <>&nbsp;</>
               }
-              isSuccess={passwordRepeatError === ''}
+              isSuccess={passwordRepeat.value.length > 0 && passwordRepeatError === ''}
               value={passwordRepeat.value}
               onChange={passwordRepeat.onChange}
               required

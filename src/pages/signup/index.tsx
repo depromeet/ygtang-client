@@ -98,7 +98,7 @@ export default function Signup() {
           value={email.value}
           onChange={email.onChange}
           feedback={email.value !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={emailError === ''}
+          isSuccess={email.value.length > 0 && emailError === ''}
           required
         />
         <CTAButton type={'submit'} disabled={emailSendingLoading || checkExistsUserLoading}>

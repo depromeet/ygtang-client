@@ -82,7 +82,7 @@ export default function Login() {
           label={'이메일 아이디'}
           placeholder={'이메일을 입력해주세요'}
           feedback={email.value !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={emailError === ''}
+          isSuccess={email.value.length > 0 && emailError === ''}
           value={email.value}
           onChange={email.onChange}
           required
@@ -92,7 +92,7 @@ export default function Login() {
           label={'비밀번호'}
           placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
           feedback={password.value !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={passwordError === ''}
+          isSuccess={password.value.length > 0 && passwordError === ''}
           value={password.value}
           onChange={password.onChange}
           required
