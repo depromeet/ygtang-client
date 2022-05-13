@@ -8,7 +8,7 @@ export interface InspirationMutationRequest {
   content?: string;
   file?: string;
   memo: string;
-  tagIds: number[];
+  tagIds?: number[];
   type: InspirationType;
 }
 
@@ -16,7 +16,7 @@ export default function useInspirationMutation() {
   const { push } = useInternalRouter();
   const { fireToast } = useToast();
   const createInspirationMutation = useMutation(
-    (data: InspirationMutationRequest) => post('/v1/inspiration/add', { data }),
+    (data: FormData) => post('/v1/inspiration/add', data),
     {
       onSuccess: () => {
         fireToast({ content: '영감이 등록되었습니다!' });

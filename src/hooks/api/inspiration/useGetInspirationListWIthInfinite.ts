@@ -24,10 +24,13 @@ export default function useGetInspirationListWithInfinite({
 }: UseGetInspirationListWithInfiniteProps) {
   const fetchInsipirations = (page: number = 0) => {
     if (filteredTags.length > 0)
-      return post<InspirationListResponseInterface>(`/v1/inspiration/tag/?size=20&page=${page}`, [
-        ...filteredTags.map(eachTag => eachTag.id),
-      ]);
-    return get<InspirationListResponseInterface>(`/v1/inspiration/list?size=20&page=${page}`);
+      return post<InspirationListResponseInterface>(
+        `/v1/inspiration/tag/?size=20&page=${page}&sort=updatedDateTime,desc`,
+        [...filteredTags.map(eachTag => eachTag.id)]
+      );
+    return get<InspirationListResponseInterface>(
+      `/v1/inspiration/list?size=20&page=${page}&sort=updatedDateTime,desc`
+    );
   };
 
   const query = useInfiniteQuery<InspirationListResponseInterface>(
