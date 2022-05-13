@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import { useMutation } from 'react-query';
 
 import { post } from '~/libs/api/client';
@@ -8,11 +7,14 @@ interface ReissueMutationRequest {
 }
 
 interface UseReissueMutationProps {
-  userLogin: ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) => void;
-  setIsLoaded: Dispatch<SetStateAction<boolean>>;
+  onSuccess?: (
+    data: AuthTokenResponseInterface,
+    variables: ReissueMutationRequest,
+    context: unknown
+  ) => void | Promise<unknown>;
 }
 
-export default function useReissueMutation({ userLogin, setIsLoaded }: UseReissueMutationProps) {
+export default function useReissueMutation({ onSuccess }: UseReissueMutationProps) {
   return useMutation(
     (data: ReissueMutationRequest) =>
       post<AuthTokenResponseInterface>('/v1/reissue', undefined, {
@@ -21,11 +23,7 @@ export default function useReissueMutation({ userLogin, setIsLoaded }: UseReissu
         },
       }),
     {
-      onSuccess: data => {
-        const { accessToken, refreshToken } = data.data;
-        userLogin({ accessToken, refreshToken });
-        setIsLoaded(true);
-      },
+      onSuccess,
     }
   );
 }

@@ -10,12 +10,16 @@ import { useUser } from './';
 
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
   const { isLoaded, setIsLoaded, userLogin, isLoggedIn } = useUser();
-  const { mutate: reissueMutate, error: reissueMutationError } = useReissueMutation({
-    userLogin,
-    setIsLoaded,
-  });
-  const { get: cookieGet } = useCookie();
 
+  const { mutate: reissueMutate, error: reissueMutationError } = useReissueMutation({
+    onSuccess: data => {
+      const { accessToken, refreshToken } = data.data;
+      userLogin({ accessToken, refreshToken });
+      setIsLoaded(true);
+    },
+  });
+
+  const { get: cookieGet } = useCookie();
   const { isRouterGuardPassed } = useRouterGuard({ isLoaded, isLoggedIn });
 
   // 컴포넌트 마운트 시
