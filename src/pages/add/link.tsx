@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
@@ -14,12 +14,14 @@ import { useAppliedTags } from '~/store/AppliedTags';
 import { formCss } from './image';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
+// TODO: code 200임에도 response가 null로 오는 경우가 있어서 백엔드 문의 필요
 export interface OpenGraph {
   description: string;
   siteName: string;
   title: string;
   url: string;
-  imageUrl?: string;
+  code: number;
+  image?: string;
 }
 
 export default function AddLink() {
@@ -31,6 +33,10 @@ export default function AddLink() {
   const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
   const { createInspiration } = useInspirationMutation();
   const { tags } = useAppliedTags();
+
+  const saveOpenGraph = useCallback((og: OpenGraph | null) => {
+    setOpenGraph(og);
+  }, []);
 
   const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,7 +59,7 @@ export default function AddLink() {
         <form onSubmit={submitLink} css={formCss}>
           <section css={addLinkTopCss}>
             <div css={contentWrapperCss}>
-              <LinkInput openGraph={openGraph} setOpenGraph={setOpenGraph} />
+              <LinkInput openGraph={openGraph} saveOpenGraph={saveOpenGraph} />
             </div>
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />
