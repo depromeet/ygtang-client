@@ -39,7 +39,7 @@ export default function AddImage() {
     if (!uploadedImg) return;
     const tagIds = tags.map(tag => tag.id);
     const imgData = new FormData();
-    imgData.append('file', uploadedImg);
+    imgData.append('file', uploadedImg.blob);
     imgData.append('memo', memoValue);
     imgData.append('type', 'IMAGE');
     imgData.append('tagIds', tagIds.toString());
@@ -56,7 +56,13 @@ export default function AddImage() {
           <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
           <section css={addImageTopCss}>
             <div css={contentWrapperCss}>
-              {<ImageContent clickXbtn={openFileInput} src={uploadedImg} alt="uploadedImg" />}
+              {
+                <ImageContent
+                  clickXbtn={openFileInput}
+                  src={uploadedImg?.base64 ?? null}
+                  alt="uploadedImg"
+                />
+              }
             </div>
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />

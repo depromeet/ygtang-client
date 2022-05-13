@@ -2,11 +2,16 @@ import { useRecoilState } from 'recoil';
 
 import { uploadedImgState } from './UploadedImgState';
 
-export function useUploadedImg() {
-  const [uploadedImg, setUploadedImg] = useRecoilState<null | string>(uploadedImgState);
+export interface UploadedImg {
+  blob: Blob;
+  base64: string;
+}
 
-  const uploadImg = (img: string) => {
-    setUploadedImg(img);
+export function useUploadedImg() {
+  const [uploadedImg, setUploadedImg] = useRecoilState<null | UploadedImg>(uploadedImgState);
+
+  const uploadImg = ({ blob, base64 }: UploadedImg) => {
+    setUploadedImg({ blob, base64 });
   };
 
   const resetImg = () => {
