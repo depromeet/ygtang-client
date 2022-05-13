@@ -16,9 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <ThemeProvider theme={CustomTheme}>
         <QueryClientProvider client={queryClient}>
+          <GlobalStyle />
           <UserProvider>
             <Layout>
-              <GlobalStyle />
               <Component {...pageProps} />
               <ToastSection />
             </Layout>
