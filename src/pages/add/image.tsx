@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { css } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
@@ -8,11 +9,17 @@ import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation, {
   InspirationMutationRequest,
 } from '~/hooks/api/inspiration/useInspirationMutation';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useUploadedImg } from '~/store/UploadedImage';
 
 export default function AddImage() {
+  const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
   const { createInspiration } = useInspirationMutation();
+
+  useEffect(() => {
+    if (!uploadedImg) push('/');
+  }, [uploadedImg, push]);
 
   const tags = [{ id: 1, content: '1111' }];
 
@@ -31,7 +38,8 @@ export default function AddImage() {
   return (
     <article css={addImageCss}>
       <NavigationBar title="이미지 추가" />
-      <form onSubmit={submitImg}>
+
+      <form onSubmit={submitImg} css={formCss}>
         <section css={addImageTopCss}>
           <div css={contentWrapperCss}>
             {uploadedImg && <ImageContent src={uploadedImg} alt="uploadedImg" />}
@@ -43,6 +51,7 @@ export default function AddImage() {
             <MemoText writable />
           </div>
         </section>
+
         <section css={addImageBottomCss}>
           <CTAButton type="submit">Tang!</CTAButton>
         </section>
@@ -54,8 +63,14 @@ export default function AddImage() {
 const addImageCss = css`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
+`;
+
+const formCss = css`
+  height: calc(var(--vh, 1vh) * 100 - 44px);
+  display: flex;
+  flex-direction: column;
 `;
 
 const addImageTopCss = css`
