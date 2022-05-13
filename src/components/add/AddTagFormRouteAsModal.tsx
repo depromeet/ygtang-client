@@ -10,7 +10,6 @@ import TagPage from '~/pages/add/tag';
 export default function AddTagFormRouteAsModal() {
   const query = useQueryParam('modal', String);
   usePreventScroll(query === 'addTag');
-  console.log('ye>>>>>>>>>>>>>>', query === 'addTag');
   return (
     <PortalWrapper isShowing={query === 'addTag'}>
       <div css={wrapperCss}>
