@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 
 import { SearchBar } from '~/components/common/TextField';
@@ -25,22 +25,27 @@ export default function TagForm({
 }) {
   const { value, setValue, onChange } = useInput({ useDebounce: false });
   const [keyword, setKeyword] = useState('');
+  const lastKeyword = useRef<string | null>(null);
   const { tags, isLoading } = useGetTagListWithInfinite({ keyword, isExactlySame: true });
   const { createTag } = useTagMutation();
 
   //TODO: API 업데이트 이후 data가 내려오면 정상 동작 예정입니다.
   //TODO: 아직 중복처리가 API 단에서 이루어지지 않아서 이렇게 작업을 올립니다.
-  const saveCreatedTag = (keyword: string) => {
-    createTag(keyword, {
-      onSuccess: data => {
-        // onSave(data.data);
-        const _data = data;
-        onSave({ id: 32131, content: '된다고 쳐' });
-      },
-    });
-  };
+  const saveCreatedTag = useCallback(
+    (keyword: string) => {
+      createTag(keyword, {
+        onSuccess: data => {
+          // onSave(data.data);
+          const _data = data;
+          onSave({ id: 32131, content: '된다고 쳐' });
+        },
+      });
+    },
+    [createTag, onSave]
+  );
 
   useEffect(() => {
+    if (keyword === lastKeyword.current) return;
     if (!isLoading) onSearch && onSearch(keyword);
     if (!isLoading && keyword) {
       if (!tags.length) {
@@ -48,10 +53,10 @@ export default function TagForm({
       } else {
         onSave(tags[0]);
       }
+      lastKeyword.current = keyword;
       setValue('');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
+  }, [isLoading, keyword, onSave, onSearch, saveCreatedTag, setValue, tags]);
 
   const onFormReturn = async (e: React.FormEvent) => {
     e.preventDefault();
