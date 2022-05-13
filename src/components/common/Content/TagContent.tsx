@@ -29,7 +29,7 @@ export default function TagContent({ tags, label = '태그', onClickTag }: TagCo
               }}
             />
           ))}
-          <Link href="/?modal=addTag" as="/add/tag" scroll={false}>
+          <Link href="?modal=addTag" as="/add/tag" scroll={false}>
             <a>
               <IconButton iconName="PlusIcon" />
             </a>

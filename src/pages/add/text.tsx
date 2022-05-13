@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
@@ -12,6 +13,8 @@ import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
 
 import { formCss } from './image';
+
+const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddText() {
   const inspiringText = useInput({ useDebounce: true });
@@ -33,39 +36,42 @@ export default function AddText() {
   };
 
   return (
-    <article css={addTextCss}>
-      <NavigationBar title="글 추가" />
+    <>
+      <article css={addTextCss}>
+        <NavigationBar title="글 추가" />
 
-      <form onSubmit={submitText} css={formCss}>
-        <section css={addTextTopCss}>
-          <div css={contentWrapperCss}>
-            <Input
-              as="textarea"
-              placeholder="영감을 작성해 보세요."
-              value={inspiringText.value}
-              onChange={inspiringText.onChange}
-            />
-          </div>
-          <div css={contentWrapperCss}>
-            <TagContent tags={tags} />
-          </div>
-          <div css={contentWrapperCss}>
-            <MemoText
-              writable
-              onChange={memoText.onChange}
-              debouncedValue={memoText.debouncedValue}
-              value={memoText.value}
-            />
-          </div>
-        </section>
+        <form onSubmit={submitText} css={formCss}>
+          <section css={addTextTopCss}>
+            <div css={contentWrapperCss}>
+              <Input
+                as="textarea"
+                placeholder="영감을 작성해 보세요."
+                value={inspiringText.value}
+                onChange={inspiringText.onChange}
+              />
+            </div>
+            <div css={contentWrapperCss}>
+              <TagContent tags={tags} />
+            </div>
+            <div css={contentWrapperCss}>
+              <MemoText
+                writable
+                onChange={memoText.onChange}
+                debouncedValue={memoText.debouncedValue}
+                value={memoText.value}
+              />
+            </div>
+          </section>
 
-        <section css={addTextBottomCss}>
-          <CTAButton type="submit" disabled={isEmptyText}>
-            Tang!
-          </CTAButton>
-        </section>
-      </form>
-    </article>
+          <section css={addTextBottomCss}>
+            <CTAButton type="submit" disabled={isEmptyText}>
+              Tang!
+            </CTAButton>
+          </section>
+        </form>
+      </article>
+      <AddTagFormRouteAsModal />
+    </>
   );
 }
 

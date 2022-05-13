@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import { ImgUploader } from '~/components/add/ImgUploader';
@@ -15,6 +16,8 @@ import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useUploadedImg } from '~/store/UploadedImage';
+
+const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddImage() {
   const {
@@ -46,33 +49,36 @@ export default function AddImage() {
   };
 
   return (
-    <article css={addImageCss}>
-      <NavigationBar title="이미지 추가" />
+    <>
+      <article css={addImageCss}>
+        <NavigationBar title="이미지 추가" />
 
-      <form onSubmit={submitImg} css={formCss}>
-        <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
-        <section css={addImageTopCss}>
-          <div css={contentWrapperCss}>
-            {<ImageContent clickXbtn={openFileInput} src={uploadedImg} alt="uploadedImg" />}
-          </div>
-          <div css={contentWrapperCss}>
-            <TagContent tags={tags} />
-          </div>
-          <div css={contentWrapperCss}>
-            <MemoText
-              writable
-              onChange={onMemoChange}
-              debouncedValue={memoDebouncedValue}
-              value={memoValue}
-            />
-          </div>
-        </section>
+        <form onSubmit={submitImg} css={formCss}>
+          <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
+          <section css={addImageTopCss}>
+            <div css={contentWrapperCss}>
+              {<ImageContent clickXbtn={openFileInput} src={uploadedImg} alt="uploadedImg" />}
+            </div>
+            <div css={contentWrapperCss}>
+              <TagContent tags={tags} />
+            </div>
+            <div css={contentWrapperCss}>
+              <MemoText
+                writable
+                onChange={onMemoChange}
+                debouncedValue={memoDebouncedValue}
+                value={memoValue}
+              />
+            </div>
+          </section>
 
-        <section css={addImageBottomCss}>
-          <CTAButton type="submit">Tang!</CTAButton>
-        </section>
-      </form>
-    </article>
+          <section css={addImageBottomCss}>
+            <CTAButton type="submit">Tang!</CTAButton>
+          </section>
+        </form>
+      </article>
+      <AddTagFormRouteAsModal />
+    </>
   );
 }
 
