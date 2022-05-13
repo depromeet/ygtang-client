@@ -7,9 +7,7 @@ import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
-import useInspirationMutation, {
-  InspirationMutationRequest,
-} from '~/hooks/api/inspiration/useInspirationMutation';
+import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
 
@@ -37,12 +35,13 @@ export default function AddLink() {
   const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!openGraph || !openGraph.url) return;
-    const linkData: InspirationMutationRequest = {
-      memo: memoValue,
-      content: openGraph.url,
-      tagIds: [1],
-      type: 'LINK',
-    };
+    const tagIds = tags.map(tag => tag.id);
+    const linkData = new FormData();
+    linkData.append('content', openGraph.url);
+    linkData.append('memo', memoValue);
+    linkData.append('type', 'LINK');
+    linkData.append('tagIds', tagIds.toString());
+
     createInspiration(linkData);
   };
 

@@ -6,9 +6,7 @@ import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
-import useInspirationMutation, {
-  InspirationMutationRequest,
-} from '~/hooks/api/inspiration/useInspirationMutation';
+import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
 
@@ -26,12 +24,13 @@ export default function AddText() {
   const submitText = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inspiringText.value) return;
-    const textData: InspirationMutationRequest = {
-      memo: memoText.value,
-      content: inspiringText.value,
-      tagIds: [1],
-      type: 'TEXT',
-    };
+    const textData = new FormData();
+    const tagIds = tags.map(tag => tag.id);
+    textData.append('content', inspiringText.value);
+    textData.append('memo', memoText.value);
+    textData.append('type', 'TEXT');
+    textData.append('tagIds', tagIds.toString());
+
     createInspiration(textData);
   };
 

@@ -8,9 +8,7 @@ import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
-import useInspirationMutation, {
-  InspirationMutationRequest,
-} from '~/hooks/api/inspiration/useInspirationMutation';
+import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
@@ -39,12 +37,13 @@ export default function AddImage() {
   const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!uploadedImg) return;
-    const imgData: InspirationMutationRequest = {
-      file: uploadedImg,
-      memo: memoValue,
-      tagIds: [1],
-      type: 'IMAGE',
-    };
+    const tagIds = tags.map(tag => tag.id);
+    const imgData = new FormData();
+    imgData.append('file', uploadedImg);
+    imgData.append('memo', memoValue);
+    imgData.append('type', 'IMAGE');
+    imgData.append('tagIds', tagIds.toString());
+
     createInspiration(imgData);
   };
 
