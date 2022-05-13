@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
 import { SearchBar } from '~/components/common/TextField';
+import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
+import useTagMutation from '~/hooks/api/tag/useTagMutation';
 import useInput from '~/hooks/common/useInput';
 
 import AppliedTags from './AppliedTags';
@@ -13,36 +15,47 @@ export default function TagForm({
   registeredTags = [],
   onSave,
   onRemove,
+  onSearch,
 }: {
   applyedTags: TagType[];
   registeredTags: TagType[];
   onSave: (tag: TagType) => void;
   onRemove: (id: number) => void;
+  onSearch?: (keyword: string) => void;
 }) {
   const { value, setValue, onChange } = useInput({ useDebounce: false });
+  const [keyword, setKeyword] = useState('');
+  const { tags, isLoading } = useGetTagListWithInfinite({ keyword, isExactlySame: true });
+  const { createTag } = useTagMutation();
 
-  const onFormReturn = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!value) {
-      return;
-    }
-    // TODO:  search API 추가
-    // NOTE:  핸드폰 UI에서는 안그러겠지만 키보드로 첬을때 엔터 너무 빨리눌러서 Debounce 못쫏아오며
-    //        굳이 Debounce걸어서 서치할 필요도 없기에 사용안하는것으로 결정했습니다.
-    const datetime = new Date().getTime();
-    const searchedTag = { id: datetime, content: value };
-    if (!searchedTag) {
-      onSave(createTag());
-    } else {
-      onSave(searchedTag);
-    }
-    setValue('');
+  //TODO: API 업데이트 이후 data가 내려오면 정상 동작 예정입니다.
+  //TODO: 아직 중복처리가 API 단에서 이루어지지 않아서 이렇게 작업을 올립니다.
+  const saveCreatedTag = (keyword: string) => {
+    createTag(keyword, {
+      onSuccess: data => {
+        // onSave(data.data);
+        const _data = data;
+        onSave({ id: 32131, content: '된다고 쳐' });
+      },
+    });
   };
 
-  const createTag = (): TagType => {
-    // TODO: create tag API를 적용해야됩니다.
-    const datetime = new Date().getTime();
-    return { id: datetime, content: '생성했다 치자' };
+  useEffect(() => {
+    console.log('keyword', keyword, 'keyword');
+    if (!isLoading) onSearch && onSearch(keyword);
+    if (!isLoading && keyword) {
+      if (!tags.length) {
+        saveCreatedTag(keyword);
+      } else {
+        onSave(tags[0]);
+      }
+      setValue('');
+    }
+  }, [isLoading]);
+
+  const onFormReturn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setKeyword(value);
   };
 
   return (
