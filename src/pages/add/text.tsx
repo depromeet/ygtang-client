@@ -25,9 +25,11 @@ export default function AddText() {
     e.preventDefault();
     if (!inspiringText.value) return;
     const textData = new FormData();
+    const tagIds = tags.map(tag => tag.id);
     textData.append('content', inspiringText.value);
     textData.append('memo', memoText.value);
     textData.append('type', 'TEXT');
+    textData.append('tagIds', tagIds.toString());
 
     createInspiration(textData);
   };

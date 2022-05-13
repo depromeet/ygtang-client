@@ -37,11 +37,12 @@ export default function AddImage() {
   const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!uploadedImg) return;
-
+    const tagIds = tags.map(tag => tag.id);
     const imgData = new FormData();
     imgData.append('file', uploadedImg);
     imgData.append('memo', memoValue);
     imgData.append('type', 'IMAGE');
+    imgData.append('tagIds', tagIds.toString());
 
     createInspiration(imgData);
   };

@@ -35,11 +35,12 @@ export default function AddLink() {
   const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!openGraph || !openGraph.url) return;
-
+    const tagIds = tags.map(tag => tag.id);
     const linkData = new FormData();
     linkData.append('content', openGraph.url);
     linkData.append('memo', memoValue);
     linkData.append('type', 'LINK');
+    linkData.append('tagIds', tagIds.toString());
 
     createInspiration(linkData);
   };
