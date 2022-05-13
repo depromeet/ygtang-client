@@ -24,13 +24,14 @@ export default function HomeNavigationBar() {
 const navCss = (theme: Theme) => css`
   position: sticky;
   top: 0;
-  width: 100%;
+  width: calc(100% + 1px);
   height: 44px;
   background-color: ${theme.color.background};
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 4px;
+  z-index: 1000;
 `;
 
 const iconCss = (theme: Theme) => css`

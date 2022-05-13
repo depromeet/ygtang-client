@@ -1,19 +1,34 @@
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
+import LoadingHandler from '~/components/common/LoadingHandler';
+import { FixedSpinner } from '~/components/common/Spinner';
 import AppendButton from '~/components/home/AppendButton';
-import ContentThumbnail from '~/components/home/ContentThumbnail';
+import EmptyImageSection from '~/components/home/EmptyImageSection';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
+import Thumbnail from '~/components/home/Thumbnail';
 import AppliedTags from '~/components/TagForm/AppliedTags';
 import { staggerHalf } from '~/constants/motions';
+import useGetInspirationListWithInfinite from '~/hooks/api/inspiration/useGetInspirationListWIthInfinite';
+import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import { useFilteredTags } from '~/store/FilteredTags';
 
 const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRouteAsModal'));
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
+  const { inspirations, isLoading, hasNextPage, fetchNextPage } = useGetInspirationListWithInfinite(
+    {
+      filteredTags,
+    }
+  );
 
+  const { setTarget } = useIntersectionObserver({
+    onIntersect: ([{ isIntersecting }]) => {
+      if (isIntersecting && hasNextPage) fetchNextPage();
+    },
+  });
   return (
     <>
       <HomeNavigationBar />
@@ -24,24 +39,36 @@ export default function Root() {
           </motion.section>
         )}
 
-        <motion.section
-          css={thumbnailWrapperCss}
-          layoutId="thumbnailSection"
-          variants={staggerHalf}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
-          {MOCK_CONTENT.map(({ type, content, tagResponse, openGraphResponse }, index) => (
-            <ContentThumbnail
-              key={index}
-              type={type as InspirationType}
-              content={content}
-              tags={tagResponse}
-              openGraph={openGraphResponse}
-            />
-          ))}
-        </motion.section>
+        {/* 태그 변경시를 위한 Presence */}
+        <AnimatePresence exitBeforeEnter>
+          <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
+            {inspirations.length === 0 ? (
+              <EmptyImageSection key="empty inspiration section" />
+            ) : (
+              <motion.section
+                css={thumbnailWrapperCss}
+                layout
+                layoutId="thumbnailSection"
+                variants={staggerHalf}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                {inspirations.map(({ id, type, content, tagResponse, openGraphResponse }) => (
+                  <Thumbnail
+                    key={id}
+                    id={id}
+                    type={type as InspirationType}
+                    content={content}
+                    tags={tagResponse}
+                    openGraph={openGraphResponse}
+                  />
+                ))}
+                {hasNextPage && <div ref={setTarget}></div>}
+              </motion.section>
+            )}
+          </LoadingHandler>
+        </AnimatePresence>
       </motion.article>
       <AppendButton />
       <TagFormRouteAsModal />
@@ -60,106 +87,3 @@ const thumbnailWrapperCss = css`
 const filteredSectionCss = css`
   margin: 2px 0;
 `;
-
-const TEST_TAGS = [
-  {
-    id: 1,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: '어쩌구태그',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 2,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: '저쩌구태그',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 3,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 4,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 5,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 6,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-  {
-    id: 7,
-    memberResponse: { id: 1, nickName: '', email: '' },
-    content: 'tag1',
-    createdDatetime: '',
-    updatedDatetime: '',
-  },
-];
-
-const MOCK_CONTENT = [
-  {
-    type: 'TEXT',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis.',
-    tagResponse: TEST_TAGS,
-  },
-  {
-    type: 'TEXT',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, similique quisquam. Inventore iure excepturi, accusamus quae repudiandae, aspernatur praesentium, consequatur quidem modi a sit rerum molestias iusto quaerat vitae perspiciatis.',
-    tagResponse: [],
-  },
-  {
-    type: 'IMAGE',
-    content: 'https://avatars.githubusercontent.com/u/26461307?v=4',
-    tagResponse: TEST_TAGS,
-  },
-  {
-    type: 'IMAGE',
-    content: 'https://avatars.githubusercontent.com/u/26461307?v=4',
-    tagResponse: [],
-  },
-  {
-    type: 'LINK',
-    content: '',
-    tagResponse: TEST_TAGS,
-    openGraphResponse: {
-      code: 200,
-      description: 'I like to share my knowledge for those who wandering in issue.',
-      siteName: null,
-      title: "Cometin' - hyesungoh",
-      url: 'https://avatars.githubusercontent.com/',
-      image: '/u/26461307?v=4',
-    },
-  },
-  {
-    type: 'LINK',
-    content: '',
-    tagResponse: [],
-    openGraphResponse: {
-      code: 200,
-      description: 'I like to share my knowledge for those who wandering in issue.',
-      siteName: null,
-      title: "Cometin' - hyesungoh",
-      url: 'https://avatars.githubusercontent.com/',
-      image: '/u/26461307?v=4',
-    },
-  },
-];

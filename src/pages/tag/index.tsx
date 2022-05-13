@@ -14,7 +14,7 @@ export default function TagPage() {
 
   return (
     <article>
-      <NavigationBar title="태그 추가" backLink="/" backLinkScrollOption={false} />
+      <NavigationBar title="태그 필터" backLink="/" backLinkScrollOption={false} />
 
       <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
         <motion.div

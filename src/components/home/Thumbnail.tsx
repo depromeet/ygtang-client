@@ -1,31 +1,31 @@
+import React from 'react';
 import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
 import { defaultEasing } from '~/constants/motions';
-import textEllipisCss from '~/styles/utils/textEllipisCss';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
-interface ContentThumbnailProps extends Pick<InspirationInterface, 'type' | 'content'> {
+import ThumbnailContent from './ThumbnailContent';
+
+export interface ContentThumbnailProps
+  extends Pick<InspirationInterface, 'type' | 'content' | 'id'> {
   tags: InspirationInterface['tagResponse'];
   openGraph?: InspirationInterface['openGraphResponse'];
 }
 
-export default function ContentThumbnail({
-  type,
-  tags,
-  content,
-  openGraph,
-}: ContentThumbnailProps) {
+function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps) {
   return (
-    <motion.section css={wrapperCss} variants={contentFadeInUp}>
+    <motion.section css={wrapperCss} variants={contentFadeInUp} layoutId={`${id}`}>
       <div css={contentWrapperCss}>
-        <Content type={type} content={content} openGraph={openGraph} />
+        <ThumbnailContent type={type} content={content} openGraph={openGraph} />
       </div>
 
       <Tags tags={tags} />
     </motion.section>
   );
 }
+
+export default React.memo(Thumbnail);
 
 const wrapperCss = (theme: Theme) => css`
   /* grid child width 설정 */
@@ -71,74 +71,6 @@ export const contentFadeInUp: Variants = {
     willChange: 'opacity, transform',
   },
 };
-
-function Content({
-  type,
-  content,
-  openGraph,
-}: Pick<ContentThumbnailProps, 'type' | 'content' | 'openGraph'>) {
-  if (type === 'IMAGE') return <img css={imageCss} alt={`${content} image`} src={content} />;
-  if (type === 'LINK')
-    return (
-      <div css={linkWrapperCss}>
-        <div css={linkImgWrapperCss}>
-          <img alt={`${openGraph?.url} thumbnail`} src={`${openGraph?.url}/${openGraph?.image}`} />
-        </div>
-
-        <div css={linkTextWrapperCss}>
-          <p>{openGraph?.title}</p>
-          <p>{openGraph?.url}</p>
-        </div>
-      </div>
-    );
-
-  // Text type
-  return <p css={textCss}>{content}</p>;
-}
-
-const imageCss = css`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const linkWrapperCss = css`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: calc(100% - 42px) 42px;
-  font-size: 10px;
-`;
-
-const linkImgWrapperCss = css`
-  width: 100%;
-
-  & > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const linkTextWrapperCss = (theme: Theme) => css`
-  width: 100%;
-  padding: 7px 6px;
-  background-color: ${theme.color.dim01};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-
-  & p {
-    ${textEllipisCss(1)}
-  }
-`;
-
-const textCss = css`
-  font-size: 12px;
-  padding: 6px;
-  line-height: 150%;
-`;
 
 function Tags({ tags }: Pick<ContentThumbnailProps, 'tags'>) {
   if (tags && tags.length > 0)
