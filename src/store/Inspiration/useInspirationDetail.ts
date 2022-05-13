@@ -1,13 +1,21 @@
 import { useRecoilState } from 'recoil';
 
-import { ContentThumbnailProps } from './../../components/home/Thumbnail';
-import { inspirationDetailState } from './InspirationDetailState';
+import { InspirationDetailState, inspirationDetailState } from './InspirationDetailState';
 
 export function useInspirationDetail() {
-  const [inspirationDetail, setInspirationDetail] = useRecoilState(inspirationDetailState);
+  const [inspirationDetail, setInspirationDetail] = useRecoilState<InspirationDetailState | null>(
+    inspirationDetailState
+  );
 
-  const saveInspirationDetail = ({ id, type, tags, content, openGraph }: ContentThumbnailProps) => {
-    setInspirationDetail({ id, type, tags, content, openGraph });
+  const saveInspirationDetail = ({
+    id,
+    type,
+    tags,
+    content,
+    openGraph,
+    memo,
+  }: InspirationDetailState) => {
+    setInspirationDetail({ id, type, tags, content, memo, openGraph });
   };
 
   const resetInspirationDetail = () => {

@@ -45,8 +45,6 @@ export default function useGetInspirationListWithInfinite({
         if (firstPage.data.first) return undefined;
         return firstPage.data.number - 1 ?? undefined;
       },
-      staleTime: Infinity,
-      keepPreviousData: true,
     }
   );
 

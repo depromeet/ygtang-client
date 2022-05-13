@@ -41,7 +41,7 @@ export default function ImageView() {
 
   if (!inspirationDetail) return <></>;
 
-  const { tags, content } = inspirationDetail;
+  const { tags, content, memo } = inspirationDetail;
 
   return (
     <>
@@ -57,10 +57,10 @@ export default function ImageView() {
             </div>
             <div css={contentWrapperCss}>
               <MemoText
-                writable
+                editable
                 onChange={onMemoChange}
                 debouncedValue={memoDebouncedValue}
-                value={memoValue}
+                value={memo}
               />
             </div>
           </section>

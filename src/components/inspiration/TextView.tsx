@@ -35,7 +35,7 @@ export default function TextView() {
 
   if (!inspirationDetail) return <></>;
 
-  const { tags, content } = inspirationDetail;
+  const { tags, content, memo } = inspirationDetail;
 
   return (
     <>
@@ -57,7 +57,7 @@ export default function TextView() {
               <MemoText
                 onChange={memoText.onChange}
                 debouncedValue={memoText.debouncedValue}
-                value={memoText.value}
+                value={memo}
               />
             </div>
           </section>

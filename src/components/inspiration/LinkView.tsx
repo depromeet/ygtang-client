@@ -43,7 +43,7 @@ export default function LinkView() {
     createInspiration(linkData);
   };
   if (!inspirationDetail) return <></>;
-  const { tags, openGraph } = inspirationDetail;
+  const { tags, openGraph, memo } = inspirationDetail;
 
   if (!openGraph) return <></>;
   const { description, siteName, title, url, code, image } = openGraph;
@@ -77,8 +77,8 @@ export default function LinkView() {
               <MemoText
                 onChange={onMemoChange}
                 debouncedValue={memoDebouncedValue}
-                value={memoValue}
-                writable
+                value={memo}
+                editable
               />
             </div>
           </section>
