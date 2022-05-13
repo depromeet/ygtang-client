@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 
-import { post } from '~/libs/api/client';
+import { get } from '~/libs/api/client';
 
 export interface CheckExistsSignupMutationParams {
   email: string;
@@ -20,6 +20,6 @@ export default function useCheckExistsSignupMutation() {
     { message?: string },
     CheckExistsSignupMutationParams
   >(({ email }: CheckExistsSignupMutationParams) =>
-    post<CheckExistsSignupMutationResponse>(`/v1/signup/${email}/status`)
+    get<CheckExistsSignupMutationResponse>(`/v1/signup/${email}/status`)
   );
 }
