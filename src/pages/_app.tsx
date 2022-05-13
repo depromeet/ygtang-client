@@ -13,17 +13,6 @@ import GlobalStyle from '~/styles/GlobalStyle';
 import CustomTheme from '~/styles/Theme';
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    localStorage.setItem(
-      'accessToken',
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Iiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sIm1lbWJlcl9pZCI6NiwiaWF0IjoxNjUyNDM1MTA5LCJleHAiOjE2NTI0Mzg3MDl9.vbXOTE4ERo2dSDnSFdM2C3DkV_ttu81T0IgiQWOPv34'
-    );
-    localStorage.setItem(
-      'refreshToken',
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Iiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sIm1lbWJlcl9pZCI6NiwiZXhwIjoxNjUzNjQ0NzA5fQ.X8jUQoyrAEVRBqdOW08En_8YqrsG0vmC7jghXXc7g_k'
-    );
-  }, []);
-
   return (
     <RecoilRoot>
       <ThemeProvider theme={CustomTheme}>
