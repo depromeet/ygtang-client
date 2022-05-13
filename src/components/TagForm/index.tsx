@@ -33,15 +33,11 @@ export default function TagForm({
   const { tags, isLoading } = useGetTagListWithInfinite({ keyword, isExactlySame: true });
   const { createTag } = useTagMutation();
 
-  //TODO: API 업데이트 이후 data가 내려오면 정상 동작 예정입니다.
-  //TODO: 아직 중복처리가 API 단에서 이루어지지 않아서 이렇게 작업을 올립니다.
   const saveCreatedTag = useCallback(
     (keyword: string) => {
       createTag(keyword, {
         onSuccess: data => {
-          // onSave(data.data);
-          const _data = data;
-          onSave({ id: 32131, content: '된다고 쳐' });
+          onSave(data);
         },
       });
     },
