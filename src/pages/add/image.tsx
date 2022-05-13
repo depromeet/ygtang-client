@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { css } from '@emotion/react';
 
+import { ImgUploader } from '~/components/add/ImgUploader';
 import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
@@ -8,11 +10,26 @@ import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation, {
   InspirationMutationRequest,
 } from '~/hooks/api/inspiration/useInspirationMutation';
+import useImgUpload from '~/hooks/common/useImgUpload';
+import useInput from '~/hooks/common/useInput';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useUploadedImg } from '~/store/UploadedImage';
 
 export default function AddImage() {
+  const {
+    onChange: onMemoChange,
+    debouncedValue: memoDebouncedValue,
+    value: memoValue,
+  } = useInput({ useDebounce: true });
+
+  const { imgInputRef, openFileInput, imgInputUploader } = useImgUpload({});
+  const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
   const { createInspiration } = useInspirationMutation();
+
+  useEffect(() => {
+    if (!uploadedImg) push('/');
+  }, [uploadedImg, push]);
 
   const tags = [{ id: 1, content: '1111' }];
 
@@ -21,7 +38,7 @@ export default function AddImage() {
     if (!uploadedImg) return;
     const imgData: InspirationMutationRequest = {
       file: uploadedImg,
-      memo: 'memo~',
+      memo: memoValue,
       tagIds: [1],
       type: 'IMAGE',
     };
@@ -31,18 +48,26 @@ export default function AddImage() {
   return (
     <article css={addImageCss}>
       <NavigationBar title="이미지 추가" />
-      <form onSubmit={submitImg}>
+
+      <form onSubmit={submitImg} css={formCss}>
+        <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
         <section css={addImageTopCss}>
           <div css={contentWrapperCss}>
-            {uploadedImg && <ImageContent src={uploadedImg} alt="uploadedImg" />}
+            {<ImageContent clickXbtn={openFileInput} src={uploadedImg} alt="uploadedImg" />}
           </div>
           <div css={contentWrapperCss}>
             <TagContent onEdit={() => {}} tags={tags} />
           </div>
           <div css={contentWrapperCss}>
-            <MemoText writable />
+            <MemoText
+              writable
+              onChange={onMemoChange}
+              debouncedValue={memoDebouncedValue}
+              value={memoValue}
+            />
           </div>
         </section>
+
         <section css={addImageBottomCss}>
           <CTAButton type="submit">Tang!</CTAButton>
         </section>
@@ -54,8 +79,14 @@ export default function AddImage() {
 const addImageCss = css`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
+`;
+
+const formCss = css`
+  height: calc(var(--vh, 1vh) * 100 - 44px);
+  display: flex;
+  flex-direction: column;
 `;
 
 const addImageTopCss = css`

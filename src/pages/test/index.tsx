@@ -14,11 +14,18 @@ import NavigationBar from '~/components/common/NavigationBar';
 import TextField, { MemoText } from '~/components/common/TextField';
 import { SearchBar } from '~/components/common/TextField/SearchBar';
 import LinkThumbnail from '~/components/LinkThumbnail';
+import useInput from '~/hooks/common/useInput';
 import { useUserAgent } from '~/hooks/common/useUserAgent';
 import { useToast } from '~/store/Toast';
 import theme from '~/styles/Theme';
 
 export default function Test() {
+  const {
+    onChange: onMemoChange,
+    debouncedValue: memoDebouncedValue,
+    value: memoValue,
+  } = useInput({ useDebounce: true });
+
   const { fireToast } = useToast();
   const { isMobile, isIos, isAndroid, isDesktop } = useUserAgent();
   const [isSSR, setIsSSR] = useState(true);
@@ -170,7 +177,13 @@ export default function Test() {
         체크 리스트
       </CheckList>
       <SearchBar readOnly value={'asdasdasd'} />
-      <MemoText editable wordLimit={150} />
+      <MemoText
+        writable
+        onChange={onMemoChange}
+        debouncedValue={memoDebouncedValue}
+        value={memoValue}
+        wordLimit={150}
+      />
     </div>
   );
 }

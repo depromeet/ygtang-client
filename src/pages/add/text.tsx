@@ -9,6 +9,11 @@ import useInput from '~/hooks/common/useInput';
 
 export default function AddText() {
   const inspiringText = useInput({ useDebounce: true });
+  const {
+    onChange: onMemoChange,
+    debouncedValue: memoDebouncedValue,
+    value: memoValue,
+  } = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
 
   return (
@@ -27,7 +32,12 @@ export default function AddText() {
           <TagContent onEdit={() => {}} tags={[]} />
         </div>
         <div css={contentWrapperCss}>
-          <MemoText writable />
+          <MemoText
+            writable
+            onChange={onMemoChange}
+            debouncedValue={memoDebouncedValue}
+            value={memoValue}
+          />
         </div>
       </section>
       <section css={addTextBottomCss}>

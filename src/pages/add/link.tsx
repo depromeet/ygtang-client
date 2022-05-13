@@ -6,6 +6,7 @@ import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
+import useInput from '~/hooks/common/useInput';
 
 export interface OpenGraph {
   description: string;
@@ -16,6 +17,11 @@ export interface OpenGraph {
 }
 
 export default function AddLink() {
+  const {
+    onChange: onMemoChange,
+    debouncedValue: memoDebouncedValue,
+    value: memoValue,
+  } = useInput({ useDebounce: true });
   const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
 
   return (
@@ -29,7 +35,12 @@ export default function AddLink() {
           <TagContent onEdit={() => {}} tags={[]} />
         </div>
         <div css={contentWrapperCss}>
-          <MemoText writable />
+          <MemoText
+            onChange={onMemoChange}
+            debouncedValue={memoDebouncedValue}
+            value={memoValue}
+            writable
+          />
         </div>
       </section>
 

@@ -1,59 +1,29 @@
-import { ReactNode, useRef } from 'react';
+import { ReactNode } from 'react';
 import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
 import { EditIcon, ImageIcon, LinkIcon } from '~/components/common/icons';
 import InternalLink from '~/components/common/InternalLink';
 import { defaultEasing } from '~/constants/motions';
-import useInternalRouter, { RouterPathType } from '~/hooks/common/useInternalRouter';
-import { useUploadedImg } from '~/store/UploadedImage';
+import useImgUpload from '~/hooks/common/useImgUpload';
+import { RouterPathType } from '~/hooks/common/useInternalRouter';
+
+import { ImgUploader } from '../add/ImgUploader';
 
 export default function AppendTooltip() {
-  const { uploadImg, uploadedImg } = useUploadedImg();
-  const { push } = useInternalRouter();
-  const imgInputRef = useRef<HTMLInputElement>(null);
-
-  const openInputFile = () => {
-    if (!imgInputRef.current) return;
-    imgInputRef.current.click();
-  };
-
-  const getBase64 = (file: Blob, onload: (file: unknown) => void) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => onload(reader.result);
-    reader.onerror = error => console.log(error);
-  };
-
-  const imgInputUploader = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = target;
-
-    if (files) {
-      getBase64(files[0], result => {
-        if (typeof result === 'string') uploadImg(result);
-      });
-
-      uploadedImg && push('/add/image');
-    }
-  };
+  const { imgInputRef, openFileInput, imgInputUploader } = useImgUpload({ isUploadPage: false });
 
   return (
     <motion.div css={wrapperCss} variants={tooltipVariants}>
       <AnchorElement href="/add/text" icon={<EditIcon />} title="글" />
       <AnchorElement
         href="/add/image"
-        onClick={openInputFile}
+        onClick={openFileInput}
         icon={<ImageIcon />}
         title="이미지"
       />
       <AnchorElement href="/add/link" icon={<LinkIcon />} title="링크" />
-      <input
-        ref={imgInputRef}
-        css={imgInputCss}
-        onChange={imgInputUploader}
-        type="file"
-        accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.jpeg,.tiff,.heif"
-      />
+      <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
     </motion.div>
   );
 }
@@ -135,7 +105,3 @@ const tooltipVariants: Variants = {
     willChange: 'opacity, transform',
   },
 };
-
-const imgInputCss = css`
-  display: none;
-`;
