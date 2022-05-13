@@ -6,7 +6,7 @@ import { useToast } from '~/store/Toast';
 
 export interface InspirationMutationRequest {
   content?: string;
-  file: string;
+  file?: string;
   memo: string;
   tagIds: number[];
   type: InspirationType;

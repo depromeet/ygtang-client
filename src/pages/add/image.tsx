@@ -84,7 +84,7 @@ const addImageCss = css`
   overflow: hidden;
 `;
 
-const formCss = css`
+export const formCss = css`
   height: calc(var(--vh, 1vh) * 100 - 44px);
   display: flex;
   flex-direction: column;
