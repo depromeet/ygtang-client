@@ -11,10 +11,17 @@ import useInspirationMutation, {
   InspirationMutationRequest,
 } from '~/hooks/api/inspiration/useInspirationMutation';
 import useImgUpload from '~/hooks/common/useImgUpload';
+import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useUploadedImg } from '~/store/UploadedImage';
 
 export default function AddImage() {
+  const {
+    onChange: onMemoChange,
+    debouncedValue: memoDebouncedValue,
+    value: memoValue,
+  } = useInput({ useDebounce: true });
+
   const { imgInputRef, openFileInput, imgInputUploader } = useImgUpload({});
   const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
@@ -31,7 +38,7 @@ export default function AddImage() {
     if (!uploadedImg) return;
     const imgData: InspirationMutationRequest = {
       file: uploadedImg,
-      memo: 'memo~',
+      memo: memoValue,
       tagIds: [1],
       type: 'IMAGE',
     };
@@ -52,7 +59,12 @@ export default function AddImage() {
             <TagContent onEdit={() => {}} tags={tags} />
           </div>
           <div css={contentWrapperCss}>
-            <MemoText writable />
+            <MemoText
+              writable
+              onChange={onMemoChange}
+              debouncedValue={memoDebouncedValue}
+              value={memoValue}
+            />
           </div>
         </section>
 

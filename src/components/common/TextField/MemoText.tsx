@@ -1,8 +1,7 @@
-import { useEffect, useId } from 'react';
+import { useId } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 
 import { labelCss } from '~/components/common/styles';
-import useInput from '~/hooks/common/useInput';
 
 import { EditIcon } from '../icons';
 import { TextField } from './TextField';
@@ -40,12 +39,16 @@ export interface MemoTextProps {
   /**
    * onChange 핸들링 함수입니다. 주입해주어야 합니다.
    */
-  onChange?: (value: string) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
 
   /**
    * 수정(저장) 아이콘을 누르면 실행되는 함수입니다. 주입해주어야 합니다.
    */
   onSaveClick?: () => void;
+  value: string;
+  debouncedValue: string;
 }
 
 export function MemoText({
@@ -56,22 +59,22 @@ export function MemoText({
   wordLimit,
   onChange: onValueChange,
   onSaveClick,
+  value,
+  debouncedValue,
 }: MemoTextProps) {
   const id = useId();
   const theme = useTheme();
-  const { value, onChange, debouncedValue } = useInput({ useDebounce: true });
 
-  useEffect(() => {
-    if (onValueChange) {
-      onValueChange(debouncedValue);
-    }
-  }, [debouncedValue, onValueChange]);
+  // useEffect(() => {
+  //   if (!onValueChange) return;
+  //   onValueChange(debouncedValue);
+  // }, [debouncedValue, onValueChange]);
 
   return (
     <TextField
       as={'textarea'}
       value={value}
-      onChange={onChange}
+      onChange={onValueChange}
       placeholder={placeholder ?? '어떤 것이 영감을 주었나요?'}
       maxLength={wordLimit}
       fixedHeight={100}
