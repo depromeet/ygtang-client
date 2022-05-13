@@ -9,7 +9,7 @@ import useInternalRouter, { RouterPathType } from '~/hooks/common/useInternalRou
 import { useUploadedImg } from '~/store/UploadedImage';
 
 export default function AppendTooltip() {
-  const { uploadImg, uploadedImg } = useUploadedImg();
+  const { uploadImg } = useUploadedImg();
   const { push } = useInternalRouter();
   const imgInputRef = useRef<HTMLInputElement>(null);
 
