@@ -30,10 +30,11 @@ export default function AppendTooltip() {
 
     if (files) {
       getBase64(files[0], result => {
-        if (typeof result === 'string') uploadImg(result);
+        if (typeof result === 'string') {
+          uploadImg(result);
+          push('/add/image');
+        }
       });
-
-      uploadedImg && push('/add/image');
     }
   };
 
