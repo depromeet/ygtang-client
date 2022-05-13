@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 
 import useInternalRouter from '~/hooks/common/useInternalRouter';
-import { post } from '~/libs/api/client';
+import { del, post } from '~/libs/api/client';
 import { useToast } from '~/store/Toast';
 
 import { INSPIRATION_LIST_QUERY_KEY } from './useGetInspirationListWIthInfinite';
@@ -36,5 +36,21 @@ export default function useInspirationMutation() {
     }
   );
 
-  return { createInspiration: createInspirationMutation.mutate };
+  const deleteInspirationMutation = useMutation(
+    (id: number) => del(`/v1/inspiration/remove/${id}`),
+    {
+      onSuccess: () => {
+        resetInspirationList();
+        push('/');
+      },
+      onError: (error, variable, context) => {
+        console.log('err', error, variable, context);
+      },
+    }
+  );
+
+  return {
+    createInspiration: createInspirationMutation.mutate,
+    deleteInspiration: deleteInspirationMutation.mutate,
+  };
 }
