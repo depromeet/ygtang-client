@@ -1,5 +1,7 @@
 import { PropsWithChildren, useEffect } from 'react';
 
+import LoadingHandler from '~/components/common/LoadingHandler';
+import { FixedSpinner } from '~/components/common/Spinner';
 import { COOKIE_REFRESH } from '~/constants/common';
 import useReissueMutation from '~/hooks/api/reissue/useReissueMutation';
 import useCookie from '~/hooks/common/useCookie';
@@ -19,7 +21,7 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
     },
   });
 
-  const { get: cookieGet } = useCookie();
+  const { get: cookieGet, remove: cookieRemove } = useCookie();
   const { isRouterGuardPassed } = useRouterGuard({ isLoaded, isLoggedIn });
 
   // 컴포넌트 마운트 시
@@ -38,9 +40,14 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
   });
 
   useEffect(() => {
-    // TODO: 에러 발생 핸들링
-  }, [reissueMutationError]);
+    if (reissueMutationError) {
+      cookieRemove(COOKIE_REFRESH);
+    }
+  }, [cookieRemove, reissueMutationError]);
 
-  // TODO: 로딩 관련 처리하기
-  return <>{isRouterGuardPassed ? children : <>로그인 대기 중...</>}</>;
+  return (
+    <LoadingHandler isLoading={!isRouterGuardPassed} loadingComponent={<FixedSpinner />}>
+      {children}
+    </LoadingHandler>
+  );
 }
