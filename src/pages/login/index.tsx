@@ -103,7 +103,10 @@ export default function Login() {
       </form>
       <GhostButton>비밀번호 찾기</GhostButton>
       <div css={signUpTextWrapperCss}>
-        계정이 없으신가요? <GhostButton size={'small'}>빠르게 가입하기</GhostButton>
+        계정이 없으신가요?{' '}
+        <GhostButton size={'small'} onClick={() => push('/signup')}>
+          빠르게 가입하기
+        </GhostButton>
       </div>
     </article>
   );
