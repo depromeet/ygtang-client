@@ -9,5 +9,6 @@ export default function useDidUpdate(callback: VoidFunction, dependencyList: Dep
       return;
     }
     callback();
-  }, [callback, dependencyList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...dependencyList]);
 }
