@@ -10,7 +10,11 @@ export type RouterPathType =
   | '/add/image'
   | '/add/tag'
   | '/my'
-  | '/my/tag';
+  | '/my/tag'
+  | '/login'
+  | '/signup'
+  | '/signup/sent-email'
+  | '/signup/email-verified';
 
 export default function useInternalRouter() {
   const router = useRouter();
