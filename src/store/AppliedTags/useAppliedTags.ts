@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { useToast } from '~/store/Toast';
 
 import { appliedTagsState } from './appliedTagsStates';
 
-export function useAppliedTags() {
+export function useAppliedTags(isUseUnmounted = false) {
   const [tags, setTags] = useRecoilState(appliedTagsState);
   const { fireToast } = useToast();
 
@@ -23,6 +24,13 @@ export function useAppliedTags() {
   const removeTag = (id: number) => {
     setTags(tags.filter(tag => tag.id !== id));
   };
+
+  useEffect(() => {
+    if (!isUseUnmounted) return;
+    return () => {
+      setTags([]);
+    };
+  }, [setTags, isUseUnmounted]);
 
   return { tags, hasTag, setTags, addTag, removeTag };
 }

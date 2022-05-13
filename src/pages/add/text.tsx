@@ -18,7 +18,7 @@ export default function AddText() {
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
-  const { tags } = useAppliedTags();
+  const { tags } = useAppliedTags(true);
   const { createInspiration } = useInspirationMutation();
 
   const submitText = (e: React.FormEvent<HTMLFormElement>) => {

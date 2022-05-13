@@ -32,7 +32,7 @@ export default function AddLink() {
   } = useInput({ useDebounce: true });
   const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
   const { createInspiration } = useInspirationMutation();
-  const { tags } = useAppliedTags();
+  const { tags } = useAppliedTags(true);
 
   const saveOpenGraph = useCallback((og: OpenGraph | null) => {
     setOpenGraph(og);

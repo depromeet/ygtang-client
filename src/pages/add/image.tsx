@@ -32,7 +32,7 @@ export default function AddImage() {
     if (!uploadedImg) push('/');
   }, [uploadedImg, push]);
 
-  const { tags } = useAppliedTags();
+  const { tags } = useAppliedTags(true);
 
   const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
