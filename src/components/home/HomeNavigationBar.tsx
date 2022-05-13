@@ -31,7 +31,7 @@ const navCss = (theme: Theme) => css`
   justify-content: flex-end;
   align-items: center;
   gap: 4px;
-  z-index: 1000;
+  z-index: 900;
 `;
 
 const iconCss = (theme: Theme) => css`

@@ -50,7 +50,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
 }
 
 const layoutCss = (theme: Theme) => css`
-  height: calc(var(--vh, 1vh) * 100);
+  min-height: calc(var(--vh, 1vh) * 100);
   background: ${theme.color.background};
   max-width: ${theme.size.maxWidth};
   width: 100%;
