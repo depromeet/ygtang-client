@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
@@ -14,9 +15,15 @@ export interface ContentThumbnailProps
 }
 
 function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps) {
+  const { push } = useRouter();
+
+  const moveToInspirationView = (id: number) => {
+    push('?modal=inspirationView', `/content/${id}`, { scroll: false });
+  };
+
   return (
     <motion.section css={wrapperCss} variants={contentFadeInUp} layoutId={`${id}`}>
-      <div css={contentWrapperCss}>
+      <div css={contentWrapperCss} onClick={() => moveToInspirationView(id)}>
         <ThumbnailContent type={type} content={content} openGraph={openGraph} />
       </div>
 
