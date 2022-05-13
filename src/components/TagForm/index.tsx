@@ -66,7 +66,14 @@ export default function TagForm({
   return (
     <div css={formTagCss}>
       <form onSubmit={onFormReturn}>
-        <SearchBar value={value} onChange={onChange} />
+        <SearchBar
+          value={value}
+          onChange={onChange}
+          onRemoveClick={() => {
+            setValue('');
+            setKeyword('');
+          }}
+        />
       </form>
       <AppliedTags applyedTags={applyedTags} onRemove={onRemove} />
       <RegisteredTagList registeredTags={registeredTags} onClick={onSave} />
