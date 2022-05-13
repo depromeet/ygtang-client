@@ -3,10 +3,17 @@ import { css, Theme } from '@emotion/react';
 import { CTAButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
 import TextField from '~/components/common/TextField';
+import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
 import useInput from '~/hooks/common/useInput';
 
 export default function Signup() {
   const email = useInput({ useDebounce: true });
+  const {
+    mutate: emailSendMutate,
+    data: emailSendedData,
+    error: emailSendedError,
+    isLoading: emailSendingLoading,
+  } = useSignupSendEmailMutation();
 
   return (
     <article css={loginCss}>
