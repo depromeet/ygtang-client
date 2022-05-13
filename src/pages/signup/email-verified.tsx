@@ -99,7 +99,7 @@ export default function SignUpEmailVerified() {
       // TODO: router.push가 안되는 문제 해결하기
       window.location.replace('/login');
     }
-  }, [push, signupSuccess]);
+  }, [signupSuccess]);
 
   useEffect(() => {
     if (signupError) {
