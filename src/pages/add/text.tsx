@@ -6,6 +6,7 @@ import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
 import useInput from '~/hooks/common/useInput';
+import { useAppliedTags } from '~/store/AppliedTags';
 
 export default function AddText() {
   const inspiringText = useInput({ useDebounce: true });
@@ -15,6 +16,7 @@ export default function AddText() {
     value: memoValue,
   } = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
+  const { tags } = useAppliedTags();
 
   return (
     <article css={addTextCss}>
@@ -29,7 +31,7 @@ export default function AddText() {
           />
         </div>
         <div css={contentWrapperCss}>
-          <TagContent onEdit={() => {}} tags={[]} />
+          <TagContent tags={tags} />
         </div>
         <div css={contentWrapperCss}>
           <MemoText

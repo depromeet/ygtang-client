@@ -1,31 +1,41 @@
-import { css } from '@emotion/react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 
+import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
+import { FixedSpinner } from '~/components/common/Spinner';
 import TagForm from '~/components/TagForm';
+import { defaultFadeInVariants } from '~/constants/motions';
+import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
 import { useAppliedTags } from '~/store/AppliedTags';
 
-export default function AddTag() {
-  const { tags, removeTag, addTag } = useAppliedTags();
-
-  const tagsB: TagType[] = [
-    { id: 1, content: 'hi hihi hi hi hi hi hi ' },
-    { id: 2, content: 'h2' },
-    { id: 3, content: 'h3' },
-    { id: 4, content: 'h4' },
-    { id: 5, content: 'h5' },
-    { id: 6, content: 'h6' },
-  ];
+export default function TagPage() {
+  const { tags: appliedTags, removeTag, addTag } = useAppliedTags();
+  const [keyword, setKeyword] = useState('');
+  const { tags, isLoading } = useGetTagListWithInfinite({ keyword });
 
   return (
-    <article css={addTagCss}>
-      <NavigationBar title="영감 추가" />
-      <TagForm applyedTags={tags} registeredTags={tagsB} onSave={addTag} onRemove={removeTag} />
+    <article>
+      <NavigationBar title="태그 추가" backLinkScrollOption={false} />
+
+      <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
+        <motion.div
+          variants={defaultFadeInVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+        >
+          <TagForm
+            applyedTags={appliedTags}
+            registeredTags={tags}
+            onSave={addTag}
+            onRemove={removeTag}
+            onSearch={keyword => {
+              setKeyword(keyword);
+            }}
+          />
+        </motion.div>
+      </LoadingHandler>
     </article>
   );
 }
-
-const addTagCss = css`
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
-`;

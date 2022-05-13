@@ -13,6 +13,7 @@ import useInspirationMutation, {
 import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
+import { useAppliedTags } from '~/store/AppliedTags';
 import { useUploadedImg } from '~/store/UploadedImage';
 
 export default function AddImage() {
@@ -31,7 +32,7 @@ export default function AddImage() {
     if (!uploadedImg) push('/');
   }, [uploadedImg, push]);
 
-  const tags = [{ id: 1, content: '1111' }];
+  const { tags } = useAppliedTags();
 
   const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ export default function AddImage() {
             {<ImageContent clickXbtn={openFileInput} src={uploadedImg} alt="uploadedImg" />}
           </div>
           <div css={contentWrapperCss}>
-            <TagContent onEdit={() => {}} tags={tags} />
+            <TagContent tags={tags} />
           </div>
           <div css={contentWrapperCss}>
             <MemoText

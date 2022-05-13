@@ -3,15 +3,16 @@ import { css, Theme } from '@emotion/react';
 import PortalWrapper from '~/components/common/PortalWrapper';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
 import useQueryParam from '~/hooks/common/useRouterQuery';
-import TagPage from '~/pages/tag';
+import TagPage from '~/pages/add/tag';
 
-export default function TagFormRouteAsModal() {
+// TODO: 다른 부분과 통합할 필요있음 state를 주입받는 형식을 사용하는것이 좋을듯
+
+export default function AddTagFormRouteAsModal() {
   const query = useQueryParam('modal', String);
-
-  usePreventScroll(query === 'tag');
+  usePreventScroll(query === 'addTag');
 
   return (
-    <PortalWrapper isShowing={query === 'tag'}>
+    <PortalWrapper isShowing={query === 'addTag'}>
       <div css={wrapperCss}>
         <TagPage />
       </div>
@@ -28,7 +29,7 @@ const wrapperCss = (theme: Theme) => css`
 
   width: 100%;
   max-width: ${theme.size.maxWidth};
-  height: 100%;
+  height: 100vh;
   background-color: ${theme.color.background};
   padding: ${theme.size.layoutPadding};
   z-index: 1000;

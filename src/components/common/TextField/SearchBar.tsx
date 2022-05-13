@@ -22,7 +22,7 @@ export function SearchBar({ value, placeholder, onRemoveClick, ...props }: Searc
       }
       append={
         value.length !== 0 && (
-          <button css={IconWrapper} onClick={onRemoveClick}>
+          <button type="button" css={IconWrapper} onClick={onRemoveClick}>
             <CloseIcon size={20} color={theme.color.gray04} />
           </button>
         )

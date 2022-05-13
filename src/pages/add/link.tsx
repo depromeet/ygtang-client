@@ -7,6 +7,7 @@ import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
 import useInput from '~/hooks/common/useInput';
+import { useAppliedTags } from '~/store/AppliedTags';
 
 export interface OpenGraph {
   description: string;
@@ -23,6 +24,7 @@ export default function AddLink() {
     value: memoValue,
   } = useInput({ useDebounce: true });
   const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
+  const { tags } = useAppliedTags();
 
   return (
     <article css={addLinkCss}>
@@ -32,7 +34,7 @@ export default function AddLink() {
           <LinkInput openGraph={openGraph} setOpenGraph={setOpenGraph} />
         </div>
         <div css={contentWrapperCss}>
-          <TagContent onEdit={() => {}} tags={[]} />
+          <TagContent tags={tags} />
         </div>
         <div css={contentWrapperCss}>
           <MemoText
