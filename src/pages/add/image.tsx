@@ -22,7 +22,6 @@ export default function AddImage() {
     debouncedValue: memoDebouncedValue,
     value: memoValue,
   } = useInput({ useDebounce: true });
-
   const { imgInputRef, openFileInput, imgInputUploader } = useImgUpload({});
   const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
