@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren } from 'react';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
