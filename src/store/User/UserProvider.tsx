@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren } from 'react';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
@@ -13,11 +13,14 @@ import { useUser } from './';
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
   const { isLoaded, setIsLoaded, userLogin, isLoggedIn } = useUser();
 
-  const { mutate: reissueMutate, error: reissueMutationError } = useReissueMutation({
+  const { mutate: reissueMutate } = useReissueMutation({
     onSuccess: data => {
       const { accessToken, refreshToken } = data.data;
       userLogin({ accessToken, refreshToken });
       setIsLoaded(true);
+    },
+    onError: () => {
+      cookieRemove(COOKIE_REFRESH);
     },
   });
 
@@ -38,12 +41,6 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
       setIsLoaded(true);
     }
   });
-
-  useEffect(() => {
-    if (reissueMutationError) {
-      cookieRemove(COOKIE_REFRESH);
-    }
-  }, [cookieRemove, reissueMutationError]);
 
   return (
     <LoadingHandler isLoading={!isRouterGuardPassed} loadingComponent={<FixedSpinner />}>

@@ -97,8 +97,8 @@ export default function Signup() {
           placeholder={'이메일을 입력해주세요'}
           value={email.value}
           onChange={email.onChange}
-          feedback={email.value !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={email.value.length > 0 && emailError === ''}
+          feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
+          isSuccess={email.debouncedValue.length > 0 && emailError === ''}
           required
         />
         <CTAButton type={'submit'} disabled={emailSendingLoading || checkExistsUserLoading}>

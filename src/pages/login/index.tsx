@@ -81,8 +81,8 @@ export default function Login() {
         <TextField
           label={'이메일 아이디'}
           placeholder={'이메일을 입력해주세요'}
-          feedback={email.value !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={email.value.length > 0 && emailError === ''}
+          feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
+          isSuccess={email.debouncedValue.length > 0 && emailError === ''}
           value={email.value}
           onChange={email.onChange}
           required
@@ -91,8 +91,8 @@ export default function Login() {
           type={'password'}
           label={'비밀번호'}
           placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
-          feedback={password.value !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={password.value.length > 0 && passwordError === ''}
+          feedback={password.debouncedValue !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
+          isSuccess={password.debouncedValue.length > 0 && passwordError === ''}
           value={password.value}
           onChange={password.onChange}
           required

@@ -120,8 +120,8 @@ export default function SignUpEmailVerified() {
             <TextField
               label={'닉네임'}
               placeholder={'닉네임을 입력해주세요'}
-              feedback={nickname.value !== '' ? nicknameError || <>&nbsp;</> : <>&nbsp;</>}
-              isSuccess={nickname.value.length > 0 && nicknameError === ''}
+              feedback={nickname.debouncedValue !== '' ? nicknameError || <>&nbsp;</> : <>&nbsp;</>}
+              isSuccess={nickname.debouncedValue.length > 0 && nicknameError === ''}
               value={nickname.value}
               onChange={nickname.onChange}
               required
@@ -130,8 +130,8 @@ export default function SignUpEmailVerified() {
               type="password"
               label={'비밀번호'}
               placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
-              feedback={password.value !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
-              isSuccess={password.value.length > 0 && passwordError === ''}
+              feedback={password.debouncedValue !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
+              isSuccess={password.debouncedValue.length > 0 && passwordError === ''}
               value={password.value}
               onChange={password.onChange}
               required
@@ -141,9 +141,13 @@ export default function SignUpEmailVerified() {
               label={'비밀번호 확인'}
               placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
               feedback={
-                passwordRepeat.value !== '' ? passwordRepeatError || <>&nbsp;</> : <>&nbsp;</>
+                passwordRepeat.debouncedValue !== '' ? (
+                  passwordRepeatError || <>&nbsp;</>
+                ) : (
+                  <>&nbsp;</>
+                )
               }
-              isSuccess={passwordRepeat.value.length > 0 && passwordRepeatError === ''}
+              isSuccess={passwordRepeat.debouncedValue.length > 0 && passwordRepeatError === ''}
               value={passwordRepeat.value}
               onChange={passwordRepeat.onChange}
               required
