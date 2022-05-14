@@ -12,9 +12,14 @@ interface UseReissueMutationProps {
     variables: ReissueMutationRequest,
     context: unknown
   ) => void | Promise<unknown>;
+  onError?: (
+    data: AuthTokenResponseInterface,
+    variables: ReissueMutationRequest,
+    context: unknown
+  ) => void | Promise<unknown>;
 }
 
-export default function useReissueMutation({ onSuccess }: UseReissueMutationProps) {
+export default function useReissueMutation({ onSuccess, onError }: UseReissueMutationProps) {
   return useMutation(
     (data: ReissueMutationRequest) =>
       post<AuthTokenResponseInterface>('/v1/reissue', undefined, {
@@ -24,6 +29,7 @@ export default function useReissueMutation({ onSuccess }: UseReissueMutationProp
       }),
     {
       onSuccess,
+      onError,
     }
   );
 }
