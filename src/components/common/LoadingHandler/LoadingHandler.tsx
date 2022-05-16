@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, ReactElement, useId } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-interface LoadingHandler {
+interface LoadingHandlerProps {
   isLoading: boolean;
   loadingComponent: ReactElement;
 }
@@ -10,7 +10,7 @@ function LoadingHandler({
   children,
   isLoading,
   loadingComponent,
-}: PropsWithChildren<LoadingHandler>) {
+}: PropsWithChildren<LoadingHandlerProps>) {
   const id = useId();
 
   return (
