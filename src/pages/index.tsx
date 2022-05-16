@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
@@ -22,17 +22,17 @@ const InspirationViewAsModal = dynamic(
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
-  const { inspirations, isLoading, hasNextPage, fetchNextPage } = useGetInspirationListWithInfinite(
-    {
+  const { inspirations, isEmpty, isLoading, hasNextPage, fetchNextPage } =
+    useGetInspirationListWithInfinite({
       filteredTags,
-    }
-  );
+    });
 
   const { setTarget } = useIntersectionObserver({
     onIntersect: ([{ isIntersecting }]) => {
       if (isIntersecting && hasNextPage) fetchNextPage();
     },
   });
+
   return (
     <>
       <HomeNavigationBar />
@@ -43,40 +43,35 @@ export default function Root() {
           </motion.section>
         )}
 
-        {/* 태그 변경시를 위한 Presence */}
-        <AnimatePresence exitBeforeEnter>
-          <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
-            {inspirations.length === 0 ? (
-              <EmptyImageSection key="empty inspiration section" />
-            ) : (
-              <motion.section
-                css={thumbnailWrapperCss}
-                layout
-                layoutId="thumbnailSection"
-                variants={staggerHalf}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-              >
-                {inspirations.map(
-                  ({ id, type, content, tagResponses, openGraphResponse, memo }) => (
-                    <Thumbnail
-                      key={id}
-                      id={id}
-                      type={type as InspirationType}
-                      content={content}
-                      tags={tagResponses}
-                      openGraph={openGraphResponse}
-                      memo={memo}
-                    />
-                  )
-                )}
-                {hasNextPage && <div ref={setTarget}></div>}
-              </motion.section>
-            )}
-          </LoadingHandler>
-        </AnimatePresence>
+        <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
+          {/* NOTE: exit 애니메이션을 위해 삼항 연산자 사용 혹은 썸네일 섹션을 컨디셔널하게 렌더링할 시 */}
+          {/* 해당 이미지 섹션이 렌더링되지 않음 */}
+          {isEmpty && <EmptyImageSection key="loading section" />}
+          <motion.section
+            css={thumbnailWrapperCss}
+            layout
+            layoutId="thumbnailSection"
+            variants={staggerHalf}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            {inspirations.map(({ id, type, content, tagResponses, openGraphResponse, memo }) => (
+              <Thumbnail
+                key={id}
+                id={id}
+                type={type as InspirationType}
+                content={content}
+                tags={tagResponses}
+                openGraph={openGraphResponse}
+                memo={memo}
+              />
+            ))}
+            {hasNextPage && !isLoading && <div ref={setTarget}></div>}
+          </motion.section>
+        </LoadingHandler>
       </motion.article>
+
       <AppendButton />
       <TagFormRouteAsModal />
       <InspirationViewAsModal />
