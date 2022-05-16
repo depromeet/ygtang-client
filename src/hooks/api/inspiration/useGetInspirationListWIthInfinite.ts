@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { flatten } from 'lodash';
 import { useInfiniteQuery } from 'react-query';
 
@@ -22,11 +23,16 @@ interface UseGetInspirationListWithInfiniteProps {
 export default function useGetInspirationListWithInfinite({
   filteredTags,
 }: UseGetInspirationListWithInfiniteProps) {
+  const filteredTagIds = useMemo(
+    () => [...filteredTags.map(eachTag => eachTag.id)],
+    [filteredTags]
+  );
+
   const fetchInsipirations = (page: number = 0) => {
     if (filteredTags.length > 0)
       return post<InspirationListResponseInterface>(
         `/v1/inspiration/tag/?size=20&page=${page}&sort=updatedDateTime,desc`,
-        [...filteredTags.map(eachTag => eachTag.id)]
+        filteredTagIds
       );
     return get<InspirationListResponseInterface>(
       `/v1/inspiration/list?size=20&page=${page}&sort=updatedDateTime,desc`
@@ -34,7 +40,7 @@ export default function useGetInspirationListWithInfinite({
   };
 
   const query = useInfiniteQuery<InspirationListResponseInterface>(
-    [INSPIRATION_LIST_QUERY_KEY, ...filteredTags],
+    [INSPIRATION_LIST_QUERY_KEY, ...filteredTagIds],
     async ({ pageParam = 0 }) => await fetchInsipirations(pageParam),
     {
       getNextPageParam: lastPage => {
@@ -48,8 +54,12 @@ export default function useGetInspirationListWithInfinite({
     }
   );
 
+  const inspirations = query.data ? flatten(query.data.pages.map(page => page.data.content)) : [];
+  const isEmpty = inspirations.length === 0;
+
   return {
-    inspirations: query.data ? flatten(query.data.pages.map(page => page.data.content)) : [],
+    inspirations,
+    isEmpty,
     ...query,
   };
 }
