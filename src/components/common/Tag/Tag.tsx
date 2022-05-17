@@ -3,13 +3,14 @@ import { css, Theme, useTheme } from '@emotion/react';
 
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
-import { CloseIcon } from './icons';
+import { CloseIcon } from '../icons';
 
 export interface TagProps extends Pick<TagInterface, 'content'> {
   deletable?: boolean;
   onDelete?: VoidFunction;
   onClick?: VoidFunction;
 }
+
 function Tag({ content, deletable = false, onDelete = () => {}, onClick = () => {} }: TagProps) {
   const theme = useTheme();
   const backGroundColor = useRef(selectRandomColor(theme, ['gray01', 'gray02', 'gray03']));
