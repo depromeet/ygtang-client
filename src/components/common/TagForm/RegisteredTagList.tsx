@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { css, Theme } from '@emotion/react';
 
 import Tag from '~/components/common/Tag';
@@ -10,26 +10,23 @@ function RegisteredTagList({
   registeredTags: TagType[];
   onClick: (tag: TagType) => void;
 }) {
-  return useMemo(
-    () => (
-      <section css={registeredTagsCss}>
-        <h2 css={userTagsTitleCss}>등록된 테그 목록</h2>
-        {Boolean(registeredTags.length) ? (
-          registeredTags.map(tag => (
-            <Tag
-              key={tag.id}
-              content={tag.content}
-              onClick={() => {
-                onClick(tag);
-              }}
-            />
-          ))
-        ) : (
-          <div css={notHaveUserTagsCss}>등록된 테그가 없습니다.</div>
-        )}
-      </section>
-    ),
-    [registeredTags, onClick]
+  return (
+    <section css={registeredTagsCss}>
+      <h2 css={userTagsTitleCss}>등록된 테그 목록</h2>
+      {Boolean(registeredTags.length) ? (
+        registeredTags.map(tag => (
+          <Tag
+            key={tag.id}
+            content={tag.content}
+            onClick={() => {
+              onClick(tag);
+            }}
+          />
+        ))
+      ) : (
+        <div css={notHaveUserTagsCss}>등록된 테그가 없습니다.</div>
+      )}
+    </section>
   );
 }
 
