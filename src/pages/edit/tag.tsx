@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import NavigationBar from '~/components/common/NavigationBar';
-import TagForm from '~/components/TagForm';
+import TagForm from '~/components/common/TagForm';
 import { useToast } from '~/store/Toast';
 
 export interface EditTagProps {

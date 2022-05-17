@@ -33,6 +33,8 @@ function RegisteredTagList({
   );
 }
 
+export default React.memo(RegisteredTagList);
+
 const registeredTagsCss = css`
   display: flex;
   flex-direction: column;
@@ -53,5 +55,3 @@ const notHaveUserTagsCss = (theme: Theme) => css`
   font-size: 12px;
   color: ${theme.color.gray03};
 `;
-
-export default React.memo(RegisteredTagList);

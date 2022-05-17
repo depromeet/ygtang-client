@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
+import AppliedTags from '~/components/common/TagForm/AppliedTags';
 import AppendButton from '~/components/home/AppendButton';
 import EmptyImageSection from '~/components/home/EmptyImageSection';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
 import Thumbnail from '~/components/home/Thumbnail';
-import AppliedTags from '~/components/TagForm/AppliedTags';
 import { staggerHalf } from '~/constants/motions';
 import useGetInspirationListWithInfinite from '~/hooks/api/inspiration/useGetInspirationListWIthInfinite';
 import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
