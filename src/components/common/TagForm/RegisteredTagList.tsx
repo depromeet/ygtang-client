@@ -12,7 +12,7 @@ function RegisteredTagList({
 }) {
   return (
     <section css={registeredTagsCss}>
-      <h2 css={userTagsTitleCss}>등록된 테그 목록</h2>
+      <h2 css={userTagsTitleCss}>등록된 태그 목록</h2>
       {Boolean(registeredTags.length) ? (
         registeredTags.map(tag => (
           <Tag
@@ -24,7 +24,7 @@ function RegisteredTagList({
           />
         ))
       ) : (
-        <div css={notHaveUserTagsCss}>등록된 테그가 없습니다.</div>
+        <div css={notHaveUserTagsCss}>등록된 태그가 없습니다.</div>
       )}
     </section>
   );
