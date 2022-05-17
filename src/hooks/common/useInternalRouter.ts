@@ -25,6 +25,13 @@ export default function useInternalRouter() {
       push(path: RouterPathType, as?: UrlObject | string, options?: TransitionOptions) {
         router.push(path, as, options);
       },
+      scrollPreventedPush(
+        path: RouterPathType,
+        as?: UrlObject | string,
+        options?: Omit<TransitionOptions, 'scroll'>
+      ) {
+        router.push(path, as, { ...options, scroll: false });
+      },
     };
   }, [router]);
 }
