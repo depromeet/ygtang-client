@@ -3,7 +3,7 @@ import { css, Theme } from '@emotion/react';
 
 import { IconButton } from '../Button';
 import { labelCss } from '../styles';
-import Tag from '../Tag/';
+import Tag from '../Tag';
 
 export interface TagContentProps {
   label?: string;
