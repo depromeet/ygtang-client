@@ -11,6 +11,7 @@ import { queryClient } from '~/libs/api/queryClient';
 import { UserProvider } from '~/store/User/UserProvider';
 import GlobalStyle from '~/styles/GlobalStyle';
 import CustomTheme from '~/styles/Theme';
+import { fullViewHeight } from '~/styles/utils';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -31,13 +32,13 @@ export default function App({ Component, pageProps }: AppProps) {
   );
 }
 
+let vh = 0;
+
 /**
  * 레이아웃 컴포넌트입니다.
  *
  * `_app`에서만 사용되는 컴포넌트이기에, 인라인으로 작성되었습니다.
  */
-let vh = 0;
-
 function Layout({ children }: PropsWithChildren<{}>) {
   const windowSize = useWindowSize();
 
@@ -50,7 +51,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
 }
 
 const layoutCss = (theme: Theme) => css`
-  min-height: calc(var(--vh, 1vh) * 100);
+  min-height: ${fullViewHeight()};
   background: ${theme.color.background};
   max-width: ${theme.size.maxWidth};
   width: 100%;

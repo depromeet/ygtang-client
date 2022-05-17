@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 
+import { fullViewHeight } from '~/styles/utils';
+
 import Spinner from './Spinner';
 
 export function FixedSpinner() {
@@ -15,7 +17,7 @@ const wrapperCss = css`
   left: 0;
   top: 0;
   width: 100vw;
-  height: calc(var(--vh, 1vh) * 100);
+  height: ${fullViewHeight()};
 
   display: flex;
   justify-content: center;

@@ -14,6 +14,7 @@ import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useUploadedImg } from '~/store/UploadedImage';
+import { fullViewHeight } from '~/styles/utils';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
@@ -90,12 +91,12 @@ export default function AddImage() {
 const addImageCss = css`
   display: flex;
   flex-direction: column;
-  height: calc(var(--vh, 1vh) * 100);
+  height: ${fullViewHeight()};
   overflow: hidden;
 `;
 
 export const formCss = css`
-  height: calc(var(--vh, 1vh) * 100 - 44px);
+  height: calc(${fullViewHeight()} - 44px);
   display: flex;
   flex-direction: column;
 `;
