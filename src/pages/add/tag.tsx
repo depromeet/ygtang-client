@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
 import { FixedSpinner } from '~/components/common/Spinner';
-import TagForm from '~/components/TagForm';
+import TagForm from '~/components/common/TagForm';
 import { defaultFadeInVariants } from '~/constants/motions';
 import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
 import { useAppliedTags } from '~/store/AppliedTags';
