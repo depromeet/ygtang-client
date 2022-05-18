@@ -1,6 +1,6 @@
 import { css, Theme } from '@emotion/react';
 
-import textEllipisCss from '~/styles/utils/textEllipisCss';
+import { textEllipsisCss } from '~/styles/utils';
 
 import { IconButton } from './common/Button';
 
@@ -81,7 +81,7 @@ const linkThumbnailTitleCss = css`
   font-size: 12px;
   line-height: 150%;
 
-  ${textEllipisCss(3)}
+  ${textEllipsisCss(3)}
 `;
 
 const linkThumbnailUrlCss = (theme: Theme) => css`
@@ -90,7 +90,7 @@ const linkThumbnailUrlCss = (theme: Theme) => css`
   line-height: 150%;
   color: ${theme.color.gray03};
 
-  ${textEllipisCss(1)}
+  ${textEllipsisCss(1)}
 `;
 
 const linkThumbnailImageCss = (theme: Theme) => css`

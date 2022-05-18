@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
-import textEllipisCss from '~/styles/utils/textEllipisCss';
+import { textEllipsisCss } from '~/styles/utils';
 
 import { ContentThumbnailProps } from './Thumbnail';
 
@@ -51,7 +51,7 @@ const linkTextWrapperCss = (theme: Theme) => css`
   overflow: hidden;
 
   & p {
-    ${textEllipisCss(1)}
+    ${textEllipsisCss(1)}
   }
 `;
 

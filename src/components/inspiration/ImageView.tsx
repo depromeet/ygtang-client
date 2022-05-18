@@ -10,6 +10,7 @@ import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
 import { useInspirationDetail } from '~/store/Inspiration';
 import { useUploadedImg } from '~/store/UploadedImage';
+import { fullViewHeight } from '~/styles/utils';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
@@ -74,12 +75,12 @@ const addImageCss = css`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(var(--vh, 1vh) * 100 - 44px);
+  height: calc(${fullViewHeight()} - 44px);
   overflow: hidden;
 `;
 
 export const formCss = css`
-  height: calc(var(--vh, 1vh) * 100 - 44px);
+  height: calc(${fullViewHeight()} - 44px);
   display: flex;
   flex-direction: column;
 `;
