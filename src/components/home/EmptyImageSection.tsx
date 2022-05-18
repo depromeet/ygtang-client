@@ -6,7 +6,7 @@ import { defaultFadeInScaleVariants, staggerOne } from '~/constants/motions';
 
 export default function EmptyImageSection() {
   return (
-    <motion.div
+    <motion.section
       css={imageWrapperCss}
       variants={staggerOne}
       initial="initial"
@@ -25,7 +25,7 @@ export default function EmptyImageSection() {
         alt="empty inspiration"
         variants={defaultFadeInScaleVariants}
       />
-    </motion.div>
+    </motion.section>
   );
 }
 
