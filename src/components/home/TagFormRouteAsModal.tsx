@@ -29,6 +29,7 @@ const wrapperCss = (theme: Theme) => css`
   width: 100%;
   max-width: ${theme.size.maxWidth};
   height: 100%;
+  overflow-y: scroll;
   background-color: ${theme.color.background};
   padding: ${theme.size.layoutPadding};
   z-index: 1000;

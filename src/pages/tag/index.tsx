@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { css } from '@emotion/react';
 import { motion } from 'framer-motion';
 
 import { GhostButton } from '~/components/common/Button';
@@ -24,7 +23,7 @@ export default function TagPage() {
   };
 
   return (
-    <article css={wrapperCss}>
+    <article>
       <NavigationBar
         title="태그 필터"
         backLink="/"
@@ -58,8 +57,3 @@ export default function TagPage() {
     </article>
   );
 }
-
-const wrapperCss = css`
-  height: 100%;
-  overflow-y: scroll;
-`;
