@@ -26,12 +26,12 @@ export default function Menu({ label, rightElement, href, onClick, ...props }: M
 
   return (
     <>
-      {href && (
-        <InternalLink css={hiddenCss} href={href}>
-          <span ref={$link}></span>
-        </InternalLink>
-      )}
       <li css={MenuCss} {...props} onClick={onClickHandler}>
+        {href && (
+          <InternalLink href={href}>
+            <span css={hiddenCss} ref={$link}></span>
+          </InternalLink>
+        )}
         <span css={menuTitleCss}>{label}</span>
         {rightElement && <>{rightElement}</>}
       </li>
@@ -40,6 +40,7 @@ export default function Menu({ label, rightElement, href, onClick, ...props }: M
 }
 
 const MenuCss = (theme: Theme) => css`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
