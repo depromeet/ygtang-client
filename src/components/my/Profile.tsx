@@ -10,8 +10,8 @@ export default function MyProfile() {
   return (
     <section css={MyProfileContainerCss}>
       <MyInformationMenu
-        title="한영감"
-        information="gggg@gmail.com"
+        label="한영감"
+        description="gggg@gmail.com"
         align="bottom"
         rightElement={<FilledButton css={LogOutButtonCss}>로그아웃</FilledButton>}
       />
