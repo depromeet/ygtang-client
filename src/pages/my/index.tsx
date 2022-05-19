@@ -16,19 +16,8 @@ export default function MyPage() {
       <section css={myPageCss}>
         <MyProfile />
         <ul>
-          <Menu
-            label="내계정"
-            onClick={() => {
-              console.log('내계정');
-            }}
-          />
-          <Menu
-            label="태그관리"
-            href="/my/tag"
-            onClick={() => {
-              console.log('태그관리');
-            }}
-          />
+          <Menu label="내 계정" href="/my/account" />
+          <Menu label="태그관리" href="/my/tag" />
           <Menu label="이용약관" />
           <Menu
             label="개인정보 정책"
