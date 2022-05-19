@@ -24,6 +24,8 @@ export function Indicator({ wrapperRef }: IndicatorProps) {
 const wrapperCss = css`
   display: flex;
   gap: 12px;
+  display: flex;
+  justify-content: center;
 `;
 
 const dotCss = (theme: Theme) => css`

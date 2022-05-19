@@ -1,4 +1,7 @@
 import { css, Theme } from '@emotion/react';
+import { motion } from 'framer-motion';
+
+import { defaultFadeInScaleVariants, staggerOne } from '~/constants/motions';
 
 interface OnboardContentProps {
   imgSrc: string;
@@ -8,13 +11,25 @@ interface OnboardContentProps {
 
 export function OnboardContent({ imgSrc, title, description }: OnboardContentProps) {
   return (
-    <div css={wrapperCss}>
-      <div css={imageWrapperCss}>
+    <motion.div
+      css={wrapperCss}
+      variants={staggerOne}
+      initial="initial"
+      whileInView="animate"
+      exit="exit"
+    >
+      <motion.div css={imageWrapperCss} variants={defaultFadeInScaleVariants}>
         <img src={imgSrc} alt={title} />
-      </div>
-      <h2 css={titleCss}>{title}</h2>
-      <p css={descriptionCss} dangerouslySetInnerHTML={{ __html: description }}></p>
-    </div>
+      </motion.div>
+      <motion.h2 css={titleCss} variants={defaultFadeInScaleVariants}>
+        {title}
+      </motion.h2>
+      <motion.p
+        css={descriptionCss}
+        dangerouslySetInnerHTML={{ __html: description }}
+        variants={defaultFadeInScaleVariants}
+      ></motion.p>
+    </motion.div>
   );
 }
 
