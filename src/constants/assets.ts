@@ -11,4 +11,4 @@ export const ONBOARD_IMAGE = [
   '/onboard_images/onboard_1.png',
   '/onboard_images/onboard_2.png',
   '/onboard_images/onboard_3.png',
-];
+] as const;

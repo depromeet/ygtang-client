@@ -4,6 +4,7 @@ import { UrlObject } from 'url';
 
 export type RouterPathType =
   | `/`
+  | '/onboard'
   | '/test'
   | '/add/link'
   | '/add/text'
