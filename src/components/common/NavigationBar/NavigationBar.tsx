@@ -37,10 +37,12 @@ export default function NavigationBar({
   );
 }
 
-const navCss = css`
-  position: relative;
+const navCss = (theme: Theme) => css`
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 44px;
+  background-color: ${theme.color.background};
 
   display: flex;
   justify-content: space-between;

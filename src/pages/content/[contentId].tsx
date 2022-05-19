@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from 'react';
-import { css } from '@emotion/react';
 
 import { IconButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
@@ -39,7 +38,7 @@ export default function ContentPage() {
   const { id } = inspirationDetail;
 
   return (
-    <article css={contentCss}>
+    <article>
       <NavigationBar
         title=""
         backLink="/"
@@ -52,5 +51,3 @@ export default function ContentPage() {
     </article>
   );
 }
-
-const contentCss = css``;

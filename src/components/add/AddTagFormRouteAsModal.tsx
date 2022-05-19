@@ -1,7 +1,6 @@
 import { css, Theme } from '@emotion/react';
 
 import PortalWrapper from '~/components/common/PortalWrapper';
-import usePreventScroll from '~/hooks/common/usePreventScroll';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 import TagPage from '~/pages/add/tag';
 
@@ -9,7 +8,7 @@ import TagPage from '~/pages/add/tag';
 
 export default function AddTagFormRouteAsModal() {
   const query = useQueryParam('modal', String);
-  usePreventScroll(query === 'addTag');
+
   return (
     <PortalWrapper isShowing={query === 'addTag'}>
       <div css={wrapperCss}>
@@ -28,7 +27,8 @@ const wrapperCss = (theme: Theme) => css`
 
   width: 100%;
   max-width: ${theme.size.maxWidth};
-  height: 100vh;
+  height: 100%;
+  overflow-y: scroll;
   background-color: ${theme.color.background};
   padding: ${theme.size.layoutPadding};
   z-index: 1000;
