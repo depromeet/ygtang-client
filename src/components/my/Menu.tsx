@@ -46,7 +46,7 @@ const MenuCss = (theme: Theme) => css`
   justify-content: space-between;
   position: relative;
   height: 54px;
-  padding: 16px 8px;
+  padding: 16px 0;
   border-bottom: solid 1px ${theme.color.gray01};
 `;
 

@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { css, Theme } from '@emotion/react';
 
+import { textEllipsisCss } from '~/styles/utils';
+
 export type MyInformationAlignType = 'top' | 'bottom';
 
 export interface MyInformationProps {
@@ -20,36 +22,38 @@ export default function MyInformationMenu({
   align = 'top',
 }: MyInformationProps) {
   return (
-    <div css={wrapperCss(align)}>
+    <li css={wrapperCss(align)}>
       <div css={informationCss}>
         <span css={labelCss}>{label}</span>
         <span css={descriptionCss}>{description}</span>
       </div>
       {rightElement && rightElement}
-    </div>
+    </li>
   );
 }
-
-const descriptionCss = (theme: Theme) => css`
-  font-size: 14px;
-  line-height: 150%;
-  color: ${theme.color.gray04};
-`;
 
 const wrapperCss = (align: MyInformationAlignType) => (theme: Theme) =>
   css`
     display: flex;
     align-items: ${align === 'top' ? 'flex-start' : 'flex-end'};
-    flex: 1;
-    padding: 16px 14px 16px 16px;
+    height: 78px;
+    padding: 16px 0;
     border-bottom: solid 1px ${theme.color.gray01};
   `;
 const informationCss = css`
   flex: 1;
+  padding-right: 14px;
   display: flex;
   flex-direction: column;
 `;
 const labelCss = css`
   font-size: 16px;
   line-height: 150%;
+  ${textEllipsisCss(1)}
+`;
+const descriptionCss = (theme: Theme) => css`
+  font-size: 14px;
+  line-height: 150%;
+  color: ${theme.color.gray04};
+  ${textEllipsisCss(1)}
 `;

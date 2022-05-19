@@ -23,15 +23,15 @@ export default function MyProfile() {
 const MyProfileContainerCss = (theme: Theme) => css`
   display: flex;
   flex-direction: column;
-  padding: 0 16px 16px;
-  height: 256px;
   background-color: ${theme.color.gray01};
   border-radius: 4px;
+  padding: 0 16px 16px;
 `;
 
 const ImageCss = css`
   height: 164px;
   width: auto;
+  object-fit: contain;
 `;
 
 const LogOutButtonCss = css`
