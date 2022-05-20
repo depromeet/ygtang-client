@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { css, Theme } from '@emotion/react';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 
 interface IndicatorProps {
   wrapperRef: HTMLDivElement | null;
