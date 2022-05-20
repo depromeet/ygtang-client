@@ -6,14 +6,19 @@ interface ReissueMutationRequest {
   refreshToken: string;
 }
 
+interface ReissueMutationResponse {
+  message: string;
+  data: AuthTokenResponseInterface;
+}
+
 interface UseReissueMutationProps {
   onSuccess?: (
-    data: AuthTokenResponseInterface,
+    data: ReissueMutationResponse,
     variables: ReissueMutationRequest,
     context: unknown
   ) => void | Promise<unknown>;
   onError?: (
-    data: AuthTokenResponseInterface,
+    data: ReissueMutationResponse,
     variables: ReissueMutationRequest,
     context: unknown
   ) => void | Promise<unknown>;
@@ -22,7 +27,7 @@ interface UseReissueMutationProps {
 export default function useReissueMutation({ onSuccess, onError }: UseReissueMutationProps) {
   return useMutation(
     (data: ReissueMutationRequest) =>
-      post<AuthTokenResponseInterface>('/v1/reissue', undefined, {
+      post<ReissueMutationResponse>('/v1/reissue', undefined, {
         headers: {
           'REFRESH-TOKEN': data.refreshToken,
         },
