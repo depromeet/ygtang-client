@@ -30,7 +30,7 @@ export default function MyAccountPage() {
             }
           />
           <MyInformationMenu label="이메일" description="gggg@gmail.com" />
-          <Menu label="비밀번호 재설정" href="/my/account/chage-password" />
+          <Menu label="비밀번호 재설정" href="/my/account/change-password" />
         </ul>
         <Menu
           label=""

@@ -5,7 +5,7 @@ import NavigationBar from '~/components/common/NavigationBar';
 import { CONNECT_EMAIL } from '~/constants/common';
 import { useToast } from '~/store/Toast';
 
-export default function MyAccountChagePassword() {
+export default function MyAccountChangePassword() {
   const { fireToast } = useToast();
 
   return (

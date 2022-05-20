@@ -13,12 +13,12 @@ export interface MenuProps {
 }
 
 export default function Menu({ label, rightElement, href, onClick, ...props }: MenuProps) {
-  const $link = useRef<HTMLDivElement>(null);
+  const linkRef = useRef<HTMLDivElement>(null);
 
   const onClickHandler = (e: React.MouseEvent<HTMLSpanElement>) => {
     if (e.target !== e.currentTarget) return;
     if (href) {
-      $link.current?.click();
+      linkRef.current?.click();
     } else {
       onClick && onClick();
     }
@@ -29,7 +29,7 @@ export default function Menu({ label, rightElement, href, onClick, ...props }: M
       <li css={MenuCss} {...props} onClick={onClickHandler}>
         {href && (
           <InternalLink href={href}>
-            <span css={hiddenCss} ref={$link}></span>
+            <span css={hiddenCss} ref={linkRef}></span>
           </InternalLink>
         )}
         <span css={menuTitleCss}>{label}</span>
@@ -62,5 +62,5 @@ const hiddenCss = css`
   padding: 0;
   overflow: hidden;
   border: 0;
-  clip: rect(0 0 0 0);
+  clip-path: circle(0);
 `;

@@ -15,7 +15,7 @@ export default function MyPage() {
       <NavigationBar title="환경설정" />
       <section css={myPageCss}>
         <MyProfile />
-        <ul>
+        <ul css={menuListCss}>
           <Menu label="내 계정" href="/my/account" />
           <Menu label="태그관리" href="/my/tag" />
           <Menu label="이용약관" />
@@ -76,4 +76,8 @@ const initalizeMenuCss = css`
 const dialogLongButtonCss = css`
   width: 163px;
   flex-shrink: 0;
+`;
+
+const menuListCss = css`
+  margin-top: 16px;
 `;

@@ -13,7 +13,7 @@ export type RouterPathType =
   | '/my'
   | '/my/tag'
   | '/my/account'
-  | '/my/account/chage-password'
+  | '/my/account/change-password'
   | '/login'
   | '/signup'
   | '/signup/sent-email'

@@ -27,7 +27,7 @@ export default function MyInformationMenu({
         <span css={labelCss}>{label}</span>
         <span css={descriptionCss}>{description}</span>
       </div>
-      {rightElement && rightElement}
+      {rightElement && <>{rightElement}</>}
     </li>
   );
 }
@@ -53,6 +53,7 @@ const labelCss = css`
 `;
 const descriptionCss = (theme: Theme) => css`
   font-size: 14px;
+  font-weight: ${theme.font.weight.medium};
   line-height: 150%;
   color: ${theme.color.gray04};
   ${textEllipsisCss(1)}
