@@ -11,7 +11,7 @@ import useRouterGuard from '~/hooks/common/useRouterGuard';
 import { useUser } from './';
 
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
-  const { isLoaded, setIsLoaded, userLogin, isLoggedIn } = useUser();
+  const { isLoaded, setIsLoaded, userLogin, userLogout, isLoggedIn } = useUser();
 
   const { mutate: reissueMutate } = useReissueMutation({
     onSuccess: data => {
@@ -20,11 +20,11 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
       setIsLoaded(true);
     },
     onError: () => {
-      cookieRemove(COOKIE_REFRESH);
+      userLogout();
     },
   });
 
-  const { get: cookieGet, remove: cookieRemove } = useCookie();
+  const { get: cookieGet } = useCookie();
   const { isRouterGuardPassed } = useRouterGuard({ isLoaded, isLoggedIn });
 
   // 컴포넌트 마운트 시
