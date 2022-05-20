@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const developmentApiUrl = process.env.API_DEVELOPMENT ?? 'https://ygtang.kr/api';
 
@@ -8,17 +8,7 @@ export const instance = axios.create({
 });
 
 export function replaceAccessTokenForRequestInstance(token: string) {
-  // Request interceptor
-  function interceptorRequestFulfilled(config: AxiosRequestConfig) {
-    return {
-      ...config,
-      headers: {
-        accessToken: `${token}`,
-      },
-    };
-  }
-
-  instance.interceptors.request.use(interceptorRequestFulfilled);
+  instance.defaults.headers.common['accessToken'] = token;
 }
 
 // Response interceptor

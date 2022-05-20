@@ -13,16 +13,16 @@ export default function useAuthorizationIntercept() {
   const { fireToast } = useToast();
   const { get: getCookie, remove: removeCookie } = useCookie();
   const { push } = useInternalRouter();
-  const { userLogin } = useUser();
+  const { userLogin, refreshToken } = useUser();
   const [isPending, setPending] = useState(false);
 
   useEffect(() => {
     const axiosRejectedInterceptor = async (error: AxiosError) => {
       const status = error.response ? error.response.status : null;
 
-      if (status === 401 && !isPending) {
-        const storedRefreshToken = getCookie(COOKIE_REFRESH);
-        if (!storedRefreshToken) {
+      if (error.config.headers && status === 401 && !isPending) {
+        if (!refreshToken) {
+          // TODO: 추후 로그아웃(user/userLogout) 넣기
           return Promise.reject('로그인 하지 못했습니다.');
         }
         setPending(true);
@@ -32,14 +32,17 @@ export default function useAuthorizationIntercept() {
             undefined,
             {
               headers: {
-                'REFRESH-TOKEN': storedRefreshToken,
+                'REFRESH-TOKEN': refreshToken,
               },
             }
           );
           setPending(false);
           userLogin({ accessToken: data.accessToken, refreshToken: data.refreshToken });
+          error.config.headers['accessToken'] = data.accessToken;
         } catch {
-          fireToast({ content: '세션이 만료되었습니다.' });
+          fireToast({ content: '세션이 만료되었습니다. 다시 로그인 해주세요.' });
+
+          // TODO: 추후 로그아웃(user/userLogout)으로 대체
           push('/login');
           removeCookie(COOKIE_REFRESH);
           setPending(false);
@@ -53,5 +56,5 @@ export default function useAuthorizationIntercept() {
     };
 
     replaceResponseInterceptorForApiInstance({ rejected: axiosRejectedInterceptor });
-  }, [fireToast, getCookie, isPending, push, removeCookie, userLogin]);
+  }, [fireToast, getCookie, isPending, push, refreshToken, removeCookie, userLogin]);
 }
