@@ -47,7 +47,7 @@ export default function PasswordReset() {
         },
       });
     }
-  }, [isSendPasswordResetEmailSuccess]);
+  }, [email.value, isSendPasswordResetEmailSuccess, push]);
 
   useEffect(() => {
     if (isSendPasswordResetEmailError) {
