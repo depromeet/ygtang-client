@@ -20,11 +20,6 @@ export default function useAuthorizationIntercept() {
     const axiosRejectedInterceptor = async (error: AxiosError) => {
       const status = error.response ? error.response.status : null;
 
-      // // response
-      // if (error.response?.data?.message) {
-      //   return Promise.reject(new Error(error.response?.data?.message));
-      // }
-
       if (status === 401 && !isPending) {
         const storedRefreshToken = getCookie(COOKIE_REFRESH);
         if (!storedRefreshToken) {
