@@ -15,7 +15,8 @@ export type RouterPathType =
   | '/login'
   | '/signup'
   | '/signup/sent-email'
-  | '/signup/email-verified';
+  | '/signup/email-verified'
+  | '/password';
 
 export default function useInternalRouter() {
   const router = useRouter();

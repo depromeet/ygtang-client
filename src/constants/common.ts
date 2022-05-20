@@ -1,4 +1,13 @@
-export const PUBLIC_ROUTES = ['/login', '/password', '/signup', '/onboard'];
+export const PUBLIC_ROUTES = [
+  '/login',
+  '/password',
+  '/signup',
+  '/signup/sent-email',
+  '/signup/email-verified',
+  '/onboard',
+  '/password/sent-email',
+  '/password/verified',
+];
 
 export const IS_PRODUCTION = process.env.APP_ENV === 'production';
 

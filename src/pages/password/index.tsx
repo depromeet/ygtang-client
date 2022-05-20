@@ -20,6 +20,7 @@ export default function PasswordReset() {
     mutate: sendPasswordResetEmailMutation,
     isSuccess: isSendPasswordResetEmailSuccess,
     isError: isSendPasswordResetEmailError,
+    isLoading: isSendPasswordResetEmailLoading,
   } = useSendPasswordResetEmailMutation();
 
   const handleEmailSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -76,7 +77,11 @@ export default function PasswordReset() {
         />
         <CTAButton
           type={'submit'}
-          disabled={email.debouncedValue.length === 0 || emailError !== ''}
+          disabled={
+            email.debouncedValue.length === 0 ||
+            emailError !== '' ||
+            isSendPasswordResetEmailLoading
+          }
         >
           로그인
         </CTAButton>

@@ -32,7 +32,7 @@ export default function SentPasswordResetEmail() {
       loadingComponent={<FixedSpinner />}
     >
       <article css={sentPasswordResetCss}>
-        <NavigationBar title={'회원가입'} />
+        <NavigationBar title={'비밀번호 찾기'} />
         <div css={introCardCss}>
           <p css={introTextWrapper}>
             회원님의 이메일로
