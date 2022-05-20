@@ -13,7 +13,7 @@ export function Indicator({ wrapperRef }: IndicatorProps) {
   const { currentIndex } = useIndicator({ wrapperRef });
 
   return (
-    <div css={wrapperCss}>
+    <div css={wrapperCss} data-testid="carouselIndicator">
       {childrenIdArray.map(eachIndex => (
         <span key={eachIndex} css={[dotCss, currentIndex === eachIndex && currentDotCss]}></span>
       ))}

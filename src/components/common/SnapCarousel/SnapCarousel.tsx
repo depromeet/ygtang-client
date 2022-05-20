@@ -8,7 +8,7 @@ const SnapCarouselWrapper = forwardRef(function SnapCarouselWrapper(
   const { children } = props;
 
   return (
-    <section css={wrapperCss} ref={forwardedRef}>
+    <section css={wrapperCss} ref={forwardedRef} data-testid="carouselWrapper">
       {children}
     </section>
   );
