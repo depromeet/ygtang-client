@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 
 import { PUBLIC_ROUTES } from '~/constants/common';
+
+import useInternalRouter from './useInternalRouter';
 
 interface UseRouterGuardProps {
   isLoaded: boolean;
@@ -10,7 +11,7 @@ interface UseRouterGuardProps {
 
 export default function useRouterGuard({ isLoaded, isLoggedIn }: UseRouterGuardProps) {
   const [isRouterGuardPassed, setIsRouterGuardPassed] = useState<boolean>(false);
-  const router = useRouter();
+  const router = useInternalRouter();
 
   useEffect(() => {
     const authCheck = (url: string) => {
@@ -24,10 +25,7 @@ export default function useRouterGuard({ isLoaded, isLoggedIn }: UseRouterGuardP
 
       const path = url.split('?')[0];
       if (!PUBLIC_ROUTES.includes(path)) {
-        router.push({
-          pathname: '/login',
-          query: { returnUrl: router.asPath },
-        });
+        router.push('/onboard');
       } else {
         // 로그인을 하지 않았으며, 퍼블릭 route에 방문시 패스 인증
         setIsRouterGuardPassed(true);
