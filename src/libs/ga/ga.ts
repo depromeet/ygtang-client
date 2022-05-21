@@ -5,6 +5,7 @@ declare global {
 }
 
 export function gaPageview(url: string) {
+  if (typeof window.gtag === 'undefined') return;
   window.gtag('config', process.env.NEXT_PUBLICK_GA_ID, { page_path: url });
 }
 
@@ -16,5 +17,6 @@ interface GaEventProps {
 }
 
 export function gaEvent({ category, label, value, action }: GaEventProps) {
+  if (typeof window.gtag === 'undefined') return;
   window.gtag('event', action, { event_category: category, event_label: label, value });
 }
