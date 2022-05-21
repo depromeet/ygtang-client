@@ -51,5 +51,9 @@ export function useUser() {
     setIsLoaded,
     userLogin,
     userLogout,
+    accessToken,
+    refreshToken,
+    setAccessToken,
+    setRefreshToken,
   };
 }
