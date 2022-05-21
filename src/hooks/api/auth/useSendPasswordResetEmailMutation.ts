@@ -14,6 +14,8 @@ export interface SendPasswordResetEmailMutationParams {
 export default function useSendPasswordResetEmailMutation() {
   return useMutation<undefined, { message?: string }, SendPasswordResetEmailMutationParams>(
     ({ email }: SendPasswordResetEmailMutationParams) =>
-      post<undefined>(`/v1/auth/password/sends-email/${email}`)
+      post<undefined>(`/v1/auth/sends-email/passwords/reset`, {
+        email,
+      })
   );
 }
