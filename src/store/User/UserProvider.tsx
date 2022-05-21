@@ -15,7 +15,6 @@ import { useUser } from './';
 
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
   const { isLoaded, setIsLoaded, userLogin, userLogout, isLoggedIn } = useUser();
-  const { get: cookieGet, remove: cookieRemove } = useCookie();
   const { fireToast } = useToast();
   const { push } = useInternalRouter();
 
