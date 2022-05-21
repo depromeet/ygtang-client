@@ -14,7 +14,7 @@ import { useToast } from '../Toast';
 import { useUser } from './';
 
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
-  const { isLoaded, setIsLoaded, userLogin, isLoggedIn } = useUser();
+  const { isLoaded, setIsLoaded, userLogin, userLogout, isLoggedIn } = useUser();
   const { get: cookieGet, remove: cookieRemove } = useCookie();
   const { fireToast } = useToast();
   const { push } = useInternalRouter();
@@ -27,7 +27,7 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
     },
     onError: () => {
       fireToast({ content: '세션이 만료되었습니다. 다시 로그인 해주세요.' });
-      cookieRemove(COOKIE_REFRESH);
+      userLogout();
       push('/login');
       setIsLoaded(true);
     },
@@ -35,6 +35,7 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
 
   useAuthorizationIntercept();
 
+  const { get: cookieGet } = useCookie();
   const { isRouterGuardPassed } = useRouterGuard({ isLoaded, isLoggedIn });
 
   // 컴포넌트 마운트 시
