@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 
 import { COOKIE_REFRESH } from '~/constants/common';
 import useCookie from '~/hooks/common/useCookie';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { replaceAccessTokenForRequestInstance } from '~/libs/api/client';
 
 import { userAccessTokenState, userRefreshTokenState } from './userStates';
@@ -11,7 +12,8 @@ export function useUser() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [accessToken, setAccessToken] = useRecoilState(userAccessTokenState);
   const [refreshToken, setRefreshToken] = useRecoilState(userRefreshTokenState);
-  const { set: cookieSet } = useCookie();
+  const { set: cookieSet, remove: cookieRemove } = useCookie();
+  const { push } = useInternalRouter();
 
   /**
    * 유저 로그인 시에 사용합니다.
@@ -38,10 +40,16 @@ export function useUser() {
     [cookieSet, setAccessToken, setRefreshToken]
   );
 
+  const userLogout = () => {
+    cookieRemove(COOKIE_REFRESH);
+    push('/login');
+  };
+
   return {
     isLoggedIn: accessToken !== undefined && refreshToken !== undefined,
     isLoaded,
     setIsLoaded,
     userLogin,
+    userLogout,
   };
 }
