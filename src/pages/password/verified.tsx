@@ -1,100 +1,100 @@
-import { FormEvent, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
-import { CTAButton } from '~/components/common/Button';
 import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
-import TextField from '~/components/common/TextField';
-import useDidUpdate from '~/hooks/common/useDidUpdate';
-import useInput from '~/hooks/common/useInput';
+import useCheckPasswordResetEmailVerifiedMutation from '~/hooks/api/auth/useCheckPasswordResetEmailVerifiedMutation';
+import useSendResetPasswordMutation from '~/hooks/api/member/useSendResetPasswordMutation';
 import { useToast } from '~/store/Toast';
-import { validator } from '~/utils/validator';
 
 export default function PasswordResetVerified() {
   const { fireToast } = useToast();
   const { query } = useRouter();
-  const password = useInput({ useDebounce: true });
-  const passwordRepeat = useInput({ useDebounce: true });
-  const [passwordError, setPasswordError] = useState('');
-  const [passwordRepeatError, setPasswordRepeatError] = useState('');
+  const [isSent, setIsSent] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const {
+    mutate: checkMutate,
+    data: checkData,
+    isLoading: checkLoading,
+    error: checkError,
+  } = useCheckPasswordResetEmailVerifiedMutation();
+  const {
+    mutate: sendMutate,
+    isSuccess: sendSuccess,
+    isLoading: sendLoading,
+    error: sendError,
+  } = useSendResetPasswordMutation();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (passwordError !== '' || passwordRepeatError !== '') {
-      return fireToast({ content: '모든 입력 값이 올바른지 확인해주세요.' });
+  useEffect(() => {
+    if (query && query.email && query.email !== '') {
+      checkMutate({
+        email: query.email as string,
+      });
     }
-  };
+  }, [checkMutate, query]);
 
-  useDidUpdate(() => {
-    if (password.debouncedValue.length >= 6) {
-      if (
-        validator({
-          rule: /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/,
-          value: password.debouncedValue,
-        })
-      ) {
-        setPasswordError('');
+  useEffect(() => {
+    if (checkData) {
+      if (checkData.data) {
+        sendMutate({
+          email: query.email as string,
+        });
       } else {
-        setPasswordError('비밀번호는 영문과 숫자를 모두 포함하여야 합니다.');
+        setIsError(true);
+        fireToast({ content: '전송하지 못했습니다. 사유: ' + checkData.message, duration: 5000 });
       }
-    } else {
-      setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
     }
-  }, [password.debouncedValue]);
+  }, [checkData, fireToast, query.email, sendMutate]);
 
-  useDidUpdate(() => {
-    if (
-      passwordRepeat.debouncedValue.length > 0 &&
-      passwordRepeat.debouncedValue === password.value
-    ) {
-      setPasswordRepeatError('');
-    } else {
-      setPasswordRepeatError('비밀번호와 일치하여야 합니다.');
+  useEffect(() => {
+    if (checkError) {
+      setIsError(true);
+      fireToast({ content: '전송하지 못했습니다. 사유: ' + checkError.message, duration: 5000 });
     }
-  }, [passwordRepeat.debouncedValue]);
+  }, [checkError, fireToast]);
+
+  useEffect(() => {
+    if (sendSuccess) {
+      setIsSent(true);
+    }
+  }, [sendSuccess]);
+
+  useEffect(() => {
+    if (sendError) {
+      setIsError(true);
+      fireToast({ content: '전송하지 못했습니다. 사유: ' + sendError.message, duration: 5000 });
+    }
+  }, [sendError, fireToast]);
+
+  if (isError) {
+    return (
+      <article css={passwordResetCss}>
+        <p css={passwordAlertTextCss}>올바른 접근이 아닙니다.</p>
+      </article>
+    );
+  }
 
   return (
     <LoadingHandler
-      isLoading={!query || !Boolean(query.email) || query.email === undefined}
+      isLoading={
+        !query ||
+        !Boolean(query.email) ||
+        query.email === undefined ||
+        checkLoading ||
+        !isSent ||
+        sendLoading
+      }
       loadingComponent={<FixedSpinner />}
     >
       <article css={passwordResetCss}>
         <div css={navMockupCss} />
-        <p css={introTextWrapper}>
-          새로운 비밀번호를
+        <p css={introTextWrapperCss}>이메일로 임시 비밀번호를 보냈어요.</p>
+        <p css={introTextWrapperCss}>
+          임시 비밀번호로 로그인 후,
           <br />
-          입력해주세요.
+          꼭! 비밀번호를 변경해주세요.
         </p>
-        <form css={loginFieldSetCss} onSubmit={handleSubmit}>
-          <TextField
-            type={'password'}
-            label={'새로운 비밀번호'}
-            placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
-            feedback={password.debouncedValue !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
-            isSuccess={password.debouncedValue.length > 0 && passwordError === ''}
-            value={password.value}
-            onChange={password.onChange}
-            required
-          />
-          <TextField
-            type={'password'}
-            label={'비밀번호 확인'}
-            placeholder={'비밀번호와 동일한 값 입력'}
-            feedback={
-              passwordRepeat.debouncedValue !== '' ? (
-                passwordRepeatError || <>&nbsp;</>
-              ) : (
-                <>&nbsp;</>
-              )
-            }
-            isSuccess={passwordRepeat.debouncedValue.length > 0 && passwordRepeatError === ''}
-            value={passwordRepeat.value}
-            onChange={passwordRepeat.onChange}
-            required
-          />
-          <CTAButton type={'submit'}>입력 완료</CTAButton>
-        </form>
       </article>
     </LoadingHandler>
   );
@@ -109,19 +109,26 @@ const passwordResetCss = css`
   flex-direction: column;
 `;
 
-const introTextWrapper = (theme: Theme) => css`
+const introTextWrapperCss = (theme: Theme) => css`
   color: ${theme.color.gray05};
   font-size: 18px;
   font-weight: ${theme.font.weight.bold};
   line-height: 150%;
-
-  margin-top: 40px;
-  margin-bottom: 36px;
+  margin-top: 20px;
+  text-align: center;
 `;
 
-const loginFieldSetCss = css`
+const passwordAlertTextCss = (theme: Theme) => css`
+  color: ${theme.color.gray05};
+  font-size: 14px;
+  font-weight: ${theme.font.weight.medium};
+  line-height: 150%;
+  margin-top: 24px;
+  text-align: center;
+`;
+
+const buttonWrapperCss = css`
+  margin-top: 16px;
   display: flex;
-  flex-direction: column;
-  gap: 36px;
-  margin-bottom: 52px;
+  justify-content: center;
 `;

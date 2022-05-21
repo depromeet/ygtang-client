@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
@@ -7,24 +7,13 @@ import Dialog from '~/components/common/Dialog';
 import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
 import { FixedSpinner } from '~/components/common/Spinner';
+import useCheckPasswordResetEmailVerifiedMutation from '~/hooks/api/auth/useCheckPasswordResetEmailVerifiedMutation';
 import { useToast } from '~/store/Toast';
 import { validator } from '~/utils/validator';
 
 export default function SentPasswordResetEmail() {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const { fireToast } = useToast();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleEmailChecking = () => {
-    if (query.email !== undefined && validator({ type: 'email', value: query.email as string })) {
-    } else {
-      fireToast({ content: '제공 된 이메일이 올바르지 않습니다. 다시 시도해 보세요.' });
-    }
-  };
-
-  const handleEmailResend = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <LoadingHandler
@@ -37,34 +26,12 @@ export default function SentPasswordResetEmail() {
           <p css={introTextWrapper}>
             회원님의 이메일로
             <br />
-            인증 링크가 전송되었습니다
+            인증 링크가 전송되었습니다.
             <br />
-            확인 후 아래의 &apos;인증완료&apos; 버튼을 눌러주세요.
+            <br />
+            전송된 이메일의 링크를 눌러주세요.
           </p>
         </div>
-        <div css={emailWrapperCss}>
-          <p css={emailText}>{query.email}</p>
-          <CTAButton onClick={handleEmailChecking}>인증완료</CTAButton>
-        </div>
-        <Dialog
-          isShowing={isModalOpen}
-          actionButtons={
-            <>
-              <FilledButton colorType="light" onClick={() => setIsModalOpen(false)}>
-                취소
-              </FilledButton>
-              <div css={dialogLongButtonCss}>
-                <FilledButton colorType="dark" onClick={handleEmailResend}>
-                  다시 전송
-                </FilledButton>
-              </div>
-            </>
-          }
-        >
-          이메일 인증이 완료되지 않았습니다.
-          <br />
-          인증을 다시 받으시겠어요?
-        </Dialog>
       </article>
     </LoadingHandler>
   );
