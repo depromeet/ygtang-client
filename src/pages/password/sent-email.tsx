@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
-import { CTAButton, FilledButton } from '~/components/common/Button';
-import Dialog from '~/components/common/Dialog';
 import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
 import { FixedSpinner } from '~/components/common/Spinner';
-import useCheckPasswordResetEmailVerifiedMutation from '~/hooks/api/auth/useCheckPasswordResetEmailVerifiedMutation';
-import { useToast } from '~/store/Toast';
-import { validator } from '~/utils/validator';
 
 export default function SentPasswordResetEmail() {
-  const { query, push } = useRouter();
-  const { fireToast } = useToast();
+  const { query } = useRouter();
 
   return (
     <LoadingHandler
@@ -57,26 +50,4 @@ const introTextWrapper = (theme: Theme) => css`
   font-size: 15px;
   font-weight: 600;
   line-height: 150%;
-`;
-
-const emailWrapperCss = css`
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  margin-bottom: 42px;
-`;
-
-const emailText = (theme: Theme) => css`
-  white-space: pre;
-  font-weight: ${theme.font.weight.medium};
-  color: ${theme.color.gray05};
-  font-size: 16px;
-  line-height: 150%;
-
-  margin-bottom: 74px;
-`;
-
-const dialogLongButtonCss = css`
-  width: 163px;
-  flex-shrink: 0;
 `;

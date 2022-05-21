@@ -126,9 +126,3 @@ const passwordAlertTextCss = (theme: Theme) => css`
   margin-top: 24px;
   text-align: center;
 `;
-
-const buttonWrapperCss = css`
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-`;
