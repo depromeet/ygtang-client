@@ -6,6 +6,11 @@ export interface CheckPasswordResetEmailVerifiedMutationParams {
   email: string;
 }
 
+export interface CheckPasswordResetEmailVerifiedMutationResponse {
+  message: string;
+  data: boolean;
+}
+
 /**
  * `/api/v1/auth/passwords/reset/email/{email}/status`
  *
@@ -13,10 +18,12 @@ export interface CheckPasswordResetEmailVerifiedMutationParams {
  */
 export default function useCheckPasswordResetEmailVerifiedMutation() {
   return useMutation<
-    undefined,
+    CheckPasswordResetEmailVerifiedMutationResponse,
     { message?: string },
     CheckPasswordResetEmailVerifiedMutationParams
   >(({ email }: CheckPasswordResetEmailVerifiedMutationParams) =>
-    get<undefined>(`/v1/auth/passwords/reset/email/${email}/status`)
+    get<CheckPasswordResetEmailVerifiedMutationResponse>(
+      `/v1/auth/passwords/reset/email/${email}/status`
+    )
   );
 }
