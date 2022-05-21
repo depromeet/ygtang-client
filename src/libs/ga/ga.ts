@@ -16,7 +16,7 @@ interface GaEventProps {
   value?: string;
 }
 
-export function gaEvent({ category, label, value, action }: GaEventProps) {
+export function gaEvent({ action, category, label, value }: GaEventProps) {
   if (typeof window.gtag === 'undefined') return;
   window.gtag('event', action, { event_category: category, event_label: label, value });
 }
