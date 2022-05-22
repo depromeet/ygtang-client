@@ -31,11 +31,11 @@ export default function useGetInspirationListWithInfinite({
   const fetchInsipirations = (page: number = 0) => {
     if (filteredTags.length > 0)
       return post<InspirationListResponseInterface>(
-        `/v1/inspiration/tag/?size=20&page=${page}&sort=updatedDateTime,desc`,
+        `/v1/inspiration/tag/?size=20&page=${page}&sort=createdDateTime,desc`,
         filteredTagIds
       );
     return get<InspirationListResponseInterface>(
-      `/v1/inspiration/list?size=20&page=${page}&sort=updatedDateTime,desc`
+      `/v1/inspiration/list?size=20&page=${page}&sort=createdDateTime,desc`
     );
   };
 
