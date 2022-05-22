@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { AppProps } from 'next/app';
+import NextHead from 'next/head';
 import { css, Theme, ThemeProvider } from '@emotion/react';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -7,6 +8,7 @@ import { RecoilRoot } from 'recoil';
 
 import ToastSection from '~/components/common/ToastSection';
 import { useWindowSize } from '~/hooks/common/useWindowSize';
+import { useGaPageview } from '~/hooks/ga/useGaPageview';
 import { queryClient } from '~/libs/api/queryClient';
 import { UserProvider } from '~/store/User/UserProvider';
 import GlobalStyle from '~/styles/GlobalStyle';
@@ -14,21 +16,26 @@ import CustomTheme from '~/styles/Theme';
 import { fullViewHeight } from '~/styles/utils';
 
 export default function App({ Component, pageProps }: AppProps) {
+  useGaPageview();
+
   return (
-    <RecoilRoot>
-      <ThemeProvider theme={CustomTheme}>
-        <QueryClientProvider client={queryClient}>
-          <GlobalStyle />
-          <UserProvider>
-            <Layout>
-              <Component {...pageProps} />
-              <ToastSection />
-            </Layout>
-          </UserProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </ThemeProvider>
-    </RecoilRoot>
+    <>
+      <Head />
+      <RecoilRoot>
+        <ThemeProvider theme={CustomTheme}>
+          <QueryClientProvider client={queryClient}>
+            <GlobalStyle />
+            <UserProvider>
+              <Layout>
+                <Component {...pageProps} />
+                <ToastSection />
+              </Layout>
+            </UserProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </ThemeProvider>
+      </RecoilRoot>
+    </>
   );
 }
 
@@ -58,3 +65,14 @@ const layoutCss = (theme: Theme) => css`
   margin: 0 auto;
   padding: ${theme.size.layoutPadding};
 `;
+
+function Head() {
+  return (
+    <NextHead>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      />
+    </NextHead>
+  );
+}
