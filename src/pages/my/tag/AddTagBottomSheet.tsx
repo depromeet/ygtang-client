@@ -5,7 +5,9 @@ import BottomSheetModal from '~/components/common/BottomSheetModal';
 import { GhostButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
 import { SearchBar } from '~/components/common/TextField';
+import useTagMutation from '~/hooks/api/tag/useTagMutation';
 import useInput from '~/hooks/common/useInput';
+import { useToast } from '~/store/Toast';
 
 export interface AddTagBottomSheetProps {
   isShowing: boolean;
@@ -13,12 +15,19 @@ export interface AddTagBottomSheetProps {
 }
 export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSheetProps) {
   const { value, setValue, onChange } = useInput({ useDebounce: false });
+  const { createTag } = useTagMutation();
+  const { fireToast } = useToast();
 
   const onFormReturn = (e: React.FormEvent) => {
     e.preventDefault();
     if (!value) {
       return;
     }
+    createTag(value, {
+      onSuccess: () => {
+        fireToast({ content: '태그 저장 성공!' });
+      },
+    });
     setValue('');
   };
 

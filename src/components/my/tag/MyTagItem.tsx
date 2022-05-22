@@ -1,10 +1,17 @@
 import { IconButton } from '~/components/common/Button';
 import Menu from '~/components/my/Menu';
+import useTagMutation from '~/hooks/api/tag/useTagMutation';
+import { useToast } from '~/store/Toast';
 
 export default function MyTagItem({ tag }: { tag: TagType }) {
+  const { deleteTag } = useTagMutation();
+  const { fireToast } = useToast();
   const onDelete = () => {
-    // TODO: Tag delete API 호출
-    console.log(tag.id);
+    deleteTag(tag.id, {
+      onSuccess: () => {
+        fireToast({ content: '태그 삭제 성공!' });
+      },
+    });
   };
 
   return (
