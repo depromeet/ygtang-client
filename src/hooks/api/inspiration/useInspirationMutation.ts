@@ -7,14 +7,6 @@ import { useToast } from '~/store/Toast';
 
 import { INSPIRATION_LIST_QUERY_KEY } from './useGetInspirationListWIthInfinite';
 
-export interface InspirationMutationRequest {
-  content?: string;
-  file?: string;
-  memo: string;
-  tagIds?: number[];
-  type: InspirationType;
-}
-
 export default function useInspirationMutation() {
   const queryClient = useQueryClient();
   const { push } = useInternalRouter();
@@ -56,7 +48,7 @@ export default function useInspirationMutation() {
   );
 
   const modifyInspirationMemoMutation = useMutation(
-    (data: { id: number; memo: string }) => post('/v1/inspiration/modify', data),
+    (modifiedMemo: { id: number; memo: string }) => post('/v1/inspiration/modify', modifiedMemo),
     {
       onSuccess: (_res, req) => {
         resetInspirationItem(req.id);
@@ -68,8 +60,22 @@ export default function useInspirationMutation() {
   );
 
   return {
+    /**
+     * 영감을 추가합니다.
+     * createInspiration(data: FormData);
+     */
     createInspiration: createInspirationMutation.mutate,
+
+    /**
+     * 영감을 삭제합니다.
+     * deleteInspiration(id: number);
+     */
     deleteInspiration: deleteInspirationMutation.mutate,
+
+    /**
+     * 영감 메모를 수정합니다.
+     * modifyInspiration({id: number, memo: string})
+     */
     modifyInspiration: modifyInspirationMemoMutation.mutate,
   };
 }
