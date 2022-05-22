@@ -16,7 +16,7 @@ export default function MyAccountChangePassword() {
       <NavigationBar title="비밀번호 변경?찾기?" />
       <div css={introCardCss}>
         <p css={introTextWrapper}>
-          안녕하세요. {userInformation?.nickName}님
+          안녕하세요. {userInformation.nickName}님
           <br />
           비밀번호를 변경하고 싶으신가요?
           <br />

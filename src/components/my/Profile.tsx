@@ -14,8 +14,8 @@ export default function MyProfile() {
   return (
     <section css={MyProfileContainerCss}>
       <MyInformationMenu
-        label={userInformation?.nickName || ''}
-        description={userInformation?.email || ''}
+        label={userInformation.nickName}
+        description={userInformation.email}
         align="bottom"
         rightElement={
           <FilledButton css={LogOutButtonCss} onClick={userLogout}>

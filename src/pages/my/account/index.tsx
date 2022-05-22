@@ -21,7 +21,7 @@ export default function MyAccountPage() {
         <ul>
           <MyInformationMenu
             label="이름"
-            description={userInformation?.nickName || ''}
+            description={userInformation.nickName}
             rightElement={
               <InternalLink href="/my/account/change-nickname">
                 <a>
@@ -30,7 +30,7 @@ export default function MyAccountPage() {
               </InternalLink>
             }
           />
-          <MyInformationMenu label="이메일" description={userInformation?.email || ''} />
+          <MyInformationMenu label="이메일" description={userInformation.email} />
           <Menu label="비밀번호 재설정" href="/my/account/change-password" />
         </ul>
         <Menu

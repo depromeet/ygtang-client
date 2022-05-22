@@ -20,7 +20,7 @@ export default function MyAccountChangeNickame() {
   }, [userInformation.nickName]);
 
   useDidUpdate(() => {
-    if (!nickname.debouncedValue.length || userInformation?.nickName === nickname.debouncedValue) {
+    if (!nickname.debouncedValue.length || userInformation.nickName === nickname.debouncedValue) {
       setNicknameError('변경될 이름을 입력해주세요.');
     } else {
       setNicknameError('');
