@@ -24,7 +24,6 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
     if (!isWriting) return setWriting(true);
     modifyInspiration({ id: inspiration.id, memo: modifiedMemo });
     setWriting(false);
-    
   };
 
   if (!inspiration) return <></>;
