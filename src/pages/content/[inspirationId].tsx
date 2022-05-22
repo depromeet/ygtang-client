@@ -1,41 +1,53 @@
 import { useCallback, useEffect } from 'react';
 
 import { IconButton } from '~/components/common/Button';
+import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
+import { FixedSpinner } from '~/components/common/Spinner';
 import ImageView from '~/components/inspiration/ImageView';
 import LinkView from '~/components/inspiration/LinkView';
 import TextView from '~/components/inspiration/TextView';
+import { useInspirationById } from '~/hooks/api/inspiration/useInspirationById';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
-import { useInspirationDetail } from '~/store/Inspiration';
+import useQueryParam from '~/hooks/common/useRouterQuery';
 
 export default function ContentPage() {
-  const { inspirationDetail } = useInspirationDetail();
+  const inspirationIdFromRoute = useQueryParam('inspirationId', String);
+
   const { deleteInspiration } = useInspirationMutation();
   const { push } = useInternalRouter();
+  const inspirationId = inspirationIdFromRoute;
+
+  const { inspiration, isLoading } = useInspirationById({
+    inspirationId,
+  });
 
   useEffect(() => {
-    if (!inspirationDetail) return push('/');
-  }, [inspirationDetail, push]);
+    if (isLoading) return;
+    if (!inspiration) return push('/');
+  }, [isLoading, inspiration, push]);
 
   const deleteInspirationById = (id: number) => {
     // TODO: 삭제 여부 묻는 다이얼로그 추가 필요
     deleteInspiration(id);
   };
 
-  const renderInspirationViewByType = useCallback(() => {
-    const type = inspirationDetail?.type;
+  const renderInspirationViewByType = useCallback((inspiration: InspirationInterface) => {
+    const type = inspiration?.type;
+
     if (type === 'IMAGE') {
-      return <ImageView />;
+      return <ImageView inspiration={inspiration} />;
     }
     if (type === 'LINK') {
-      return <LinkView />;
+      return <LinkView inspiration={inspiration} />;
     }
-    return <TextView />;
-  }, [inspirationDetail?.type]);
+    return <TextView inspiration={inspiration} />;
+  }, []);
 
-  if (!inspirationDetail) return <></>;
-  const { id } = inspirationDetail;
+  if (!inspiration) return <></>;
+
+  const { id } = inspiration;
 
   return (
     <article>
@@ -47,7 +59,9 @@ export default function ContentPage() {
           <IconButton onClick={() => deleteInspirationById(id)} iconName="DeleteIcon" light />
         }
       />
-      {renderInspirationViewByType()}
+      <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
+        {inspiration && renderInspirationViewByType(inspiration)}
+      </LoadingHandler>
     </article>
   );
 }

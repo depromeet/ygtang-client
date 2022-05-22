@@ -6,7 +6,7 @@ export interface InspirationDetailState {
   type: InspirationType;
   content: string;
   memo: string;
-  openGraph?: OpenGraphResonse;
+  openGraph?: OpenGraphResponse;
 }
 
 export const inspirationDetailState = atom<InspirationDetailState | null>({

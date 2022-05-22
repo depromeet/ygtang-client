@@ -6,14 +6,12 @@ import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
-import { useInspirationDetail } from '~/store/Inspiration';
 
 import { formCss } from './ImageView';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
-export default function TextView() {
-  const { inspirationDetail } = useInspirationDetail();
+export default function TextView({ inspiration }: { inspiration: InspirationInterface }) {
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
   const { createInspiration } = useInspirationMutation();
@@ -22,7 +20,7 @@ export default function TextView() {
     e.preventDefault();
     if (!inspiringText.value) return;
     const textData = new FormData();
-    const tagIds = tags.map(tag => tag.id);
+    const tagIds = tagResponses.map(tag => tag.id);
     textData.append('content', inspiringText.value);
     textData.append('memo', memoText.value);
     textData.append('type', 'TEXT');
@@ -31,9 +29,9 @@ export default function TextView() {
     createInspiration(textData);
   };
 
-  if (!inspirationDetail) return <></>;
+  if (!inspiration) return <></>;
 
-  const { tags, content, memo } = inspirationDetail;
+  const { tagResponses, content, memo } = inspiration;
 
   return (
     <>
@@ -49,7 +47,7 @@ export default function TextView() {
               />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tags} />
+              <TagContent tags={tagResponses} />
             </div>
             <div css={contentWrapperCss}>
               <MemoText

@@ -18,6 +18,7 @@ export default function useInspirationMutation() {
   const queryClient = useQueryClient();
   const { push } = useInternalRouter();
   const { fireToast } = useToast();
+
   const resetInspirationList = () => {
     queryClient.resetQueries(INSPIRATION_LIST_QUERY_KEY);
   };
