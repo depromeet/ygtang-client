@@ -25,6 +25,10 @@ export default function useUserInformationMutation() {
     }
   );
   return {
+    /**
+     * 유저의 이름을 업데이트 합니다.
+     * updateNickname({nickname: string})
+     */
     updateNickname: putUserInformationNicknameMutation.mutate,
   };
 }
