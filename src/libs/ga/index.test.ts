@@ -1,9 +1,8 @@
-import * as ga from './index';
+import { gaEvent, gaPageview } from './index';
 
 describe('libs/ga/index', () => {
   it('should defined', () => {
-    expect(ga).toBeDefined();
-    expect(ga.gaPageview).toBeDefined();
-    expect(ga.gaEvent).toBeDefined();
+    expect(gaPageview).toBeDefined();
+    expect(gaEvent).toBeDefined();
   });
 });
