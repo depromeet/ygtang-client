@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
 import { MemoText } from '~/components/common/TextField';
-// import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
+import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
 import { fullViewHeight } from '~/styles/utils';
 
@@ -16,10 +16,10 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
     debouncedValue: memoDebouncedValue,
     value: modifiedMemo,
   } = useInput({ useDebounce: true, initialValue: inspiration.memo });
-  // const { modifyInspiration } = useInspirationMutation();
+  const { modifyInspiration } = useInspirationMutation();
 
   const saveMemo = () => {
-    console.log(modifiedMemo);
+    modifyInspiration({ id: inspiration.id, memo: modifiedMemo });
   };
 
   if (!inspiration) return <></>;

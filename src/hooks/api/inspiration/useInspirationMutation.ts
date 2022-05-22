@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 
+import { INSPIRATION_BY_ID_QUERY_KEY } from '~/hooks/api/inspiration/useInspirationById';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { del, post } from '~/libs/api/client';
 import { useToast } from '~/store/Toast';
@@ -21,6 +22,10 @@ export default function useInspirationMutation() {
 
   const resetInspirationList = () => {
     queryClient.resetQueries(INSPIRATION_LIST_QUERY_KEY);
+  };
+
+  const resetInspirationItem = (id: number) => {
+    queryClient.invalidateQueries([INSPIRATION_BY_ID_QUERY_KEY, `${id}`]);
   };
 
   const createInspirationMutation = useMutation(
@@ -53,9 +58,8 @@ export default function useInspirationMutation() {
   const modifyInspirationMemoMutation = useMutation(
     (data: { id: number; memo: string }) => post('/v1/inspiration/modify', data),
     {
-      onSuccess: res => {
-        console.log(res);
-        // TODO: view 화면 업데이트, 리스트도.. 필요할지도
+      onSuccess: (_res, req) => {
+        resetInspirationItem(req.id);
       },
       onError: (error, variable, context) => {
         console.log('err', error, variable, context);
