@@ -39,7 +39,7 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
               {<ImageContent src={content ?? null} alt="uploadedImg" />}
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tagResponses} isEditing />
+              <TagContent tags={tagResponses} inspirationId={inspiration.id} />
             </div>
             <div css={contentWrapperCss}>
               <MemoText

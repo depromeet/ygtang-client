@@ -12,14 +12,14 @@ export interface TagContentProps {
    * 단일 Tag 클릭 할 경우, Action을 넘겨 줍니다.
    */
   onClickTag?: (tagId: number) => void;
-  isEditing?: boolean;
+  inspirationId?: number;
 }
 
 export default function TagContent({
   tags,
   label = '태그',
   onClickTag,
-  isEditing = false,
+  inspirationId,
 }: TagContentProps) {
   return (
     <>
@@ -36,8 +36,12 @@ export default function TagContent({
             />
           ))}
           <Link
-            href={`?modal=${isEditing ? 'editTag' : 'addTag'}`}
-            as={isEditing ? '/edit/tag' : '/add/tag'}
+            href={`${
+              inspirationId
+                ? `/edit/tag?modal=editTag&inspirationId=${inspirationId}`
+                : '?modal=addTag'
+            }`}
+            as={inspirationId ? `/edit/tag?inspirationId=${inspirationId}` : '/add/tag'}
             scroll={false}
           >
             <a>

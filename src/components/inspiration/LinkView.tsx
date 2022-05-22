@@ -63,7 +63,7 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
               />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tagResponses} isEditing />
+              <TagContent tags={tagResponses} inspirationId={inspiration.id} />
             </div>
             <div css={contentWrapperCss}>
               <MemoText
