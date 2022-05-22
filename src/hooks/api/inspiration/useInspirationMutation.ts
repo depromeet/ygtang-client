@@ -1,18 +1,11 @@
 import { useMutation, useQueryClient } from 'react-query';
 
+import { INSPIRATION_BY_ID_QUERY_KEY } from '~/hooks/api/inspiration/useInspirationById';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { del, post } from '~/libs/api/client';
 import { useToast } from '~/store/Toast';
 
 import { INSPIRATION_LIST_QUERY_KEY } from './useGetInspirationListWIthInfinite';
-
-export interface InspirationMutationRequest {
-  content?: string;
-  file?: string;
-  memo: string;
-  tagIds?: number[];
-  type: InspirationType;
-}
 
 export default function useInspirationMutation() {
   const queryClient = useQueryClient();
@@ -21,6 +14,10 @@ export default function useInspirationMutation() {
 
   const resetInspirationList = () => {
     queryClient.resetQueries(INSPIRATION_LIST_QUERY_KEY);
+  };
+
+  const resetInspirationItem = (id: number) => {
+    queryClient.invalidateQueries([INSPIRATION_BY_ID_QUERY_KEY, `${id}`]);
   };
 
   const createInspirationMutation = useMutation(
@@ -50,8 +47,36 @@ export default function useInspirationMutation() {
     }
   );
 
+  const modifyInspirationMemoMutation = useMutation(
+    (modifiedMemo: { id: number; memo: string }) => post('/v1/inspiration/modify', modifiedMemo),
+    {
+      onSuccess: (_res, req) => {
+        fireToast({ content: '메모가 수정되었습니다!' });
+        resetInspirationItem(req.id);
+      },
+      onError: (error, variable, context) => {
+        console.log('err', error, variable, context);
+      },
+    }
+  );
+
   return {
+    /**
+     * 영감을 추가합니다.
+     * createInspiration(data: FormData);
+     */
     createInspiration: createInspirationMutation.mutate,
+
+    /**
+     * 영감을 삭제합니다.
+     * deleteInspiration(id: number);
+     */
     deleteInspiration: deleteInspirationMutation.mutate,
+
+    /**
+     * 영감 메모를 수정합니다.
+     * modifyInspiration({id: number, memo: string})
+     */
+    modifyInspiration: modifyInspirationMemoMutation.mutate,
   };
 }

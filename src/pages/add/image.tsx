@@ -59,7 +59,7 @@ export default function AddImage() {
             <div css={contentWrapperCss}>
               {
                 <ImageContent
-                  clickXbtn={openFileInput}
+                  onClickXBtn={openFileInput}
                   src={uploadedImg?.base64 ?? null}
                   alt="uploadedImg"
                 />

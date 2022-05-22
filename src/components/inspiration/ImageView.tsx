@@ -1,14 +1,12 @@
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
-import { ImgUploader } from '~/components/add/ImgUploader';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
-import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
-import { useUploadedImg } from '~/store/UploadedImage';
 import { fullViewHeight } from '~/styles/utils';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
@@ -17,47 +15,41 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
-    value: memoValue,
-  } = useInput({ useDebounce: true });
-  const { imgInputRef, openFileInput, imgInputUploader } = useImgUpload({});
-  const { uploadedImg } = useUploadedImg();
-  const { createInspiration } = useInspirationMutation();
+    value: modifiedMemo,
+  } = useInput({ useDebounce: true, initialValue: inspiration.memo });
+  const { modifyInspiration } = useInspirationMutation();
+  const [isWriting, setWriting] = useState(false);
 
-  const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!uploadedImg) return;
-    const tagIds = tagResponses.map(tag => tag.id);
-    const imgData = new FormData();
-    imgData.append('file', uploadedImg.blob);
-    imgData.append('memo', memoValue);
-    imgData.append('type', 'IMAGE');
-    imgData.append('tagIds', tagIds.toString());
-
-    createInspiration(imgData);
+  const saveMemo = () => {
+    if (!isWriting) return setWriting(true);
+    modifyInspiration({ id: inspiration.id, memo: modifiedMemo });
+    setWriting(false);
   };
 
   if (!inspiration) return <></>;
 
-  const { tagResponses, content, memo } = inspiration;
+  const { tagResponses, content } = inspiration;
 
   return (
     <>
       <article css={addImageCss}>
-        <form onSubmit={submitImg} css={formCss}>
-          <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
+        <form css={formCss}>
           <section css={addImageTopCss}>
             <div css={contentWrapperCss}>
-              {<ImageContent clickXbtn={openFileInput} src={content ?? null} alt="uploadedImg" />}
+              {<ImageContent src={content ?? null} alt="uploadedImg" />}
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tagResponses} />
+              <TagContent tags={tagResponses} isEditing />
             </div>
             <div css={contentWrapperCss}>
               <MemoText
                 editable
+                onSaveClick={saveMemo}
                 onChange={onMemoChange}
                 debouncedValue={memoDebouncedValue}
-                value={memo}
+                value={modifiedMemo}
+                writable={isWriting}
+                autoFocus={isWriting}
               />
             </div>
           </section>

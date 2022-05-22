@@ -12,9 +12,15 @@ export interface TagContentProps {
    * 단일 Tag 클릭 할 경우, Action을 넘겨 줍니다.
    */
   onClickTag?: (tagId: number) => void;
+  isEditing?: boolean;
 }
 
-export default function TagContent({ tags, label = '태그', onClickTag }: TagContentProps) {
+export default function TagContent({
+  tags,
+  label = '태그',
+  onClickTag,
+  isEditing = false,
+}: TagContentProps) {
   return (
     <>
       <div css={tagContentWrapperCss}>
@@ -29,7 +35,11 @@ export default function TagContent({ tags, label = '태그', onClickTag }: TagCo
               }}
             />
           ))}
-          <Link href="?modal=addTag" as="/add/tag" scroll={false}>
+          <Link
+            href={`?modal=${isEditing ? 'editTag' : 'addTag'}`}
+            as={isEditing ? '/edit/tag' : '/add/tag'}
+            scroll={false}
+          >
             <a>
               <IconButton iconName="PlusIcon" />
             </a>
