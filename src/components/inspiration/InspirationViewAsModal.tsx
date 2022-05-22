@@ -3,15 +3,15 @@ import { css, Theme } from '@emotion/react';
 import PortalWrapper from '~/components/common/PortalWrapper';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
 import useQueryParam from '~/hooks/common/useRouterQuery';
-import ContentPage from '~/pages/content/[contentId]';
+import ContentPage from '~/pages/content/[inspirationId]';
 
 export default function InspirationViewAsModal() {
-  const query = useQueryParam('modal', String);
+  const modal = useQueryParam('modal', String);
 
-  usePreventScroll(query === 'inspirationView');
+  usePreventScroll(modal === 'inspirationView');
 
   return (
-    <PortalWrapper isShowing={query === 'inspirationView'}>
+    <PortalWrapper isShowing={modal === 'inspirationView'}>
       <div css={wrapperCss}>
         <ContentPage />
       </div>

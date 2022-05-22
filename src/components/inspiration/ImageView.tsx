@@ -8,15 +8,12 @@ import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
-import { useInspirationDetail } from '~/store/Inspiration';
 import { useUploadedImg } from '~/store/UploadedImage';
 import { fullViewHeight } from '~/styles/utils';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
-export default function ImageView() {
-  const { inspirationDetail } = useInspirationDetail();
-
+export default function ImageView({ inspiration }: { inspiration: InspirationInterface }) {
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
@@ -29,7 +26,7 @@ export default function ImageView() {
   const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!uploadedImg) return;
-    const tagIds = tags.map(tag => tag.id);
+    const tagIds = tagResponses.map(tag => tag.id);
     const imgData = new FormData();
     imgData.append('file', uploadedImg.blob);
     imgData.append('memo', memoValue);
@@ -39,9 +36,9 @@ export default function ImageView() {
     createInspiration(imgData);
   };
 
-  if (!inspirationDetail) return <></>;
+  if (!inspiration) return <></>;
 
-  const { tags, content, memo } = inspirationDetail;
+  const { tagResponses, content, memo } = inspiration;
 
   return (
     <>
@@ -53,7 +50,7 @@ export default function ImageView() {
               {<ImageContent clickXbtn={openFileInput} src={content ?? null} alt="uploadedImg" />}
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tags} />
+              <TagContent tags={tagResponses} />
             </div>
             <div css={contentWrapperCss}>
               <MemoText

@@ -4,7 +4,6 @@ import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
 import { defaultEasing } from '~/constants/motions';
-import { useInspirationDetail } from '~/store/Inspiration';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
 import ThumbnailContent from './ThumbnailContent';
@@ -16,13 +15,13 @@ export interface ContentThumbnailProps
   memo: InspirationInterface['memo'];
 }
 
-function Thumbnail({ id, type, tags, content, openGraph, memo }: ContentThumbnailProps) {
-  const { saveInspirationDetail } = useInspirationDetail();
+function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps) {
   const { push } = useRouter();
 
   const moveToInspirationView = (id: number) => {
-    saveInspirationDetail({ id, type, tags, content, memo, openGraph });
-    push('?modal=inspirationView', `/content/${id}`, { scroll: false });
+    push(`?modal=inspirationView&inspirationId=${id}`, `/content/${id}`, {
+      scroll: false,
+    });
   };
 
   return (

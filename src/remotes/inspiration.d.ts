@@ -1,6 +1,6 @@
 type InspirationType = 'TEXT' | 'IMAGE' | 'LINK';
 
-interface OpenGraphResonse {
+interface OpenGraphResponse {
   code: number;
   description: string | null;
   siteName: string | null;

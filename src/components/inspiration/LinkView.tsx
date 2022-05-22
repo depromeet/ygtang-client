@@ -6,7 +6,6 @@ import TagContent from '~/components/common/Content/TagContent';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
-import { useInspirationDetail } from '~/store/Inspiration';
 
 import { formCss } from './ImageView';
 
@@ -20,8 +19,7 @@ export interface OpenGraph {
   image?: string;
 }
 
-export default function LinkView() {
-  const { inspirationDetail } = useInspirationDetail();
+export default function LinkView({ inspiration }: { inspiration: InspirationInterface }) {
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
@@ -31,21 +29,21 @@ export default function LinkView() {
 
   const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!openGraph || !openGraph.url) return;
-    const tagIds = tags.map(tag => tag.id);
+    if (!openGraphResponse || !openGraphResponse.url) return;
+    const tagIds = tagResponses.map(tag => tag.id);
     const linkData = new FormData();
-    linkData.append('content', openGraph.url);
+    linkData.append('content', openGraphResponse.url);
     linkData.append('memo', memoValue);
     linkData.append('type', 'LINK');
     linkData.append('tagIds', tagIds.toString());
 
     createInspiration(linkData);
   };
-  if (!inspirationDetail) return <></>;
-  const { tags, openGraph, memo } = inspirationDetail;
+  if (!inspiration) return <></>;
+  const { tagResponses, openGraphResponse, memo } = inspiration;
 
-  if (!openGraph) return <></>;
-  const { description, siteName, title, url, code, image } = openGraph;
+  if (!openGraphResponse) return <></>;
+  const { description, siteName, title, url, code, image } = openGraphResponse;
 
   return (
     <>
@@ -56,7 +54,7 @@ export default function LinkView() {
               <LinkInput
                 // TODO: 오픈그래프 type refactoring 필요
                 openGraph={
-                  openGraph
+                  openGraphResponse
                     ? ({
                         description,
                         siteName,
@@ -70,7 +68,7 @@ export default function LinkView() {
               />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tags} />
+              <TagContent tags={tagResponses} />
             </div>
             <div css={contentWrapperCss}>
               <MemoText
