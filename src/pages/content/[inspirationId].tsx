@@ -60,7 +60,7 @@ export default function ContentPage() {
         }
       />
       <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
-        {inspiration && renderInspirationViewByType(inspiration)}
+        {renderInspirationViewByType(inspiration)}
       </LoadingHandler>
     </article>
   );
