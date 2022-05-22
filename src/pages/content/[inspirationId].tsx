@@ -1,6 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { IconButton } from '~/components/common/Button';
+import { FilledButton, IconButton } from '~/components/common/Button';
+import IllustDialog from '~/components/common/IllustDialog';
 import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
 import { FixedSpinner } from '~/components/common/Spinner';
@@ -14,9 +15,10 @@ import useQueryParam from '~/hooks/common/useRouterQuery';
 
 export default function ContentPage() {
   const inspirationId = useQueryParam('inspirationId', String);
-
   const { deleteInspiration } = useInspirationMutation();
   const { push } = useInternalRouter();
+
+  const [isDeleteInspirationModalOn, setDeleteInspirationModalOn] = useState(false);
 
   const { inspiration, isLoading } = useInspirationById({
     inspirationId,
@@ -26,11 +28,6 @@ export default function ContentPage() {
     if (isLoading) return;
     if (!inspiration) return push('/');
   }, [isLoading, inspiration, push]);
-
-  const deleteInspirationById = (id: number) => {
-    // TODO: 삭제 여부 묻는 다이얼로그 추가 필요
-    deleteInspiration(id);
-  };
 
   const renderInspirationViewByType = useCallback((inspiration: InspirationInterface) => {
     const type = inspiration?.type;
@@ -48,6 +45,11 @@ export default function ContentPage() {
 
   const { id } = inspiration;
 
+  const deleteInspirationById = (id: number) => {
+    deleteInspiration(id);
+    setDeleteInspirationModalOn(false);
+  };
+
   return (
     <article>
       <NavigationBar
@@ -55,12 +57,35 @@ export default function ContentPage() {
         backLink="/"
         backLinkScrollOption={false}
         rightElement={
-          <IconButton onClick={() => deleteInspirationById(id)} iconName="DeleteIcon" light />
+          <IconButton
+            onClick={() => setDeleteInspirationModalOn(true)}
+            iconName="DeleteIcon"
+            light
+          />
         }
       />
       <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
         {renderInspirationViewByType(inspiration)}
       </LoadingHandler>
+
+      <IllustDialog
+        image={`/modal_characters/2.png`}
+        isShowing={isDeleteInspirationModalOn}
+        actionButtons={
+          <>
+            <FilledButton colorType="light" onClick={() => deleteInspirationById(id)}>
+              네
+            </FilledButton>
+            <FilledButton colorType="dark" onClick={() => setDeleteInspirationModalOn(false)}>
+              아니요
+            </FilledButton>
+          </>
+        }
+      >
+        영감이 삭제됩니다.
+        <br />
+        괜찮으신가요?
+      </IllustDialog>
     </article>
   );
 }

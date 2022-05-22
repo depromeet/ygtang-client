@@ -62,7 +62,7 @@ const dimBackdropCss = (theme: Theme) => css`
 
   background-color: ${theme.color.dim03};
 
-  z-index: 10;
+  z-index: 1000;
   overflow: hidden;
 `;
 
