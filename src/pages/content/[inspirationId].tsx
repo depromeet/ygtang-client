@@ -13,11 +13,10 @@ import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 
 export default function ContentPage() {
-  const inspirationIdFromRoute = useQueryParam('inspirationId', String);
+  const inspirationId = useQueryParam('inspirationId', String);
 
   const { deleteInspiration } = useInspirationMutation();
   const { push } = useInternalRouter();
-  const inspirationId = inspirationIdFromRoute;
 
   const { inspiration, isLoading } = useInspirationById({
     inspirationId,
