@@ -1,2 +1,2 @@
-export * from './Indicator';
-export * from './SnapCarousel';
+export { Indicator } from './Indicator';
+export { SnapCarousel } from './SnapCarousel';

@@ -1,2 +1,2 @@
-export * from './textEllipsisCss';
-export * from './viewHeight';
+export { textEllipsisCss } from './textEllipsisCss';
+export { fullViewHeight, viewHeight } from './viewHeight';

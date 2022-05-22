@@ -1,1 +1,1 @@
-export * from './ga';
+export { gaEvent, gaPageview } from './ga';

@@ -1,1 +1,1 @@
-export * from './OnboardContent';
+export { OnboardContent } from './OnboardContent';

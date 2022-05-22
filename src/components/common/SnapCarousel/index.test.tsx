@@ -7,5 +7,7 @@ describe('components/common/SnapCarousel/index', () => {
 
   it('should defined SnapCarousel', () => {
     expect(SnapCarousel).toBeDefined();
+    expect(SnapCarousel.Wrapper).toBeDefined();
+    expect(SnapCarousel.Item).toBeDefined();
   });
 });
