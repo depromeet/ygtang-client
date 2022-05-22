@@ -13,30 +13,21 @@ const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagForm
 
 export default function TextView({ inspiration }: { inspiration: InspirationInterface }) {
   const inspiringText = useInput({ useDebounce: true });
-  const memoText = useInput({ useDebounce: true });
-  const { createInspiration } = useInspirationMutation();
+  const memoText = useInput({ useDebounce: true, initialValue: inspiration.memo });
+  const { modifyInspiration } = useInspirationMutation();
 
-  const submitText = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!inspiringText.value) return;
-    const textData = new FormData();
-    const tagIds = tagResponses.map(tag => tag.id);
-    textData.append('content', inspiringText.value);
-    textData.append('memo', memoText.value);
-    textData.append('type', 'TEXT');
-    textData.append('tagIds', tagIds.toString());
-
-    createInspiration(textData);
+  const saveMemo = () => {
+    modifyInspiration({ id: inspiration.id, memo: memoText.value });
   };
 
   if (!inspiration) return <></>;
 
-  const { tagResponses, content, memo } = inspiration;
+  const { tagResponses, content } = inspiration;
 
   return (
     <>
       <article css={addTextCss}>
-        <form onSubmit={submitText} css={formCss}>
+        <form css={formCss}>
           <section css={addTextTopCss}>
             <div css={contentWrapperCss}>
               <Input
@@ -54,7 +45,8 @@ export default function TextView({ inspiration }: { inspiration: InspirationInte
                 editable
                 onChange={memoText.onChange}
                 debouncedValue={memoText.debouncedValue}
-                value={memo}
+                value={memoText.value}
+                onSaveClick={saveMemo}
               />
             </div>
           </section>
