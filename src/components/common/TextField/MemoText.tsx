@@ -73,6 +73,13 @@ export function MemoText({
   const id = useId();
   const theme = useTheme();
 
+  const onClick = (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    onSaveClick && onSaveClick();
+  };
+
   return (
     <TextField
       as={'textarea'}
@@ -87,7 +94,7 @@ export function MemoText({
             {label ?? '메모'}
           </label>
           {editable && (
-            <button css={transparentButtonCss} onClick={onSaveClick}>
+            <button css={transparentButtonCss} onClick={onClick}>
               <EditIcon size={21} color={theme.color.gray05} />
             </button>
           )}

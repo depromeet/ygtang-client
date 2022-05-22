@@ -50,8 +50,22 @@ export default function useInspirationMutation() {
     }
   );
 
+  const modifyInspirationMemoMutation = useMutation(
+    (data: { id: number; memo: string }) => post('/v1/inspiration/modify', data),
+    {
+      onSuccess: res => {
+        console.log(res);
+        // TODO: view 화면 업데이트, 리스트도.. 필요할지도
+      },
+      onError: (error, variable, context) => {
+        console.log('err', error, variable, context);
+      },
+    }
+  );
+
   return {
     createInspiration: createInspirationMutation.mutate,
     deleteInspiration: deleteInspirationMutation.mutate,
+    modifyInspiration: modifyInspirationMemoMutation.mutate,
   };
 }
