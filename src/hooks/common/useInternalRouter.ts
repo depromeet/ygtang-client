@@ -10,6 +10,7 @@ export type RouterPathType =
   | '/add/text'
   | '/add/image'
   | '/add/tag'
+  | '/edit/tag'
   | '/my'
   | '/my/tag'
   | '/my/account'

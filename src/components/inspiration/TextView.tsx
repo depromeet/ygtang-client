@@ -43,7 +43,7 @@ export default function TextView({ inspiration }: { inspiration: InspirationInte
               />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tagResponses} />
+              <TagContent tags={tagResponses} isEditing />
             </div>
             <div css={contentWrapperCss}>
               <MemoText
