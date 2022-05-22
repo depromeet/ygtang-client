@@ -7,12 +7,19 @@ import { FixedSpinner } from '~/components/common/Spinner';
 import TagForm from '~/components/common/TagForm';
 import { defaultFadeInVariants } from '~/constants/motions';
 import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
+import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import { useAppliedTags } from '~/store/AppliedTags';
 
 export default function TagPage() {
   const { tags: appliedTags, removeTag, addTag } = useAppliedTags();
   const [keyword, setKeyword] = useState('');
-  const { tags, isLoading } = useGetTagListWithInfinite({ keyword });
+  const { tags, isLoading, hasNextPage, fetchNextPage } = useGetTagListWithInfinite({ keyword });
+
+  const { setTarget } = useIntersectionObserver({
+    onIntersect: ([{ isIntersecting }]) => {
+      if (isIntersecting && hasNextPage) fetchNextPage();
+    },
+  });
 
   return (
     <article>
@@ -34,6 +41,7 @@ export default function TagPage() {
               setKeyword(keyword);
             }}
           />
+          {hasNextPage && !isLoading && <div ref={setTarget}></div>}
         </motion.div>
       </LoadingHandler>
     </article>
