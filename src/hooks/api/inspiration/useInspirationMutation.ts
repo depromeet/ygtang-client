@@ -51,6 +51,7 @@ export default function useInspirationMutation() {
     (modifiedMemo: { id: number; memo: string }) => post('/v1/inspiration/modify', modifiedMemo),
     {
       onSuccess: (_res, req) => {
+        fireToast({ content: '메모가 수정되었습니다!' });
         resetInspirationItem(req.id);
       },
       onError: (error, variable, context) => {

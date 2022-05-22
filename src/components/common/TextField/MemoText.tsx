@@ -57,6 +57,11 @@ export interface MemoTextProps {
    * 메모 debouncedValue 입니다.
    */
   debouncedValue: string;
+
+  /**
+   * input 자동 포커스 boolean 값을 넣어 사용합니다.
+   */
+  autoFocus?: boolean;
 }
 
 export function MemoText({
@@ -69,6 +74,7 @@ export function MemoText({
   onSaveClick,
   value,
   debouncedValue,
+  autoFocus,
 }: MemoTextProps) {
   const id = useId();
   const theme = useTheme();
@@ -104,12 +110,13 @@ export function MemoText({
         <div css={flexBetweenWrapper}>
           <div />
           <span css={textLimitCss}>
-            <span css={(editable || writable) && textLimitCurrentCss}>{debouncedValue.length}</span>
+            <span css={writable && textLimitCurrentCss}>{debouncedValue.length}</span>
             {`/${wordLimit ?? 150}`}
           </span>
         </div>
       }
-      disabled={!editable && !writable}
+      disabled={!writable}
+      autoFocus={autoFocus}
     />
   );
 }

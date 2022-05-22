@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
@@ -26,9 +27,12 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
     value: memoValue,
   } = useInput({ useDebounce: true, initialValue: inspiration.memo });
   const { modifyInspiration } = useInspirationMutation();
+  const [isWriting, setWriting] = useState(false);
 
   const saveMemo = () => {
+    if (!isWriting) return setWriting(true);
     modifyInspiration({ id: inspiration.id, memo: memoValue });
+    setWriting(false);
   };
 
   if (!inspiration) return <></>;
@@ -63,11 +67,13 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
             </div>
             <div css={contentWrapperCss}>
               <MemoText
+                editable
+                onSaveClick={saveMemo}
                 onChange={onMemoChange}
                 debouncedValue={memoDebouncedValue}
                 value={memoValue}
-                editable
-                onSaveClick={saveMemo}
+                writable={isWriting}
+                autoFocus={isWriting}
               />
             </div>
           </section>

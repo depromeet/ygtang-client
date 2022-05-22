@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from 'react';
+import { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes, useEffect, useRef } from 'react';
 import { css, jsx, Theme, useTheme } from '@emotion/react';
 
 type InputAndTextarea = InputHTMLAttributes<HTMLInputElement> &
@@ -37,6 +37,11 @@ export interface InputProps extends InputAndTextarea {
    * @default 12
    */
   padding?: number;
+
+  /**
+   * input 자동 포커스 boolean 값을 넣어 사용합니다.
+   */
+  autoFocus?: boolean;
 }
 
 export function Input({
@@ -45,9 +50,19 @@ export function Input({
   append,
   fixedHeight,
   padding,
+  autoFocus = false,
   ...props
 }: InputProps) {
   const theme = useTheme();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  // input auto focus하면서 커서 맨 뒤로 보내기
+  useEffect(() => {
+    if (!autoFocus) return;
+    const valueLength = inputRef.current?.value.length ?? 0;
+    inputRef.current?.focus();
+    inputRef.current?.setSelectionRange(valueLength, valueLength);
+  }, [autoFocus]);
 
   return (
     <div css={inputWrapperCss}>
@@ -62,6 +77,8 @@ export function Input({
             isAppend: typeof append !== 'undefined',
             padding,
           }),
+          ref: inputRef,
+
           ...props,
         },
         null

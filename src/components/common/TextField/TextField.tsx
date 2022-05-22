@@ -34,9 +34,21 @@ export interface TextFieldProps extends InputProps {
    * 의존 컴포넌트를 위한 옵션입니다.
    */
   customId?: string;
+
+  /**
+   * input 자동 포커스 boolean 값을 넣어 사용합니다.
+   */
+  autoFocus?: boolean;
 }
 
-export function TextField({ label, isSuccess, feedback, customId, ...props }: TextFieldProps) {
+export function TextField({
+  label,
+  isSuccess,
+  feedback,
+  customId,
+  autoFocus,
+  ...props
+}: TextFieldProps) {
   const id = useId();
   return (
     <div css={wrapperCss}>
@@ -49,6 +61,7 @@ export function TextField({ label, isSuccess, feedback, customId, ...props }: Te
           label
         ))}
       <Input
+        autoFocus={autoFocus}
         id={customId ?? 'input-' + id}
         {...props}
         append={
