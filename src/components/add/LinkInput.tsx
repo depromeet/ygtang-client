@@ -6,6 +6,7 @@ import { Input } from '~/components/common/TextField/Input';
 import LinkThumbnail from '~/components/LinkThumbnail';
 import { useCheckLinkAvailable } from '~/hooks/api/inspiration/useCheckLinkAvailable';
 import useInput from '~/hooks/common/useInput';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { OpenGraph } from '~/pages/add/link';
 import { useToast } from '~/store/Toast';
 import { validator } from '~/utils/validator';
@@ -16,6 +17,7 @@ interface LinkInputProps {
 }
 
 export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) {
+  const { asPath } = useInternalRouter();
   const url = useInput({ useDebounce: true });
   const { openGraph: og, refetch, isFetching } = useCheckLinkAvailable({ link: url.value });
 
@@ -48,8 +50,8 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
     <div css={LinkInputCss}>
       {openGraph ? (
         <LinkThumbnail
+          edit={asPath.includes('add')}
           thumbnail={openGraph}
-          edit
           onDelete={() => saveOpenGraph && saveOpenGraph(null)}
         />
       ) : (

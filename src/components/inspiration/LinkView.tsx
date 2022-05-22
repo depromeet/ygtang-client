@@ -44,7 +44,6 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
           <section css={addLinkTopCss}>
             <div css={contentWrapperCss}>
               <LinkInput
-                // TODO: 오픈그래프 type refactoring 필요
                 openGraph={
                   openGraphResponse
                     ? ({

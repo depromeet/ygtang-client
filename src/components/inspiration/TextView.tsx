@@ -35,6 +35,7 @@ export default function TextView({ inspiration }: { inspiration: InspirationInte
                 placeholder="영감을 작성해 보세요."
                 value={content}
                 onChange={inspiringText.onChange}
+                disabled
               />
             </div>
             <div css={contentWrapperCss}>
