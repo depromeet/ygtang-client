@@ -24,23 +24,15 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
     value: memoValue,
-  } = useInput({ useDebounce: true });
-  const { createInspiration } = useInspirationMutation();
+  } = useInput({ useDebounce: true, initialValue: inspiration.memo });
+  const { modifyInspiration } = useInspirationMutation();
 
-  const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!openGraphResponse || !openGraphResponse.url) return;
-    const tagIds = tagResponses.map(tag => tag.id);
-    const linkData = new FormData();
-    linkData.append('content', openGraphResponse.url);
-    linkData.append('memo', memoValue);
-    linkData.append('type', 'LINK');
-    linkData.append('tagIds', tagIds.toString());
-
-    createInspiration(linkData);
+  const saveMemo = () => {
+    modifyInspiration({ id: inspiration.id, memo: memoValue });
   };
+
   if (!inspiration) return <></>;
-  const { tagResponses, openGraphResponse, memo } = inspiration;
+  const { tagResponses, openGraphResponse } = inspiration;
 
   if (!openGraphResponse) return <></>;
   const { description, siteName, title, url, code, image } = openGraphResponse;
@@ -48,7 +40,7 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
   return (
     <>
       <article css={addLinkCss}>
-        <form onSubmit={submitLink} css={formCss}>
+        <form css={formCss}>
           <section css={addLinkTopCss}>
             <div css={contentWrapperCss}>
               <LinkInput
@@ -74,8 +66,9 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
               <MemoText
                 onChange={onMemoChange}
                 debouncedValue={memoDebouncedValue}
-                value={memo}
+                value={memoValue}
                 editable
+                onSaveClick={saveMemo}
               />
             </div>
           </section>
