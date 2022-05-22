@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
 
+import useUserInformationMutation from '~/hooks/api/member/useUserInformationMutaion';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
+import { useToast } from '~/store/Toast';
 import { useUserInformation } from '~/store/UserInformation';
 
 import { GhostButton } from '../../../components/common/Button';
@@ -10,10 +13,12 @@ import NavigationBar from '../../../components/common/NavigationBar';
 import TextField from '../../../components/common/TextField';
 
 export default function MyAccountChangeNickame() {
+  const { fireToast } = useToast();
   const nickname = useInput({ useDebounce: true });
   const { userInformation } = useUserInformation();
   const [nicknameError, setNicknameError] = useState('');
-
+  const { updateNickname } = useUserInformationMutation();
+  const { push } = useInternalRouter();
   useDidUpdate(() => {
     nickname.setValue(userInformation.nickName);
   }, [userInformation.nickName]);
@@ -32,7 +37,15 @@ export default function MyAccountChangeNickame() {
   };
 
   const callMuation = () => {
-    console.log('뮤테이션 실행');
+    if (nicknameError) return fireToast({ content: '변경될 이름을 확인해주세요.' });
+    updateNickname(
+      { nickname: nickname.debouncedValue },
+      {
+        onSuccess: () => {
+          push('/my/account');
+        },
+      }
+    );
   };
 
   return (
