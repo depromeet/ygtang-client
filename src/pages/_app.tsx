@@ -2,10 +2,12 @@ import { PropsWithChildren, useEffect } from 'react';
 import { AppProps } from 'next/app';
 import NextHead from 'next/head';
 import { css, Theme, ThemeProvider } from '@emotion/react';
+import { init as SentryInit } from '@sentry/nextjs';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 
+import { ErrorBoundary } from '~/components/common/ErrorBoundary';
 import ToastSection from '~/components/common/ToastSection';
 import { useWindowSize } from '~/hooks/common/useWindowSize';
 import { useGaPageview } from '~/hooks/ga/useGaPageview';
@@ -18,23 +20,27 @@ import { fullViewHeight } from '~/styles/utils';
 export default function App({ Component, pageProps }: AppProps) {
   useGaPageview();
 
+  SentryInit({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN });
+
   return (
     <>
       <Head />
-      <RecoilRoot>
-        <ThemeProvider theme={CustomTheme}>
-          <QueryClientProvider client={queryClient}>
-            <GlobalStyle />
-            <UserProvider>
-              <Layout>
-                <Component {...pageProps} />
-                <ToastSection />
-              </Layout>
-            </UserProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </ThemeProvider>
-      </RecoilRoot>
+      <ErrorBoundary>
+        <RecoilRoot>
+          <ThemeProvider theme={CustomTheme}>
+            <QueryClientProvider client={queryClient}>
+              <GlobalStyle />
+              <UserProvider>
+                <Layout>
+                  <Component {...pageProps} />
+                  <ToastSection />
+                </Layout>
+              </UserProvider>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </ThemeProvider>
+        </RecoilRoot>
+      </ErrorBoundary>
     </>
   );
 }
