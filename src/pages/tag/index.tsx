@@ -9,12 +9,20 @@ import TagForm from '~/components/common/TagForm';
 import { defaultFadeInVariants } from '~/constants/motions';
 import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
+import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import { useFilteredTags } from '~/store/FilteredTags';
 
 export default function TagPage() {
   const { filteredTags, addTag, removeTag } = useFilteredTags({});
   const [keyword, setKeyword] = useState('');
-  const { tags, isLoading } = useGetTagListWithInfinite({ keyword });
+
+  const { tags, isLoading, hasNextPage, fetchNextPage } = useGetTagListWithInfinite({ keyword });
+
+  const { setTarget } = useIntersectionObserver({
+    onIntersect: ([{ isIntersecting }]) => {
+      if (isIntersecting && hasNextPage) fetchNextPage();
+    },
+  });
 
   const router = useInternalRouter();
 
@@ -52,6 +60,7 @@ export default function TagPage() {
             }}
             readOnly
           />
+          {hasNextPage && !isLoading && <div ref={setTarget}></div>}
         </motion.div>
       </LoadingHandler>
     </article>
