@@ -60,6 +60,32 @@ export default function useInspirationMutation() {
     }
   );
 
+  const addInspirationTagMutation = useMutation(
+    (addTag: { id: number; tagId: number }) => post('/v1/inspiration/tag', addTag),
+    {
+      onSuccess: (_res, req) => {
+        fireToast({ content: '태그 추가 성공!' });
+        resetInspirationItem(req.id);
+      },
+      onError: (error, variable, context) => {
+        console.log('err', error, variable, context);
+      },
+    }
+  );
+
+  const deleteInspirationTagMutation = useMutation(
+    ({ id, tagId }: { id: number; tagId: number }) => del(`/v1/inspiration/untag/${id}/${tagId}`),
+    {
+      onSuccess: (_res, req) => {
+        fireToast({ content: '태그 삭제 성공!' });
+        resetInspirationItem(req.id);
+      },
+      onError: (error, variable, context) => {
+        console.log('err', error, variable, context);
+      },
+    }
+  );
+
   return {
     /**
      * 영감을 추가합니다.
@@ -78,5 +104,17 @@ export default function useInspirationMutation() {
      * modifyInspiration({id: number, memo: string})
      */
     modifyInspiration: modifyInspirationMemoMutation.mutate,
+
+    /**
+     * 영감에 태그를 추가합니다.
+     * addInspirationTag({id: number, tagId: number})
+     */
+    addInspirationTag: addInspirationTagMutation.mutate,
+
+    /**
+     * 영감에 태그를 삭제합니다.
+     * deleteInspirationTag({id: number, tagId: number})
+     */
+    deleteInspirationTag: deleteInspirationTagMutation.mutate,
   };
 }
