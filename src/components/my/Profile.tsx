@@ -1,21 +1,21 @@
 import { css, Theme } from '@emotion/react';
 
 import { USER_PROFILE_IMAGE_SRC } from '~/constants/assets';
-import useGetUserInformation from '~/hooks/api/member/useGetUserInfromation';
 import { useUser } from '~/store/User';
+import { useUserInformation } from '~/store/UserInformation';
 
 import { FilledButton } from '../common/Button';
 import MyInformationMenu from './InformationMenu';
 
 export default function MyProfile() {
   const { userLogout } = useUser();
-  const { userInfromation } = useGetUserInformation();
+  const { userInformation } = useUserInformation();
 
   return (
     <section css={MyProfileContainerCss}>
       <MyInformationMenu
-        label={userInfromation?.nickName || ''}
-        description={userInfromation?.email || ''}
+        label={userInformation?.nickName || ''}
+        description={userInformation?.email || ''}
         align="bottom"
         rightElement={
           <FilledButton css={LogOutButtonCss} onClick={userLogout}>

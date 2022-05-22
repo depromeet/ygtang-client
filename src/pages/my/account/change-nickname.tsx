@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-import useGetUserInformation, {
-  UserInformationInterface,
-} from '~/hooks/api/member/useGetUserInfromation';
+import useDidMount from '~/hooks/common/useDidMount';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
+import { useUserInformation } from '~/store/UserInformation';
 
 import { GhostButton } from '../../../components/common/Button';
 import NavigationBar from '../../../components/common/NavigationBar';
@@ -13,14 +12,15 @@ import TextField from '../../../components/common/TextField';
 
 export default function MyAccountChangeNickame() {
   const nickname = useInput({ useDebounce: true });
-  const initNickname = (userInfromation: UserInformationInterface) => {
-    nickname.setValue(userInfromation.nickName);
-  };
-  const { userInfromation } = useGetUserInformation(initNickname);
+  const { userInformation } = useUserInformation();
   const [nicknameError, setNicknameError] = useState('');
 
   useDidUpdate(() => {
-    if (!nickname.debouncedValue.length || userInfromation?.nickName === nickname.debouncedValue) {
+    nickname.setValue(userInformation.nickName);
+  }, [userInformation.nickName]);
+
+  useDidUpdate(() => {
+    if (!nickname.debouncedValue.length || userInformation?.nickName === nickname.debouncedValue) {
       setNicknameError('변경될 이름을 입력해주세요.');
     } else {
       setNicknameError('');
