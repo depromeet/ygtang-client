@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
     const MIXPANEL_ID = process.env.NEXT_PUBLIC_MIXPANEL_ID;
     if (!MIXPANEL_ID) return;
 
-    mixpanel.init(MIXPANEL_ID, { debug: true });
+    mixpanel.init(MIXPANEL_ID);
   });
 
   return (
