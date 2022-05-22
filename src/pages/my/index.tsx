@@ -8,7 +8,7 @@ import Menu from '~/components/my/Menu';
 import MyProfile from '~/components/my/Profile';
 
 export default function MyPage() {
-  const [isInitalizeConfirmModalOpen, setIsInitalizeConfirmModalOpen] = useState(false);
+  const [isInitializeConfirmModalOpen, setIsInitializeConfirmModalOpen] = useState(false);
 
   return (
     <article css={myPageContainerCss}>
@@ -26,23 +26,26 @@ export default function MyPage() {
             }}
           />
           <Menu
-            css={initalizeMenuCss}
+            css={initializeMenuCss}
             label="정보초기화"
             onClick={() => {
-              setIsInitalizeConfirmModalOpen(true);
+              setIsInitializeConfirmModalOpen(true);
             }}
           />
         </ul>
       </section>
       <Dialog
-        isShowing={isInitalizeConfirmModalOpen}
+        isShowing={isInitializeConfirmModalOpen}
         actionButtons={
           <>
-            <FilledButton colorType="dark" onClick={() => setIsInitalizeConfirmModalOpen(false)}>
+            <FilledButton colorType="dark" onClick={() => setIsInitializeConfirmModalOpen(false)}>
               네
             </FilledButton>
             <div css={dialogLongButtonCss}>
-              <FilledButton colorType="light" onClick={() => setIsInitalizeConfirmModalOpen(false)}>
+              <FilledButton
+                colorType="light"
+                onClick={() => setIsInitializeConfirmModalOpen(false)}
+              >
                 아니요
               </FilledButton>
             </div>
@@ -69,7 +72,7 @@ const myPageCss = css`
   overflow-y: auto;
 `;
 
-const initalizeMenuCss = css`
+const initializeMenuCss = css`
   margin-top: 64px;
 `;
 
