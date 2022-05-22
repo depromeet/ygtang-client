@@ -2,13 +2,14 @@ import { PropsWithChildren, useEffect } from 'react';
 import { AppProps } from 'next/app';
 import NextHead from 'next/head';
 import { css, Theme, ThemeProvider } from '@emotion/react';
-import mixpanel from 'mixpanel-browser';
+import { init as sentryInit } from '@sentry/nextjs';
+import { init as mixpanelInit } from 'mixpanel-browser';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 
+import { ErrorBoundary } from '~/components/common/ErrorBoundary';
 import ToastSection from '~/components/common/ToastSection';
-import useDidMount from '~/hooks/common/useDidMount';
 import { useWindowSize } from '~/hooks/common/useWindowSize';
 import { useGaPageview } from '~/hooks/ga/useGaPageview';
 import { queryClient } from '~/libs/api/queryClient';
@@ -20,30 +21,28 @@ import { fullViewHeight } from '~/styles/utils';
 export default function App({ Component, pageProps }: AppProps) {
   useGaPageview();
 
-  useDidMount(() => {
-    const MIXPANEL_ID = process.env.NEXT_PUBLIC_MIXPANEL_ID;
-    if (!MIXPANEL_ID) return;
-
-    mixpanel.init(MIXPANEL_ID);
-  });
+  sentryInit({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN });
+  mixpanelInit(process.env.NEXT_PUBLIC_MIXPANEL_ID as string);
 
   return (
     <>
       <Head />
-      <RecoilRoot>
-        <ThemeProvider theme={CustomTheme}>
-          <QueryClientProvider client={queryClient}>
-            <GlobalStyle />
-            <UserProvider>
-              <Layout>
-                <Component {...pageProps} />
-                <ToastSection />
-              </Layout>
-            </UserProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </ThemeProvider>
-      </RecoilRoot>
+      <ErrorBoundary>
+        <RecoilRoot>
+          <ThemeProvider theme={CustomTheme}>
+            <QueryClientProvider client={queryClient}>
+              <GlobalStyle />
+              <UserProvider>
+                <Layout>
+                  <Component {...pageProps} />
+                  <ToastSection />
+                </Layout>
+              </UserProvider>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </ThemeProvider>
+        </RecoilRoot>
+      </ErrorBoundary>
     </>
   );
 }
