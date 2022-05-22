@@ -6,10 +6,12 @@ import Dialog from '~/components/common/Dialog';
 import NavigationBar from '~/components/common/NavigationBar';
 import MyInformationMenu from '~/components/my/InformationMenu';
 import Menu from '~/components/my/Menu';
+import useGetUserInformation from '~/hooks/api/member/useGetUserInfromation';
 import { fullViewHeight } from '~/styles/utils';
 
 export default function MyAccountPage() {
   const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] = useState(false);
+  const { userInfromation } = useGetUserInformation();
 
   return (
     <article css={myAccountPageContainerCss}>
@@ -18,7 +20,7 @@ export default function MyAccountPage() {
         <ul>
           <MyInformationMenu
             label="이름"
-            description="한영감"
+            description={userInfromation?.nickName || ''}
             rightElement={
               <IconButton
                 onClick={() => {
@@ -29,7 +31,7 @@ export default function MyAccountPage() {
               />
             }
           />
-          <MyInformationMenu label="이메일" description="gggg@gmail.com" />
+          <MyInformationMenu label="이메일" description={userInfromation?.email || ''} />
           <Menu label="비밀번호 재설정" href="/my/account/change-password" />
         </ul>
         <Menu
