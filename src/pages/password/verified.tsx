@@ -1,73 +1,53 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
 import useCheckPasswordResetEmailVerifiedMutation from '~/hooks/api/auth/useCheckPasswordResetEmailVerifiedMutation';
 import useSendResetPasswordMutation from '~/hooks/api/member/useSendResetPasswordMutation';
+import useRouterQuery from '~/hooks/common/useRouterQuery';
 import { useToast } from '~/store/Toast';
 
 export default function PasswordResetVerified() {
   const { fireToast } = useToast();
   const queryEmail = useRouterQuery('email', String);
-  
-  // 하단의 query.email => queryEmail로
+
   const [isSent, setIsSent] = useState(false);
   const [isError, setIsError] = useState(false);
-  const {
-    mutate: checkMutate,
-    data: checkData,
-    isLoading: checkLoading,
-    error: checkError,
-  } = useCheckPasswordResetEmailVerifiedMutation();
-  const {
-    mutate: sendMutate,
-    isSuccess: sendSuccess,
-    isLoading: sendLoading,
-    error: sendError,
-  } = useSendResetPasswordMutation();
+  const { mutate: checkMutate, isLoading: checkLoading } =
+    useCheckPasswordResetEmailVerifiedMutation({
+      onSuccess: data => {
+        if (data.data && queryEmail) {
+          sendMutate({
+            email: queryEmail,
+          });
+        } else {
+          setIsError(true);
+          fireToast({ content: '전송하지 못했습니다. 사유: ' + data.message, duration: 5000 });
+        }
+      },
+      onError: data => {
+        fireToast({ content: '전송하지 못했습니다. 사유: ' + data.message, duration: 5000 });
+        setIsError(true);
+      },
+    });
+  const { mutate: sendMutate, isLoading: sendLoading } = useSendResetPasswordMutation({
+    onSuccess: () => setIsSent(true),
+    onError: error => {
+      if (error) {
+        setIsError(true);
+        fireToast({ content: '전송하지 못했습니다. 사유: ' + error.message, duration: 5000 });
+      }
+    },
+  });
 
   useEffect(() => {
-    if (query && query.email && query.email !== '') {
+    if (queryEmail && queryEmail !== '') {
       checkMutate({
-        email: query.email as string,
+        email: queryEmail,
       });
     }
-  }, [checkMutate, query]);
-
-  useEffect(() => {
-    if (checkData) {
-      if (checkData.data) {
-        sendMutate({
-          email: query.email as string,
-        });
-      } else {
-        setIsError(true);
-        fireToast({ content: '전송하지 못했습니다. 사유: ' + checkData.message, duration: 5000 });
-      }
-    }
-  }, [checkData, fireToast, query.email, sendMutate]);
-
-  useEffect(() => {
-    if (checkError) {
-      setIsError(true);
-      fireToast({ content: '전송하지 못했습니다. 사유: ' + checkError.message, duration: 5000 });
-    }
-  }, [checkError, fireToast]);
-
-  useEffect(() => {
-    if (sendSuccess) {
-      setIsSent(true);
-    }
-  }, [sendSuccess]);
-
-  useEffect(() => {
-    if (sendError) {
-      setIsError(true);
-      fireToast({ content: '전송하지 못했습니다. 사유: ' + sendError.message, duration: 5000 });
-    }
-  }, [sendError, fireToast]);
+  }, [checkMutate, queryEmail]);
 
   if (isError) {
     return (
@@ -80,12 +60,7 @@ export default function PasswordResetVerified() {
   return (
     <LoadingHandler
       isLoading={
-        !query ||
-        !Boolean(query.email) ||
-        query.email === undefined ||
-        checkLoading ||
-        !isSent ||
-        sendLoading
+        !Boolean(queryEmail) || queryEmail === undefined || checkLoading || !isSent || sendLoading
       }
       loadingComponent={<FixedSpinner />}
     >

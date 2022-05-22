@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
@@ -16,12 +16,20 @@ export default function PasswordReset() {
   const email = useInput({ useDebounce: true });
   const { push } = useRouter();
   const [emailError, setEmailError] = useState('');
-  const {
-    mutate: sendPasswordResetEmailMutation,
-    isSuccess: isSendPasswordResetEmailSuccess,
-    isError: isSendPasswordResetEmailError,
-    isLoading: isSendPasswordResetEmailLoading,
-  } = useSendPasswordResetEmailMutation();
+  const { mutate: sendPasswordResetEmailMutation, isLoading: isSendPasswordResetEmailLoading } =
+    useSendPasswordResetEmailMutation({
+      onSuccess: () => {
+        push({
+          pathname: '/password/sent-email',
+          query: {
+            email: email.value,
+          },
+        });
+      },
+      onError: () => {
+        fireToast({ content: '이메일 전송 도중 오류가 발생하였습니다.' });
+      },
+    });
 
   const handleEmailSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,23 +46,6 @@ export default function PasswordReset() {
       setEmailError('');
     }
   }, [email.debouncedValue]);
-
-  useEffect(() => {
-    if (isSendPasswordResetEmailSuccess) {
-      push({
-        pathname: '/password/sent-email',
-        query: {
-          email: email.value,
-        },
-      });
-    }
-  }, [email.value, isSendPasswordResetEmailSuccess, push]);
-
-  useEffect(() => {
-    if (isSendPasswordResetEmailError) {
-      fireToast({ content: '이메일 전송 도중 오류가 발생하였습니다.' });
-    }
-  }, [fireToast, isSendPasswordResetEmailError]);
 
   return (
     <article css={loginCss}>
