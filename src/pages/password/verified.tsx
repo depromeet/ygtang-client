@@ -10,7 +10,9 @@ import { useToast } from '~/store/Toast';
 
 export default function PasswordResetVerified() {
   const { fireToast } = useToast();
-  const { query } = useRouter();
+  const queryEmail = useRouterQuery('email', String);
+  
+  // 하단의 query.email => queryEmail로
   const [isSent, setIsSent] = useState(false);
   const [isError, setIsError] = useState(false);
   const {
