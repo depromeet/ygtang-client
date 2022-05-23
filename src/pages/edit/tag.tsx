@@ -17,7 +17,7 @@ import { useToast } from '~/store/Toast';
 
 export default function EditTag() {
   const { fireToast } = useToast();
-  const inspirationId = useQueryParam('inspirationId', String);
+  const inspirationId = useQueryParam('id', String);
   const { push } = useInternalRouter();
   const { inspiration } = useInspirationById({
     inspirationId,

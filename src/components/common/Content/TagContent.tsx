@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { css, Theme } from '@emotion/react';
 
+import { MODAL_TYPE } from '~/constants/common';
+
 import { IconButton } from '../Button';
 import { labelCss } from '../styles';
 import Tag from '../Tag';
@@ -38,10 +40,10 @@ export default function TagContent({
           <Link
             href={`${
               inspirationId
-                ? `/edit/tag?modal=editTag&inspirationId=${inspirationId}`
-                : '?modal=addTag'
+                ? `?modal=${MODAL_TYPE.editTag}&id=${inspirationId}`
+                : `?modal=${MODAL_TYPE.addTag}`
             }`}
-            as={inspirationId ? `/edit/tag?inspirationId=${inspirationId}` : '/add/tag'}
+            as={inspirationId ? `/edit/tag?id=${inspirationId}` : '/add/tag'}
             scroll={false}
           >
             <a>
