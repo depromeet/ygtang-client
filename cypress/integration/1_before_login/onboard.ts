@@ -51,6 +51,7 @@ describe('1_before_login/onboard', () => {
 
   it('뒤로 간 후, 빠르게 가입하기 버튼을 누를 시 회원가입 화면으로 이동합니다.', () => {
     cy.go('back');
+    cy.scrollTo('bottom', { ensureScrollable: false });
     cy.get('button').contains('빠르게 가입하기').click();
     cy.url().should('include', '/signup');
   });
