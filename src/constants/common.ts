@@ -14,3 +14,9 @@ export const IS_PRODUCTION = process.env.APP_ENV === 'production';
 export const COOKIE_REFRESH = 'ygt_refresh';
 
 export const CONNECT_EMAIL = 'yeonggamt@gmail.com';
+
+export const MODAL_TYPE = {
+  addTag: 'addTag',
+  inspirationView: 'inspirationView',
+  tag: 'tag',
+};
