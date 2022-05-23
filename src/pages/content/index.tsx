@@ -26,7 +26,7 @@ export default function ContentPage() {
 
   useEffect(() => {
     if (isLoading) return;
-    if (!inspiration) return push('/');
+    if (!inspiration) return push('/', undefined, { scroll: false });
   }, [isLoading, inspiration, push]);
 
   const renderInspirationViewByType = useCallback((inspiration: InspirationInterface) => {
