@@ -17,6 +17,7 @@ export const CONNECT_EMAIL = 'yeonggamt@gmail.com';
 
 export const MODAL_TYPE = {
   addTag: 'addTag',
+  editTag: 'editTag',
   inspirationView: 'inspirationView',
   tag: 'tag',
 };
