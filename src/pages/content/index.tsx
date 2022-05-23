@@ -14,7 +14,7 @@ import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 
 export default function ContentPage() {
-  const inspirationId = useQueryParam('inspirationId', String);
+  const inspirationId = useQueryParam('id', String);
   const { deleteInspiration } = useInspirationMutation();
   const { push } = useInternalRouter();
 

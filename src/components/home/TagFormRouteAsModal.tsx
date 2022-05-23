@@ -1,17 +1,19 @@
 import { css, Theme } from '@emotion/react';
 
 import PortalWrapper from '~/components/common/PortalWrapper';
+import { MODAL_TYPE } from '~/constants/common';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 import TagPage from '~/pages/tag';
 
 export default function TagFormRouteAsModal() {
   const query = useQueryParam('modal', String);
+  const isTagModal = query === MODAL_TYPE.tag;
 
-  usePreventScroll(query === 'tag');
+  usePreventScroll(isTagModal);
 
   return (
-    <PortalWrapper isShowing={query === 'tag'}>
+    <PortalWrapper isShowing={isTagModal}>
       <div css={wrapperCss}>
         <TagPage />
       </div>
