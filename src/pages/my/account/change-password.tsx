@@ -4,16 +4,19 @@ import { CTAButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
 import { CONNECT_EMAIL } from '~/constants/common';
 import { useToast } from '~/store/Toast';
+import { useUserInformation } from '~/store/UserInformation';
 
 export default function MyAccountChangePassword() {
   const { fireToast } = useToast();
+
+  const { userInformation } = useUserInformation();
 
   return (
     <article css={loginCss}>
       <NavigationBar title="비밀번호 변경?찾기?" />
       <div css={introCardCss}>
         <p css={introTextWrapper}>
-          안녕하세요. {'한영감'}님
+          안녕하세요. {userInformation.nickName}님
           <br />
           비밀번호를 변경하고 싶으신가요?
           <br />

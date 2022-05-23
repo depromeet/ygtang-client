@@ -3,13 +3,16 @@ import { css } from '@emotion/react';
 
 import { FilledButton, IconButton } from '~/components/common/Button';
 import Dialog from '~/components/common/Dialog';
+import InternalLink from '~/components/common/InternalLink';
 import NavigationBar from '~/components/common/NavigationBar';
 import MyInformationMenu from '~/components/my/InformationMenu';
 import Menu from '~/components/my/Menu';
+import { useUserInformation } from '~/store/UserInformation';
 import { fullViewHeight } from '~/styles/utils';
 
 export default function MyAccountPage() {
   const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] = useState(false);
+  const { userInformation } = useUserInformation();
 
   return (
     <article css={myAccountPageContainerCss}>
@@ -18,18 +21,16 @@ export default function MyAccountPage() {
         <ul>
           <MyInformationMenu
             label="이름"
-            description="한영감"
+            description={userInformation.nickName}
             rightElement={
-              <IconButton
-                onClick={() => {
-                  console.log('edit');
-                }}
-                iconName="EditIcon"
-                light
-              />
+              <InternalLink href="/my/account/change-nickname">
+                <a>
+                  <IconButton iconName="EditIcon" light />
+                </a>
+              </InternalLink>
             }
           />
-          <MyInformationMenu label="이메일" description="gggg@gmail.com" />
+          <MyInformationMenu label="이메일" description={userInformation.email} />
           <Menu label="비밀번호 재설정" href="/my/account/change-password" />
         </ul>
         <Menu

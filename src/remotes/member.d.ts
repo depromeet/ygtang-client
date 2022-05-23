@@ -3,3 +3,5 @@ interface MemberResponseInterface {
   nickName: string;
   email: string;
 }
+
+type UserInformationType = Omit<MemberResponseInterface, 'id'>;

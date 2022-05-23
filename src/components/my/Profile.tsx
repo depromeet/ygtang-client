@@ -2,19 +2,20 @@ import { css, Theme } from '@emotion/react';
 
 import { USER_PROFILE_IMAGE_SRC } from '~/constants/assets';
 import { useUser } from '~/store/User';
+import { useUserInformation } from '~/store/UserInformation';
 
 import { FilledButton } from '../common/Button';
 import MyInformationMenu from './InformationMenu';
 
 export default function MyProfile() {
   const { userLogout } = useUser();
-  // TODO: USER 정보 부르기
+  const { userInformation } = useUserInformation();
 
   return (
     <section css={MyProfileContainerCss}>
       <MyInformationMenu
-        label="한영감"
-        description="gggg@gmail.com"
+        label={userInformation.nickName}
+        description={userInformation.email}
         align="bottom"
         rightElement={
           <FilledButton css={LogOutButtonCss} onClick={userLogout}>

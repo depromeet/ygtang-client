@@ -15,6 +15,7 @@ export type RouterPathType =
   | '/my/tag'
   | '/my/account'
   | '/my/account/change-password'
+  | '/my/account/change-nickname'
   | '/login'
   | '/signup'
   | '/signup/sent-email'
