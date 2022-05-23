@@ -83,7 +83,6 @@ jobs:
 
   run-cypress:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node14.19.0-chrome100-ff99-edge
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -102,6 +101,7 @@ jobs:
 
       - name: Install mkcert
         run: |
+          sudo apt install libnss3-tools
           brew install mkcert
           mkcert -install
           mkcert localhost
