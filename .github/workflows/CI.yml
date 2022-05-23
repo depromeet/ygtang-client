@@ -98,21 +98,21 @@ jobs:
 
       - name: Install dependencies
         run: yarn
-      
+
       - name: Install mkcert
-        run: | 
+        run: |
           sudo apt install libnss3-tools
           brew install mkcert
           mkcert -install
           mkcert localhost
 
-      - name: E2E test - Chrome
+      - name: E2E test
         uses: cypress-io/github-action@v2
         with:
+          install: false
           start: yarn httpsdev
           wait-on: 'https://localhost:3000'
           record: true
-          browser: chrome
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.HYESUNG_GITHUB_TOKEN }}
