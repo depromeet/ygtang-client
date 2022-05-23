@@ -11,6 +11,6 @@ export interface SignupSendEmailMutationRequest {
  */
 export default function useSignupSendEmailMutation() {
   return useMutation<undefined, { message?: string }, SignupSendEmailMutationRequest>(
-    (data: SignupSendEmailMutationRequest) => post<undefined>('/v1/auth/sends-email', data)
+    (data: SignupSendEmailMutationRequest) => post<undefined>('/v1/auth/sends-email/signup', data)
   );
 }
