@@ -19,9 +19,18 @@ function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps
   const { push } = useRouter();
 
   const moveToInspirationView = (id: number) => {
-    push(`?modal=inspirationView&inspirationId=${id}`, `/content/${id}`, {
-      scroll: false,
-    });
+    push(
+      {
+        query: {
+          modal: 'inspirationView',
+          id,
+        },
+      },
+      { pathname: 'content', query: { id } },
+      {
+        scroll: false,
+      }
+    );
   };
 
   return (

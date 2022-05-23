@@ -3,7 +3,7 @@ import { css, Theme } from '@emotion/react';
 import PortalWrapper from '~/components/common/PortalWrapper';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
 import useQueryParam from '~/hooks/common/useRouterQuery';
-import ContentPage from '~/pages/content/[inspirationId]';
+import ContentPage from '~/pages/content';
 
 export default function InspirationViewAsModal() {
   const modal = useQueryParam('modal', String);
