@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "cypress": "cypress open",
+    "cypress:headless": "cypress run"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -42,7 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "compression-webpack-plugin": "^9.2.0",
-    "cypress": "^9.6.0",
+    "cypress": "^9.6.1",
     "esbuild": "^0.14.38",
     "esbuild-jest": "^0.5.0",
     "eslint": "8.12.0",
