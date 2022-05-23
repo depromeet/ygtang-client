@@ -4,4 +4,4 @@ interface MemberResponseInterface {
   email: string;
 }
 
-type UserInformationInterface = Omit<MemberResponseInterface, 'id'>;
+type UserInformationType = Omit<MemberResponseInterface, 'id'>;

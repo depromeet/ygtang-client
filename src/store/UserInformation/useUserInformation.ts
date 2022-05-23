@@ -6,10 +6,10 @@ import { userInformationState } from './userInformationStates';
 
 export function useUserInformation() {
   const [userInformation, setUserInformation] = useRecoilState(userInformationState);
-  const { refetch } = useGetUserInformation(setUserInformation);
+  useGetUserInformation(setUserInformation);
 
   return {
     userInformation,
-    resetUserInformation: refetch,
+    setUserInformation,
   };
 }

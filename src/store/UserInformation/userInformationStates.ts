@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const userInformationState = atom<UserInformationInterface>({
+export const userInformationState = atom<UserInformationType>({
   key: 'userInformationState',
   default: {
     email: '',

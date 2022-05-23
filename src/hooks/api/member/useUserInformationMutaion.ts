@@ -8,7 +8,7 @@ import { USER_INFORMATION_QUERY_KEY } from './useGetUserInformation';
 
 export default function useUserInformationMutation() {
   const { fireToast } = useToast();
-  const reSetUserInformation = () => {
+  const resetUserInformation = () => {
     queryClient.resetQueries(USER_INFORMATION_QUERY_KEY);
   };
 
@@ -17,7 +17,7 @@ export default function useUserInformationMutation() {
     {
       onSuccess: () => {
         fireToast({ content: '이름 변경에 성공하였습니다.' });
-        reSetUserInformation();
+        resetUserInformation();
       },
       onError: (error, variable, context) => {
         console.log('err', error, variable, context);
