@@ -35,4 +35,22 @@
 
 ## Preview
 
-<img width='19%' src="https://user-images.githubusercontent.com/26461307/170093489-faa77d91-6eeb-43ab-b402-722d58869fd2.png" align="left" /> <img width='19%' src="https://user-images.githubusercontent.com/26461307/170093501-ab5ef942-8e30-4273-b9ee-cbcc7d0c4826.png" align="left" /> <img width='19%' src="https://user-images.githubusercontent.com/26461307/170093507-2cfd4e4d-aad2-4fd5-afcb-3487bc62b6ae.png" align="left" /> <img width='19%' src="https://user-images.githubusercontent.com/26461307/170093512-67840acb-d447-4090-b477-72ea7de49bdd.png" align="left" /> <img width='19%' src="https://user-images.githubusercontent.com/26461307/170093514-5910ab12-25e6-4037-ae66-ca5a237da0c4.png" align="left" />
+<img width='18%' src="https://user-images.githubusercontent.com/26461307/170093489-faa77d91-6eeb-43ab-b402-722d58869fd2.png" align="left" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093501-ab5ef942-8e30-4273-b9ee-cbcc7d0c4826.png" align="left" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093507-2cfd4e4d-aad2-4fd5-afcb-3487bc62b6ae.png" align="left" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093512-67840acb-d447-4090-b477-72ea7de49bdd.png" align="left" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093514-5910ab12-25e6-4037-ae66-ca5a237da0c4.png" align="left" />
+
+## 사용 기술
+
+<img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white"/>
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/Emotion-EFD1EA?style=flat-square&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/ReactQuery-FF4154?style=flat-square&logo=ReactQuery&logoColor=white"/>
+<img src="https://img.shields.io/badge/Recoil-3578E5?style=flat-square&logo=react&logoColor=white"/>
+<img alt="ESLint" src="https://img.shields.io/badge/-ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white" />
+<img alt="Prettier" src="https://img.shields.io/badge/-Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=white" />
+<img alt="jest" src="https://img.shields.io/badge/-Jest-C21325?style=flat-square&logo=jest&logoColor=white" />
+<img alt="cypress" src="https://img.shields.io/badge/-Cypress-17202C?style=flat-square&logo=Cypress&logoColor=white" />
+<img alt="codecov" src="https://img.shields.io/badge/-Codecov-F01F7A?style=flat-square&logo=Codecov&logoColor=white" />
+<img alt="github actions" src="https://img.shields.io/badge/-GithubActions-2088FF?style=flat-square&logo=githubactions&logoColor=white" />
+<img alt="LGTMBot" src="https://img.shields.io/badge/-LGTM-ffffff?style=flat-square&logo=Lgtm&logoColor=black" />
+<img alt="cloudflare" src="https://img.shields.io/badge/-CloudflarePages-F38020?style=flat-square&logo=cloudflare&logoColor=white" />
+
+## 팀원
