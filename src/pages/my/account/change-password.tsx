@@ -75,7 +75,7 @@ export default function MypageChangePassword() {
 
   return (
     <article css={containerCss}>
-      <NavigationBar title={'비밀번호 찾기'} />
+      <NavigationBar title={'비밀번호 변경'} />
       <p css={introTextWrapper}>비밀번호를 변경합니다.</p>
       <form css={formCss} onSubmit={handleSubmit}>
         <fieldset css={fieldSetCss}>
