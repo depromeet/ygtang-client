@@ -20,7 +20,7 @@ export default function MypageChangePassword() {
       fireToast({
         content: '비밀번호가 변경되었습니다.',
       });
-      push('/my');
+      push('/my/account');
     },
     onError: () => {
       fireToast({
