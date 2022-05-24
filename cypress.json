@@ -1,4 +1,6 @@
 {
   "projectId": "tmhk21",
-  "baseUrl": "https://localhost:3000/"
+  "baseUrl": "https://localhost:3000/",
+  "viewportWidth": 414,
+  "viewportHeight": 896
 }
