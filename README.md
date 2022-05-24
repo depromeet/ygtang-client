@@ -41,7 +41,12 @@
 
 </p>
 
+<br />
+<br />
+
 ## 사용 기술
+
+<p>
 
 <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white"/>
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/>
@@ -56,5 +61,7 @@
 <img alt="github actions" src="https://img.shields.io/badge/-GithubActions-2088FF?style=flat-square&logo=githubactions&logoColor=white" />
 <img alt="LGTMBot" src="https://img.shields.io/badge/-LGTM-ffffff?style=flat-square&logo=Lgtm&logoColor=black" />
 <img alt="cloudflare" src="https://img.shields.io/badge/-CloudflarePages-F38020?style=flat-square&logo=cloudflare&logoColor=white" />
+
+</p>
 
 ## 팀원
