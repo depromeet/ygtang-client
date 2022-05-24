@@ -50,7 +50,7 @@ export default function MypageChangePassword() {
       setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
       return;
     }
-   
+
     if (
       validator({
         rule: /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/,
