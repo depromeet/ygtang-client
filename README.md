@@ -35,7 +35,11 @@
 
 ## Preview
 
-<img width='18%' src="https://user-images.githubusercontent.com/26461307/170093489-faa77d91-6eeb-43ab-b402-722d58869fd2.png" align="left" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093501-ab5ef942-8e30-4273-b9ee-cbcc7d0c4826.png" align="left" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093507-2cfd4e4d-aad2-4fd5-afcb-3487bc62b6ae.png" align="left" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093512-67840acb-d447-4090-b477-72ea7de49bdd.png" align="left" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093514-5910ab12-25e6-4037-ae66-ca5a237da0c4.png" align="left" />
+<p>
+
+<img width='18%' src="https://user-images.githubusercontent.com/26461307/170093489-faa77d91-6eeb-43ab-b402-722d58869fd2.png" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093501-ab5ef942-8e30-4273-b9ee-cbcc7d0c4826.png" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093507-2cfd4e4d-aad2-4fd5-afcb-3487bc62b6ae.png" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093512-67840acb-d447-4090-b477-72ea7de49bdd.png" /> <img width='18%' src="https://user-images.githubusercontent.com/26461307/170093514-5910ab12-25e6-4037-ae66-ca5a237da0c4.png" />
+
+</p>
 
 ## 사용 기술
 
