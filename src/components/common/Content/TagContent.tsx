@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { css, Theme } from '@emotion/react';
 
+import { MODAL_TYPE } from '~/constants/common';
+
 import { IconButton } from '../Button';
 import { labelCss } from '../styles';
 import Tag from '../Tag';
@@ -12,14 +14,14 @@ export interface TagContentProps {
    * 단일 Tag 클릭 할 경우, Action을 넘겨 줍니다.
    */
   onClickTag?: (tagId: number) => void;
-  isEditing?: boolean;
+  inspirationId?: number;
 }
 
 export default function TagContent({
   tags,
   label = '태그',
   onClickTag,
-  isEditing = false,
+  inspirationId,
 }: TagContentProps) {
   return (
     <>
@@ -36,8 +38,12 @@ export default function TagContent({
             />
           ))}
           <Link
-            href={`?modal=${isEditing ? 'editTag' : 'addTag'}`}
-            as={isEditing ? '/edit/tag' : '/add/tag'}
+            href={`${
+              inspirationId
+                ? `?modal=${MODAL_TYPE.editTag}&id=${inspirationId}`
+                : `?modal=${MODAL_TYPE.addTag}`
+            }`}
+            as={inspirationId ? `/edit/tag?id=${inspirationId}` : '/add/tag'}
             scroll={false}
           >
             <a>

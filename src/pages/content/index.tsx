@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 
 import { FilledButton, IconButton } from '~/components/common/Button';
 import IllustDialog from '~/components/common/IllustDialog';
@@ -12,6 +13,8 @@ import { useInspirationById } from '~/hooks/api/inspiration/useInspirationById';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useQueryParam from '~/hooks/common/useRouterQuery';
+
+const EditTagFormRouteAsModal = dynamic(() => import('~/components/edit/EditTagFormRouteAsModal'));
 
 export default function ContentPage() {
   const inspirationId = useQueryParam('id', String);
@@ -51,41 +54,44 @@ export default function ContentPage() {
   };
 
   return (
-    <article>
-      <NavigationBar
-        title=""
-        backLink="/"
-        backLinkScrollOption={false}
-        rightElement={
-          <IconButton
-            onClick={() => setDeleteInspirationModalOn(true)}
-            iconName="DeleteIcon"
-            light
-          />
-        }
-      />
-      <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
-        {renderInspirationViewByType(inspiration)}
-      </LoadingHandler>
+    <>
+      <article>
+        <NavigationBar
+          title=""
+          backLink="/"
+          backLinkScrollOption={false}
+          rightElement={
+            <IconButton
+              onClick={() => setDeleteInspirationModalOn(true)}
+              iconName="DeleteIcon"
+              light
+            />
+          }
+        />
+        <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
+          {renderInspirationViewByType(inspiration)}
+        </LoadingHandler>
 
-      <IllustDialog
-        image={`/modal_characters/2.png`}
-        isShowing={isDeleteInspirationModalOn}
-        actionButtons={
-          <>
-            <FilledButton colorType="light" onClick={() => deleteInspirationById(id)}>
-              네
-            </FilledButton>
-            <FilledButton colorType="dark" onClick={() => setDeleteInspirationModalOn(false)}>
-              아니요
-            </FilledButton>
-          </>
-        }
-      >
-        영감이 삭제됩니다.
-        <br />
-        괜찮으신가요?
-      </IllustDialog>
-    </article>
+        <IllustDialog
+          image={`/modal_characters/2.png`}
+          isShowing={isDeleteInspirationModalOn}
+          actionButtons={
+            <>
+              <FilledButton colorType="light" onClick={() => deleteInspirationById(id)}>
+                네
+              </FilledButton>
+              <FilledButton colorType="dark" onClick={() => setDeleteInspirationModalOn(false)}>
+                아니요
+              </FilledButton>
+            </>
+          }
+        >
+          영감이 삭제됩니다.
+          <br />
+          괜찮으신가요?
+        </IllustDialog>
+      </article>
+      <EditTagFormRouteAsModal />
+    </>
   );
 }

@@ -19,6 +19,7 @@ const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRoute
 const InspirationViewAsModal = dynamic(
   () => import('~/components/inspiration/InspirationViewAsModal')
 );
+const EditTagFormRouteAsModal = dynamic(() => import('~/components/edit/EditTagFormRouteAsModal'));
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
@@ -75,6 +76,7 @@ export default function Root() {
       <AppendButton />
       <TagFormRouteAsModal />
       <InspirationViewAsModal />
+      <EditTagFormRouteAsModal />
     </>
   );
 }
