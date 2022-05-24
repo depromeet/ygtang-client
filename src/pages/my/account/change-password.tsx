@@ -46,19 +46,20 @@ export default function MypageChangePassword() {
   };
 
   useDidUpdate(() => {
-    if (password.debouncedValue.length >= 6) {
-      if (
-        validator({
-          rule: /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/,
-          value: password.debouncedValue,
-        })
-      ) {
-        setPasswordError('');
-      } else {
-        setPasswordError('비밀번호는 영문과 숫자를 모두 포함하여야 합니다.');
-      }
-    } else {
+    if (password.debouncedValue.length > 6) {
       setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
+      return;
+    }
+   
+    if (
+      validator({
+        rule: /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/,
+        value: password.debouncedValue,
+      })
+    ) {
+      setPasswordError('');
+    } else {
+      setPasswordError('비밀번호는 영문과 숫자를 모두 포함하여야 합니다.');
     }
   }, [password.debouncedValue]);
 
