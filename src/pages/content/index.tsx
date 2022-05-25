@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 
 import { FilledButton, IconButton } from '~/components/common/Button';
 import IllustDialog from '~/components/common/IllustDialog';
@@ -9,6 +10,7 @@ import { FixedSpinner } from '~/components/common/Spinner';
 import ImageView from '~/components/inspiration/ImageView';
 import LinkView from '~/components/inspiration/LinkView';
 import TextView from '~/components/inspiration/TextView';
+import { defaultFadeInScaleVariants } from '~/constants/motions';
 import { useInspirationById } from '~/hooks/api/inspiration/useInspirationById';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
@@ -69,7 +71,17 @@ export default function ContentPage() {
           }
         />
         <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
-          {renderInspirationViewByType(inspiration)}
+          <motion.section
+            layout
+            layoutId="inspirationView"
+            variants={defaultFadeInScaleVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            {' '}
+            {renderInspirationViewByType(inspiration)}{' '}
+          </motion.section>
         </LoadingHandler>
 
         <IllustDialog
