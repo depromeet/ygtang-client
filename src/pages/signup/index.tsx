@@ -28,7 +28,11 @@ export default function Signup() {
     data: checkExistsUserData,
     error: checkExistsUserError,
     isLoading: checkExistsUserLoading,
-  } = useCheckExistsSignupMutation();
+  } = useCheckExistsSignupMutation({
+    onError: () => {
+      fireToast({ content: '유저 검사 도중 문제가 발생하였습니다.' });
+    },
+  });
 
   const handleEmailSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -102,7 +106,7 @@ export default function Signup() {
           required
         />
         <CTAButton type={'submit'} disabled={emailSendingLoading || checkExistsUserLoading}>
-          로그인
+          다음
         </CTAButton>
       </form>
       <div css={signUpTextWrapperCss}>
