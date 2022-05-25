@@ -79,8 +79,7 @@ export default function ContentPage() {
             animate="animate"
             exit="exit"
           >
-            {' '}
-            {renderInspirationViewByType(inspiration)}{' '}
+            {renderInspirationViewByType(inspiration)}
           </motion.section>
         </LoadingHandler>
 
