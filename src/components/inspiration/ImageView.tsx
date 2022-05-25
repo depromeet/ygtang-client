@@ -44,7 +44,7 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
             <div css={contentWrapperCss}>
               <MemoText
                 editable
-                onSaveClick={saveMemo}
+                onSave={saveMemo}
                 onChange={onMemoChange}
                 debouncedValue={memoDebouncedValue}
                 value={modifiedMemo}
