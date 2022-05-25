@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
+import { motion } from 'framer-motion';
 
+import { defaultFadeInVariants } from '~/constants/motions';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
 import { CloseIcon } from '../icons';
@@ -20,14 +22,21 @@ function Tag({ content, deletable = false, onDelete = () => {}, onClick = () => 
     onDelete();
   };
   return (
-    <div css={tagCss(theme, backGroundColor.current)} onClick={onClick}>
+    <motion.div
+      variants={defaultFadeInVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      css={tagCss(theme, backGroundColor.current)}
+      onClick={onClick}
+    >
       #{content}
       {deletable && (
         <button css={closeButtonCss} onClick={onClickCloseIcon}>
           <CloseIcon size={15} />
         </button>
       )}
-    </div>
+    </motion.div>
   );
 }
 
