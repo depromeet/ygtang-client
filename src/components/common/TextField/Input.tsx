@@ -117,7 +117,6 @@ const inputElementCss = (
   color: ${theme.color.gray05};
   /* iOS에서 disabled input 텍스트 색상 자동 흐려짐 방지 */
   /* https://stackoverflow.com/questions/262158/disabled-input-text-color-on-ios */
-  -webkit-text-fill-color: ${theme.color.gray05};
   opacity: 1;
   -webkit-opacity: 1;
 
@@ -132,7 +131,7 @@ const inputElementCss = (
     border-color: ${theme.color.gray03};
   }
 
-  &:placeholder {
+  &::placeholder {
     color: ${theme.color.gray03};
   }
 `;
