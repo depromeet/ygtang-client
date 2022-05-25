@@ -48,7 +48,7 @@ export default function TextView({ inspiration }: { inspiration: InspirationInte
             <div css={contentWrapperCss}>
               <MemoText
                 editable
-                onSaveClick={saveMemo}
+                onSave={saveMemo}
                 onChange={memoText.onChange}
                 debouncedValue={memoText.debouncedValue}
                 value={memoText.value}

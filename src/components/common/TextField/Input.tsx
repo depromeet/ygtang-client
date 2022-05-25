@@ -42,6 +42,11 @@ export interface InputProps extends InputAndTextarea {
    * input 자동 포커스 boolean 값을 넣어 사용합니다.
    */
   autoFocus?: boolean;
+
+  /**
+   * input이 blur가 될 때 실행할 액션입니다.
+   */
+  onBlur?: VoidFunction;
 }
 
 export function Input({
@@ -51,6 +56,7 @@ export function Input({
   fixedHeight,
   padding,
   autoFocus = false,
+  onBlur,
   ...props
 }: InputProps) {
   const theme = useTheme();
@@ -78,6 +84,7 @@ export function Input({
             padding,
           }),
           ref: inputRef,
+          onBlur: onBlur,
           ...props,
         },
         null

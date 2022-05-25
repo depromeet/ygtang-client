@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useCallback, useId } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 
 import { labelCss } from '~/components/common/styles';
@@ -46,7 +46,7 @@ export interface MemoTextProps {
   /**
    * 수정(저장) 아이콘을 누르면 실행되는 함수입니다. 주입해주어야 합니다.
    */
-  onSaveClick?: () => void;
+  onSave?: () => void;
 
   /**
    * 메모 value 입니다.
@@ -71,7 +71,7 @@ export function MemoText({
   writable,
   wordLimit,
   onChange: onValueChange,
-  onSaveClick,
+  onSave,
   value,
   debouncedValue,
   autoFocus,
@@ -79,12 +79,17 @@ export function MemoText({
   const id = useId();
   const theme = useTheme();
 
-  const onClick = (
-    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    onSaveClick && onSaveClick();
-  };
+  const saveMemo = useCallback(() => {
+    onSave && onSave();
+  }, [onSave]);
+
+  const onClick = useCallback(
+    (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement, MouseEvent>) => {
+      e.preventDefault();
+      saveMemo();
+    },
+    [saveMemo]
+  );
 
   return (
     <TextField
@@ -117,6 +122,7 @@ export function MemoText({
       }
       disabled={!writable}
       autoFocus={autoFocus}
+      onBlur={saveMemo}
     />
   );
 }

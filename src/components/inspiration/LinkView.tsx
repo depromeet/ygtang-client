@@ -68,7 +68,7 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
             <div css={contentWrapperCss}>
               <MemoText
                 editable
-                onSaveClick={saveMemo}
+                onSave={saveMemo}
                 onChange={onMemoChange}
                 debouncedValue={memoDebouncedValue}
                 value={memoValue}
