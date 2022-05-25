@@ -103,7 +103,89 @@
 
 ## Owner
 
-| <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width=100 /> |
-| :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
-|                                    고은정                                    |                                    오혜성                                    |                                    정대윤                                    |                                    정도현                                    |                                    김자연                                    |                                    문인우                                    |                                    정형일                                    |                                    김자영                                    |                                    박수연                                    |                                    정미숙                                    |
-|                                    Web FE                                    |                                    Web FE                                    |                                    Web FE                                    |                                    Web FE                                    |                                    Server                                    |                                    Server                                    |                                    Server                                    |                                    Design                                    |                                    Design                                    |                                    Design                                    |
+<table>
+
+<tr>
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+ 
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+  
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+  
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+  
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+  
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+  
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+  
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+  
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+  
+  <td align=center>
+  <a href="https://github.com/hyesungoh">
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <br/>
+  FE • 오혜성
+  </a>
+  </td>
+ 
+</tr>
+
+</table>
