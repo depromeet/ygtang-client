@@ -71,6 +71,8 @@
 <br />
 <br />
 
+<!--
+
 ## Directory structure
 
 ```bash
@@ -99,7 +101,7 @@
 ├── @types # React-Native types
 ├── httpsDevServer.js # with httpsdev command
 └── README.md
-```
+``` -->
 
 ## Owner
 
@@ -110,7 +112,9 @@
   <a href="https://github.com/hyesungoh">
   <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
   <br/>
-  FE • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
  
@@ -118,7 +122,7 @@
   <a href="https://github.com/hyesungoh">
   <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
   <br/>
-  FE • 오혜성
+  🖥 • 오혜성
   </a>
   </td>
   
@@ -126,7 +130,7 @@
   <a href="https://github.com/hyesungoh">
   <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
   <br/>
-  FE • 오혜성
+  🖥 • 오혜성
   </a>
   </td>
   
@@ -134,7 +138,7 @@
   <a href="https://github.com/hyesungoh">
   <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
   <br/>
-  FE • 오혜성
+  🖥 • 오혜성
   </a>
   </td>
   
