@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 import { motion } from 'framer-motion';
 
-import { defaultFadeInScaleVariants } from '~/constants/motions';
+import { defaultFadeInVariants } from '~/constants/motions';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
 import { CloseIcon } from '../icons';
@@ -23,7 +23,7 @@ function Tag({ content, deletable = false, onDelete = () => {}, onClick = () => 
   };
   return (
     <motion.div
-      variants={defaultFadeInScaleVariants}
+      variants={defaultFadeInVariants}
       initial="initial"
       animate="animate"
       exit="exit"
