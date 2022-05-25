@@ -44,7 +44,7 @@ export default function LinkThumbnail({
       href={thumbnail.url}
       onClick={onOpenUrl}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
     >
       <article css={linkThumbnailBoxCss}>
         <section css={linkThumbnailContentCss(hasImage())}>
