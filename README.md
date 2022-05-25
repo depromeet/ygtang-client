@@ -10,6 +10,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/context:javascript) [![CI](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml) [![ygtang](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/tmhk21/main&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/tmhk21/runs) [![codecov](https://codecov.io/gh/depromeet/11th_7team_web/branch/main/graph/badge.svg?token=OM28A5TKRR)](https://codecov.io/gh/depromeet/11th_7team_web)
 
 여기저기 흩어져 넘치는 영감.
+
 세상의 모든 것은 영감이 될 수 있고, 영감탱에서 기억할 수 있어요.
 
 <br />
@@ -33,6 +34,9 @@
 
 플레이 스토어 링크 이미지 / 앱스토어 링크 이미지
 
+<br />
+<br />
+
 ## Preview
 
 <p>
@@ -44,7 +48,7 @@
 <br />
 <br />
 
-## 사용 기술
+## Skills
 
 <p>
 
@@ -64,4 +68,42 @@
 
 </p>
 
-## 팀원
+<br />
+<br />
+
+## Directory structure
+
+```bash
+├── public
+├── src
+│   ├── __test__
+│   ├── components
+│   │   ├── common
+│   │   └── [routes]
+│   ├── constants
+│   ├── hooks
+│   │   ├── common
+│   │   ├── api
+│   │   ├── bridge
+│   │   └── ga
+│   ├── libs
+│   ├── pages
+│   ├── remotes
+│   ├── store
+│   ├── styles
+│   └── utils
+├── eslint # custom eslint plugin
+├── mock-server
+├── coverage # jest coverage
+├── cypress # E2E test
+├── @types # React-Native types
+├── httpsDevServer.js # with httpsdev command
+└── README.md
+```
+
+## Owner
+
+| <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> | <img src="https://avatars.githubusercontent.com/u/26461307?v=4" style="border-radius: 50%" /> |
+| :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: |
+|                                            고은정                                             |                                            오혜성                                             |                                            정대윤                                             |                                            정도현                                             |                                            김자연                                             |                                            문인우                                             |                                            정형일                                             |                                            김자영                                             |                                            박수연                                             |                                            정미숙                                             |
+|                                              FE                                               |                                              FE                                               |                                              FE                                               |                                              FE                                               |                                              BE                                               |                                              BE                                               |                                              BE                                               |                                            Design                                             |                                            Design                                             |                                            Design                                             |
