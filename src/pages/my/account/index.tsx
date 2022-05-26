@@ -35,17 +35,10 @@ export default function MyAccountPage() {
         </ul>
         <Menu
           label=""
-          rightElement={
-            <span
-              css={menuTitleCss}
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.stopPropagation();
-                setIsDeleteAccountModalOpen(true);
-              }}
-            >
-              계정 삭제하기
-            </span>
-          }
+          onClick={() => {
+            setIsDeleteAccountModalOpen(true);
+          }}
+          rightElement={<span css={menuTitleCss}>계정 삭제하기</span>}
         />
       </section>
       <Dialog
