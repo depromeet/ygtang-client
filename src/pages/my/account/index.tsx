@@ -38,7 +38,8 @@ export default function MyAccountPage() {
           rightElement={
             <span
               css={menuTitleCss}
-              onClick={() => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.stopPropagation();
                 setIsDeleteAccountModalOpen(true);
               }}
             >

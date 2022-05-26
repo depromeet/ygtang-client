@@ -6,7 +6,8 @@ import { useToast } from '~/store/Toast';
 export default function MyTagItem({ tag }: { tag: TagType }) {
   const { deleteTag } = useTagMutation();
   const { fireToast } = useToast();
-  const onDelete = () => {
+  const onDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     deleteTag(tag.id, {
       onSuccess: () => {
         fireToast({ content: '태그 삭제 성공!' });

@@ -15,8 +15,7 @@ export interface MenuProps {
 export default function Menu({ label, rightElement, href, onClick, ...props }: MenuProps) {
   const linkRef = useRef<HTMLDivElement>(null);
 
-  const onClickHandler = (e: React.MouseEvent<HTMLSpanElement>) => {
-    if (e.target !== e.currentTarget) return;
+  const onClickHandler = () => {
     if (href) {
       linkRef.current?.click();
     } else {
