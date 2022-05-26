@@ -8,15 +8,24 @@ import InternalLink from '../common/InternalLink';
 export interface MenuProps {
   label: string;
   rightElement?: ReactElement;
+  /**
+   * Internal Route에 사용됩니다.
+   * ex) /my/account, '/add/tag'
+   */
   href?: RouterPathType;
+  /**
+   * 새창열기에서 사용됩니다.
+   * like) Window.open target="_blank"
+   */
+  url?: string;
   onClick?: VoidFunction;
 }
 
-export default function Menu({ label, rightElement, href, onClick, ...props }: MenuProps) {
-  const linkRef = useRef<HTMLDivElement>(null);
+export default function Menu({ label, rightElement, href, url, onClick, ...props }: MenuProps) {
+  const linkRef = useRef<HTMLAnchorElement>(null);
 
   const onClickHandler = () => {
-    if (href) {
+    if (href || url) {
       linkRef.current?.click();
     } else {
       onClick && onClick();
@@ -28,8 +37,11 @@ export default function Menu({ label, rightElement, href, onClick, ...props }: M
       <li css={MenuCss} {...props} onClick={onClickHandler}>
         {href && (
           <InternalLink href={href}>
-            <span css={hiddenCss} ref={linkRef}></span>
+            <a css={hiddenCss} ref={linkRef} />
           </InternalLink>
+        )}
+        {url && (
+          <a css={hiddenCss} href={url} ref={linkRef} target="_blank" rel="noopener noreferrer" />
         )}
         <span css={menuTitleCss}>{label}</span>
         {rightElement && <>{rightElement}</>}
