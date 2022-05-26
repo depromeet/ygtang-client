@@ -18,12 +18,13 @@ export default function MyPage() {
         <ul css={menuListCss}>
           <Menu label="내 계정" href="/my/account" />
           <Menu label="태그관리" href="/my/tag" />
-          <Menu label="이용약관" />
+          <Menu
+            label="이용약관"
+            url="https://gifted-puffin-352.notion.site/e75b7f51da7944508f37071f5345cc46"
+          />
           <Menu
             label="개인정보 정책"
-            onClick={() => {
-              console.log('이용약관');
-            }}
+            url="https://gifted-puffin-352.notion.site/94ac34de4c97467fb1f21a8bbed26eab"
           />
           {/* <Menu
             css={initializeMenuCss}
