@@ -46,7 +46,7 @@ export default function BottomSheetModal({ isShowing, children, onClose }: Botto
 
 const dimBackdropCss = (theme: Theme) => css`
   position: fixed;
-  z-index: 10;
+  z-index: 1000;
   top: 0;
   left: 0;
 
@@ -64,6 +64,7 @@ const contentWrapperCss = (theme: Theme) => css`
   position: absolute;
   top: 100%;
   transform: translateY(-100%);
+  z-index: 1000;
 
   width: 100%;
   min-height: ${MIN_HIEGHT}px;
