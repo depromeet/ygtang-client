@@ -22,6 +22,6 @@ export default function useCheckEmailVerifiedStatusMutation() {
     { message?: string },
     CheckEmailVerifiedStatusMutationParams
   >(({ email }: CheckEmailVerifiedStatusMutationParams) =>
-    get<CheckEmailVerifiedStatusMutationResponse>(`/v1/auth/email/${email}/status`)
+    get<CheckEmailVerifiedStatusMutationResponse>(`/v1/auth/signup/email/${email}/status`)
   );
 }
