@@ -25,13 +25,13 @@ export default function MyPage() {
               console.log('이용약관');
             }}
           />
-          <Menu
+          {/* <Menu
             css={initializeMenuCss}
             label="정보초기화"
             onClick={() => {
               setIsInitializeConfirmModalOpen(true);
             }}
-          />
+          /> */}
         </ul>
       </section>
       <Dialog
@@ -72,9 +72,9 @@ const myPageCss = css`
   overflow-y: auto;
 `;
 
-const initializeMenuCss = css`
-  margin-top: 64px;
-`;
+// const initializeMenuCss = css`
+//   margin-top: 64px;
+// `;
 
 const dialogLongButtonCss = css`
   width: 163px;
