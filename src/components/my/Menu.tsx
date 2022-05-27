@@ -12,20 +12,27 @@ export interface MenuProps {
    * Internal Route에 사용됩니다.
    * ex) /my/account, '/add/tag'
    */
-  href?: RouterPathType;
+  internalHref?: RouterPathType;
   /**
    * 새창열기에서 사용됩니다.
    * like) Window.open target="_blank"
    */
-  url?: string;
+  externalHref?: string;
   onClick?: VoidFunction;
 }
 
-export default function Menu({ label, rightElement, href, url, onClick, ...props }: MenuProps) {
+export default function Menu({
+  label,
+  rightElement,
+  internalHref,
+  externalHref,
+  onClick,
+  ...props
+}: MenuProps) {
   const linkRef = useRef<HTMLAnchorElement>(null);
 
   const onClickHandler = () => {
-    if (href || url) {
+    if (internalHref || externalHref) {
       linkRef.current?.click();
     } else {
       onClick && onClick();
@@ -35,13 +42,19 @@ export default function Menu({ label, rightElement, href, url, onClick, ...props
   return (
     <>
       <li css={MenuCss} {...props} onClick={onClickHandler}>
-        {href && (
-          <InternalLink href={href}>
+        {internalHref && (
+          <InternalLink href={internalHref}>
             <a css={hiddenCss} ref={linkRef} />
           </InternalLink>
         )}
-        {url && (
-          <a css={hiddenCss} href={url} ref={linkRef} target="_blank" rel="noopener noreferrer" />
+        {externalHref && (
+          <a
+            css={hiddenCss}
+            href={externalHref}
+            ref={linkRef}
+            target="_blank"
+            rel="noopener noreferrer"
+          />
         )}
         <span css={menuTitleCss}>{label}</span>
         {rightElement && <>{rightElement}</>}

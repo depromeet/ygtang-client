@@ -6,6 +6,7 @@ import Dialog from '~/components/common/Dialog';
 import NavigationBar from '~/components/common/NavigationBar';
 import Menu from '~/components/my/Menu';
 import MyProfile from '~/components/my/Profile';
+import { POLICIY_URL } from '~/constants/common';
 
 export default function MyPage() {
   const [isInitializeConfirmModalOpen, setIsInitializeConfirmModalOpen] = useState(false);
@@ -16,16 +17,10 @@ export default function MyPage() {
       <section css={myPageCss}>
         <MyProfile />
         <ul css={menuListCss}>
-          <Menu label="내 계정" href="/my/account" />
-          <Menu label="태그관리" href="/my/tag" />
-          <Menu
-            label="이용약관"
-            url="https://gifted-puffin-352.notion.site/e75b7f51da7944508f37071f5345cc46"
-          />
-          <Menu
-            label="개인정보 정책"
-            url="https://gifted-puffin-352.notion.site/94ac34de4c97467fb1f21a8bbed26eab"
-          />
+          <Menu label="내 계정" internalHref="/my/account" />
+          <Menu label="태그관리" internalHref="/my/tag" />
+          <Menu label="이용약관" externalHref={POLICIY_URL.TOS} />
+          <Menu label="개인정보 정책" externalHref={POLICIY_URL.PRIVACY} />
           {/* <Menu
             css={initializeMenuCss}
             label="정보초기화"
