@@ -5,19 +5,37 @@ import { RouterPathType } from '~/hooks/common/useInternalRouter';
 
 import InternalLink from '../common/InternalLink';
 
-export interface MenuProps {
+interface MenuBaseProps {
   label: string;
   rightElement?: ReactElement;
-  href?: RouterPathType;
-  onClick?: VoidFunction;
+}
+interface MenuInternalProps extends MenuBaseProps {
+  internalHref: RouterPathType;
+  externalHref: never;
+  onClick: never;
+}
+interface MenuExternalProps extends MenuBaseProps {
+  externalHref: string;
+  internalHref: never;
+  onClick: never;
+}
+interface MenuOnClickProps extends MenuBaseProps {
+  onClick: VoidFunction;
+  internalHref: never;
+  externalHref: never;
 }
 
-export default function Menu({ label, rightElement, href, onClick, ...props }: MenuProps) {
-  const linkRef = useRef<HTMLDivElement>(null);
+type MenuProps = MenuBaseProps | MenuInternalProps | MenuExternalProps | MenuOnClickProps;
 
-  const onClickHandler = (e: React.MouseEvent<HTMLSpanElement>) => {
-    if (e.target !== e.currentTarget) return;
-    if (href) {
+export default function Menu(props: MenuProps) {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const { label, rightElement } = props;
+  const { internalHref } = props as MenuInternalProps;
+  const { externalHref } = props as MenuExternalProps;
+  const { onClick } = props as MenuOnClickProps;
+
+  const onClickHandler = () => {
+    if (internalHref || externalHref) {
       linkRef.current?.click();
     } else {
       onClick && onClick();
@@ -27,10 +45,19 @@ export default function Menu({ label, rightElement, href, onClick, ...props }: M
   return (
     <>
       <li css={MenuCss} {...props} onClick={onClickHandler}>
-        {href && (
-          <InternalLink href={href}>
-            <span css={hiddenCss} ref={linkRef}></span>
+        {internalHref && (
+          <InternalLink href={internalHref}>
+            <a css={hiddenCss} ref={linkRef} />
           </InternalLink>
+        )}
+        {externalHref && (
+          <a
+            css={hiddenCss}
+            href={externalHref}
+            ref={linkRef}
+            target="_blank"
+            rel="noopener noreferrer"
+          />
         )}
         <span css={menuTitleCss}>{label}</span>
         {rightElement && <>{rightElement}</>}

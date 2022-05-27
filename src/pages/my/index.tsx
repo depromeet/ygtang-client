@@ -6,6 +6,7 @@ import Dialog from '~/components/common/Dialog';
 import NavigationBar from '~/components/common/NavigationBar';
 import Menu from '~/components/my/Menu';
 import MyProfile from '~/components/my/Profile';
+import { POLICY_URL } from '~/constants/common';
 
 export default function MyPage() {
   const [isInitializeConfirmModalOpen, setIsInitializeConfirmModalOpen] = useState(false);
@@ -16,22 +17,17 @@ export default function MyPage() {
       <section css={myPageCss}>
         <MyProfile />
         <ul css={menuListCss}>
-          <Menu label="내 계정" href="/my/account" />
-          <Menu label="태그관리" href="/my/tag" />
-          <Menu label="이용약관" />
-          <Menu
-            label="개인정보 정책"
-            onClick={() => {
-              console.log('이용약관');
-            }}
-          />
-          <Menu
+          <Menu label="내 계정" internalHref="/my/account" />
+          <Menu label="태그관리" internalHref="/my/tag" />
+          <Menu label="이용약관" externalHref={POLICY_URL.TOS} />
+          <Menu label="개인정보 정책" externalHref={POLICY_URL.PRIVACY} />
+          {/* <Menu
             css={initializeMenuCss}
             label="정보초기화"
             onClick={() => {
               setIsInitializeConfirmModalOpen(true);
             }}
-          />
+          /> */}
         </ul>
       </section>
       <Dialog
@@ -72,9 +68,9 @@ const myPageCss = css`
   overflow-y: auto;
 `;
 
-const initializeMenuCss = css`
-  margin-top: 64px;
-`;
+// const initializeMenuCss = css`
+//   margin-top: 64px;
+// `;
 
 const dialogLongButtonCss = css`
   width: 163px;

@@ -31,21 +31,15 @@ export default function MyAccountPage() {
             }
           />
           <MyInformationMenu label="이메일" description={userInformation.email} />
-          <Menu label="비밀번호 재설정" href="/my/account/change-password" />
+          <Menu label="비밀번호 재설정" internalHref="/my/account/change-password" />
         </ul>
-        <Menu
+        {/* <Menu
           label=""
-          rightElement={
-            <span
-              css={menuTitleCss}
-              onClick={() => {
-                setIsDeleteAccountModalOpen(true);
-              }}
-            >
-              계정 삭제하기
-            </span>
-          }
-        />
+          onClick={() => {
+            setIsDeleteAccountModalOpen(true);
+          }}
+          rightElement={<span css={menuTitleCss}>계정 삭제하기</span>}
+        /> */}
       </section>
       <Dialog
         isShowing={isDeleteAccountModalOpen}
@@ -86,9 +80,9 @@ const myAccountPageCss = css`
   overflow-y: auto;
 `;
 
-const menuTitleCss = css`
-  font-size: 12px;
-`;
+// const menuTitleCss = css`
+//   font-size: 12px;
+// `;
 
 const dialogLongButtonCss = css`
   width: 163px;
