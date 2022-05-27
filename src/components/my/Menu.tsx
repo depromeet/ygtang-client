@@ -5,34 +5,37 @@ import { RouterPathType } from '~/hooks/common/useInternalRouter';
 
 import InternalLink from '../common/InternalLink';
 
-export interface MenuProps {
+interface MenuBaseProps {
   label: string;
   rightElement?: ReactElement;
-  /**
-   * Internal Route에 사용됩니다.
-   * ex) /my/account, '/add/tag'
-   */
-  internalHref?: RouterPathType;
-  /**
-   * 새창열기에서 사용됩니다.
-   * like) Window.open target="_blank"
-   */
-  externalHref?: string;
-  onClick?: VoidFunction;
+}
+interface MenuInternalProps extends MenuBaseProps {
+  internalHref: RouterPathType;
+  externalHref: never;
+  onClick: never;
+}
+interface MenuExternalProps extends MenuBaseProps {
+  externalHref: string;
+  internalHref: never;
+  onClick: never;
+}
+interface MenuOnClickProps extends MenuBaseProps {
+  onClick: VoidFunction;
+  internalHref: never;
+  externalHref: never;
 }
 
-export default function Menu({
-  label,
-  rightElement,
-  internalHref,
-  externalHref,
-  onClick,
-  ...props
-}: MenuProps) {
+type MenuProps = MenuBaseProps | MenuInternalProps | MenuExternalProps | MenuOnClickProps;
+
+export default function Menu(props: MenuProps) {
   const linkRef = useRef<HTMLAnchorElement>(null);
+  const { label, rightElement } = props;
+  const { internalHref } = props as MenuInternalProps;
+  const { externalHref } = props as MenuExternalProps;
+  const { onClick } = props as MenuOnClickProps;
 
   const onClickHandler = () => {
-    if (internalHref || externalHref) {
+    if (props as MenuInternalProps) {
       linkRef.current?.click();
     } else {
       onClick && onClick();
@@ -88,3 +91,6 @@ const hiddenCss = css`
   border: 0;
   clip-path: circle(0);
 `;
+
+export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+export type XOR<T, U> = T | U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
