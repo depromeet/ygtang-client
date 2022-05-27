@@ -8,6 +8,7 @@ import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
 import { FixedSpinner } from '~/components/common/Spinner';
 import TextField from '~/components/common/TextField';
+import { POLICY_URL } from '~/constants/common';
 import useSignupMutation from '~/hooks/api/sign-up/useSignupMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
@@ -153,10 +154,18 @@ export default function SignUpEmailVerified() {
               required
             />
             <div css={checkListWrapperCss}>
-              <CheckList isChecked={checkTerms} onToggle={() => setCheckTerms(!checkTerms)}>
+              <CheckList
+                isChecked={checkTerms}
+                externalHref={POLICY_URL.TOS}
+                onToggle={() => setCheckTerms(!checkTerms)}
+              >
                 (필수) 서비스 이용약관에 동의
               </CheckList>
-              <CheckList isChecked={checkPrivacy} onToggle={() => setCheckPrivacy(!checkPrivacy)}>
+              <CheckList
+                isChecked={checkPrivacy}
+                externalHref={POLICY_URL.PRIVACY}
+                onToggle={() => setCheckPrivacy(!checkPrivacy)}
+              >
                 (필수) 개인정보 수집 이용에 동의
               </CheckList>
             </div>

@@ -164,6 +164,7 @@ export default function Test() {
         onToggle={checked => {
           console.log(checked);
         }}
+        externalHref="https//:www.naver.com"
       >
         체크 리스트
       </CheckList>
@@ -172,7 +173,7 @@ export default function Test() {
         onToggle={checked => {
           console.log(checked);
         }}
-        onClick={() => {}}
+        externalHref="https//:www.naver.com"
       >
         체크 리스트
       </CheckList>

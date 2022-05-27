@@ -1,19 +1,19 @@
 import React, { PropsWithChildren, useEffect, useId, useState } from 'react';
-import { css, useTheme } from '@emotion/react';
+import { css, Theme, useTheme } from '@emotion/react';
 
 import { CheckCircleIcon, ChevronIcon } from './icons';
 
 export interface CheckListProps {
   isChecked: boolean;
   onToggle: (checked: boolean) => void;
-  onClick?: VoidFunction;
+  externalHref: string;
 }
 
 export default function CheckList({
   children,
   isChecked,
   onToggle,
-  onClick,
+  externalHref,
 }: PropsWithChildren<CheckListProps>) {
   const theme = useTheme();
   const id = useId();
@@ -39,10 +39,10 @@ export default function CheckList({
       <label htmlFor={`check-list-${id}`}>
         <CheckCircleIcon color={checked ? '' : theme.color.gray01} />
       </label>
-      <span css={childrenWrapperCss} onClick={onClick}>
+      <a css={childrenWrapperCss} href={externalHref} target="_blank" rel="noopener noreferrer">
         {children}
         <ChevronIcon direction="right" />
-      </span>
+      </a>
     </div>
   );
 }
@@ -55,7 +55,7 @@ const checkListContainerCss = css`
   height: 30px;
 `;
 
-const childrenWrapperCss = css`
+const childrenWrapperCss = (theme: Theme) => css`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,6 +63,8 @@ const childrenWrapperCss = css`
   flex: 1;
   font-size: 12px;
   line-height: 150%;
+  color: ${theme.color.gray05};
+  text-decoration: none;
 `;
 
 const inputCheckboxHiddenCss = css`
