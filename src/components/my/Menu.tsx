@@ -35,7 +35,7 @@ export default function Menu(props: MenuProps) {
   const { onClick } = props as MenuOnClickProps;
 
   const onClickHandler = () => {
-    if (props as MenuInternalProps) {
+    if (internalHref || externalHref) {
       linkRef.current?.click();
     } else {
       onClick && onClick();
