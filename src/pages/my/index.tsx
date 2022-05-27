@@ -6,7 +6,7 @@ import Dialog from '~/components/common/Dialog';
 import NavigationBar from '~/components/common/NavigationBar';
 import Menu from '~/components/my/Menu';
 import MyProfile from '~/components/my/Profile';
-import { POLICIY_URL } from '~/constants/common';
+import { POLICY_URL } from '~/constants/common';
 
 export default function MyPage() {
   const [isInitializeConfirmModalOpen, setIsInitializeConfirmModalOpen] = useState(false);
@@ -19,8 +19,8 @@ export default function MyPage() {
         <ul css={menuListCss}>
           <Menu label="내 계정" internalHref="/my/account" />
           <Menu label="태그관리" internalHref="/my/tag" />
-          <Menu label="이용약관" externalHref={POLICIY_URL.TOS} />
-          <Menu label="개인정보 정책" externalHref={POLICIY_URL.PRIVACY} />
+          <Menu label="이용약관" externalHref={POLICY_URL.TOS} />
+          <Menu label="개인정보 정책" externalHref={POLICY_URL.PRIVACY} />
           {/* <Menu
             css={initializeMenuCss}
             label="정보초기화"
