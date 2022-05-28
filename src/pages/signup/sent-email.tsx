@@ -27,7 +27,7 @@ export default function SignupSentEmail() {
     error: emailSendedError,
     isSuccess: emailSendingSuccess,
     isLoading: emailSendingLoading,
-  } = useSignupSendEmailMutation();
+  } = useSignupSendEmailMutation({});
 
   const handleEmailChecking = () => {
     if (query.email !== undefined && validator({ type: 'email', value: query.email as string })) {

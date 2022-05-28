@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
@@ -17,18 +17,29 @@ export default function Signup() {
   const email = useInput({ useDebounce: true });
   const { push } = useRouter();
   const [emailError, setEmailError] = useState('');
-  const {
-    mutate: emailSendMutate,
-    error: emailSendedError,
-    isSuccess: emailSendingSuccess,
-    isLoading: emailSendingLoading,
-  } = useSignupSendEmailMutation();
+  const { mutate: emailSendMutate, isLoading: emailSendingLoading } = useSignupSendEmailMutation({
+    onSuccess: () => {
+      push({
+        pathname: '/signup/sent-email',
+        query: {
+          email: email.value,
+        },
+      });
+    },
+    onError: data => {
+      if (data.message) fireToast({ content: data.message });
+    },
+  });
+
   const {
     mutate: checkExistsUserMutate,
     data: checkExistsUserData,
-    error: checkExistsUserError,
     isLoading: checkExistsUserLoading,
-  } = useCheckExistsSignupMutation();
+  } = useCheckExistsSignupMutation({
+    onError: () => {
+      fireToast({ content: '유저 검사 도중 문제가 발생하였습니다.' });
+    },
+  });
 
   const handleEmailSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,40 +57,19 @@ export default function Signup() {
     }
   }, [email.debouncedValue]);
 
-  useEffect(() => {
-    if (checkExistsUserData) {
-      if (!checkExistsUserData.data) {
-        emailSendMutate({ email: email.value });
-      } else {
-        fireToast({ content: '이미 가입된 사용자입니다!' });
-      }
-    }
+  // NOTE: 이메일이 존재하지 않는 경우, 회원가입 진행 로직
+  useDidUpdate(() => {
+    if (!checkExistsUserData) return;
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!checkExistsUserData.data) {
+      emailSendMutate({ email: email.value });
+    } else {
+      fireToast({ content: '이미 가입된 사용자입니다!' });
+    }
   }, [checkExistsUserData]);
 
-  useEffect(() => {
-    if (emailSendingSuccess) {
-      push({
-        pathname: '/signup/sent-email',
-        query: {
-          email: email.value,
-        },
-      });
-    }
-  }, [email.value, emailSendingSuccess, push]);
-
-  useEffect(() => {
-    if (emailSendedError && emailSendedError.message) {
-      fireToast({ content: emailSendedError.message });
-    }
-  }, [emailSendedError, fireToast]);
-
-  useEffect(() => {
-    if (checkExistsUserError) {
-      fireToast({ content: '유저 검사 도중 문제가 발생하였습니다.' });
-    }
-  }, [checkExistsUserError, fireToast]);
+  // NOTE: 이메일 에러 메세지가 공백이 아니면서, 비동기 로직이 로딩중일 때
+  const isCTAButtonDisabled = emailError !== '' || emailSendingLoading || checkExistsUserLoading;
 
   return (
     <article css={loginCss}>
@@ -101,8 +91,8 @@ export default function Signup() {
           isSuccess={email.debouncedValue.length > 0 && emailError === ''}
           required
         />
-        <CTAButton type={'submit'} disabled={emailSendingLoading || checkExistsUserLoading}>
-          로그인
+        <CTAButton type={'submit'} disabled={isCTAButtonDisabled}>
+          다음
         </CTAButton>
       </form>
       <div css={signUpTextWrapperCss}>
