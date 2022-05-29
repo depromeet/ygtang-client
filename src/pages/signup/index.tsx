@@ -125,7 +125,6 @@ function useSignupWithCheckingEmail(email: string) {
       `/v1/signup/${email}/status`
     );
 
-    console.log('isSignupedEmail' + isSignupedEmail);
     // 가입되어 있을 시
     if (isSignupedEmail) {
       fireToast({ content: '이미 가입된 사용자입니다.' });
@@ -138,6 +137,7 @@ function useSignupWithCheckingEmail(email: string) {
 
     // 가입이 안되어있으며, 이메일 인증은 한 상태
     if (isCertificatedEmail) {
+      fireToast({ content: '인증된 이메일입니다.' });
       router.push({
         pathname: '/signup/email-verified',
         query: { email },
