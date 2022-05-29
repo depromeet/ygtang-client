@@ -19,6 +19,8 @@ interface UseCheckExistsSignupMutationProps {
   ) => void | Promise<unknown>;
 }
 
+// TODO: 현재 사용하는 곳 없음. 논의 후 삭제 예정
+
 /**
  * 해당 유저가 가입되어 있는 유저인지 상태 여부를 반환한다.
  */
