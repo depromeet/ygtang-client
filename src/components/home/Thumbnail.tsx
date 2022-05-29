@@ -35,11 +35,13 @@ function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps
 
   return (
     <motion.section css={wrapperCss} variants={contentFadeInUp} layoutId={`${id}`}>
-      <div css={contentWrapperCss} onClick={() => moveToInspirationView(id)}>
-        <ThumbnailContent type={type} content={content} openGraph={openGraph} />
-      </div>
+      <div css={supportAspectRatioWrapperCss}>
+        <div css={contentWrapperCss} onClick={() => moveToInspirationView(id)}>
+          <ThumbnailContent type={type} content={content} openGraph={openGraph} />
+        </div>
 
-      <Tags tags={tags} />
+        <Tags tags={tags} />
+      </div>
     </motion.section>
   );
 }
@@ -47,20 +49,45 @@ function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps
 export default React.memo(Thumbnail);
 
 const wrapperCss = (theme: Theme) => css`
-  /* grid child width 설정 */
   max-width: 100%;
+  aspect-ratio: 1;
   overflow: hidden;
 
-  aspect-ratio: 1;
   padding: 6px;
   color: ${theme.color.background};
   background-color: ${selectRandomColor(theme, ['gray03', 'gray04', 'gray05'])};
   border-radius: ${theme.borderRadius.outer};
 
+  @supports not (aspect-ratio: 1) {
+    position: relative;
+
+    &::before {
+      content: '';
+      float: left;
+      padding-top: 100%;
+    }
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+`;
+
+const supportAspectRatioWrapperCss = css`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 6px;
+
+  @supports not (aspect-ratio: 1) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 6px;
+  }
 `;
 
 const contentWrapperCss = (theme: Theme) => css`
