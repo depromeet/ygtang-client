@@ -47,6 +47,16 @@ export default function useInspirationMutation() {
     }
   );
 
+  const deleteAllInspirationMutation = useMutation(() => del(`/v1/inspiration/remove/all`), {
+    onSuccess: () => {
+      fireToast({ content: '정보를 초기화되었습니다!' });
+      resetInspirationList();
+    },
+    onError: (error, variable, context) => {
+      console.log('err', error, variable, context);
+    },
+  });
+
   const modifyInspirationMemoMutation = useMutation(
     (modifiedMemo: { id: number; memo: string }) => post('/v1/inspiration/modify', modifiedMemo),
     {
@@ -64,7 +74,7 @@ export default function useInspirationMutation() {
     (addTag: { id: number; tagId: number }) => post('/v1/inspiration/tag', addTag),
     {
       onSuccess: (_res, req) => {
-        fireToast({ content: '태그 추가 성공!' });
+        fireToast({ content: '태그를 추가했습니다!' });
         resetInspirationItem(req.id);
       },
       onError: (error, variable, context) => {
@@ -77,7 +87,7 @@ export default function useInspirationMutation() {
     ({ id, tagId }: { id: number; tagId: number }) => del(`/v1/inspiration/untag/${id}/${tagId}`),
     {
       onSuccess: (_res, req) => {
-        fireToast({ content: '태그 삭제 성공!' });
+        fireToast({ content: '태그를 삭제했습니다!' });
         resetInspirationItem(req.id);
       },
       onError: (error, variable, context) => {
@@ -98,6 +108,12 @@ export default function useInspirationMutation() {
      * deleteInspiration(id: number);
      */
     deleteInspiration: deleteInspirationMutation.mutate,
+
+    /**
+     * 유저의 모든 영감을 삭제합니다.
+     * deleteInspiration(id: number);
+     */
+    deleteAllInspiration: deleteAllInspirationMutation.mutate,
 
     /**
      * 영감 메모를 수정합니다.

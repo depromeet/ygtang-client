@@ -7,9 +7,11 @@ import NavigationBar from '~/components/common/NavigationBar';
 import Menu from '~/components/my/Menu';
 import MyProfile from '~/components/my/Profile';
 import { POLICY_URL } from '~/constants/common';
+import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 
 export default function MyPage() {
   const [isInitializeConfirmModalOpen, setIsInitializeConfirmModalOpen] = useState(false);
+  const { deleteAllInspiration } = useInspirationMutation();
 
   return (
     <article css={myPageContainerCss}>
@@ -21,20 +23,29 @@ export default function MyPage() {
           <Menu label="태그관리" internalHref="/my/tag" />
           <Menu label="이용약관" externalHref={POLICY_URL.TOS} />
           <Menu label="개인정보 정책" externalHref={POLICY_URL.PRIVACY} />
-          {/* <Menu
+          <Menu
             css={initializeMenuCss}
             label="정보초기화"
             onClick={() => {
               setIsInitializeConfirmModalOpen(true);
             }}
-          /> */}
+          />
         </ul>
       </section>
       <Dialog
         isShowing={isInitializeConfirmModalOpen}
         actionButtons={
           <>
-            <FilledButton colorType="dark" onClick={() => setIsInitializeConfirmModalOpen(false)}>
+            <FilledButton
+              colorType="dark"
+              onClick={() => {
+                deleteAllInspiration(undefined, {
+                  onSettled: () => {
+                    setIsInitializeConfirmModalOpen(false);
+                  },
+                });
+              }}
+            >
               네
             </FilledButton>
             <div css={dialogLongButtonCss}>
@@ -68,9 +79,9 @@ const myPageCss = css`
   overflow-y: auto;
 `;
 
-// const initializeMenuCss = css`
-//   margin-top: 64px;
-// `;
+const initializeMenuCss = css`
+  margin-top: 64px;
+`;
 
 const dialogLongButtonCss = css`
   width: 163px;
