@@ -85,6 +85,7 @@ export default function Signup() {
       <form css={fieldSetCss} onSubmit={handleEmailSubmit}>
         <TextField
           placeholder={'이메일을 입력해주세요'}
+          type="email"
           value={email.value}
           onChange={email.onChange}
           feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}

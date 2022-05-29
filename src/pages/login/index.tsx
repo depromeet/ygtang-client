@@ -79,6 +79,7 @@ export default function Login() {
       <div css={loginIntroCardCss}></div>
       <form css={loginFieldSetCss} onSubmit={handleFormSubmitEvent}>
         <TextField
+          type="email"
           label={'이메일 아이디'}
           placeholder={'이메일을 입력해주세요'}
           feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
@@ -88,7 +89,7 @@ export default function Login() {
           required
         />
         <TextField
-          type={'password'}
+          type="password"
           label={'비밀번호'}
           placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
           feedback={password.debouncedValue !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
