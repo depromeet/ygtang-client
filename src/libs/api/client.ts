@@ -24,28 +24,7 @@ function interceptorResponseRejected(error: AxiosError) {
   return Promise.reject(new Error(error.response?.data?.message ?? error));
 }
 
-let responseInterceptor = instance.interceptors.response.use(
-  interceptorResponseFulfilled,
-  interceptorResponseRejected
-);
-
-/**
- * API 인스턴스의 response 인터셉터를 수정합니다.
- */
-export function replaceResponseInterceptorForApiInstance({
-  fulfilled,
-  rejected,
-}: {
-  fulfilled?: any;
-  rejected?: any;
-}) {
-  instance.interceptors.response.eject(responseInterceptor);
-
-  responseInterceptor = instance.interceptors.response.use(
-    fulfilled ?? interceptorResponseFulfilled,
-    rejected ?? interceptorResponseRejected
-  );
-}
+instance.interceptors.response.use(interceptorResponseFulfilled, interceptorResponseRejected);
 
 export function get<T>(...args: Parameters<typeof instance.get>) {
   return instance.get<T, T>(...args);
