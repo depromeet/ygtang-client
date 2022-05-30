@@ -52,8 +52,6 @@ const wrapperCss = (theme: Theme) => css`
   max-width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
-
-  padding: 6px;
   color: ${theme.color.background};
   background-color: ${selectRandomColor(theme, ['gray03', 'gray04', 'gray05'])};
   border-radius: ${theme.borderRadius.outer};
@@ -77,6 +75,7 @@ const wrapperCss = (theme: Theme) => css`
 const supportAspectRatioWrapperCss = css`
   width: 100%;
   height: 100%;
+  padding: 6px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -86,7 +85,6 @@ const supportAspectRatioWrapperCss = css`
     position: absolute;
     top: 0;
     left: 0;
-    padding: 6px;
   }
 `;
 
