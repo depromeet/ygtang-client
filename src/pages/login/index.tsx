@@ -7,8 +7,8 @@ import useMemberLoginMutation from '~/hooks/api/member/useMemberLoginMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
+import { useUser } from '~/hooks/common/useUser';
 import { useToast } from '~/store/Toast';
-import { useUser } from '~/store/User';
 import { validator } from '~/utils/validator';
 
 export default function Login() {

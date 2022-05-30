@@ -1,7 +1,7 @@
 import { css, Theme } from '@emotion/react';
 
 import { USER_PROFILE_IMAGE_SRC } from '~/constants/assets';
-import { useUser } from '~/store/User';
+import { useUser } from '~/hooks/common/useUser';
 import { useUserInformation } from '~/store/UserInformation';
 
 import { FilledButton } from '../common/Button';
