@@ -37,6 +37,8 @@ const globalCss = (theme: Theme) => css`
       word-wrap: break-word;
       -ms-overflow-style: none;
 
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* iOS Button Active */
+
       -ms-overflow-style: none; /* IE 11 */
       scrollbar-width: none; /* Firefox 64 */
       ::-webkit-scrollbar {
