@@ -1,18 +1,14 @@
 import { useCallback, useState } from 'react';
-import { useRecoilState } from 'recoil';
 
-import { COOKIE_REFRESH } from '~/constants/common';
-import useCookie from '~/hooks/common/useCookie';
+import { localStorageUserTokenKeys } from '~/constants/localStorage';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { replaceAccessTokenForRequestInstance } from '~/libs/api/client';
 
-import { userAccessTokenState, userRefreshTokenState } from './userStates';
+import useDidMount from '../useDidMount';
 
 export function useUser() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [accessToken, setAccessToken] = useRecoilState(userAccessTokenState);
-  const [refreshToken, setRefreshToken] = useRecoilState(userRefreshTokenState);
-  const { set: cookieSet, remove: cookieRemove } = useCookie();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const { push } = useInternalRouter();
 
   /**
@@ -32,28 +28,34 @@ export function useUser() {
         throw Error('로그인 토큰이 올바르지 않습니다.');
       }
 
-      setAccessToken(accessToken);
-      setRefreshToken(refreshToken);
-      cookieSet(COOKIE_REFRESH, refreshToken);
       replaceAccessTokenForRequestInstance(accessToken);
+      localStorage.setItem(localStorageUserTokenKeys.accessToken, accessToken);
+      localStorage.setItem(localStorageUserTokenKeys.refreshToken, refreshToken);
+      setIsLoggedIn(true);
     },
-    [cookieSet, setAccessToken, setRefreshToken]
+    []
   );
 
   const userLogout = () => {
-    cookieRemove(COOKIE_REFRESH);
+    localStorage.removeItem(localStorageUserTokenKeys.accessToken);
+    localStorage.removeItem(localStorageUserTokenKeys.refreshToken);
+    setIsLoggedIn(false);
     push('/login');
   };
 
+  useDidMount(() => {
+    const isStoredAccessToken = Boolean(
+      localStorage.getItem(localStorageUserTokenKeys.accessToken)
+    );
+
+    setIsLoggedIn(isStoredAccessToken);
+  });
+
   return {
-    isLoggedIn: accessToken !== undefined && refreshToken !== undefined,
+    isLoggedIn,
     isLoaded,
     setIsLoaded,
     userLogin,
     userLogout,
-    accessToken,
-    refreshToken,
-    setAccessToken,
-    setRefreshToken,
   };
 }
