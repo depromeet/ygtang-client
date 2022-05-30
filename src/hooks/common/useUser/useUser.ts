@@ -22,7 +22,6 @@ export function useUser() {
         accessToken === '' ||
         refreshToken === ''
       ) {
-        // TODO: 에러 토큰 관리 변경
         throw Error('로그인 토큰이 올바르지 않습니다.');
       }
 
