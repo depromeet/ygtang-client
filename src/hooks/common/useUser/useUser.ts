@@ -4,11 +4,9 @@ import { localStorageUserTokenKeys } from '~/constants/localStorage';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { replaceAccessTokenForRequestInstance } from '~/libs/api/client';
 
-import useDidMount from '../useDidMount';
-
 export function useUser() {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
   const { push } = useInternalRouter();
 
   /**
@@ -31,7 +29,6 @@ export function useUser() {
       replaceAccessTokenForRequestInstance(accessToken);
       localStorage.setItem(localStorageUserTokenKeys.accessToken, accessToken);
       localStorage.setItem(localStorageUserTokenKeys.refreshToken, refreshToken);
-      setIsLoggedIn(true);
     },
     []
   );
@@ -39,20 +36,11 @@ export function useUser() {
   const userLogout = () => {
     localStorage.removeItem(localStorageUserTokenKeys.accessToken);
     localStorage.removeItem(localStorageUserTokenKeys.refreshToken);
-    setIsLoggedIn(false);
+
     push('/login');
   };
 
-  useDidMount(() => {
-    const isStoredAccessToken = Boolean(
-      localStorage.getItem(localStorageUserTokenKeys.accessToken)
-    );
-
-    setIsLoggedIn(isStoredAccessToken);
-  });
-
   return {
-    isLoggedIn,
     isLoaded,
     setIsLoaded,
     userLogin,

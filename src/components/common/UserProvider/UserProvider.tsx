@@ -11,7 +11,7 @@ import { useUser } from '~/hooks/common/useUser';
 import { useToast } from '~/store/Toast';
 
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
-  const { isLoaded, setIsLoaded, userLogin, userLogout, isLoggedIn } = useUser();
+  const { isLoaded, setIsLoaded, userLogin, userLogout } = useUser();
   const { fireToast } = useToast();
   const { push } = useInternalRouter();
 
@@ -29,7 +29,7 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
     },
   });
 
-  const { isRouterGuardPassed } = useRouterGuard({ isLoaded, isLoggedIn });
+  const { isRouterGuardPassed } = useRouterGuard({ isLoaded });
 
   // 컴포넌트 마운트 시
   useDidMount(() => {

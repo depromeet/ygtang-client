@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
 import { PUBLIC_ROUTES } from '~/constants/common';
+import { localStorageUserTokenKeys } from '~/constants/localStorage';
 
 import useInternalRouter from './useInternalRouter';
 
 interface UseRouterGuardProps {
   isLoaded: boolean;
-  isLoggedIn: boolean;
 }
 
-export default function useRouterGuard({ isLoaded, isLoggedIn }: UseRouterGuardProps) {
+export default function useRouterGuard({ isLoaded }: UseRouterGuardProps) {
   const [isRouterGuardPassed, setIsRouterGuardPassed] = useState<boolean>(false);
   const router = useInternalRouter();
 
@@ -17,6 +17,7 @@ export default function useRouterGuard({ isLoaded, isLoggedIn }: UseRouterGuardP
     const authCheck = (url: string) => {
       if (!isLoaded) return;
 
+      const isLoggedIn = Boolean(localStorage.getItem(localStorageUserTokenKeys.accessToken));
       if (isLoggedIn) {
         // 로그인 시 모든 route 접근 가능
         setIsRouterGuardPassed(true);
@@ -38,7 +39,7 @@ export default function useRouterGuard({ isLoaded, isLoggedIn }: UseRouterGuardP
     return () => {
       router.events.off('routeChangeStart', authCheck);
     };
-  }, [isLoaded, isLoggedIn, router]);
+  }, [isLoaded, router]);
 
   return { isRouterGuardPassed };
 }
