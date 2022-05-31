@@ -35,7 +35,6 @@ const globalCss = (theme: Theme) => css`
       font-family: inherit;
       word-break: keep-all;
       word-wrap: break-word;
-      -ms-overflow-style: none;
 
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* iOS Button Active */
 

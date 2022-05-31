@@ -2,19 +2,16 @@ import { PropsWithChildren } from 'react';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
-import { COOKIE_REFRESH } from '~/constants/common';
+import { localStorageUserTokenKeys } from '~/constants/localStorage';
 import useReissueMutation from '~/hooks/api/reissue/useReissueMutation';
-import useAuthorizationIntercept from '~/hooks/common/useAuthorizationIntercept';
-import useCookie from '~/hooks/common/useCookie';
 import useDidMount from '~/hooks/common/useDidMount';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useRouterGuard from '~/hooks/common/useRouterGuard';
-
-import { useToast } from '../Toast';
-import { useUser } from './';
+import { useUser } from '~/hooks/common/useUser';
+import { useToast } from '~/store/Toast';
 
 export function UserProvider({ children }: PropsWithChildren<unknown>) {
-  const { isLoaded, setIsLoaded, userLogin, userLogout, isLoggedIn } = useUser();
+  const { isLoaded, setIsLoaded, userLogin, userLogout } = useUser();
   const { fireToast } = useToast();
   const { push } = useInternalRouter();
 
@@ -32,16 +29,13 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
     },
   });
 
-  useAuthorizationIntercept();
-
-  const { get: cookieGet } = useCookie();
-  const { isRouterGuardPassed } = useRouterGuard({ isLoaded, isLoggedIn });
+  const { isRouterGuardPassed } = useRouterGuard({ isLoaded });
 
   // 컴포넌트 마운트 시
   useDidMount(() => {
     if (isLoaded) return;
 
-    const storedRefreshToken = cookieGet(COOKIE_REFRESH);
+    const storedRefreshToken = localStorage.getItem(localStorageUserTokenKeys.refreshToken);
 
     if (storedRefreshToken) {
       reissueMutate({

@@ -10,10 +10,10 @@ import { RecoilRoot } from 'recoil';
 
 import { ErrorBoundary } from '~/components/common/ErrorBoundary';
 import ToastSection from '~/components/common/ToastSection';
+import { UserProvider } from '~/components/common/UserProvider';
 import { useWindowSize } from '~/hooks/common/useWindowSize';
 import { useGaPageview } from '~/hooks/ga/useGaPageview';
 import { queryClient } from '~/libs/api/queryClient';
-import { UserProvider } from '~/store/User/UserProvider';
 import GlobalStyle from '~/styles/GlobalStyle';
 import CustomTheme from '~/styles/Theme';
 import { fullViewHeight } from '~/styles/utils';
