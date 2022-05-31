@@ -7,12 +7,14 @@ import InternalLink from '~/components/common/InternalLink';
 import NavigationBar from '~/components/common/NavigationBar';
 import MyInformationMenu from '~/components/my/InformationMenu';
 import Menu from '~/components/my/Menu';
+import useMemberSiginOutMutation from '~/hooks/api/member/useMemberSignOutMutaion';
 import { useUserInformation } from '~/store/UserInformation';
 import { fullViewHeight } from '~/styles/utils';
 
 export default function MyAccountPage() {
   const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] = useState(false);
   const { userInformation } = useUserInformation();
+  const { mutate: siginOutMutate } = useMemberSiginOutMutation();
 
   return (
     <article css={myAccountPageContainerCss}>
@@ -33,19 +35,28 @@ export default function MyAccountPage() {
           <MyInformationMenu label="이메일" description={userInformation.email} />
           <Menu label="비밀번호 재설정" internalHref="/my/account/change-password" />
         </ul>
-        {/* <Menu
+        <Menu
           label=""
           onClick={() => {
             setIsDeleteAccountModalOpen(true);
           }}
           rightElement={<span css={menuTitleCss}>계정 삭제하기</span>}
-        /> */}
+        />
       </section>
       <Dialog
         isShowing={isDeleteAccountModalOpen}
         actionButtons={
           <>
-            <FilledButton colorType="dark" onClick={() => setIsDeleteAccountModalOpen(false)}>
+            <FilledButton
+              colorType="dark"
+              onClick={() => {
+                siginOutMutate(undefined, {
+                  onSettled: () => {
+                    setIsDeleteAccountModalOpen(false);
+                  },
+                });
+              }}
+            >
               네
             </FilledButton>
             <div css={dialogLongButtonCss}>
@@ -80,9 +91,9 @@ const myAccountPageCss = css`
   overflow-y: auto;
 `;
 
-// const menuTitleCss = css`
-//   font-size: 12px;
-// `;
+const menuTitleCss = css`
+  font-size: 12px;
+`;
 
 const dialogLongButtonCss = css`
   width: 163px;

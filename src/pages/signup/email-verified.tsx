@@ -42,9 +42,8 @@ export default function SignUpEmailVerified() {
     if (!validator({ type: 'email', value: query.email as string })) {
       return fireToast({ content: '이메일이 올바르지 않습니다. 처음부터 다시 시작해주세요.' });
     }
-
     if (nicknameError !== '' || passwordError !== '' || passwordRepeatError !== '') {
-      return fireToast({ content: '모든 입력 값을 적어주세요.' });
+      return fireToast({ content: nicknameError || passwordError || passwordRepeatError });
     }
 
     if (!checkTerms && !checkPrivacy) {
