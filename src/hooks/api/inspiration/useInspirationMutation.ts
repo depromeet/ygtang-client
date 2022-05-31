@@ -16,6 +16,10 @@ export default function useInspirationMutation() {
     queryClient.resetQueries(INSPIRATION_LIST_QUERY_KEY);
   };
 
+  const removeInspirationList = () => {
+    queryClient.removeQueries(INSPIRATION_LIST_QUERY_KEY, { exact: true });
+  };
+
   const resetInspirationItem = (id: number) => {
     queryClient.invalidateQueries([INSPIRATION_BY_ID_QUERY_KEY, `${id}`]);
   };
@@ -50,7 +54,7 @@ export default function useInspirationMutation() {
   const deleteAllInspirationMutation = useMutation(() => del(`/v1/inspiration/remove/all`), {
     onSuccess: () => {
       fireToast({ content: '정보를 초기화되었습니다!' });
-      resetInspirationList();
+      removeInspirationList();
     },
     onError: (error, variable, context) => {
       console.log('err', error, variable, context);
