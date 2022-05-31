@@ -57,6 +57,7 @@ const tagCss = (theme: Theme, backGroundColor: string) => css`
 `;
 
 const closeButtonCss = css`
+  color: inherit;
   padding: 0;
   line-height: 0;
   margin-left: 4px;
