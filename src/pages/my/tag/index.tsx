@@ -8,6 +8,7 @@ import NavigationBar from '~/components/common/NavigationBar';
 import { FixedSpinner } from '~/components/common/Spinner';
 import MyTagItem from '~/components/my/tag/MyTagItem';
 import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import { fullViewHeight } from '~/styles/utils';
 
@@ -23,11 +24,21 @@ export default function MyTag() {
 
   const [isShowing, setIsShowing] = useState(false);
 
+  const router = useInternalRouter();
+
+  const onClickComplete = () => {
+    router.back();
+  };
+
   return (
     <article css={myTagCss}>
       <NavigationBar
         title="태그 관리"
-        rightElement={<GhostButton size="large">완료</GhostButton>}
+        rightElement={
+          <GhostButton size="large" onClick={onClickComplete}>
+            완료
+          </GhostButton>
+        }
       />
       <LoadingHandler
         isLoading={isLoading}
