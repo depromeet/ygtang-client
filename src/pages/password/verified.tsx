@@ -55,20 +55,9 @@ export default function PasswordResetVerified() {
   if (isError) {
     return (
       <article css={articleCss}>
-        <div css={navMockupCss} />
-        <div css={introCardCss}>
-          <p css={introTextWrapperCss}>
-            회원님의 이메일로
-            <br />
-            임시 비밀번호를 보냈어요.
-          </p>
-          <p css={introSecondTextWrapperCss}>
-            임시 비밀번호로 로그인 후,
-            <br />
-            꼭! 비밀번호를 변경해주세요!
-          </p>
+        <div css={passwordAlertWrapper}>
+          <img src="/WrongAccess.svg" alt="오류 안내 캐릭터" css={ErrorImg} />
         </div>
-        <div css={smallTextWrapperCss}>문의사항은 yeonggamt@gmail.com로 문의해 주세요.</div>
       </article>
     );
   }
@@ -89,11 +78,7 @@ export default function PasswordResetVerified() {
             꼭! 비밀번호를 변경해주세요!
           </p>
         </div>
-        <div css={smallTextWrapperCss}>
-          입력한 이메일은 홍보/마케팅 용으로 사용되지 않고,
-          <br />
-          로그인과 회원가입, 비밀번호 찾기에만 사용되니 안심하세요.
-        </div>
+        <div css={smallTextWrapperCss}>문의사항은 yeonggamt@gmail.com로 문의해 주세요.</div>
       </article>
     </LoadingHandler>
   );
