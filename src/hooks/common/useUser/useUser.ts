@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useQueryClient } from 'react-query';
 
 import { localStorageUserTokenKeys } from '~/constants/localStorage';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
@@ -8,6 +9,7 @@ export function useUser() {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const { push } = useInternalRouter();
+  const queryClient = useQueryClient();
 
   /**
    * 유저 로그인 시에 사용합니다.
@@ -28,14 +30,15 @@ export function useUser() {
       replaceAccessTokenForRequestInstance(accessToken);
       localStorage.setItem(localStorageUserTokenKeys.accessToken, accessToken);
       localStorage.setItem(localStorageUserTokenKeys.refreshToken, refreshToken);
+      queryClient.clear();
     },
-    []
+    [queryClient]
   );
 
   const userLogout = () => {
     localStorage.removeItem(localStorageUserTokenKeys.accessToken);
     localStorage.removeItem(localStorageUserTokenKeys.refreshToken);
-
+    queryClient.clear();
     push('/login');
   };
 
