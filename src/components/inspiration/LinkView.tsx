@@ -74,6 +74,7 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
                 value={memoValue}
                 writable={isWriting}
                 autoFocus={isWriting}
+                wordLimit={150}
               />
             </div>
           </section>

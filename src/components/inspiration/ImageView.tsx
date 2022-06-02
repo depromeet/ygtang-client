@@ -50,6 +50,7 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
                 value={modifiedMemo}
                 writable={isWriting}
                 autoFocus={isWriting}
+                wordLimit={150}
               />
             </div>
           </section>

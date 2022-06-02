@@ -124,6 +124,7 @@ const inputElementCss = (
   color: ${theme.color.gray05};
   opacity: 1;
   -webkit-opacity: 1;
+  -webkit-appearance: none;
 
   font-weight: 500;
   font-size: 14px;
