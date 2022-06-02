@@ -5,9 +5,10 @@ import { CancelIcon } from './icons';
 interface ImageContentProps {
   alt: string;
   src: string | null;
-  onClickXBtn?: VoidFunction;
   width?: string;
   height?: string;
+  htmlFor?: string;
+  onClickXBtn?: VoidFunction;
 }
 
 export default function ImageContent({
@@ -15,16 +16,17 @@ export default function ImageContent({
   alt = 'blank',
   width = '100%',
   height,
+  htmlFor,
   onClickXBtn,
 }: ImageContentProps) {
   const theme = useTheme();
 
   return (
     <div css={imgBoxCss({ width, height, theme })}>
-      {onClickXBtn && (
-        <button onClick={onClickXBtn} css={closeIconCss}>
+      {(onClickXBtn || htmlFor) && (
+        <label htmlFor={htmlFor} onClick={onClickXBtn} css={closeIconCss}>
           <CancelIcon isUsingFill color={theme.color.gray05} />
-        </button>
+        </label>
       )}
       {src && <img src={src} css={imgBoxCss({ width, height, theme })} alt={alt} />}
     </div>
@@ -58,4 +60,5 @@ const closeIconCss = css`
   height: 24px;
   padding: 0;
   z-index: 1;
+  cursor: pointer;
 `;
