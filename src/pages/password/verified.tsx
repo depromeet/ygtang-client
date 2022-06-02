@@ -50,8 +50,6 @@ export default function PasswordResetVerified() {
     }
   });
 
-  console.log(isSent);
-
   if (isError) {
     return (
       <article css={articleCss}>
