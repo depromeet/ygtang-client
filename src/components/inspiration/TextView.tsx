@@ -54,6 +54,7 @@ export default function TextView({ inspiration }: { inspiration: InspirationInte
                 value={memoText.value}
                 writable={isWriting}
                 autoFocus={isWriting}
+                wordLimit={150}
               />
             </div>
           </section>

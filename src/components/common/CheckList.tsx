@@ -37,7 +37,7 @@ export default function CheckList({
         onChange={onCheck}
       />
       <label htmlFor={`check-list-${id}`}>
-        <CheckCircleIcon color={checked ? '' : theme.color.gray01} />
+        <CheckCircleIcon color={checked ? theme.color.gray05 : theme.color.gray01} />
       </label>
       <a css={childrenWrapperCss} href={externalHref} target="_blank" rel="noopener noreferrer">
         {children}

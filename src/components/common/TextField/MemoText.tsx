@@ -114,10 +114,12 @@ export function MemoText({
       feedback={
         <div css={flexBetweenWrapper}>
           <div />
-          <span css={textLimitCss}>
-            <span css={writable && textLimitCurrentCss}>{debouncedValue.length}</span>
-            {`/${wordLimit ?? 150}`}
-          </span>
+          {wordLimit && (
+            <span css={textLimitCss}>
+              <span css={writable && textLimitCurrentCss}>{debouncedValue.length}</span>
+              {`/${wordLimit}`}
+            </span>
+          )}
         </div>
       }
       disabled={!writable}
