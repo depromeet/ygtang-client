@@ -18,15 +18,9 @@ export default function CheckList({
   const theme = useTheme();
   const id = useId();
 
-  const [checked, setChecked] = useState(isChecked);
-
   const onCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
+    onToggle(event.target.checked);
   };
-
-  useEffect(() => {
-    onToggle(checked);
-  }, [checked, onToggle]);
 
   return (
     <div css={checkListContainerCss}>
@@ -37,7 +31,7 @@ export default function CheckList({
         onChange={onCheck}
       />
       <label htmlFor={`check-list-${id}`}>
-        <CheckCircleIcon color={checked ? theme.color.gray05 : theme.color.gray01} />
+        <CheckCircleIcon color={isChecked ? theme.color.gray05 : theme.color.gray01} />
       </label>
       <a css={childrenWrapperCss} href={externalHref} target="_blank" rel="noopener noreferrer">
         {children}
