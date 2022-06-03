@@ -18,7 +18,7 @@ export default function MyAccountPage() {
 
   return (
     <article css={myAccountPageContainerCss}>
-      <NavigationBar title="내 계정" />
+      <NavigationBar title="내 계정" backLink="/my" />
       <section css={myAccountPageCss}>
         <ul>
           <MyInformationMenu

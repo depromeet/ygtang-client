@@ -15,7 +15,7 @@ export default function MyPage() {
 
   return (
     <article css={myPageContainerCss}>
-      <NavigationBar title="환경설정" />
+      <NavigationBar title="환경설정" backLink="/" />
       <section css={myPageCss}>
         <MyProfile />
         <ul css={menuListCss}>
