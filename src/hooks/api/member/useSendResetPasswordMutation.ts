@@ -10,7 +10,7 @@ interface SendResetPasswordMutationProps {
   ) => void | Promise<unknown>;
   onError?: (
     data: { message?: string },
-    variables: { message?: string },
+    variables: SendResetPasswordMutationParams,
     context: unknown
   ) => void | Promise<unknown>;
 }
@@ -24,11 +24,15 @@ export interface SendResetPasswordMutationParams {
  *
  * 초기화된 비밀번호를 이메일로 전송한다.
  */
-export default function useSendResetPasswordMutation({}: SendResetPasswordMutationProps) {
+export default function useSendResetPasswordMutation({
+  onSuccess,
+  onError,
+}: SendResetPasswordMutationProps) {
   return useMutation<undefined, { message?: string }, SendResetPasswordMutationParams>(
     ({ email }: SendResetPasswordMutationParams) =>
       post<undefined>(`/v1/members/sends-email/reset-passwords`, {
         email,
-      })
+      }),
+    { onSuccess, onError }
   );
 }
