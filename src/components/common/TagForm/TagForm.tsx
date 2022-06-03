@@ -65,7 +65,7 @@ export default function TagForm({
 
   return (
     <div css={formTagCss}>
-      <form onSubmit={onFormReturn}>
+      <form css={formCss} onSubmit={onFormReturn}>
         <SearchBar
           value={value}
           onChange={onChange}
@@ -75,7 +75,7 @@ export default function TagForm({
           }}
         />
       </form>
-      <AppliedTags applyedTags={applyedTags} onRemove={onRemove} />
+      {applyedTags.length ? <AppliedTags applyedTags={applyedTags} onRemove={onRemove} /> : <></>}
       <RegisteredTagList registeredTags={registeredTags} onClick={onSave} />
     </div>
   );
@@ -84,5 +84,8 @@ export default function TagForm({
 const formTagCss = css`
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
+`;
+
+const formCss = css`
+  padding: 16px 0;
 `;
