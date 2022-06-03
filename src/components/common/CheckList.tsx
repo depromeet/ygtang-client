@@ -26,6 +26,7 @@ export default function CheckList({
     <div css={checkListContainerCss}>
       <input
         css={inputCheckboxHiddenCss}
+        defaultChecked={isChecked}
         id={`check-list-${id}`}
         type="checkbox"
         onChange={onCheck}
