@@ -15,7 +15,7 @@ describe('components/common/Button/Button', () => {
     expect(screen.getByText(buttonText)).toBeInTheDocument();
   });
 
-  it('onClick props가 정상적으로 동작해야함', () => {
+  it('onClick prop이 정상적으로 동작해야함', () => {
     const onClickMock = jest.fn();
     render(<Button onClick={onClickMock}>{buttonText}</Button>);
 
