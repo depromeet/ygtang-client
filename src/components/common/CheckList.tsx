@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useId, useState } from 'react';
+import React, { PropsWithChildren, useId } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 
 import { CheckCircleIcon, ChevronIcon } from './icons';
