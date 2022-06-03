@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { css } from '@emotion/react';
 import { motion } from 'framer-motion';
 
@@ -22,8 +22,7 @@ export default function EditTag() {
   const { inspiration } = useInspirationById({
     inspirationId,
   });
-  const [keyword, setKeyword] = useState('');
-  const { tags, isLoading, hasNextPage, fetchNextPage } = useGetTagListWithInfinite({ keyword });
+  const { tags, isLoading, hasNextPage, fetchNextPage } = useGetTagListWithInfinite({});
   const { addInspirationTag, deleteInspirationTag } = useInspirationMutation();
 
   const { setTarget } = useIntersectionObserver({
@@ -67,9 +66,6 @@ export default function EditTag() {
             registeredTags={tags}
             onSave={saveTag}
             onRemove={removeTag}
-            onSearch={keyword => {
-              setKeyword(keyword);
-            }}
           />
           {hasNextPage && !isLoading && <div ref={setTarget}></div>}
         </motion.div>
