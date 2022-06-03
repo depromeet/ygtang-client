@@ -19,16 +19,27 @@ export default function MyAccountChangeNickame() {
   const [nicknameError, setNicknameError] = useState('');
   const { updateNickname } = useUserInformationMutation();
   const { push } = useInternalRouter();
+
   useDidUpdate(() => {
     nickname.setValue(userInformation.nickName);
   }, [userInformation.nickName]);
 
+  const isNicknameNotValidateForLength =
+    nickname.debouncedValue.length < 4 || 20 < nickname.debouncedValue.length;
+
+  const isNicknameSameWithPrev = userInformation.nickName === nickname.debouncedValue;
+
   useDidUpdate(() => {
-    if (!nickname.debouncedValue.length || userInformation.nickName === nickname.debouncedValue) {
-      setNicknameError('변경될 이름을 입력해주세요.');
-    } else {
-      setNicknameError('');
+    if (isNicknameNotValidateForLength) {
+      setNicknameError('닉네임은 4자 이상 20자 이하여야 합니다.');
+      return;
     }
+    if (isNicknameSameWithPrev) {
+      setNicknameError('변경될 이름을 입력해주세요.');
+      return;
+    }
+
+    setNicknameError('');
   }, [nickname.debouncedValue]);
 
   const onFormReturn = async (e: React.FormEvent) => {
@@ -37,7 +48,8 @@ export default function MyAccountChangeNickame() {
   };
 
   const callMuation = () => {
-    if (nicknameError) return fireToast({ content: '변경될 이름을 확인해주세요.' });
+    if (nicknameError) return fireToast({ content: nicknameError });
+
     updateNickname(
       { nickname: nickname.debouncedValue },
       {
@@ -52,6 +64,7 @@ export default function MyAccountChangeNickame() {
     <article css={editNickNameCss}>
       <NavigationBar
         title="이름"
+        backLink="/my/account"
         rightElement={
           <GhostButton
             size="large"
@@ -66,8 +79,8 @@ export default function MyAccountChangeNickame() {
       <form css={formCss} onSubmit={onFormReturn}>
         <TextField
           label="이름"
-          feedback={nickname.debouncedValue !== '' ? nicknameError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={nickname.debouncedValue.length > 0 && nicknameError === ''}
+          feedback={nicknameError}
+          isSuccess={!isNicknameNotValidateForLength && !isNicknameSameWithPrev}
           value={nickname.value}
           onChange={nickname.onChange}
           required
