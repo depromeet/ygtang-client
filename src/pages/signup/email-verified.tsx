@@ -52,14 +52,14 @@ export default function SignUpEmailVerified() {
 
     signupMutate({
       email: query.email as string,
-      nickName: nickname.value,
+      nickName: nickname.value.trim(),
       password: password.value,
       confirmPassword: passwordRepeat.value,
     });
   };
 
   useDidUpdate(() => {
-    if (nickname.debouncedValue.length >= 4 && nickname.debouncedValue.length <= 20) {
+    if (nickname.debouncedValue.trim().length >= 4 && nickname.debouncedValue.trim().length <= 20) {
       setNicknameError('');
     } else {
       setNicknameError('닉네임은 4자 이상 20자 이하여야 합니다.');

@@ -13,12 +13,14 @@ import NavigationBar from '../../../components/common/NavigationBar';
 import TextField from '../../../components/common/TextField';
 
 export default function MyAccountChangeNickame() {
-  const nickname = useInput({ useDebounce: true });
-  const [nicknameError, setNicknameError] = useState('');
+  const { userInformation } = useUserInformation();
+  const nickname = useInput({ useDebounce: true, initialValue: userInformation.nickName });
+  const [nicknameError, setNicknameError] = useState('변경될 이름을 입력해주세요.');
   const { callMuation, onFormReturn, isValidateNickname } = useChangeNickname({
     nickname,
     nicknameError,
     setNicknameError,
+    userInformation,
   });
 
   return (
@@ -64,23 +66,28 @@ interface UseChangeNicknameProps {
   nickname: ReturnType<typeof useInput>;
   nicknameError: string;
   setNicknameError: Dispatch<SetStateAction<string>>;
+  userInformation: UserInformationType;
 }
 
-function useChangeNickname({ nickname, nicknameError, setNicknameError }: UseChangeNicknameProps) {
+function useChangeNickname({
+  nickname,
+  nicknameError,
+  setNicknameError,
+  userInformation,
+}: UseChangeNicknameProps) {
   const { fireToast } = useToast();
-  const { userInformation } = useUserInformation();
   const { updateNickname } = useUserInformationMutation();
   const { push } = useInternalRouter();
 
-  // NOTE: 변경 전 닉네임 setStating
+  // NOTE: route 직접 방문 시 변경 전 닉네임 setStating
   useDidUpdate(() => {
     nickname.setValue(userInformation.nickName);
   }, [userInformation.nickName]);
 
   const isNicknameNotValidateForLength =
-    nickname.debouncedValue.length < 4 || 20 < nickname.debouncedValue.length;
+    nickname.debouncedValue.trim().length < 4 || 20 < nickname.debouncedValue.trim().length;
 
-  const isNicknameSameWithPrev = userInformation.nickName === nickname.debouncedValue;
+  const isNicknameSameWithPrev = userInformation.nickName === nickname.debouncedValue.trim();
 
   const isValidateNickname = !isNicknameNotValidateForLength && !isNicknameSameWithPrev;
 
@@ -89,6 +96,7 @@ function useChangeNickname({ nickname, nicknameError, setNicknameError }: UseCha
       setNicknameError('닉네임은 4자 이상 20자 이하여야 합니다.');
       return;
     }
+
     if (isNicknameSameWithPrev) {
       setNicknameError('변경될 이름을 입력해주세요.');
       return;
@@ -101,7 +109,7 @@ function useChangeNickname({ nickname, nicknameError, setNicknameError }: UseCha
     if (nicknameError) return fireToast({ content: nicknameError });
 
     updateNickname(
-      { nickname: nickname.debouncedValue },
+      { nickname: nickname.debouncedValue.trim() },
       {
         onSuccess: () => {
           push('/my/account');
