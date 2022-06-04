@@ -74,7 +74,7 @@ export default function PasswordReset() {
             isSendPasswordResetEmailLoading
           }
         >
-          로그인
+          다음
         </CTAButton>
       </form>
       <div css={signUpTextWrapperCss}>문의사항은 yeonggamt@gmail.com로 문의해 주세요.</div>
@@ -96,7 +96,6 @@ const introCardCss = css`
 
 const introTextWrapper = (theme: Theme) => css`
   position: absolute;
-  left: 12px;
   bottom: 17px;
   color: ${theme.color.gray05};
   font-size: 15px;

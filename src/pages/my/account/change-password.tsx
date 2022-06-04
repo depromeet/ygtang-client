@@ -46,7 +46,7 @@ export default function MypageChangePassword() {
   };
 
   useDidUpdate(() => {
-    if (password.debouncedValue.length > 6) {
+    if (password.debouncedValue.length < 6) {
       setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
       return;
     }
