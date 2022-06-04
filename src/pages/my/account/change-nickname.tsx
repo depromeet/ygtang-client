@@ -15,7 +15,7 @@ import TextField from '../../../components/common/TextField';
 export default function MyAccountChangeNickame() {
   const { userInformation } = useUserInformation();
   const nickname = useInput({ useDebounce: true, initialValue: userInformation.nickName });
-  const [nicknameError, setNicknameError] = useState('');
+  const [nicknameError, setNicknameError] = useState('변경될 이름을 입력해주세요.');
   const { callMuation, onFormReturn, isValidateNickname } = useChangeNickname({
     nickname,
     nicknameError,
@@ -91,16 +91,12 @@ function useChangeNickname({
 
   const isValidateNickname = !isNicknameNotValidateForLength && !isNicknameSameWithPrev;
 
-  console.log('userInformation: ' + userInformation.nickName);
-  console.log('nickname debounced: ' + nickname.debouncedValue.trim());
-
   useDidUpdate(() => {
-    console.log('isNicknameSameWithPrev: ' + isNicknameSameWithPrev);
-
     if (isNicknameNotValidateForLength) {
       setNicknameError('닉네임은 4자 이상 20자 이하여야 합니다.');
       return;
     }
+
     if (isNicknameSameWithPrev) {
       setNicknameError('변경될 이름을 입력해주세요.');
       return;
