@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
@@ -12,8 +11,7 @@ import { useAppliedTags } from '~/store/AppliedTags';
 
 export default function TagPage() {
   const { tags: appliedTags, removeTag, addTag } = useAppliedTags();
-  const [keyword, setKeyword] = useState('');
-  const { tags, isLoading, hasNextPage, fetchNextPage } = useGetTagListWithInfinite({ keyword });
+  const { tags, isLoading, hasNextPage, fetchNextPage } = useGetTagListWithInfinite({});
 
   const { setTarget } = useIntersectionObserver({
     onIntersect: ([{ isIntersecting }]) => {
@@ -37,9 +35,6 @@ export default function TagPage() {
             registeredTags={tags}
             onSave={addTag}
             onRemove={removeTag}
-            onSearch={keyword => {
-              setKeyword(keyword);
-            }}
           />
           {hasNextPage && !isLoading && <div ref={setTarget}></div>}
         </motion.div>

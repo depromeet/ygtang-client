@@ -65,7 +65,7 @@ export default function TagForm({
 
   return (
     <div css={formTagCss}>
-      <form onSubmit={onFormReturn}>
+      <form css={formCss} onSubmit={onFormReturn}>
         <SearchBar
           value={value}
           onChange={onChange}
@@ -73,9 +73,10 @@ export default function TagForm({
             setValue('');
             setKeyword('');
           }}
+          placeholder={readOnly ? '태그를 검색해보세요.' : '태그를 등록해보세요.'}
         />
       </form>
-      <AppliedTags applyedTags={applyedTags} onRemove={onRemove} />
+      {applyedTags.length > 0 && <AppliedTags applyedTags={applyedTags} onRemove={onRemove} />}
       <RegisteredTagList registeredTags={registeredTags} onClick={onSave} />
     </div>
   );
@@ -84,5 +85,8 @@ export default function TagForm({
 const formTagCss = css`
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
+`;
+
+const formCss = css`
+  padding: 16px 0;
 `;

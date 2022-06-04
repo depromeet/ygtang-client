@@ -35,6 +35,7 @@ export default React.memo(RegisteredTagList);
 const registeredTagsCss = css`
   display: flex;
   flex-direction: column;
+  padding: 16px 0;
   row-gap: 8px;
 `;
 
