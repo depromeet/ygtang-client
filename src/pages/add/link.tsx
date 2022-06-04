@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import LinkInput from '~/components/add/LinkInput';
-import { CTAButton } from '~/components/common/Button';
+import { CTABottomButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
@@ -75,9 +75,9 @@ export default function AddLink() {
           </section>
 
           <section css={addLinkBottomCss}>
-            <CTAButton disabled={!Boolean(openGraph)} type="submit">
+            <CTABottomButton disabled={!Boolean(openGraph)} type="submit">
               Tang!
-            </CTAButton>
+            </CTABottomButton>
           </section>
         </form>
       </article>

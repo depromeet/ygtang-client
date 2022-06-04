@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
-import { CTAButton } from '~/components/common/Button';
+import { CTABottomButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
 import { MemoText } from '~/components/common/TextField';
@@ -63,9 +63,9 @@ export default function AddText() {
           </section>
 
           <section css={addTextBottomCss}>
-            <CTAButton type="submit" disabled={isEmptyText}>
+            <CTABottomButton type="submit" disabled={isEmptyText}>
               Tang!
-            </CTAButton>
+            </CTABottomButton>
           </section>
         </form>
       </article>

@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import { IMAGE_INPUT_ID, ImgUploader } from '~/components/add/ImgUploader';
-import { CTAButton } from '~/components/common/Button';
+import { CTABottomButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
 import NavigationBar from '~/components/common/NavigationBar';
@@ -78,7 +78,7 @@ export default function AddImage() {
           </section>
 
           <section css={addImageBottomCss}>
-            <CTAButton type="submit">Tang!</CTAButton>
+            <CTABottomButton type="submit">Tang!</CTABottomButton>
           </section>
         </form>
       </article>
