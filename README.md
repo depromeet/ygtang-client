@@ -108,7 +108,7 @@ wait a sec..
 <tr>
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://avatars.githubusercontent.com/u/69200669?v=4" width="100px"  />
   <br/>
   FE 🖥
   <br/>
@@ -118,41 +118,41 @@ wait a sec..
  
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px"  />
   <br/>
   FE 🖥
   <br/>
-  고은정
+  오혜성
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://avatars.githubusercontent.com/u/59507527?v=4" width="100px"  />
   <br/>
   FE 🖥
   <br/>
-  고은정
+  정대윤
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://avatars.githubusercontent.com/u/6638675?v=4" width="100px"  />
   <br/>
   FE 🖥
   <br/>
-  고은정
+  정도현
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://user-images.githubusercontent.com/26461307/171999525-9e8f67d7-94e7-40e2-af81-f5ef23d41183.png" width="100px"  />
   <br/>
-  FE 🖥
+  Design 🎨
   <br/>
-  고은정
+  김자영
   </a>
   </td>
 
@@ -162,51 +162,51 @@ wait a sec..
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://avatars.githubusercontent.com/u/63771579?v=4" width="100px"  />
   <br/>
-  FE 🖥
+  BE 💾
   <br/>
-  고은정
+  김자연
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://avatars.githubusercontent.com/u/72685070?v=4" width="100px"  />
   <br/>
-  FE 🖥
+  BE 💾
   <br/>
-  고은정
+  문인우
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://avatars.githubusercontent.com/u/43127088?v=4" width="100px"  />
   <br/>
-  FE 🖥
+  BE 💾
   <br/>
-  고은정
+  정형일
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://user-images.githubusercontent.com/26461307/171999527-4c959b86-221a-4f5d-add1-1b536d798c01.png" width="100px"  />
   <br/>
-  FE 🖥
+  Design 🎨
   <br/>
-  고은정
+  박수연
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
+  <img src="https://user-images.githubusercontent.com/26461307/171999522-4e9d04c5-60b5-4740-9b8d-7efd84555775.png" width="100px" />
   <br/>
-  FE 🖥
+  Design 🎨
   <br/>
-  고은정
+  정미숙
   </a>
   </td>
  
