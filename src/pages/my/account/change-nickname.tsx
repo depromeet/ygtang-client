@@ -78,9 +78,9 @@ function useChangeNickname({ nickname, nicknameError, setNicknameError }: UseCha
   }, [userInformation.nickName]);
 
   const isNicknameNotValidateForLength =
-    nickname.debouncedValue.length < 4 || 20 < nickname.debouncedValue.length;
+    nickname.debouncedValue.trim().length < 4 || 20 < nickname.debouncedValue.trim().length;
 
-  const isNicknameSameWithPrev = userInformation.nickName === nickname.debouncedValue;
+  const isNicknameSameWithPrev = userInformation.nickName === nickname.debouncedValue.trim();
 
   const isValidateNickname = !isNicknameNotValidateForLength && !isNicknameSameWithPrev;
 
@@ -101,7 +101,7 @@ function useChangeNickname({ nickname, nicknameError, setNicknameError }: UseCha
     if (nicknameError) return fireToast({ content: nicknameError });
 
     updateNickname(
-      { nickname: nickname.debouncedValue },
+      { nickname: nickname.debouncedValue.trim() },
       {
         onSuccess: () => {
           push('/my/account');
