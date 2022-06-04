@@ -31,7 +31,9 @@
 
 ## Download
 
-wait a sec..
+| Apple App Store | Google Play Store |
+|--|--|
+| <a href="https://apps.apple.com/us/app/%EC%98%81%EA%B0%90%ED%83%B1/id1626598770?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | wait a sec... | 
 
 <br />
 <br />
