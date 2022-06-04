@@ -102,7 +102,7 @@ export default function Login() {
           로그인
         </CTAButton>
       </form>
-      <GhostButton>비밀번호 찾기</GhostButton>
+      <GhostButton onClick={() => push('/password')}>비밀번호 찾기</GhostButton>
       <div css={signUpTextWrapperCss}>
         계정이 없으신가요?{' '}
         <GhostButton size={'small'} onClick={() => push('/signup')}>
