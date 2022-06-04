@@ -5,7 +5,7 @@ import { PlusIcon } from '~/components/common/icons';
 import { Input } from '~/components/common/TextField/Input';
 import LinkThumbnail from '~/components/LinkThumbnail';
 import { useCheckLinkAvailable } from '~/hooks/api/inspiration/useCheckLinkAvailable';
-import useIgonreOpenGrap from '~/hooks/api/inspiration/useIgonreOpenGrap';
+import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { OpenGraph } from '~/pages/add/link';
@@ -21,8 +21,8 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   const { asPath } = useInternalRouter();
   const url = useInput({ useDebounce: true });
   const { openGraph: og, refetch, isFetching } = useCheckLinkAvailable({ link: url.value });
-  const [igonredOg, setigonredOg] = useState<OpenGraph | undefined>();
-  const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgonreOpenGrap();
+  const [ignoredOg, setIgnoredOg] = useState<OpenGraph | undefined>();
+  const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
 
   const { fireToast } = useToast();
 
@@ -37,9 +37,9 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
     e.preventDefault();
 
     if (checkIgonreOpenGraphHost(url.value)) {
-      setigonredOg(makeURLOpenGraph(url.value));
+      setIgnoredOg(makeURLOpenGraph(url.value));
     } else if (validator({ value: url.value, type: 'url' })) {
-      setigonredOg(undefined);
+      setIgnoredOg(undefined);
       refetch();
     } else {
       showErrorMessage();
@@ -47,13 +47,13 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   };
 
   useEffect(() => {
-    if (igonredOg) return saveOpenGraph && saveOpenGraph(igonredOg);
+    if (ignoredOg) return saveOpenGraph && saveOpenGraph(ignoredOg);
 
     if (isFetching || !og) return;
     if (og.url === null) return showErrorMessage();
 
     saveOpenGraph && saveOpenGraph(og);
-  }, [isFetching, og, saveOpenGraph, showErrorMessage, igonredOg]);
+  }, [isFetching, og, saveOpenGraph, showErrorMessage, ignoredOg]);
 
   return (
     <div css={LinkInputCss}>

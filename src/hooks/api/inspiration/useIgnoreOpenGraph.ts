@@ -6,7 +6,7 @@ const IGONRE_OPEN_GRAPH_HOSTS = [INSTAGRAM_ORIGIN, FACEBOOK_ORIGIN];
 
 const SUCCESS_CODE = 200;
 
-export default function useIgonreOpenGrap() {
+export default function useIgnoreOpenGraph() {
   const checkIgonreOpenGraphHost = (_url: string) => {
     try {
       const { host } = new URL(_url);

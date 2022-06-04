@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
-import useIgonreOpenGrap from '~/hooks/api/inspiration/useIgonreOpenGrap';
+import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
 import useDidMount from '~/hooks/common/useDidMount';
 import { textEllipsisCss } from '~/styles/utils';
 
@@ -71,7 +71,7 @@ function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGr
 
   const [og, setOg] = useState<OpenGraph>();
   const [src, setSrc] = useState<string>('');
-  const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgonreOpenGrap();
+  const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
 
   useDidMount(() => {
     setOg(checkIgonreOpenGraphHost(content) ? makeURLOpenGraph(content) : openGraph);
@@ -92,7 +92,7 @@ function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGr
   return (
     <div css={linkWrapperCss}>
       <div css={linkImgWrapperCss}>
-        {src ? <img alt={`${og?.url} thumbnail`} src={src} onError={onImageError} /> : <></>}
+        {src && <img alt={`${og?.url} thumbnail`} src={src} onError={onImageError} />}
       </div>
 
       <div css={linkTextWrapperCss}>
