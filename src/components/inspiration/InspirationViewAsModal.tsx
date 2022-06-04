@@ -4,6 +4,8 @@ import usePreventScroll from '~/hooks/common/usePreventScroll';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 import ContentPage from '~/pages/content';
 
+import ModalWrapper from '../common/ModalWrapper';
+
 export default function InspirationViewAsModal() {
   const modal = useQueryParam('modal', String);
   const isInspirationViewModal = modal === MODAL_TYPE.inspirationView;
@@ -12,7 +14,9 @@ export default function InspirationViewAsModal() {
 
   return (
     <PortalWrapper isShowing={isInspirationViewModal}>
-      <ContentPage />
+      <ModalWrapper>
+        <ContentPage />
+      </ModalWrapper>
     </PortalWrapper>
   );
 }

@@ -31,7 +31,7 @@ export default function AppendTooltip() {
 const wrapperCss = (theme: Theme) => css`
   position: fixed;
   right: 16px;
-  bottom: 134px;
+  bottom: 88px;
 
   width: 128px;
   padding: 10px 8px;
