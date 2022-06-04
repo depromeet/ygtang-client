@@ -2,7 +2,6 @@ import { PropsWithChildren, useEffect } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import { useWindowSize } from '~/hooks/common/useWindowSize';
-import { fullViewHeight } from '~/styles/utils';
 
 let vh = 0;
 
@@ -24,7 +23,7 @@ export default function Layout({ children }: PropsWithChildren<{}>) {
 }
 
 const layoutCss = (theme: Theme) => css`
-  min-height: ${fullViewHeight()};
+  min-height: calc(var(--var, 1vh) * 100);
   background: ${theme.color.background};
   max-width: ${theme.size.maxWidth};
   width: 100%;
