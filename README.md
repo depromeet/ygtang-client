@@ -1,5 +1,4 @@
-![스크린샷 2022-05-25 오전 1 44 30](https://user-images.githubusercontent.com/26461307/170089432-b7daac62-62c7-428f-9816-5c5cc4d0eff3.png)
-![스크린샷 2022-05-25 오전 1 44 48](https://user-images.githubusercontent.com/26461307/170089423-878bb5fa-2384-498f-8f00-1a4e5f1c569d.png)
+![Github-readme](https://user-images.githubusercontent.com/26461307/172001186-f07cfa73-8f3d-4329-bafc-389e2c70dc7d.png)
 
 <br />
 
