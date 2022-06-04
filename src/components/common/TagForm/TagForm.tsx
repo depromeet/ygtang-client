@@ -73,6 +73,7 @@ export default function TagForm({
             setValue('');
             setKeyword('');
           }}
+          placeholder={readOnly ? '태그를 검색해보세요.' : '태그를 등록해보세요.'}
         />
       </form>
       {applyedTags.length ? <AppliedTags applyedTags={applyedTags} onRemove={onRemove} /> : <></>}

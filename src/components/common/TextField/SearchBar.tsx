@@ -27,7 +27,7 @@ export function SearchBar({ value, placeholder, onRemoveClick, ...props }: Searc
           </button>
         )
       }
-      placeholder={placeholder ?? '태그를 등록 혹은 검색해보세요'}
+      placeholder={placeholder}
       padding={8}
     />
   );
