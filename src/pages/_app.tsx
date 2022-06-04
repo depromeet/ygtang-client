@@ -12,10 +12,9 @@ import ToastSection from '~/components/common/ToastSection';
 import { UserProvider } from '~/components/common/UserProvider';
 import { useGaPageview } from '~/hooks/ga/useGaPageview';
 import { queryClient } from '~/libs/api/queryClient';
+import Layout from '~/pages/_layout';
 import GlobalStyle from '~/styles/GlobalStyle';
 import CustomTheme from '~/styles/Theme';
-
-import Layout from './_layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   useGaPageview();

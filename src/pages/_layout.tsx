@@ -33,11 +33,11 @@ const layoutCss = (theme: Theme) => css`
 `;
 
 export const safeAreaTopCss = css`
-  height: calc(constant(safe-area-inset-top));
-  height: calc(env(safe-area-inset-top));
+  height: constant(safe-area-inset-top);
+  height: env(safe-area-inset-top);
 `;
 
 export const safeAreaBottomCss = css`
-  height: calc(constant(safe-area-inset-bottom));
-  height: calc(env(safe-area-inset-bottom));
+  height: constant(safe-area-inset-bottom);
+  height: env(safe-area-inset-bottom);
 `;
