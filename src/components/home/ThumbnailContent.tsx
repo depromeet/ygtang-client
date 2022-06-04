@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
@@ -7,6 +7,7 @@ import { textEllipsisCss } from '~/styles/utils';
 
 import { OpenGraph } from '../inspiration/LinkView';
 import { ContentThumbnailProps } from './Thumbnail';
+import useDidUpdate from '~/hooks/common/useDidUpdate';
 
 export default function ThumbnailContent({
   type,
@@ -73,10 +74,10 @@ function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGr
   const [src, setSrc] = useState<string>('');
   const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
 
-  useDidMount(() => {
+  useDidUpdate(() => {
     setOg(checkIgonreOpenGraphHost(content) ? makeURLOpenGraph(content) : openGraph);
     setSrc(og && og.url && og.image ? og.url + og.image : '');
-  });
+  }, [og]);
 
   const onImageError = (e: SyntheticEvent<HTMLImageElement>) => {
     if (!og) return;
