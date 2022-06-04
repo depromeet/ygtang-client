@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useId, useState } from 'react';
+import React, { PropsWithChildren, useId } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 
 import { CheckCircleIcon, ChevronIcon } from './icons';
@@ -18,26 +18,21 @@ export default function CheckList({
   const theme = useTheme();
   const id = useId();
 
-  const [checked, setChecked] = useState(isChecked);
-
   const onCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
+    onToggle(event.target.checked);
   };
-
-  useEffect(() => {
-    onToggle(checked);
-  }, [checked, onToggle]);
 
   return (
     <div css={checkListContainerCss}>
       <input
         css={inputCheckboxHiddenCss}
+        defaultChecked={isChecked}
         id={`check-list-${id}`}
         type="checkbox"
         onChange={onCheck}
       />
       <label htmlFor={`check-list-${id}`}>
-        <CheckCircleIcon color={checked ? theme.color.gray05 : theme.color.gray01} />
+        <CheckCircleIcon color={isChecked ? theme.color.gray05 : theme.color.gray01} />
       </label>
       <a css={childrenWrapperCss} href={externalHref} target="_blank" rel="noopener noreferrer">
         {children}
