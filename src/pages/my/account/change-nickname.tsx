@@ -91,7 +91,12 @@ function useChangeNickname({
 
   const isValidateNickname = !isNicknameNotValidateForLength && !isNicknameSameWithPrev;
 
+  console.log('userInformation: ' + userInformation.nickName);
+  console.log('nickname debounced: ' + nickname.debouncedValue.trim());
+
   useDidUpdate(() => {
+    console.log('isNicknameSameWithPrev: ' + isNicknameSameWithPrev);
+
     if (isNicknameNotValidateForLength) {
       setNicknameError('닉네임은 4자 이상 20자 이하여야 합니다.');
       return;
