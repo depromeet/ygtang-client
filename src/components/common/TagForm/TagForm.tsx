@@ -76,7 +76,7 @@ export default function TagForm({
           placeholder={readOnly ? '태그를 검색해보세요.' : '태그를 등록해보세요.'}
         />
       </form>
-      {applyedTags.length ? <AppliedTags applyedTags={applyedTags} onRemove={onRemove} /> : <></>}
+      {applyedTags.length > 0 && <AppliedTags applyedTags={applyedTags} onRemove={onRemove} />}
       <RegisteredTagList registeredTags={registeredTags} onClick={onSave} />
     </div>
   );
