@@ -3,6 +3,8 @@ import { MODAL_TYPE } from '~/constants/common';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 import TagPage from '~/pages/add/tag';
 
+import ModalWrapper from '../common/ModalWrapper';
+
 // TODO: 다른 부분과 통합할 필요있음 state를 주입받는 형식을 사용하는것이 좋을듯
 
 export default function AddTagFormRouteAsModal() {
@@ -10,7 +12,9 @@ export default function AddTagFormRouteAsModal() {
 
   return (
     <PortalWrapper isShowing={query === MODAL_TYPE.addTag}>
-      <TagPage />
+      <ModalWrapper>
+        <TagPage />
+      </ModalWrapper>
     </PortalWrapper>
   );
 }

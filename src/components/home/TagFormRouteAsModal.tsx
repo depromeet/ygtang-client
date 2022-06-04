@@ -4,6 +4,8 @@ import usePreventScroll from '~/hooks/common/usePreventScroll';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 import TagPage from '~/pages/tag';
 
+import ModalWrapper from '../common/ModalWrapper';
+
 export default function TagFormRouteAsModal() {
   const query = useQueryParam('modal', String);
   const isTagModal = query === MODAL_TYPE.tag;
@@ -12,7 +14,9 @@ export default function TagFormRouteAsModal() {
 
   return (
     <PortalWrapper isShowing={isTagModal}>
-      <TagPage />
+      <ModalWrapper>
+        <TagPage />
+      </ModalWrapper>
     </PortalWrapper>
   );
 }
