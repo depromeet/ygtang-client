@@ -132,6 +132,11 @@ export default function useInspirationMutation() {
     addInspirationTag: addInspirationTagMutation.mutate,
 
     /**
+     * 영감에 태그를 Loading의 상태를 보여줍니다.
+     */
+    addInspirationTagIsLoading: addInspirationTagMutation.isLoading,
+
+    /**
      * 영감에 태그를 삭제합니다.
      * deleteInspirationTag({id: number, tagId: number})
      */

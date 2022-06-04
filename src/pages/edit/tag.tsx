@@ -23,7 +23,8 @@ export default function EditTag() {
     inspirationId,
   });
   const { tags, isLoading, hasNextPage, fetchNextPage } = useGetTagListWithInfinite({});
-  const { addInspirationTag, deleteInspirationTag } = useInspirationMutation();
+  const { addInspirationTag, deleteInspirationTag, addInspirationTagIsLoading } =
+    useInspirationMutation();
 
   const { setTarget } = useIntersectionObserver({
     onIntersect: ([{ isIntersecting }]) => {
@@ -40,6 +41,10 @@ export default function EditTag() {
   };
 
   const saveTag = (tag: TagType) => {
+    if (addInspirationTagIsLoading) {
+      fireToast({ content: '태그를 추가 중 입니다. 잠시 후에 시도해주세요.' });
+      return;
+    }
     if (hasTag(tag)) {
       fireToast({ content: '리스트에 태그가 이미 존재합니다.' });
       return;
