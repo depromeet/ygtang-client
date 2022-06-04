@@ -32,13 +32,12 @@ const layoutCss = (theme: Theme) => css`
   padding: ${theme.size.layoutPadding};
 `;
 
-const safeAreaTopCss = css`
+export const safeAreaTopCss = css`
   height: calc(constant(safe-area-inset-top));
   height: calc(env(safe-area-inset-top));
-  background-color: red;
 `;
 
-const safeAreaBottomCss = css`
+export const safeAreaBottomCss = css`
   height: calc(constant(safe-area-inset-bottom));
   height: calc(env(safe-area-inset-bottom));
 `;
