@@ -8,21 +8,21 @@ import { defaultEasing } from '~/constants/motions';
 import useImgUpload from '~/hooks/common/useImgUpload';
 import { RouterPathType } from '~/hooks/common/useInternalRouter';
 
-import { ImgUploader } from '../add/ImgUploader';
+import { IMAGE_INPUT_ID, ImgUploader } from '../add/ImgUploader';
 
 export default function AppendTooltip() {
-  const { imgInputRef, openFileInput, imgInputUploader } = useImgUpload({ isUploadPage: false });
+  const { imgInputUploader } = useImgUpload({ isUploadPage: false });
 
   return (
     <motion.div css={wrapperCss} variants={tooltipVariants}>
       <AnchorElement href="/add/text" icon={<EditIcon />} title="글" />
       <AnchorElement
         href="/add/image"
-        onClick={openFileInput}
         icon={<ImageIcon />}
         title="이미지"
+        htmlFor={IMAGE_INPUT_ID}
       />
-      <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
+      <ImgUploader imgInputUploader={imgInputUploader} />
       <AnchorElement href="/add/link" icon={<LinkIcon />} title="링크" />
     </motion.div>
   );
@@ -45,16 +45,16 @@ interface AnchorElementProps {
   href: RouterPathType;
   icon: ReactNode;
   title: string;
-  onClick?: VoidFunction;
+  htmlFor?: string;
 }
 
-function AnchorElement({ href, onClick, icon, title }: AnchorElementProps) {
-  if (onClick) {
+function AnchorElement({ href, icon, title, htmlFor }: AnchorElementProps) {
+  if (htmlFor) {
     return (
-      <a css={anchorCss} onClick={onClick}>
+      <label css={anchorCss} htmlFor={htmlFor}>
         {icon}
         <span>{title}</span>
-      </a>
+      </label>
     );
   }
 
@@ -76,6 +76,7 @@ const anchorCss = (theme: Theme) => css`
   align-items: center;
   gap: 12px;
   color: ${theme.color.gray05};
+  cursor: pointer;
 
   &:not(:last-child) {
     border-bottom: solid 1px ${theme.color.gray01};

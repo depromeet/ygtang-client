@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
-import { ImgUploader } from '~/components/add/ImgUploader';
+import { IMAGE_INPUT_ID, ImgUploader } from '~/components/add/ImgUploader';
 import { CTAButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
@@ -24,7 +24,8 @@ export default function AddImage() {
     debouncedValue: memoDebouncedValue,
     value: memoValue,
   } = useInput({ useDebounce: true });
-  const { imgInputRef, openFileInput, imgInputUploader } = useImgUpload({});
+
+  const { imgInputUploader } = useImgUpload({});
   const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
   const { createInspiration } = useInspirationMutation();
@@ -54,16 +55,14 @@ export default function AddImage() {
         <NavigationBar title="이미지 추가" />
 
         <form onSubmit={submitImg} css={formCss}>
-          <ImgUploader imgInputUploader={imgInputUploader} ref={imgInputRef} />
+          <ImgUploader imgInputUploader={imgInputUploader} />
           <section css={addImageTopCss}>
             <div css={contentWrapperCss}>
-              {
-                <ImageContent
-                  onClickXBtn={openFileInput}
-                  src={uploadedImg?.base64 ?? null}
-                  alt="uploadedImg"
-                />
-              }
+              <ImageContent
+                src={uploadedImg?.base64 ?? null}
+                alt="uploadedImg"
+                htmlFor={IMAGE_INPUT_ID}
+              />
             </div>
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />
