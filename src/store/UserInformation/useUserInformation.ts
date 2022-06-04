@@ -8,6 +8,7 @@ export function useUserInformation() {
   const [userInformation, setUserInformation] = useRecoilState(userInformationState);
   useGetUserInformation(setUserInformation);
 
+  console.log(userInformation.nickName);
   return {
     userInformation,
     setUserInformation,
