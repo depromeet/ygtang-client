@@ -30,9 +30,9 @@
 <br />
 <br />
 
-## 다운로드 구역 (추후 수정)
+## Download
 
-플레이 스토어 링크 이미지 / 앱스토어 링크 이미지
+wait a sec..
 
 <br />
 <br />
@@ -71,8 +71,6 @@
 <br />
 <br />
 
-<!--
-
 ## Directory structure
 
 ```bash
@@ -101,7 +99,7 @@
 ├── @types # React-Native types
 ├── httpsDevServer.js # with httpsdev command
 └── README.md
-``` -->
+```
 
 ## Owner
 
@@ -110,7 +108,7 @@
 <tr>
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
   FE 🖥
   <br/>
@@ -120,33 +118,41 @@
  
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  🖥 • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  🖥 • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  🖥 • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  FE • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
 
@@ -156,41 +162,51 @@
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  FE • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  FE • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  FE • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  FE • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
   
   <td align=center>
   <a href="https://github.com/hyesungoh">
-  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" />
+  <img src="https://avatars.githubusercontent.com/u/26461307?v=4" width="100px" style="border-radius:50%;" />
   <br/>
-  FE • 오혜성
+  FE 🖥
+  <br/>
+  고은정
   </a>
   </td>
  
