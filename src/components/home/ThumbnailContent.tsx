@@ -1,8 +1,11 @@
 import { SyntheticEvent, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
+import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
+import useDidMount from '~/hooks/common/useDidMount';
 import { textEllipsisCss } from '~/styles/utils';
 
+import { OpenGraph } from '../inspiration/LinkView';
 import { ContentThumbnailProps } from './Thumbnail';
 
 export default function ThumbnailContent({
@@ -11,7 +14,7 @@ export default function ThumbnailContent({
   openGraph,
 }: Pick<ContentThumbnailProps, 'type' | 'content' | 'openGraph'>) {
   if (type === 'IMAGE') return <img css={imageCss} alt={`${content} image`} src={content} />;
-  if (type === 'LINK') return <LinkContent openGraph={openGraph} />;
+  if (type === 'LINK') return <LinkContent openGraph={openGraph} content={content} />;
 
   // Text type
   return <p css={textCss}>{content}</p>;
@@ -31,8 +34,9 @@ const linkWrapperCss = css`
   font-size: 10px;
 `;
 
-const linkImgWrapperCss = css`
+const linkImgWrapperCss = (theme: Theme) => css`
   width: 100%;
+  background-color: ${theme.color.dim01};
 
   & > img {
     width: 100%;
@@ -61,33 +65,39 @@ const textCss = css`
   line-height: 150%;
 `;
 
-function LinkContent({ openGraph }: Pick<ContentThumbnailProps, 'openGraph'>) {
+function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGraph' | 'content'>) {
   // initial state를 og.url + og.image로 한 이유는
   // og.image가 안되는 경우가 상대주소로 작성이 되어 있어 영감탱 서버에 요청하기 때문
-  const [src, setSrc] = useState<string>(
-    openGraph && openGraph.url && openGraph.image ? openGraph.url + openGraph.image : ''
-  );
+
+  const [og, setOg] = useState<OpenGraph>();
+  const [src, setSrc] = useState<string>('');
+  const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
+
+  useDidMount(() => {
+    setOg(checkIgonreOpenGraphHost(content) ? makeURLOpenGraph(content) : openGraph);
+    setSrc(og && og.url && og.image ? og.url + og.image : '');
+  });
 
   const onImageError = (e: SyntheticEvent<HTMLImageElement>) => {
-    if (!openGraph) return;
-    if (!openGraph.url) return;
-    if (!openGraph.image) return;
+    if (!og) return;
+    if (!og.url) return;
+    if (!og.image) return;
 
     // 두번째로 시도하는 og.image에서도 에러를 발생할 경우
     if (e.currentTarget.src === openGraph.image) return;
 
-    setSrc(openGraph.image);
+    setSrc(og.image);
   };
 
   return (
     <div css={linkWrapperCss}>
       <div css={linkImgWrapperCss}>
-        <img alt={`${openGraph?.url} thumbnail`} src={src} onError={onImageError} />
+        {src && <img alt={`${og?.url} thumbnail`} src={src} onError={onImageError} />}
       </div>
 
       <div css={linkTextWrapperCss}>
-        <p>{openGraph?.title}</p>
-        <p>{openGraph?.url}</p>
+        <p>{og?.title}</p>
+        <p>{og?.url}</p>
       </div>
     </div>
   );
