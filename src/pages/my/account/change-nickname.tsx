@@ -13,12 +13,14 @@ import NavigationBar from '../../../components/common/NavigationBar';
 import TextField from '../../../components/common/TextField';
 
 export default function MyAccountChangeNickame() {
-  const nickname = useInput({ useDebounce: true });
+  const { userInformation } = useUserInformation();
+  const nickname = useInput({ useDebounce: true, initialValue: userInformation.nickName });
   const [nicknameError, setNicknameError] = useState('');
   const { callMuation, onFormReturn, isValidateNickname } = useChangeNickname({
     nickname,
     nicknameError,
     setNicknameError,
+    userInformation,
   });
 
   return (
@@ -64,15 +66,20 @@ interface UseChangeNicknameProps {
   nickname: ReturnType<typeof useInput>;
   nicknameError: string;
   setNicknameError: Dispatch<SetStateAction<string>>;
+  userInformation: UserInformationType;
 }
 
-function useChangeNickname({ nickname, nicknameError, setNicknameError }: UseChangeNicknameProps) {
+function useChangeNickname({
+  nickname,
+  nicknameError,
+  setNicknameError,
+  userInformation,
+}: UseChangeNicknameProps) {
   const { fireToast } = useToast();
-  const { userInformation } = useUserInformation();
   const { updateNickname } = useUserInformationMutation();
   const { push } = useInternalRouter();
 
-  // NOTE: 변경 전 닉네임 setStating
+  // NOTE: route 직접 방문 시 변경 전 닉네임 setStating
   useDidUpdate(() => {
     nickname.setValue(userInformation.nickName);
   }, [userInformation.nickName]);
