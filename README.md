@@ -111,7 +111,7 @@
 
 <tr>
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://github.com/positiveko">
   <img src="https://avatars.githubusercontent.com/u/69200669?v=4" width="100px"  />
   <br/>
   FE 🖥
@@ -131,7 +131,7 @@
   </td>
   
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://github.com/SenseCodeValue">
   <img src="https://avatars.githubusercontent.com/u/59507527?v=4" width="100px"  />
   <br/>
   FE 🖥
@@ -141,7 +141,7 @@
   </td>
   
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://github.com/ddarkr">
   <img src="https://avatars.githubusercontent.com/u/6638675?v=4" width="100px"  />
   <br/>
   FE 🖥
@@ -151,7 +151,7 @@
   </td>
   
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://linktr.ee/kzmgy">
   <img src="https://user-images.githubusercontent.com/26461307/171999525-9e8f67d7-94e7-40e2-af81-f5ef23d41183.png" width="100px"  />
   <br/>
   Design 🎨
@@ -165,7 +165,7 @@
   <tr>
   
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://github.com/nature1216">
   <img src="https://avatars.githubusercontent.com/u/63771579?v=4" width="100px"  />
   <br/>
   BE 💾
@@ -175,7 +175,7 @@
   </td>
   
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://github.com/IW-MOON">
   <img src="https://avatars.githubusercontent.com/u/72685070?v=4" width="100px"  />
   <br/>
   BE 💾
@@ -185,7 +185,7 @@
   </td>
   
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://github.com/Hyung1Jung">
   <img src="https://avatars.githubusercontent.com/u/43127088?v=4" width="100px"  />
   <br/>
   BE 💾
@@ -195,7 +195,7 @@
   </td>
   
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://www.behance.net/sypak120c57e">
   <img src="https://user-images.githubusercontent.com/26461307/171999527-4c959b86-221a-4f5d-add1-1b536d798c01.png" width="100px"  />
   <br/>
   Design 🎨
@@ -205,7 +205,7 @@
   </td>
   
   <td align=center>
-  <a href="https://github.com/hyesungoh">
+  <a href="https://www.behance.net/misukj12240ed5">
   <img src="https://user-images.githubusercontent.com/26461307/171999522-4e9d04c5-60b5-4740-9b8d-7efd84555775.png" width="100px" />
   <br/>
   Design 🎨
