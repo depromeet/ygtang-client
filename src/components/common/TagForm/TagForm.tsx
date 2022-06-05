@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { SearchBar } from '~/components/common/TextField';
 import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
 import useTagMutation from '~/hooks/api/tag/useTagMutation';
+import useTagRefresh from '~/hooks/api/tag/useTagRefresh';
 import useInput from '~/hooks/common/useInput';
 
 import AppliedTags from './AppliedTags';
@@ -32,16 +33,18 @@ export default function TagForm({
   const lastKeyword = useRef<string | null>(null);
   const { tags, isLoading } = useGetTagListWithInfinite({ keyword, isExactlySame: true });
   const { createTag } = useTagMutation();
+  const { refresh } = useTagRefresh();
 
   const saveCreatedTag = useCallback(
     (keyword: string) => {
       createTag(keyword, {
         onSuccess: data => {
           onSave(data);
+          refresh();
         },
       });
     },
-    [createTag, onSave]
+    [createTag, onSave, refresh]
   );
 
   useEffect(() => {
