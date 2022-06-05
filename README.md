@@ -6,7 +6,7 @@
 
 # 영감탱
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/context:javascript) [![CI](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml) [![ygtang](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/tmhk21/main&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/tmhk21/runs) [![codecov](https://codecov.io/gh/depromeet/11th_7team_web/branch/main/graph/badge.svg?token=OM28A5TKRR)](https://codecov.io/gh/depromeet/11th_7team_web)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/context:javascript) [![CI](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml) [![ygtang](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/tmhk21/main&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/tmhk21/runs) [![codecov](https://codecov.io/gh/depromeet/ygtang-client/branch/main/graph/badge.svg?token=OM28A5TKRR)](https://codecov.io/gh/depromeet/ygtang-client)
 
 여기저기 흩어져 넘치는 영감.
 
@@ -31,9 +31,9 @@
 
 ## Download
 
-| Apple App Store | Google Play Store |
-|--|--|
-| <a href="https://apps.apple.com/us/app/%EC%98%81%EA%B0%90%ED%83%B1/id1626598770?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | wait a sec... | 
+| Apple App Store                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Google Play Store |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
+| <a href="https://apps.apple.com/us/app/%EC%98%81%EA%B0%90%ED%83%B1/id1626598770?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | wait a sec...     |
 
 <br />
 <br />
