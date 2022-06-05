@@ -1,17 +1,19 @@
 import { css, Theme } from '@emotion/react';
 
+import useOpenGraphImage from '~/hooks/common/useOpenGraphImage';
 import { textEllipsisCss } from '~/styles/utils';
 
-import { IconButton } from './common/Button';
+import { IconButton } from '../common/Button';
 
-export interface LinkThumbnailMetaData {
+// TODO: /remotes/inspiration OpenGraphResponse로 대체 가능해보임
+interface LinkThumbnailMetaData {
   image?: string;
   title: string;
   url: string;
   alt?: string;
 }
 
-export interface LinkThumbnailProps {
+interface LinkThumbnailProps {
   edit?: boolean;
   thumbnail: LinkThumbnailMetaData;
   onDelete?: VoidFunction;
@@ -22,6 +24,8 @@ export default function LinkThumbnail({
   thumbnail,
   onDelete: _onDelete,
 }: LinkThumbnailProps) {
+  const { src, onImageError } = useOpenGraphImage({ url: thumbnail.url, image: thumbnail.image });
+
   const hasImage = () => {
     return Boolean(thumbnail?.image);
   };
@@ -52,7 +56,7 @@ export default function LinkThumbnail({
           <span css={linkThumbnailUrlCss}>{thumbnail.url}</span>
         </section>
         {hasImage() && (
-          <img css={linkThumbnailImageCss} src={thumbnail.image} alt={thumbnail.alt} />
+          <img css={linkThumbnailImageCss} src={src} alt={thumbnail.alt} onError={onImageError} />
         )}
         <IconButton
           light
@@ -75,6 +79,7 @@ const linkThumbnailBoxCss = () => css`
   height: 100px;
   border-radius: 4px;
 `;
+
 const linkThumbnailContentCss = (hasImage: boolean) => (theme: Theme) =>
   css`
     padding: 16px;

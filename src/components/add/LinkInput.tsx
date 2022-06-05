@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
+import LinkThumbnail from '~/components/add/LinkThumbnail';
 import { PlusIcon } from '~/components/common/icons';
 import { Input } from '~/components/common/TextField/Input';
-import LinkThumbnail from '~/components/LinkThumbnail';
 import { useCheckLinkAvailable } from '~/hooks/api/inspiration/useCheckLinkAvailable';
 import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
 import useInput from '~/hooks/common/useInput';

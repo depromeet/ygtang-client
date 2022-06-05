@@ -14,7 +14,8 @@ import { useAppliedTags } from '~/store/AppliedTags';
 import { formCss } from './image';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
-// TODO: code 200임에도 response가 null로 오는 경우가 있어서 백엔드 문의 필요
+
+// TODO: /remotes/inspiration OpenGraphResponse로 대체 가능해보임
 export interface OpenGraph {
   description: string;
   siteName: string;

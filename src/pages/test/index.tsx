@@ -1,6 +1,7 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
+import LinkThumbnail from '~/components/add/LinkThumbnail';
 import Button, {
   CTAButton,
   FilledButton,
@@ -13,7 +14,6 @@ import { SearchIcon } from '~/components/common/icons';
 import NavigationBar from '~/components/common/NavigationBar';
 import TextField, { MemoText } from '~/components/common/TextField';
 import { SearchBar } from '~/components/common/TextField/SearchBar';
-import LinkThumbnail from '~/components/LinkThumbnail';
 import useInput from '~/hooks/common/useInput';
 import { useUserAgent } from '~/hooks/common/useUserAgent';
 import { useToast } from '~/store/Toast';
