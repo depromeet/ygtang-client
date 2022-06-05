@@ -1,7 +1,8 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
+import useOpenGraphImage from '~/hooks/common/useOpenGraphImage';
 import { textEllipsisCss } from '~/styles/utils';
 
 import { OpenGraph } from '../inspiration/LinkView';
@@ -65,29 +66,15 @@ const textCss = css`
 `;
 
 function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGraph' | 'content'>) {
-  // initial state를 og.url + og.image로 한 이유는
-  // og.image가 안되는 경우가 상대주소로 작성이 되어 있어 영감탱 서버에 요청하기 때문
-
   const [og, setOg] = useState<OpenGraph>();
-  const [src, setSrc] = useState<string>('');
   const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
+  const { src, onImageError } = useOpenGraphImage({ url: og?.url, image: og?.image });
 
   useEffect(() => {
     setOg(checkIgonreOpenGraphHost(content) ? makeURLOpenGraph(content) : openGraph);
-    setSrc(og && og.url && og.image ? og.url + og.image : '');
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [og]);
-
-  const onImageError = (e: SyntheticEvent<HTMLImageElement>) => {
-    if (!og) return;
-    if (!og.url) return;
-    if (!og.image) return;
-
-    // 두번째로 시도하는 og.image에서도 에러를 발생할 경우
-    if (e.currentTarget.src === openGraph.image) return;
-
-    setSrc(og.image);
-  };
 
   return (
     <div css={linkWrapperCss}>
