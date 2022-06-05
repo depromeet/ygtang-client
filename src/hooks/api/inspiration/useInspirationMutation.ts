@@ -12,6 +12,10 @@ export default function useInspirationMutation() {
   const { push } = useInternalRouter();
   const { fireToast } = useToast();
 
+  const refreshInspirationList = () => {
+    queryClient.invalidateQueries(INSPIRATION_LIST_QUERY_KEY);
+  };
+
   const resetInspirationList = () => {
     queryClient.resetQueries(INSPIRATION_LIST_QUERY_KEY);
   };
@@ -80,6 +84,7 @@ export default function useInspirationMutation() {
       onSuccess: (_res, req) => {
         fireToast({ content: '태그를 추가했습니다!' });
         resetInspirationItem(req.id);
+        refreshInspirationList();
       },
       onError: (error, variable, context) => {
         console.log('err', error, variable, context);
@@ -93,6 +98,7 @@ export default function useInspirationMutation() {
       onSuccess: (_res, req) => {
         fireToast({ content: '태그를 삭제했습니다!' });
         resetInspirationItem(req.id);
+        refreshInspirationList();
       },
       onError: (error, variable, context) => {
         console.log('err', error, variable, context);

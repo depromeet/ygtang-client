@@ -33,18 +33,18 @@ export default function TagForm({
   const lastKeyword = useRef<string | null>(null);
   const { tags, isLoading } = useGetTagListWithInfinite({ keyword, isExactlySame: true });
   const { createTag } = useTagMutation();
-  const { refresh } = useTagRefresh();
+  const { refresh: tagListRefresh } = useTagRefresh();
 
   const saveCreatedTag = useCallback(
     (keyword: string) => {
       createTag(keyword, {
         onSuccess: data => {
           onSave(data);
-          refresh();
+          tagListRefresh();
         },
       });
     },
-    [createTag, onSave, refresh]
+    [createTag, onSave, tagListRefresh]
   );
 
   useEffect(() => {
