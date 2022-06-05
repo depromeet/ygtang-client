@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
@@ -19,6 +19,7 @@ import { fullViewHeight } from '~/styles/utils';
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddImage() {
+  const [disabled, setDisabled] = useState(false);
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
@@ -39,6 +40,7 @@ export default function AddImage() {
   const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!uploadedImg) return;
+    setDisabled(true);
     const tagIds = tags.map(tag => tag.id);
     const imgData = new FormData();
     imgData.append('file', uploadedImg.blob);
@@ -78,7 +80,9 @@ export default function AddImage() {
           </section>
 
           <section css={addImageBottomCss}>
-            <CTABottomButton type="submit">Tang!</CTABottomButton>
+            <CTABottomButton disabled={disabled} type="submit">
+              Tang!
+            </CTABottomButton>
           </section>
         </form>
       </article>

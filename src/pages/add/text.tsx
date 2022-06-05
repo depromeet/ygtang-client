@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
@@ -15,6 +16,7 @@ import { formCss } from './image';
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddText() {
+  const [disabled, setDisabled] = useState(false);
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
@@ -24,6 +26,7 @@ export default function AddText() {
   const submitText = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inspiringText.value) return;
+    setDisabled(true);
     const textData = new FormData();
     const tagIds = tags.map(tag => tag.id);
     textData.append('content', inspiringText.value);
@@ -63,7 +66,7 @@ export default function AddText() {
           </section>
 
           <section css={addTextBottomCss}>
-            <CTABottomButton type="submit" disabled={isEmptyText}>
+            <CTABottomButton type="submit" disabled={isEmptyText || disabled}>
               Tang!
             </CTABottomButton>
           </section>
