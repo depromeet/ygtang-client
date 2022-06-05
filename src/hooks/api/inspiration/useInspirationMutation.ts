@@ -12,6 +12,10 @@ export default function useInspirationMutation() {
   const { push } = useInternalRouter();
   const { fireToast } = useToast();
 
+  const refreshInspirationList = () => {
+    queryClient.invalidateQueries(INSPIRATION_LIST_QUERY_KEY);
+  };
+
   const resetInspirationList = () => {
     queryClient.resetQueries(INSPIRATION_LIST_QUERY_KEY);
   };
@@ -20,8 +24,12 @@ export default function useInspirationMutation() {
     queryClient.removeQueries(INSPIRATION_LIST_QUERY_KEY, { exact: true });
   };
 
-  const resetInspirationItem = (id: number) => {
+  const refreshInspirationById = (id: number) => {
     queryClient.invalidateQueries([INSPIRATION_BY_ID_QUERY_KEY, `${id}`]);
+  };
+
+  const removeWholeInspirationById = () => {
+    queryClient.removeQueries(INSPIRATION_BY_ID_QUERY_KEY);
   };
 
   const createInspirationMutation = useMutation(
@@ -66,7 +74,7 @@ export default function useInspirationMutation() {
     {
       onSuccess: (_res, req) => {
         fireToast({ content: '메모가 수정되었습니다!' });
-        resetInspirationItem(req.id);
+        refreshInspirationById(req.id);
       },
       onError: (error, variable, context) => {
         console.log('err', error, variable, context);
@@ -79,7 +87,8 @@ export default function useInspirationMutation() {
     {
       onSuccess: (_res, req) => {
         fireToast({ content: '태그를 추가했습니다!' });
-        resetInspirationItem(req.id);
+        refreshInspirationById(req.id);
+        refreshInspirationList();
       },
       onError: (error, variable, context) => {
         console.log('err', error, variable, context);
@@ -92,7 +101,8 @@ export default function useInspirationMutation() {
     {
       onSuccess: (_res, req) => {
         fireToast({ content: '태그를 삭제했습니다!' });
-        resetInspirationItem(req.id);
+        refreshInspirationById(req.id);
+        refreshInspirationList();
       },
       onError: (error, variable, context) => {
         console.log('err', error, variable, context);
@@ -141,5 +151,20 @@ export default function useInspirationMutation() {
      * deleteInspirationTag({id: number, tagId: number})
      */
     deleteInspirationTag: deleteInspirationTagMutation.mutate,
+
+    /**
+     * 모든 영감들을 Refresh 합니다.
+     */
+    refreshInspirationList,
+
+    /**
+     * 모든 영감들을 Reset 합니다.
+     */
+    resetInspirationList,
+
+    /**
+     * 모든 개별 영감들을 Remove 합니다.
+     */
+    removeWholeInspirationById,
   };
 }

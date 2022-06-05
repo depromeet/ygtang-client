@@ -2,6 +2,7 @@ import { useMutation } from 'react-query';
 
 import { del, post } from '~/libs/api/client';
 
+import useInspirationMutation from '../inspiration/useInspirationMutation';
 import useTagRefresh from './useTagRefresh';
 
 interface CreateTagDataResponseInterface {
@@ -10,7 +11,8 @@ interface CreateTagDataResponseInterface {
 }
 
 export default function useTagMutation() {
-  const { refresh } = useTagRefresh();
+  const { reset } = useTagRefresh();
+  const { resetInspirationList, removeWholeInspirationById } = useInspirationMutation();
 
   const createTagMutation = useMutation<
     CreateTagDataResponseInterface,
@@ -18,13 +20,15 @@ export default function useTagMutation() {
     string
   >((content: string) => post<CreateTagDataResponseInterface>('/v1/tag/add', { content }), {
     onSuccess: () => {
-      refresh();
+      reset();
     },
   });
 
   const deleteTagMutation = useMutation((id: number) => del(`/v1/tag/remove/${id}`), {
     onSuccess: () => {
-      refresh();
+      reset();
+      resetInspirationList();
+      removeWholeInspirationById();
     },
   });
 
