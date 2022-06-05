@@ -6,8 +6,12 @@ export default function useTagRefresh() {
   const queryClient = useQueryClient();
 
   const refresh = () => {
-    queryClient.invalidateQueries([TAG_LIST_QUERY_KEY]);
+    queryClient.invalidateQueries(TAG_LIST_QUERY_KEY);
   };
 
-  return { refresh };
+  const reset = () => {
+    queryClient.resetQueries(TAG_LIST_QUERY_KEY);
+  };
+
+  return { refresh, reset };
 }
