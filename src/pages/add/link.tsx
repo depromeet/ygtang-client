@@ -25,6 +25,7 @@ export interface OpenGraph {
 }
 
 export default function AddLink() {
+  const [disabled, setDisabled] = useState(false);
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
@@ -41,6 +42,7 @@ export default function AddLink() {
   const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!openGraph || !openGraph.url) return;
+    setDisabled(true);
     const tagIds = tags.map(tag => tag.id);
     const linkData = new FormData();
     linkData.append('content', openGraph.url);
@@ -75,7 +77,7 @@ export default function AddLink() {
           </section>
 
           <section css={addLinkBottomCss}>
-            <CTABottomButton disabled={!Boolean(openGraph)} type="submit">
+            <CTABottomButton disabled={!Boolean(openGraph) || disabled} type="submit">
               Tang!
             </CTABottomButton>
           </section>
