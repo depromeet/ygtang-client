@@ -1,7 +1,8 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
+import useDidUpdate from '~/hooks/common/useDidUpdate';
 import { textEllipsisCss } from '~/styles/utils';
 
 import { OpenGraph } from '../inspiration/LinkView';
@@ -72,10 +73,12 @@ function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGr
   const [src, setSrc] = useState<string>('');
   const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
 
-  useEffect(() => {
+  useDidUpdate(() => {
     setOg(checkIgonreOpenGraphHost(content) ? makeURLOpenGraph(content) : openGraph);
+  }, [content, openGraph]);
+
+  useDidUpdate(() => {
     setSrc(og && og.url && og.image ? og.url + og.image : '');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [og]);
 
   const onImageError = (e: SyntheticEvent<HTMLImageElement>) => {
