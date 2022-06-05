@@ -28,8 +28,8 @@ export default function useInspirationMutation() {
     queryClient.invalidateQueries([INSPIRATION_BY_ID_QUERY_KEY, `${id}`]);
   };
 
-  const resetWholeInspirationById = () => {
-    queryClient.resetQueries(INSPIRATION_BY_ID_QUERY_KEY);
+  const removeWholeInspirationById = () => {
+    queryClient.removeQueries(INSPIRATION_BY_ID_QUERY_KEY);
   };
 
   const createInspirationMutation = useMutation(
@@ -163,8 +163,8 @@ export default function useInspirationMutation() {
     resetInspirationList,
 
     /**
-     * 모든 개별 영감들을 Reset 합니다.
+     * 모든 개별 영감들을 Remove 합니다.
      */
-    resetWholeInspirationById,
+    removeWholeInspirationById,
   };
 }

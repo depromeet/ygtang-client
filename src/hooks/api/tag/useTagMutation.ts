@@ -12,7 +12,7 @@ interface CreateTagDataResponseInterface {
 
 export default function useTagMutation() {
   const { reset } = useTagRefresh();
-  const { resetWholeInspirationById, resetInspirationList } = useInspirationMutation();
+  const { resetInspirationList, removeWholeInspirationById } = useInspirationMutation();
 
   const createTagMutation = useMutation<
     CreateTagDataResponseInterface,
@@ -28,7 +28,7 @@ export default function useTagMutation() {
     onSuccess: () => {
       reset();
       resetInspirationList();
-      resetWholeInspirationById();
+      removeWholeInspirationById();
     },
   });
 
