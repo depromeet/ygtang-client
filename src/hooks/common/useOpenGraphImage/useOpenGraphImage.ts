@@ -15,13 +15,10 @@ export default function useOpenGraphImage({ url, image }: UseOpenGraphImageProps
       setSrc(url + image);
     } else if (image) {
       setSrc(image);
-    } else if (url) {
-      setSrc(url);
     }
   }, [image, url]);
 
   const onImageError = (e: SyntheticEvent<HTMLImageElement>) => {
-    if (!url) return;
     if (!image) return;
 
     // NOTE: 두번째로 시도하는 og.image에서도 에러를 발생할 경우
