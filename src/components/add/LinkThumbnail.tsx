@@ -5,33 +5,25 @@ import { textEllipsisCss } from '~/styles/utils';
 
 import { IconButton } from '../common/Button';
 
-// TODO: /remotes/inspiration OpenGraphResponse로 대체 가능해보임
-interface LinkThumbnailMetaData {
-  image?: string;
-  title: string;
-  url: string;
-  alt?: string;
-}
-
 interface LinkThumbnailProps {
   edit?: boolean;
-  thumbnail: LinkThumbnailMetaData;
+  openGraph: OpenGraphResponse;
   onDelete?: VoidFunction;
 }
 
 export default function LinkThumbnail({
   edit = false,
-  thumbnail,
+  openGraph,
   onDelete: _onDelete,
 }: LinkThumbnailProps) {
-  const { src, onImageError } = useOpenGraphImage({ url: thumbnail.url, image: thumbnail.image });
+  const { src, onImageError } = useOpenGraphImage({ url: openGraph.url, image: openGraph.image });
 
   const hasImage = () => {
-    return Boolean(thumbnail?.image);
+    return Boolean(openGraph?.image);
   };
 
   const onOpenUrl = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (edit || !thumbnail?.url) {
+    if (edit || !openGraph?.url) {
       event.preventDefault();
     }
   };
@@ -45,18 +37,23 @@ export default function LinkThumbnail({
   return (
     <a
       css={linkThumbnailLinkCss}
-      href={thumbnail.url}
+      href={openGraph.url || undefined}
       onClick={onOpenUrl}
       target="_blank"
       rel="noopener noreferrer"
     >
       <article css={linkThumbnailBoxCss}>
         <section css={linkThumbnailContentCss(hasImage())}>
-          <p css={linkThumbnailTitleCss}>{thumbnail.title}</p>
-          <span css={linkThumbnailUrlCss}>{thumbnail.url}</span>
+          <p css={linkThumbnailTitleCss}>{openGraph.title}</p>
+          <span css={linkThumbnailUrlCss}>{openGraph.url}</span>
         </section>
         {hasImage() && (
-          <img css={linkThumbnailImageCss} src={src} alt={thumbnail.alt} onError={onImageError} />
+          <img
+            css={linkThumbnailImageCss}
+            src={src}
+            alt={openGraph.url || ''}
+            onError={onImageError}
+          />
         )}
         <IconButton
           light

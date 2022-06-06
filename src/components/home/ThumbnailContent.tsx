@@ -6,7 +6,6 @@ import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useOpenGraphImage from '~/hooks/common/useOpenGraphImage';
 import { textEllipsisCss } from '~/styles/utils';
 
-import { OpenGraph } from '../inspiration/LinkView';
 import { ContentThumbnailProps } from './Thumbnail';
 
 export default function ThumbnailContent({
@@ -67,7 +66,7 @@ const textCss = css`
 `;
 
 function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGraph' | 'content'>) {
-  const [og, setOg] = useState<OpenGraph>();
+  const [og, setOg] = useState<OpenGraphResponse>();
   const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
   const { src, onImageError } = useOpenGraphImage({ url: og?.url, image: og?.image });
 
