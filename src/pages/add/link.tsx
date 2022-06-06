@@ -15,16 +15,6 @@ import { formCss } from './image';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
-// TODO: /remotes/inspiration OpenGraphResponse로 대체 가능해보임
-export interface OpenGraph {
-  description: string;
-  siteName: string;
-  title: string;
-  url: string;
-  code: number;
-  image?: string;
-}
-
 export default function AddLink() {
   const [disabled, setDisabled] = useState(false);
   const {
@@ -32,11 +22,11 @@ export default function AddLink() {
     debouncedValue: memoDebouncedValue,
     value: memoValue,
   } = useInput({ useDebounce: true });
-  const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
+  const [openGraph, setOpenGraph] = useState<OpenGraphResponse | null>(null);
   const { createInspiration } = useInspirationMutation();
   const { tags } = useAppliedTags(true);
 
-  const saveOpenGraph = useCallback((og: OpenGraph | null) => {
+  const saveOpenGraph = useCallback((og: OpenGraphResponse | null) => {
     setOpenGraph(og);
   }, []);
 

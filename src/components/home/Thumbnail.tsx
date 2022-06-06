@@ -11,7 +11,7 @@ import ThumbnailContent from './ThumbnailContent';
 export interface ContentThumbnailProps
   extends Pick<InspirationInterface, 'type' | 'content' | 'id'> {
   tags: InspirationInterface['tagResponses'];
-  openGraph?: InspirationInterface['openGraphResponse'];
+  openGraph?: OpenGraphResponse;
   memo: InspirationInterface['memo'];
 }
 
@@ -34,7 +34,7 @@ function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps
   };
 
   return (
-    <motion.section css={wrapperCss} variants={contentFadeInUp} layoutId={`${id}`}>
+    <motion.article css={wrapperCss} variants={contentFadeInUp} layoutId={`${id}`}>
       <div css={supportAspectRatioWrapperCss}>
         <div css={contentWrapperCss} onClick={() => moveToInspirationView(id)}>
           <ThumbnailContent type={type} content={content} openGraph={openGraph} />
@@ -42,7 +42,7 @@ function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps
 
         <Tags tags={tags} />
       </div>
-    </motion.section>
+    </motion.article>
   );
 }
 

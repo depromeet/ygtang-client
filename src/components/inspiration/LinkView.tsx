@@ -12,14 +12,6 @@ import useInput from '~/hooks/common/useInput';
 import { formCss } from './ImageView';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
-export interface OpenGraph {
-  description: string;
-  siteName: string;
-  title: string;
-  url: string;
-  code: number;
-  image?: string;
-}
 
 export default function LinkView({ inspiration }: { inspiration: InspirationInterface }) {
   const {
@@ -56,14 +48,14 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
               <LinkInput
                 openGraph={
                   openGraphResponse
-                    ? ({
+                    ? {
                         description,
                         siteName,
                         title,
                         url,
                         code,
                         image,
-                      } as OpenGraph)
+                      }
                     : null
                 }
               />

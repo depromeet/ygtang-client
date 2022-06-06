@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
-import useDidUpdate from '~/hooks/common/useDidUpdate';
+import useDidMount from '~/hooks/common/useDidMount';
 import useOpenGraphImage from '~/hooks/common/useOpenGraphImage';
 import { textEllipsisCss } from '~/styles/utils';
 
-import { OpenGraph } from '../inspiration/LinkView';
 import { ContentThumbnailProps } from './Thumbnail';
 
 export default function ThumbnailContent({
@@ -67,14 +66,13 @@ const textCss = css`
 `;
 
 function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGraph' | 'content'>) {
-  const [og, setOg] = useState<OpenGraph>();
+  const [og, setOg] = useState<OpenGraphResponse>();
   const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
   const { src, onImageError } = useOpenGraphImage({ url: og?.url, image: og?.image });
 
-  useDidUpdate(() => {
+  useDidMount(() => {
     setOg(checkIgonreOpenGraphHost(content) ? makeURLOpenGraph(content) : openGraph);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [content, openGraph]);
+  });
 
   return (
     <div css={linkWrapperCss}>

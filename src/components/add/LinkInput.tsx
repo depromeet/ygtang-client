@@ -8,20 +8,19 @@ import { useCheckLinkAvailable } from '~/hooks/api/inspiration/useCheckLinkAvail
 import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
-import { OpenGraph } from '~/pages/add/link';
 import { useToast } from '~/store/Toast';
 import { validator } from '~/utils/validator';
 
 interface LinkInputProps {
-  openGraph: OpenGraph | null;
-  saveOpenGraph?: (og: OpenGraph | null) => void;
+  openGraph: OpenGraphResponse | null;
+  saveOpenGraph?: (og: OpenGraphResponse | null) => void;
 }
 
 export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) {
   const { asPath } = useInternalRouter();
   const url = useInput({ useDebounce: true });
   const { openGraph: og, refetch, isFetching } = useCheckLinkAvailable({ link: url.value });
-  const [ignoredOg, setIgnoredOg] = useState<OpenGraph | undefined>();
+  const [ignoredOg, setIgnoredOg] = useState<OpenGraphResponse | undefined>();
   const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
 
   const { fireToast } = useToast();
@@ -60,7 +59,7 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
       {openGraph ? (
         <LinkThumbnail
           edit={asPath.includes('add')}
-          thumbnail={openGraph}
+          openGraph={openGraph}
           onDelete={() => saveOpenGraph && saveOpenGraph(null)}
         />
       ) : (

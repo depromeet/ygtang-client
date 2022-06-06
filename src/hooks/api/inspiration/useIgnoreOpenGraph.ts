@@ -1,5 +1,3 @@
-import { OpenGraph } from '~/components/inspiration/LinkView';
-
 const INSTAGRAM_ORIGIN = 'www.instagram.com';
 const FACEBOOK_ORIGIN = 'www.facebook.com';
 const IGONRE_OPEN_GRAPH_HOSTS = [INSTAGRAM_ORIGIN, FACEBOOK_ORIGIN];
@@ -15,7 +13,7 @@ export default function useIgnoreOpenGraph() {
       return false;
     }
   };
-  const makeURLOpenGraph = (_url: string): OpenGraph | undefined => {
+  const makeURLOpenGraph = (_url: string): OpenGraphResponse | undefined => {
     const { origin, hostname } = new URL(_url);
     return {
       description: '',
@@ -23,6 +21,7 @@ export default function useIgnoreOpenGraph() {
       title: origin,
       url: _url,
       code: SUCCESS_CODE,
+      image: null,
     };
   };
 
