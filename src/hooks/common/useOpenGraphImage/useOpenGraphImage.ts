@@ -1,12 +1,12 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 
 interface UseOpenGraphImageProps {
-  url: string | undefined;
-  image: string | undefined;
+  url: string | undefined | null;
+  image: string | undefined | null;
 }
 
 export default function useOpenGraphImage({ url, image }: UseOpenGraphImageProps) {
-  const [src, setSrc] = useState<string>('');
+  const [src, setSrc] = useState<string>(url && image ? url + image : '');
 
   useEffect(() => {
     // NOTE: initial state를 og.url + og.image로 한 이유는
