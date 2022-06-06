@@ -10,8 +10,14 @@ interface UseCheckLinkAvailable {
 export function useCheckLinkAvailable({ link }: UseCheckLinkAvailable) {
   const INSPIRATION_LINK_OG_QUERY_KEY = 'opengraph';
 
+  const getLinkWithProtocol = (link: string) => {
+    if (link.startsWith('http')) return link;
+    return `http://${link}`;
+  };
+
   const fetchOpenGraph = (link: string): Promise<AxiosResponse<OpenGraphResponse>> => {
-    return get(`/v1/inspiration/link/availiable?link=${link}`);
+    const linkWithProtocol = getLinkWithProtocol(link);
+    return get(`/v1/inspiration/link/availiable?link=${linkWithProtocol}`);
   };
 
   const {
