@@ -10,6 +10,7 @@ import { Input } from '~/components/common/TextField/Input';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
+import { useToast } from '~/store/Toast';
 
 import { formCss } from './image';
 
@@ -21,7 +22,9 @@ export default function AddText() {
   const memoText = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
   const { tags } = useAppliedTags(true);
+  const { fireToast } = useToast();
   const onMutationError = () => {
+    fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
     setDisabled(false);
   };
   const { createInspiration } = useInspirationMutation({ onError: onMutationError });

@@ -10,6 +10,7 @@ import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
+import { useToast } from '~/store/Toast';
 
 import { formCss } from './image';
 
@@ -23,8 +24,10 @@ export default function AddLink() {
     value: memoValue,
   } = useInput({ useDebounce: true });
   const [openGraph, setOpenGraph] = useState<OpenGraphResponse | null>(null);
+  const { fireToast } = useToast();
 
   const onMutationError = () => {
+    fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
     setDisabled(false);
   };
   const { createInspiration } = useInspirationMutation({ onError: onMutationError });
