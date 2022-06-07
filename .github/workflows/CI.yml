@@ -108,8 +108,10 @@ jobs:
 
       - name: Generate environment json file
         run: |
-          echo '{\n "user-email":"$CYPRESS_USER_EMAIL", \n' >> cypress.env.json
-          echo '"user-password":"$CYPRESS_USER_PASSWORD" \n}"' >> cypress.env.json
+          echo '{' >> cypress.env.json
+          echo '"user-email":"$CYPRESS_USER_EMAIL",' >> cypress.env.json
+          echo '"user-password":"$CYPRESS_USER_PASSWORD"' >> cypress.env.json
+          echo '}' >> cypress.env.json
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
