@@ -13,6 +13,7 @@ import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useAppliedTags } from '~/store/AppliedTags';
+import { useToast } from '~/store/Toast';
 import { useUploadedImg } from '~/store/UploadedImage';
 import { fullViewHeight } from '~/styles/utils';
 
@@ -29,7 +30,9 @@ export default function AddImage() {
   const { imgInputUploader } = useImgUpload({});
   const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
+  const { fireToast } = useToast();
   const onMutationError = () => {
+    fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
     setDisabled(false);
   };
   const { createInspiration } = useInspirationMutation({ onError: onMutationError });
