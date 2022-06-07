@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
@@ -6,7 +6,6 @@ import { CTAButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
 import TextField from '~/components/common/TextField';
 import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
-import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import { get } from '~/libs/api/client';
 import { useToast } from '~/store/Toast';
@@ -16,7 +15,7 @@ export default function Signup() {
   const email = useInput({ useDebounce: true });
   const [emailError, setEmailError] = useState('');
 
-  useDidUpdate(() => {
+  useEffect(() => {
     if (!validator({ type: 'email', value: email.debouncedValue })) {
       setEmailError('올바른 이메일을 입력해주세요.');
     } else {
