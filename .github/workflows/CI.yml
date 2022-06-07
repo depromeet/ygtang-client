@@ -108,13 +108,9 @@ jobs:
 
       - name: Generate environment json file
         run: |
-          echo '{' >> cypress.env.json
-          echo '"user-email":"$CYPRESS_USER_EMAIL",' >> cypress.env.json
-          echo '"user-password":"$CYPRESS_USER_PASSWORD"' >> cypress.env.json
-          echo '}' >> cypress.env.json
+          echo "$CYPRESS_ENV_JSON" >> cypress.env.json
         env:
-          CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
-          CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
+          CYPRESS_ENV_JSON: ${{ secrets.CYPRESS_ENV_JSON }}
 
       - name: E2E test - chrome
         uses: cypress-io/github-action@v2
