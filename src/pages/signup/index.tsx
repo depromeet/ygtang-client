@@ -4,6 +4,8 @@ import { css, Theme } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
+import PortalWrapper from '~/components/common/PortalWrapper';
+import { FixedSpinner } from '~/components/common/Spinner';
 import TextField from '~/components/common/TextField';
 import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
 import useInput from '~/hooks/common/useInput';
@@ -58,6 +60,9 @@ export default function Signup() {
         <br />
         로그인과 회원가입, 비밀번호 찾기에만 사용되니 안심하세요.
       </div>
+      <PortalWrapper isShowing={isLoading}>
+        <FixedSpinner opacity={0.8} />
+      </PortalWrapper>
     </article>
   );
 }
