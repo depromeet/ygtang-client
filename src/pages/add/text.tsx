@@ -21,7 +21,10 @@ export default function AddText() {
   const memoText = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
   const { tags } = useAppliedTags(true);
-  const { createInspiration } = useInspirationMutation();
+  const onMutationError = () => {
+    setDisabled(false);
+  };
+  const { createInspiration } = useInspirationMutation({ onError: onMutationError });
 
   const submitText = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

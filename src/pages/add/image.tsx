@@ -29,7 +29,10 @@ export default function AddImage() {
   const { imgInputUploader } = useImgUpload({});
   const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
-  const { createInspiration } = useInspirationMutation();
+  const onMutationError = () => {
+    setDisabled(false);
+  };
+  const { createInspiration } = useInspirationMutation({ onError: onMutationError });
 
   useEffect(() => {
     if (!uploadedImg) push('/');

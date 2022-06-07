@@ -7,7 +7,18 @@ import { useToast } from '~/store/Toast';
 
 import { INSPIRATION_LIST_QUERY_KEY } from './useGetInspirationListWIthInfinite';
 
-export default function useInspirationMutation() {
+interface InspirationMutationParams {
+  /**
+   * 오류 발생 시 실행되는 공통적인 훅 함수입니다.
+   *
+   * @NOTE 현재는 `createInspirationMutation`에만 적용되어 있습니다
+   */
+  onError?: () => void;
+}
+
+export default function useInspirationMutation(param?: InspirationMutationParams) {
+  const { onError } = param ?? {};
+
   const queryClient = useQueryClient();
   const { push } = useInternalRouter();
   const { fireToast } = useToast();
@@ -41,6 +52,7 @@ export default function useInspirationMutation() {
         push('/');
       },
       onError: (error, variable, context) => {
+        onError && onError();
         console.log('err', error, variable, context);
       },
     }

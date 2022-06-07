@@ -23,7 +23,11 @@ export default function AddLink() {
     value: memoValue,
   } = useInput({ useDebounce: true });
   const [openGraph, setOpenGraph] = useState<OpenGraphResponse | null>(null);
-  const { createInspiration } = useInspirationMutation();
+
+  const onMutationError = () => {
+    setDisabled(false);
+  };
+  const { createInspiration } = useInspirationMutation({ onError: onMutationError });
   const { tags } = useAppliedTags(true);
 
   const saveOpenGraph = useCallback((og: OpenGraphResponse | null) => {
