@@ -25,7 +25,7 @@ describe('3_login/login success', () => {
 
   it('로그인 시 루트 url로 이동되어야 합니다', () => {
     cy.get('button').should('have.attr', 'type', 'submit').contains('로그인').click();
-    cy.wait(2000).url().should('eq', 'https://localhost:3000/');
+    cy.wait(2000).url().should('eq', Cypress.config().baseUrl);
   });
 });
 
