@@ -106,6 +106,12 @@ jobs:
           mkcert -install
           mkcert localhost
 
+      - name: Generate environment json file
+        run: |
+          echo "$CYPRESS_ENV_JSON" >> cypress.env.json
+        env:
+          CYPRESS_ENV_JSON: ${{ secrets.CYPRESS_ENV_JSON }}
+
       - name: E2E test - chrome
         uses: cypress-io/github-action@v2
         with:
