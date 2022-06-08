@@ -1,12 +1,13 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
+import PortalWrapper from '~/components/common/PortalWrapper';
+import { FixedSpinner } from '~/components/common/Spinner';
 import TextField from '~/components/common/TextField';
 import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
-import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import { get } from '~/libs/api/client';
 import { useToast } from '~/store/Toast';
@@ -16,7 +17,7 @@ export default function Signup() {
   const email = useInput({ useDebounce: true });
   const [emailError, setEmailError] = useState('');
 
-  useDidUpdate(() => {
+  useEffect(() => {
     if (!validator({ type: 'email', value: email.debouncedValue })) {
       setEmailError('올바른 이메일을 입력해주세요.');
     } else {
@@ -24,10 +25,10 @@ export default function Signup() {
     }
   }, [email.debouncedValue]);
 
-  const { onSubmit, isEmailSendingLoading } = useSignupWithCheckingEmail(email.value);
+  const { onSubmit, isLoading } = useSignupWithCheckingEmail(email.value);
 
   // NOTE: 이메일 에러 메세지가 공백이 아니면서, 비동기 로직이 로딩중일 때
-  const isCTAButtonDisabled = emailError !== '' || isEmailSendingLoading;
+  const isCTAButtonDisabled = emailError !== '' || isLoading;
 
   return (
     <article css={loginCss}>
@@ -59,6 +60,9 @@ export default function Signup() {
         <br />
         로그인과 회원가입, 비밀번호 찾기에만 사용되니 안심하세요.
       </div>
+      <PortalWrapper isShowing={isLoading}>
+        <FixedSpinner opacity={0.8} />
+      </PortalWrapper>
     </article>
   );
 }
@@ -102,8 +106,9 @@ const signUpTextWrapperCss = (theme: Theme) => css`
 function useSignupWithCheckingEmail(email: string) {
   const { fireToast } = useToast();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { mutate: emailSendMutate, isLoading: isEmailSendingLoading } = useSignupSendEmailMutation({
+  const { mutate: emailSendMutate } = useSignupSendEmailMutation({
     onSuccess: () => {
       router.push({
         pathname: '/signup/sent-email',
@@ -119,6 +124,7 @@ function useSignupWithCheckingEmail(email: string) {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const { data: isSignupedEmail } = await get<CheckSignupResponseInterface>(
       `/v1/signup/${email}/status`
@@ -127,6 +133,7 @@ function useSignupWithCheckingEmail(email: string) {
     // 가입되어 있을 시
     if (isSignupedEmail) {
       fireToast({ content: '이미 가입된 사용자입니다.' });
+      setIsLoading(false);
       return;
     }
 
@@ -146,5 +153,5 @@ function useSignupWithCheckingEmail(email: string) {
     }
   };
 
-  return { onSubmit, isEmailSendingLoading };
+  return { onSubmit, isLoading };
 }
