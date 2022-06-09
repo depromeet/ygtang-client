@@ -15,6 +15,7 @@ import { useInspirationById } from '~/hooks/api/inspiration/useInspirationById';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useQueryParam from '~/hooks/common/useRouterQuery';
+import { recordEvent } from '~/utils/analytics';
 
 const EditTagFormRouteAsModal = dynamic(() => import('~/components/edit/EditTagFormRouteAsModal'));
 
@@ -36,6 +37,10 @@ export default function ContentPage() {
 
   const renderInspirationViewByType = useCallback((inspiration: InspirationInterface) => {
     const type = inspiration?.type;
+
+    if (type) {
+      recordEvent({ action: '영감 상세 조회', value: type });
+    }
 
     if (type === 'IMAGE') {
       return <ImageView inspiration={inspiration} />;
