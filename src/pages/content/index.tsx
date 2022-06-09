@@ -38,10 +38,6 @@ export default function ContentPage() {
   const renderInspirationViewByType = useCallback((inspiration: InspirationInterface) => {
     const type = inspiration?.type;
 
-    if (type) {
-      recordEvent({ action: '영감 상세 조회', value: type });
-    }
-
     if (type === 'IMAGE') {
       return <ImageView inspiration={inspiration} />;
     }
