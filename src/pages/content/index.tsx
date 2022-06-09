@@ -57,6 +57,7 @@ export default function ContentPage() {
 
   const deleteInspirationById = (id: number) => {
     deleteInspiration(id);
+    recordEvent({ action: '영감 삭제' });
     setDeleteInspirationModalOn(false);
   };
 
