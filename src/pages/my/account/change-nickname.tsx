@@ -7,6 +7,7 @@ import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useToast } from '~/store/Toast';
 import { useUserInformation } from '~/store/UserInformation';
+import { recordEvent } from '~/utils/analytics';
 
 import { GhostButton } from '../../../components/common/Button';
 import NavigationBar from '../../../components/common/NavigationBar';
@@ -112,6 +113,7 @@ function useChangeNickname({
       { nickname: nickname.debouncedValue.trim() },
       {
         onSuccess: () => {
+          recordEvent({ action: '닉네임 변경' });
           push('/my/account');
         },
       }
