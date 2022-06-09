@@ -6,6 +6,7 @@ import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite
 import useTagMutation from '~/hooks/api/tag/useTagMutation';
 import useTagRefresh from '~/hooks/api/tag/useTagRefresh';
 import useInput from '~/hooks/common/useInput';
+import { recordEvent } from '~/utils/analytics';
 
 import AppliedTags from './AppliedTags';
 import RegisteredTagList from './RegisteredTagList';
@@ -39,6 +40,7 @@ export default function TagForm({
     (keyword: string) => {
       createTag(keyword, {
         onSuccess: data => {
+          recordEvent({ action: '태그 생성', value: keyword, label: '영감 편집 화면' });
           onSave(data);
           tagListRefresh();
         },

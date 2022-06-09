@@ -14,6 +14,7 @@ import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 
 export default function EditTag() {
   const { fireToast } = useToast();
@@ -49,10 +50,12 @@ export default function EditTag() {
       fireToast({ content: '리스트에 태그가 이미 존재합니다.' });
       return;
     }
+    recordEvent({ action: '영감에 태그 추가', value: tag.content });
     addInspirationTag({ id: Number(inspirationId), tagId: tag.id });
   };
 
   const removeTag = (tagId: number) => {
+    recordEvent({ action: '영감에서 태그 삭제' });
     deleteInspirationTag({ id: Number(inspirationId), tagId });
   };
 
