@@ -4,5 +4,5 @@ import { gaEvent } from '~/libs/ga';
 
 export function recordEvent([{ action, category, label, value }]: Parameters<typeof gaEvent>) {
   gaEvent({ action, category, label, value });
-  track(action);
+  track(action, { category, label, value });
 }

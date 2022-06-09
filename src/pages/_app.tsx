@@ -11,8 +11,8 @@ import { RecoilRoot } from 'recoil';
 import { ErrorBoundary } from '~/components/common/ErrorBoundary';
 import ToastSection from '~/components/common/ToastSection';
 import { UserProvider } from '~/components/common/UserProvider';
+import { useRecordPageview } from '~/hooks/analytics/useRecordPageview';
 import { useWindowSize } from '~/hooks/common/useWindowSize';
-import { useGaPageview } from '~/hooks/ga/useGaPageview';
 import { queryClient } from '~/libs/api/queryClient';
 import GlobalStyle from '~/styles/GlobalStyle';
 import CustomTheme from '~/styles/Theme';
@@ -20,7 +20,7 @@ import CustomTheme from '~/styles/Theme';
 let vh = 0;
 
 export default function App({ Component, pageProps }: AppProps) {
-  useGaPageview();
+  useRecordPageview();
 
   sentryInit({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN });
   mixpanelInit(process.env.NEXT_PUBLIC_MIXPANEL_ID as string);
