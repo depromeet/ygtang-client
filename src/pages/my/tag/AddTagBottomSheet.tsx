@@ -8,6 +8,7 @@ import { SearchBar } from '~/components/common/TextField';
 import useTagMutation from '~/hooks/api/tag/useTagMutation';
 import useInput from '~/hooks/common/useInput';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 
 export interface AddTagBottomSheetProps {
   isShowing: boolean;
@@ -25,6 +26,7 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
     }
     createTag(value, {
       onSuccess: () => {
+        recordEvent({ action: '태그 생성', value, label: '설정 태그 편집 화면' });
         fireToast({ content: '태그 저장 성공!' });
       },
     });
