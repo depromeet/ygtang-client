@@ -1,0 +1,1 @@
+export { mixpanelTrack } from './mixpanel';

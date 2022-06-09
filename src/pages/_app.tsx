@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import NextHead from 'next/head';
 import { css, Theme, ThemeProvider } from '@emotion/react';
 import { init as sentryInit } from '@sentry/nextjs';
-import { init as mixpanelInit } from 'mixpanel-browser';
+// import { init as mixpanelInit } from 'mixpanel-browser';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useRecordPageview();
 
   sentryInit({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN });
-  mixpanelInit(process.env.NEXT_PUBLIC_MIXPANEL_ID as string);
+  //   mixpanelInit(process.env.NEXT_PUBLIC_MIXPANEL_ID as string, { persistence: 'localStorage' })
 
   return (
     <>
