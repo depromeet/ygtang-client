@@ -9,6 +9,7 @@ import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function MypageChangePassword() {
@@ -20,6 +21,7 @@ export default function MypageChangePassword() {
       fireToast({
         content: '비밀번호가 변경되었습니다.',
       });
+      recordEvent({ action: '비밀번호 변경' });
       push('/my/account');
     },
     onError: () => {
