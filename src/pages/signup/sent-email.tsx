@@ -10,6 +10,7 @@ import { FixedSpinner } from '~/components/common/Spinner';
 import useCheckEmailVerifiedStatusMutation from '~/hooks/api/auth/useCheckEmailVerifiedStatusMutation';
 import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function SignupSentEmail() {
@@ -45,6 +46,12 @@ export default function SignupSentEmail() {
   useEffect(() => {
     if (checkEmailStatusData) {
       if (checkEmailStatusData.data) {
+        recordEvent({
+          action: 'Signup',
+          value: '이메일 인증 버튼 클릭 후 성공',
+          category: '이메일 인증 화면',
+        });
+
         push({
           pathname: '/signup/email-verified',
           query: {
@@ -59,6 +66,7 @@ export default function SignupSentEmail() {
 
   useEffect(() => {
     if (emailSendingSuccess) {
+      recordEvent({ action: 'Signup', value: '이메일 발송 재요청' });
       fireToast({ content: '인증 이메일을 재전송했어요. 메일함을 확인해주세요.' });
     }
   }, [emailSendingSuccess, fireToast]);

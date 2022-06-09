@@ -13,6 +13,7 @@ import useSignupMutation from '~/hooks/api/sign-up/useSignupMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function SignUpEmailVerified() {
@@ -98,6 +99,11 @@ export default function SignUpEmailVerified() {
     if (signupSuccess) {
       // TODO: router.push가 안되는 문제 해결하기
       window.location.replace('/login');
+      recordEvent({
+        action: 'Signup',
+        value: '회원 가입 완료',
+        category: '이메일 인증 후 회원가입 화면',
+      });
     }
   }, [signupSuccess]);
 
