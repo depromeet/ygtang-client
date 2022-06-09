@@ -12,6 +12,7 @@ import { POLICY_URL } from '~/constants/common';
 import useSignupMutation from '~/hooks/api/sign-up/useSignupMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
+import useToggle from '~/hooks/common/useToggle';
 import { useToast } from '~/store/Toast';
 import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
@@ -27,8 +28,7 @@ export default function SignUpEmailVerified() {
   const [passwordError, setPasswordError] = useState('');
   const [passwordRepeatError, setPasswordRepeatError] = useState('');
 
-  const [checkTerms, setCheckTerms] = useState(false);
-  const [checkPrivacy, setCheckPrivacy] = useState(false);
+  const { checkTerms, toggleCheckTerms, checkPrivacy, toggleCheckPrivacy } = useInternalCheckList();
 
   const {
     mutate: signupMutate,
@@ -162,14 +162,14 @@ export default function SignUpEmailVerified() {
               <CheckList
                 isChecked={checkTerms}
                 externalHref={POLICY_URL.TOS}
-                onToggle={() => setCheckTerms(!checkTerms)}
+                onToggle={() => toggleCheckTerms()}
               >
                 (필수) 서비스 이용약관에 동의
               </CheckList>
               <CheckList
                 isChecked={checkPrivacy}
                 externalHref={POLICY_URL.PRIVACY}
-                onToggle={() => setCheckPrivacy(!checkPrivacy)}
+                onToggle={() => toggleCheckPrivacy()}
               >
                 (필수) 개인정보 수집 이용에 동의
               </CheckList>
@@ -219,3 +219,10 @@ const checkListWrapperCss = css`
   display: flex;
   flex-direction: column;
 `;
+
+function useInternalCheckList() {
+  const [checkTerms, toggleCheckTerms] = useToggle(false);
+  const [checkPrivacy, toggleCheckPrivacy] = useToggle(false);
+
+  return { checkTerms, toggleCheckTerms, checkPrivacy, toggleCheckPrivacy };
+}
