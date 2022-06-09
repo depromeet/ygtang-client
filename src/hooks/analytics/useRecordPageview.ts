@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-// import { track } from 'mixpanel-browser';
 import { IS_PRODUCTION } from '~/constants/common';
 import { gaPageview } from '~/libs/ga';
 import { mixpanelTrack } from '~/libs/mixpanel';
@@ -12,7 +11,6 @@ export function useRecordPageview() {
   useEffect(() => {
     const recordPageview = (url: string) => {
       gaPageview(url);
-      // track('Pageview', { url });
       mixpanelTrack('Page view', { url });
     };
 

@@ -20,7 +20,6 @@
     "framer-motion": "^6.3.3",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
-    "mixpanel-browser": "^2.45.0",
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
