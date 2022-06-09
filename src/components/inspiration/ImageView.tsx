@@ -8,6 +8,7 @@ import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
 import { fullViewHeight } from '~/styles/utils';
+import { recordEvent } from '~/utils/analytics';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
@@ -23,6 +24,7 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
   const saveMemo = () => {
     if (!isWriting) return setWriting(true);
     modifyInspiration({ id: inspiration.id, memo: modifiedMemo });
+    recordEvent({ action: '메모 수정' });
     setWriting(false);
   };
 
