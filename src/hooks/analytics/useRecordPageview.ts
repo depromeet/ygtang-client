@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { track } from 'mixpanel-browser';
 
+import { IS_PRODUCTION } from '~/constants/common';
 import { gaPageview } from '~/libs/ga';
 
 export function useRecordPageview() {
@@ -13,9 +14,9 @@ export function useRecordPageview() {
       track('Pageview', { url });
     };
 
-    router.events.on('routeChangeComplete', recordPageview);
+    if (IS_PRODUCTION) router.events.on('routeChangeComplete', recordPageview);
     return () => {
-      router.events.off('routeChangeComplete', recordPageview);
+      if (IS_PRODUCTION) router.events.off('routeChangeComplete', recordPageview);
     };
   }, [router.events]);
 }
