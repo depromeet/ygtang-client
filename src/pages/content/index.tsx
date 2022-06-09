@@ -15,6 +15,7 @@ import { useInspirationById } from '~/hooks/api/inspiration/useInspirationById';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useQueryParam from '~/hooks/common/useRouterQuery';
+import { recordEvent } from '~/utils/analytics';
 
 const EditTagFormRouteAsModal = dynamic(() => import('~/components/edit/EditTagFormRouteAsModal'));
 
@@ -52,6 +53,7 @@ export default function ContentPage() {
 
   const deleteInspirationById = (id: number) => {
     deleteInspiration(id);
+    recordEvent({ action: '영감 삭제' });
     setDeleteInspirationModalOn(false);
   };
 

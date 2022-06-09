@@ -9,6 +9,7 @@ import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useUser } from '~/hooks/common/useUser';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function Login() {
@@ -62,6 +63,7 @@ export default function Login() {
         refreshToken: loginMutationData.data.refreshToken,
       });
       setIsPending(false);
+      recordEvent({ action: 'Login', value: '로그인 화면에서 로그인' });
       push('/');
     }
   }, [loginMutationData]);

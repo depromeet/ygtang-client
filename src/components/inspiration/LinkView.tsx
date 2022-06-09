@@ -8,6 +8,7 @@ import { MemoText } from '~/components/common/TextField';
 import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
+import { recordEvent } from '~/utils/analytics';
 
 import { formCss } from './ImageView';
 
@@ -27,6 +28,7 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
   const saveMemo = () => {
     if (!isWriting) return setWriting(true);
     modifyInspiration({ id: inspiration.id, memo: memoValue });
+    recordEvent({ action: '메모 수정' });
     setWriting(false);
   };
 

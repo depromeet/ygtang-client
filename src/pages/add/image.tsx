@@ -16,6 +16,7 @@ import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
 import { useUploadedImg } from '~/store/UploadedImage';
 import { fullViewHeight } from '~/styles/utils';
+import { recordEvent } from '~/utils/analytics';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
@@ -54,6 +55,13 @@ export default function AddImage() {
     imgData.append('type', 'IMAGE');
     imgData.append('tagIds', tagIds.toString());
 
+    recordEvent({
+      action: '영감 생성',
+      value: '이미지 영감',
+      label:
+        (memoValue.length > 0 ? '메모와 함께 영감 추가' : '메모없이 영감 추가') +
+        ` 이미지 크기: ${uploadedImg.blob.size}`,
+    });
     createInspiration(imgData);
   };
 

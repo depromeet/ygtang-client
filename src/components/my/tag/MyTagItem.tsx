@@ -6,6 +6,7 @@ import Dialog from '~/components/common/Dialog';
 import Menu from '~/components/my/Menu';
 import useTagMutation from '~/hooks/api/tag/useTagMutation';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 
 export default function MyTagItem({ tag }: { tag: TagType }) {
   const { deleteTag } = useTagMutation();
@@ -34,6 +35,7 @@ export default function MyTagItem({ tag }: { tag: TagType }) {
                 deleteTag(tag.id, {
                   onSuccess: () => {
                     fireToast({ content: '태그 삭제했습니다.' });
+                    recordEvent({ action: '태그 삭제', label: '설정 태그 편집 화면' });
                     setisTagDeleteConfirmModalOpen(false);
                   },
                 });

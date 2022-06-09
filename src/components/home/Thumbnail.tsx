@@ -4,6 +4,7 @@ import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
 import { defaultEasing } from '~/constants/motions';
+import { recordEvent } from '~/utils/analytics';
 import { selectRandomColor } from '~/utils/selectRandomColor';
 
 import ThumbnailContent from './ThumbnailContent';
@@ -19,6 +20,7 @@ function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps
   const { push } = useRouter();
 
   const moveToInspirationView = (id: number) => {
+    recordEvent({ action: '영감 상세 조회', value: type });
     push(
       {
         query: {

@@ -3,7 +3,6 @@ import { AppProps } from 'next/app';
 import NextHead from 'next/head';
 import { css, Theme, ThemeProvider } from '@emotion/react';
 import { init as sentryInit } from '@sentry/nextjs';
-import { init as mixpanelInit } from 'mixpanel-browser';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
@@ -11,8 +10,8 @@ import { RecoilRoot } from 'recoil';
 import { ErrorBoundary } from '~/components/common/ErrorBoundary';
 import ToastSection from '~/components/common/ToastSection';
 import { UserProvider } from '~/components/common/UserProvider';
+import { useRecordPageview } from '~/hooks/analytics/useRecordPageview';
 import { useWindowSize } from '~/hooks/common/useWindowSize';
-import { useGaPageview } from '~/hooks/ga/useGaPageview';
 import { queryClient } from '~/libs/api/queryClient';
 import GlobalStyle from '~/styles/GlobalStyle';
 import CustomTheme from '~/styles/Theme';
@@ -20,10 +19,8 @@ import CustomTheme from '~/styles/Theme';
 let vh = 0;
 
 export default function App({ Component, pageProps }: AppProps) {
-  useGaPageview();
-
+  useRecordPageview();
   sentryInit({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN });
-  mixpanelInit(process.env.NEXT_PUBLIC_MIXPANEL_ID as string);
 
   return (
     <>

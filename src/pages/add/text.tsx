@@ -11,6 +11,7 @@ import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutati
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 
 import { formCss } from './image';
 
@@ -40,6 +41,11 @@ export default function AddText() {
     textData.append('type', 'TEXT');
     textData.append('tagIds', tagIds.toString());
 
+    recordEvent({
+      action: '영감 생성',
+      value: '텍스트 영감',
+      label: memoText.value.length > 0 ? '메모와 함께 영감 추가' : '메모없이 영감 추가',
+    });
     createInspiration(textData);
   };
 

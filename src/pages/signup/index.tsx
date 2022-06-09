@@ -11,6 +11,7 @@ import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutat
 import useInput from '~/hooks/common/useInput';
 import { get } from '~/libs/api/client';
 import { useToast } from '~/store/Toast';
+import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function Signup() {
@@ -110,6 +111,7 @@ function useSignupWithCheckingEmail(email: string) {
 
   const { mutate: emailSendMutate } = useSignupSendEmailMutation({
     onSuccess: () => {
+      recordEvent({ action: 'Signup', value: '이메일 인증 요청', category: '이메일 발송 화면' });
       router.push({
         pathname: '/signup/sent-email',
         query: {
@@ -132,6 +134,11 @@ function useSignupWithCheckingEmail(email: string) {
 
     // 가입되어 있을 시
     if (isSignupedEmail) {
+      recordEvent({
+        action: 'Signup',
+        value: '가입된 이메일 가입 요청',
+        category: '이메일 발송 화면',
+      });
       fireToast({ content: '이미 가입된 사용자입니다.' });
       setIsLoading(false);
       return;
@@ -143,6 +150,11 @@ function useSignupWithCheckingEmail(email: string) {
 
     // 가입이 안되어있으며, 이메일 인증은 한 상태
     if (isCertificatedEmail) {
+      recordEvent({
+        action: 'Signup',
+        value: '인증된 이메일 가입 요청',
+        category: '이메일 발송 화면',
+      });
       fireToast({ content: '인증된 이메일입니다.' });
       router.push({
         pathname: '/signup/email-verified',
