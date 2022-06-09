@@ -5,7 +5,6 @@ import LinkThumbnail from '~/components/add/LinkThumbnail';
 import { PlusIcon } from '~/components/common/icons';
 import { Input } from '~/components/common/TextField/Input';
 import { useCheckLinkAvailable } from '~/hooks/api/inspiration/useCheckLinkAvailable';
-import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useToast } from '~/store/Toast';
@@ -21,7 +20,6 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   const url = useInput({ useDebounce: true });
   const { openGraph: og, refetch, isFetching } = useCheckLinkAvailable({ link: url.value });
   const [ignoredOg, setIgnoredOg] = useState<OpenGraphResponse | undefined>();
-  const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
 
   const { fireToast } = useToast();
 
@@ -35,9 +33,7 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   ) => {
     e.preventDefault();
 
-    if (checkIgonreOpenGraphHost(url.value)) {
-      setIgnoredOg(makeURLOpenGraph(url.value));
-    } else if (validator({ value: url.value, type: 'url' })) {
+    if (validator({ value: url.value, type: 'url' })) {
       setIgnoredOg(undefined);
       refetch();
     } else {

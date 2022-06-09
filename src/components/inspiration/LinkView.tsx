@@ -5,7 +5,6 @@ import { css } from '@emotion/react';
 import LinkInput from '~/components/add/LinkInput';
 import TagContent from '~/components/common/Content/TagContent';
 import { MemoText } from '~/components/common/TextField';
-import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
 import { recordEvent } from '~/utils/analytics';
@@ -23,8 +22,6 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
   const { modifyInspiration } = useInspirationMutation();
   const [isWriting, setWriting] = useState(false);
 
-  const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
-
   const saveMemo = () => {
     if (!isWriting) return setWriting(true);
     modifyInspiration({ id: inspiration.id, memo: memoValue });
@@ -33,13 +30,11 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
   };
 
   if (!inspiration) return <></>;
-  const { tagResponses, openGraphResponse, content } = inspiration;
+  const { tagResponses, openGraphResponse } = inspiration;
 
   if (!openGraphResponse) return <></>;
 
-  const { description, siteName, title, url, code, image } = checkIgonreOpenGraphHost(content)
-    ? makeURLOpenGraph(content)
-    : openGraphResponse;
+  const { description, siteName, title, url, code, image } = openGraphResponse;
 
   return (
     <>
