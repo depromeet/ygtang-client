@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import LinkThumbnail from '~/components/add/LinkThumbnail';
@@ -19,7 +19,6 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   const { asPath } = useInternalRouter();
   const url = useInput({ useDebounce: true });
   const { openGraph: og, refetch, isFetching } = useCheckLinkAvailable({ link: url.value });
-  const [ignoredOg, setIgnoredOg] = useState<OpenGraphResponse | undefined>();
 
   const { fireToast } = useToast();
 
@@ -34,7 +33,6 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
     e.preventDefault();
 
     if (validator({ value: url.value, type: 'url' })) {
-      setIgnoredOg(undefined);
       refetch();
     } else {
       showErrorMessage();
@@ -42,13 +40,11 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   };
 
   useEffect(() => {
-    if (ignoredOg) return saveOpenGraph && saveOpenGraph(ignoredOg);
-
     if (isFetching || !og) return;
     if (og.url === null) return showErrorMessage();
 
-    saveOpenGraph && saveOpenGraph(og);
-  }, [isFetching, og, saveOpenGraph, showErrorMessage, ignoredOg]);
+    if (saveOpenGraph) saveOpenGraph(og);
+  }, [isFetching, og, saveOpenGraph, showErrorMessage]);
 
   return (
     <div css={LinkInputCss}>
