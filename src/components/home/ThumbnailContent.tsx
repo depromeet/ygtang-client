@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
-import useIgnoreOpenGraph from '~/hooks/api/inspiration/useIgnoreOpenGraph';
 import useDidMount from '~/hooks/common/useDidMount';
 import useOpenGraphImage from '~/hooks/common/useOpenGraphImage';
 import { textEllipsisCss } from '~/styles/utils';
@@ -14,7 +13,7 @@ export default function ThumbnailContent({
   openGraph,
 }: Pick<ContentThumbnailProps, 'type' | 'content' | 'openGraph'>) {
   if (type === 'IMAGE') return <img css={imageCss} alt={`${content} image`} src={content} />;
-  if (type === 'LINK') return <LinkContent openGraph={openGraph} content={content} />;
+  if (type === 'LINK') return <LinkContent openGraph={openGraph} />;
 
   // Text type
   return <p css={textCss}>{content}</p>;
@@ -65,13 +64,12 @@ const textCss = css`
   line-height: 150%;
 `;
 
-function LinkContent({ openGraph, content }: Pick<ContentThumbnailProps, 'openGraph' | 'content'>) {
+function LinkContent({ openGraph }: Pick<ContentThumbnailProps, 'openGraph'>) {
   const [og, setOg] = useState<OpenGraphResponse>();
-  const { checkIgonreOpenGraphHost, makeURLOpenGraph } = useIgnoreOpenGraph();
   const { src, onImageError } = useOpenGraphImage({ url: og?.url, image: og?.image });
 
   useDidMount(() => {
-    setOg(checkIgonreOpenGraphHost(content) ? makeURLOpenGraph(content) : openGraph);
+    setOg(openGraph);
   });
 
   return (
