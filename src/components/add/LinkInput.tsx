@@ -18,7 +18,12 @@ interface LinkInputProps {
 export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) {
   const { asPath } = useInternalRouter();
   const url = useInput({ useDebounce: true });
-  const { openGraph: og, refetch, isFetching } = useCheckLinkAvailable({ link: url.value });
+  const {
+    openGraph: og,
+    refetch,
+    isFetching,
+    isCheckingLinkWithAllProtocol,
+  } = useCheckLinkAvailable({ link: url.debouncedValue });
 
   const { fireToast } = useToast();
 
@@ -41,10 +46,10 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
 
   useEffect(() => {
     if (isFetching || !og) return;
-    if (og.url === null) return showErrorMessage();
+    if (isCheckingLinkWithAllProtocol && og.url === null) return showErrorMessage();
 
     if (saveOpenGraph) saveOpenGraph(og);
-  }, [isFetching, og, saveOpenGraph, showErrorMessage]);
+  }, [isCheckingLinkWithAllProtocol, isFetching, og, saveOpenGraph, showErrorMessage]);
 
   return (
     <div css={LinkInputCss}>
