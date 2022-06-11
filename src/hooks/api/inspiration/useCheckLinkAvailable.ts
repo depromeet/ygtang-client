@@ -15,6 +15,7 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
   const {
     data: openGraph,
     refetch,
+    remove,
     isFetching,
   } = useQuery<OpenGraphResponse>(
     [INSPIRATION_LINK_OG_QUERY_KEY, link],
@@ -40,6 +41,7 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
     isFetchedWith.current.pure = false;
     isFetchedWith.current.https = false;
     isFetchedWith.current.http = false;
+    isCheckingLinkWithAllProtocol.current = false;
   }, [link]);
 
   const getLinkWithProtocol = (link: string) => {
@@ -80,6 +82,7 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
       isFetchedWith.current.https === false ||
       isFetchedWith.current.http === false
     ) {
+      remove();
       refetch();
       return;
     }
