@@ -45,7 +45,6 @@ const imgBoxCss = ({
   position: relative;
   width: ${width};
   min-height: ${height ?? '343px'};
-  max-height: ${height ?? '450px'};
   overflow: hidden;
   border-radius: 4px;
   object-fit: cover;
