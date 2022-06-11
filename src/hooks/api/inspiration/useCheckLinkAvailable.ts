@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { useQuery } from 'react-query';
 
@@ -27,7 +27,8 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
   );
 
   // NOTE: 모든 프로토콜로 확인이 끝났을 때
-  const isCheckingLinkWithAllProtocol = useRef(false);
+  const [isCheckingLinkWithAllProtocol, setIsCheckingLinkWithAllProtocol] =
+    useState<boolean>(false);
 
   // NOTE: 각 프로토콜별 실행 유무
   const isFetchedWith = useRef({
@@ -41,7 +42,7 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
     isFetchedWith.current.pure = false;
     isFetchedWith.current.https = false;
     isFetchedWith.current.http = false;
-    isCheckingLinkWithAllProtocol.current = false;
+    setIsCheckingLinkWithAllProtocol(false);
   }, [link]);
 
   const getLinkWithProtocol = (link: string) => {
@@ -64,15 +65,15 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
 
   const fetchOpenGraph = (link: string): Promise<AxiosResponse<OpenGraphResponse>> => {
     const linkWithProtocol = getLinkWithProtocol(link);
-    console.log('fetched with' + linkWithProtocol);
     return get(`/v1/inspiration/link/availiable?link=${linkWithProtocol}`);
   };
 
   useDidUpdate(() => {
     if (!openGraph) return;
+
     // NOTE: openGraph가 재시도되면서 url 값이 있을 시 종료
     if (openGraph.url) {
-      isCheckingLinkWithAllProtocol.current = true;
+      setIsCheckingLinkWithAllProtocol(true);
       return;
     }
 
@@ -88,13 +89,13 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
     }
 
     // NOTE: 모두 재시도하였을 때
-    isCheckingLinkWithAllProtocol.current = true;
+    setIsCheckingLinkWithAllProtocol(true);
   }, [openGraph]);
 
   return {
     openGraph,
     refetch,
     isFetching,
-    isCheckingLinkWithAllProtocol: isCheckingLinkWithAllProtocol.current,
+    isCheckingLinkWithAllProtocol,
   };
 }
