@@ -3,23 +3,16 @@ import { useQuery } from 'react-query';
 
 import { get } from '~/libs/api/client';
 
-interface UseCheckLinkAvailable {
+const INSPIRATION_LINK_OG_QUERY_KEY = 'opengraph';
+
+interface UseCheckLinkAvailableProps {
   link: string;
 }
 
-export function useCheckLinkAvailable({ link }: UseCheckLinkAvailable) {
-  const INSPIRATION_LINK_OG_QUERY_KEY = 'opengraph';
+// TODO: 1. 기본 요청 > 실패 시 https 요청 > 실패 시 http 요청
+// TODO: 2. 바로 https 요청
 
-  const getLinkWithProtocol = (link: string) => {
-    if (link.startsWith('http')) return link;
-    return `http://${link}`;
-  };
-
-  const fetchOpenGraph = (link: string): Promise<AxiosResponse<OpenGraphResponse>> => {
-    const linkWithProtocol = getLinkWithProtocol(link);
-    return get(`/v1/inspiration/link/availiable?link=${linkWithProtocol}`);
-  };
-
+export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
   const {
     data: openGraph,
     refetch,
@@ -32,6 +25,17 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailable) {
       keepPreviousData: true,
     }
   );
+
+  const getLinkWithProtocol = (link: string) => {
+    if (link.startsWith('http')) return link;
+    return `https://${link}`;
+  };
+
+  const fetchOpenGraph = (link: string): Promise<AxiosResponse<OpenGraphResponse>> => {
+    const linkWithProtocol = getLinkWithProtocol(link);
+    console.log('fetch');
+    return get(`/v1/inspiration/link/availiable?link=${linkWithProtocol}`);
+  };
 
   return { openGraph, refetch, isFetching };
 }
