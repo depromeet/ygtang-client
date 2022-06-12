@@ -10,6 +10,9 @@ import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useToast } from '~/store/Toast';
 import { validator } from '~/utils/validator';
 
+import PortalWrapper from '../common/PortalWrapper';
+import { FixedSpinner } from '../common/Spinner';
+
 interface LinkInputProps {
   openGraph: OpenGraphResponse | null;
   saveOpenGraph?: (og: OpenGraphResponse | null) => void;
@@ -18,7 +21,12 @@ interface LinkInputProps {
 export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) {
   const { asPath } = useInternalRouter();
   const url = useInput({ useDebounce: true });
-  const { openGraph: og, refetch, isFetching } = useCheckLinkAvailable({ link: url.value });
+  const {
+    openGraph: og,
+    refetch,
+    isFetching,
+    isCheckingLinkWithAllProtocol,
+  } = useCheckLinkAvailable({ link: url.debouncedValue });
 
   const { fireToast } = useToast();
 
@@ -40,11 +48,13 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   };
 
   useEffect(() => {
-    if (isFetching || !og) return;
+    if (!og) return;
+    if (isFetching) return;
+    if (!isCheckingLinkWithAllProtocol) return;
     if (og.url === null) return showErrorMessage();
 
     if (saveOpenGraph) saveOpenGraph(og);
-  }, [isFetching, og, saveOpenGraph, showErrorMessage]);
+  }, [isCheckingLinkWithAllProtocol, isFetching, og, saveOpenGraph, showErrorMessage]);
 
   return (
     <div css={LinkInputCss}>
@@ -65,6 +75,10 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
           <PlusBtn onClick={getOpenGraph} />
         </section>
       )}
+
+      <PortalWrapper isShowing={isFetching}>
+        <FixedSpinner opacity={0.8} />
+      </PortalWrapper>
     </div>
   );
 }
