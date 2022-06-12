@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css, Theme } from '@emotion/react';
 
@@ -14,7 +14,6 @@ import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import useToggle from '~/hooks/common/useToggle';
 import { useToast } from '~/store/Toast';
-import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function SignUpEmailVerified() {
@@ -30,12 +29,7 @@ export default function SignUpEmailVerified() {
 
   const { checkTerms, toggleCheckTerms, checkPrivacy, toggleCheckPrivacy } = useInternalCheckList();
 
-  const {
-    mutate: signupMutate,
-    isSuccess: signupSuccess,
-    error: signupError,
-    isLoading: signupLoading,
-  } = useSignupMutation();
+  const { mutate: signupMutate, isLoading: signupLoading } = useSignupMutation();
 
   const handleSignupSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,6 +37,7 @@ export default function SignUpEmailVerified() {
     if (!validator({ type: 'email', value: query.email as string })) {
       return fireToast({ content: '이메일이 올바르지 않습니다. 처음부터 다시 시작해주세요.' });
     }
+
     if (nicknameError !== '' || passwordError !== '' || passwordRepeatError !== '') {
       return fireToast({ content: nicknameError || passwordError || passwordRepeatError });
     }
@@ -94,24 +89,6 @@ export default function SignUpEmailVerified() {
       setPasswordRepeatError('비밀번호와 일치하여야 합니다.');
     }
   }, [passwordRepeat.debouncedValue]);
-
-  useEffect(() => {
-    if (signupSuccess) {
-      // TODO: router.push가 안되는 문제 해결하기
-      window.location.replace('/login');
-      recordEvent({
-        action: 'Signup',
-        value: '회원 가입 완료',
-        category: '이메일 인증 후 회원가입 화면',
-      });
-    }
-  }, [signupSuccess]);
-
-  useEffect(() => {
-    if (signupError) {
-      fireToast({ content: signupError.message ?? '회원가입 도중 문제가 발생하였습니다.' });
-    }
-  }, [fireToast, signupError]);
 
   return (
     <LoadingHandler
