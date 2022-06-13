@@ -130,6 +130,11 @@ export default function useInspirationMutation(param?: InspirationMutationParams
     createInspiration: createInspirationMutation.mutate,
 
     /**
+     * 영감 추가의 로딩 상태입니다.
+     */
+    isCreateInspirationLoading: createInspirationMutation.isLoading,
+
+    /**
      * 영감을 삭제합니다.
      * deleteInspiration(id: number);
      */
