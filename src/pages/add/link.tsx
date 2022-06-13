@@ -6,6 +6,8 @@ import LinkInput from '~/components/add/LinkInput';
 import { CTABottomButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
+import PortalWrapper from '~/components/common/PortalWrapper';
+import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInput from '~/hooks/common/useInput';
@@ -18,20 +20,23 @@ import { formCss } from './image';
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddLink() {
-  const [disabled, setDisabled] = useState(false);
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
     value: memoValue,
   } = useInput({ useDebounce: true });
+
   const [openGraph, setOpenGraph] = useState<OpenGraphResponse | null>(null);
   const { fireToast } = useToast();
 
   const onMutationError = () => {
     fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
-    setDisabled(false);
   };
-  const { createInspiration } = useInspirationMutation({ onError: onMutationError });
+
+  const { createInspiration, isCreateInspirationLoading } = useInspirationMutation({
+    onError: onMutationError,
+  });
+
   const { tags } = useAppliedTags(true);
 
   const saveOpenGraph = useCallback((og: OpenGraphResponse | null) => {
@@ -41,7 +46,6 @@ export default function AddLink() {
   const submitLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!openGraph || !openGraph.url) return;
-    setDisabled(true);
     const tagIds = tags.map(tag => tag.id);
     const linkData = new FormData();
     linkData.append('content', openGraph.url);
@@ -81,13 +85,20 @@ export default function AddLink() {
           </section>
 
           <section css={addLinkBottomCss}>
-            <CTABottomButton disabled={!Boolean(openGraph) || disabled} type="submit">
+            <CTABottomButton
+              disabled={!Boolean(openGraph) || isCreateInspirationLoading}
+              type="submit"
+            >
               Tang!
             </CTABottomButton>
           </section>
         </form>
       </article>
       <AddTagFormRouteAsModal />
+
+      <PortalWrapper isShowing={isCreateInspirationLoading}>
+        <FixedSpinner />
+      </PortalWrapper>
     </>
   );
 }
