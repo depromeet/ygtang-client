@@ -97,7 +97,7 @@ export default function AddLink() {
       <AddTagFormRouteAsModal />
 
       <PortalWrapper isShowing={isCreateInspirationLoading}>
-        <FixedSpinner />
+        <FixedSpinner opacity={0.8} />
       </PortalWrapper>
     </>
   );
