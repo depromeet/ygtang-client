@@ -47,10 +47,6 @@ export default function ContentPage() {
     return <TextView inspiration={inspiration} />;
   }, []);
 
-  if (!inspiration) return <></>;
-
-  const { id } = inspiration;
-
   const deleteInspirationById = (id: number) => {
     deleteInspiration(id);
     recordEvent({ action: '영감 삭제' });
@@ -81,7 +77,7 @@ export default function ContentPage() {
             animate="animate"
             exit="exit"
           >
-            {renderInspirationViewByType(inspiration)}
+            {inspiration && renderInspirationViewByType(inspiration)}
           </motion.section>
         </LoadingHandler>
 
@@ -90,7 +86,10 @@ export default function ContentPage() {
           isShowing={isDeleteInspirationModalOn}
           actionButtons={
             <>
-              <FilledButton colorType="light" onClick={() => deleteInspirationById(id)}>
+              <FilledButton
+                colorType="light"
+                onClick={() => inspiration && deleteInspirationById(inspiration.id)}
+              >
                 네
               </FilledButton>
               <FilledButton colorType="dark" onClick={() => setDeleteInspirationModalOn(false)}>
