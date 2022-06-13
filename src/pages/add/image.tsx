@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
@@ -7,6 +7,8 @@ import { CTABottomButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import ImageContent from '~/components/common/ImageContent';
 import NavigationBar from '~/components/common/NavigationBar';
+import PortalWrapper from '~/components/common/PortalWrapper';
+import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useImgUpload from '~/hooks/common/useImgUpload';
@@ -21,7 +23,6 @@ import { recordEvent } from '~/utils/analytics';
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddImage() {
-  const [disabled, setDisabled] = useState(false);
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
@@ -32,11 +33,14 @@ export default function AddImage() {
   const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
   const { fireToast } = useToast();
+
   const onMutationError = () => {
     fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
-    setDisabled(false);
   };
-  const { createInspiration } = useInspirationMutation({ onError: onMutationError });
+
+  const { createInspiration, isCreateInspirationLoading } = useInspirationMutation({
+    onError: onMutationError,
+  });
 
   useEffect(() => {
     if (!uploadedImg) push('/');
@@ -47,7 +51,7 @@ export default function AddImage() {
   const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!uploadedImg) return;
-    setDisabled(true);
+
     const tagIds = tags.map(tag => tag.id);
     const imgData = new FormData();
     imgData.append('file', uploadedImg.blob);
@@ -94,13 +98,16 @@ export default function AddImage() {
           </section>
 
           <section css={addImageBottomCss}>
-            <CTABottomButton disabled={disabled} type="submit">
+            <CTABottomButton disabled={isCreateInspirationLoading} type="submit">
               Tang!
             </CTABottomButton>
           </section>
         </form>
       </article>
       <AddTagFormRouteAsModal />
+      <PortalWrapper isShowing={isCreateInspirationLoading}>
+        <FixedSpinner opacity={0.8} />
+      </PortalWrapper>
     </>
   );
 }

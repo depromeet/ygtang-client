@@ -1,10 +1,11 @@
-import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
 import { CTABottomButton } from '~/components/common/Button';
 import TagContent from '~/components/common/Content/TagContent';
 import NavigationBar from '~/components/common/NavigationBar';
+import PortalWrapper from '~/components/common/PortalWrapper';
+import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
@@ -18,22 +19,24 @@ import { formCss } from './image';
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddText() {
-  const [disabled, setDisabled] = useState(false);
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
   const { tags } = useAppliedTags(true);
   const { fireToast } = useToast();
+
   const onMutationError = () => {
     fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
-    setDisabled(false);
   };
-  const { createInspiration } = useInspirationMutation({ onError: onMutationError });
+
+  const { createInspiration, isCreateInspirationLoading } = useInspirationMutation({
+    onError: onMutationError,
+  });
 
   const submitText = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inspiringText.value) return;
-    setDisabled(true);
+
     const textData = new FormData();
     const tagIds = tags.map(tag => tag.id);
     textData.append('content', inspiringText.value);
@@ -78,13 +81,17 @@ export default function AddText() {
           </section>
 
           <section css={addTextBottomCss}>
-            <CTABottomButton type="submit" disabled={isEmptyText || disabled}>
+            <CTABottomButton type="submit" disabled={isEmptyText || isCreateInspirationLoading}>
               Tang!
             </CTABottomButton>
           </section>
         </form>
       </article>
       <AddTagFormRouteAsModal />
+
+      <PortalWrapper isShowing={isCreateInspirationLoading}>
+        <FixedSpinner opacity={0.8} />
+      </PortalWrapper>
     </>
   );
 }
