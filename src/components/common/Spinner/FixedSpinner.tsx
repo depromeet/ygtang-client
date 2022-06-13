@@ -18,8 +18,10 @@ export function FixedSpinner({ opacity = 1 }: FixedSpinnerProps) {
 
 const wrapperCss = (opacity: number) => css`
   position: fixed;
-  left: 0;
   top: 0;
+  /* 가로 가운데 정렬 */
+  left: 50%;
+  transform: translateX(-50%);
   width: 100vw;
   height: ${fullViewHeight()};
   opacity: ${opacity};
