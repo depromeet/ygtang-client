@@ -10,7 +10,7 @@ export default function useMemberSiginOutMutation() {
 
   return useMutation(() => del(`/v1/members/remove`), {
     onSuccess: () => {
-      fireToast({ content: '계정이 삭제되었습니다!' });
+      fireToast({ content: '계정이 완전히 삭제되었습니다.', duration: 2500 });
 
       userLogout();
     },

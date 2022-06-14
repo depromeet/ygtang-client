@@ -35,7 +35,10 @@ export default function SignUpEmailVerified() {
     e.preventDefault();
 
     if (!validator({ type: 'email', value: query.email as string })) {
-      return fireToast({ content: '이메일이 올바르지 않습니다. 처음부터 다시 시작해주세요.' });
+      return fireToast({
+        content: '올바르지 않은 이메일입니다. 처음부터 다시 시도해주세요',
+        duration: 3500,
+      });
     }
 
     if (nicknameError !== '' || passwordError !== '' || passwordRepeatError !== '') {
@@ -43,7 +46,7 @@ export default function SignUpEmailVerified() {
     }
 
     if (!checkTerms && !checkPrivacy) {
-      return fireToast({ content: '모두 동의해야 가입할 수 있습니다.' });
+      return fireToast({ content: '동의하지 않은 항목을 확인해주세요.' });
     }
 
     signupMutate({

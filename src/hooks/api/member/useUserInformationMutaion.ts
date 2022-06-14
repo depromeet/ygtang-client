@@ -16,7 +16,7 @@ export default function useUserInformationMutation() {
     (data: { nickname: string }) => put(`/v1/members/nickname/change`, data),
     {
       onSuccess: () => {
-        fireToast({ content: '이름 변경에 성공하였습니다.' });
+        fireToast({ content: '닉네임을 변경하였습니다.' });
         resetUserInformation();
       },
       onError: (error, variable, context) => {

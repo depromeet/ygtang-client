@@ -47,7 +47,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
     (data: FormData) => post('/v1/inspiration/add', data),
     {
       onSuccess: () => {
-        fireToast({ content: '영감이 등록되었습니다!' });
+        fireToast({ content: '영감을 등록했습니다.' });
         resetInspirationList();
         push('/');
       },
@@ -73,7 +73,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
 
   const deleteAllInspirationMutation = useMutation(() => del(`/v1/inspiration/remove/all`), {
     onSuccess: () => {
-      fireToast({ content: '정보를 초기화되었습니다!' });
+      fireToast({ content: '정보가 모두 초기화 되었습니다.', duration: 2500 });
       removeInspirationList();
     },
     onError: (error, variable, context) => {
@@ -85,7 +85,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
     (modifiedMemo: { id: number; memo: string }) => post('/v1/inspiration/modify', modifiedMemo),
     {
       onSuccess: (_res, req) => {
-        fireToast({ content: '메모가 수정되었습니다!' });
+        fireToast({ content: '메모를 수정했습니다.' });
         refreshInspirationById(req.id);
       },
       onError: (error, variable, context) => {

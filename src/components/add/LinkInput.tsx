@@ -31,7 +31,7 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
   const { fireToast } = useToast();
 
   const showErrorMessage = useCallback(
-    () => fireToast({ content: '유효하지 않은 주소입니다.' }),
+    () => fireToast({ content: '유효하지 않은 주소입니다. 다시 입력해주세요.', duration: 3500 }),
     [fireToast]
   );
 

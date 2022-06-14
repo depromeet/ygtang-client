@@ -24,11 +24,14 @@ export default function PasswordResetVerified() {
         });
       } else {
         setIsError(true);
-        fireToast({ content: '전송하지 못했습니다. (' + data.message + ')', duration: 5000 });
+        fireToast({
+          content: '이메일 전송에 실패했습니다. (' + data.message + ')',
+          duration: 5000,
+        });
       }
     },
     onError: data => {
-      fireToast({ content: '전송하지 못했습니다. (' + data.message + ')', duration: 5000 });
+      fireToast({ content: '이메일 전송에 실패했습니다. (' + data.message + ')', duration: 5000 });
       setIsError(true);
     },
   });
@@ -37,7 +40,10 @@ export default function PasswordResetVerified() {
     onError: error => {
       if (error) {
         setIsError(true);
-        fireToast({ content: '전송하지 못했습니다. (' + error.message + ')', duration: 5000 });
+        fireToast({
+          content: '이메일 전송에 실패했습니다. (' + error.message + ')',
+          duration: 5000,
+        });
       }
     },
   });

@@ -43,11 +43,11 @@ export default function EditTag() {
 
   const saveTag = (tag: TagType) => {
     if (addInspirationTagIsLoading) {
-      fireToast({ content: '태그를 추가 중 입니다. 잠시 후에 시도해주세요.' });
+      fireToast({ content: '태그를 추가중입니다. 잠시 후에 시도해주세요.', duration: 3500 });
       return;
     }
     if (hasTag(tag)) {
-      fireToast({ content: '리스트에 태그가 이미 존재합니다.' });
+      fireToast({ content: '이미 존재하는 태그입니다.' });
       return;
     }
     recordEvent({ action: '영감에 태그 추가', value: tag.content });

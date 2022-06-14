@@ -27,14 +27,17 @@ export default function PasswordReset() {
         });
       },
       onError: () => {
-        fireToast({ content: '이메일 전송 도중 오류가 발생하였습니다.' });
+        fireToast({
+          content: '이메일 전송 도중 오류가 발생하였습니다. 다시 시도해주세요.',
+          duration: 3500,
+        });
       },
     });
 
   const handleEmailSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (emailError !== '') {
-      return fireToast({ content: '입력한 값이 올바른지 확인해주세요.' });
+      return fireToast({ content: '잘못된 이메일입니다.' });
     }
     sendPasswordResetEmailMutation({ email: email.value });
   };
