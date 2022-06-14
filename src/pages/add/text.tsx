@@ -9,6 +9,7 @@ import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
+import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
@@ -24,6 +25,12 @@ export default function AddText() {
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
   const { tags } = useAppliedTags(true);
   const { fireToast } = useToast();
+
+  const setInspiringTextHandler = (data: string) => {
+    inspiringText.setValue(data);
+  };
+
+  useDataShareMessage(setInspiringTextHandler);
 
   const onMutationError = () => {
     fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
@@ -70,6 +77,7 @@ export default function AddText() {
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />
             </div>
+            <div>{sessionStorage.getItem('messageITEM')}</div>
             <div css={contentWrapperCss}>
               <MemoText
                 writable
