@@ -4,6 +4,7 @@ export const PUBLIC_ROUTES = [
   '/signup',
   '/signup/sent-email',
   '/signup/email-verified',
+  '/signup/information',
   '/onboard',
   '/password/sent-email',
   '/password/verified',
