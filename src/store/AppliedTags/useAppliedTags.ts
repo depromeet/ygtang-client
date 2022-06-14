@@ -15,7 +15,7 @@ export function useAppliedTags(isUseUnmounted = false) {
 
   const addTag = (tag: TagType) => {
     if (hasTag(tag)) {
-      fireToast({ content: '리스트에 태그가 이미 존재합니다.' });
+      fireToast({ content: '이미 존재하는 태그입니다.' });
       return;
     }
     setTags(preTags => [...preTags, tag]);

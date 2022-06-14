@@ -22,7 +22,7 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
       setIsLoaded(true);
     },
     onError: () => {
-      fireToast({ content: '세션이 만료되었습니다. 다시 로그인 해주세요.' });
+      fireToast({ content: '세션이 만료되었습니다. 다시 로그인 해주세요.', duration: 3500 });
       userLogout();
       push('/login');
       setIsLoaded(true);

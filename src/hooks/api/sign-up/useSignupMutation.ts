@@ -51,7 +51,10 @@ export default function useSignupMutation() {
         router.push('/');
       },
       onError: error => {
-        fireToast({ content: error.message ?? '회원가입 도중 문제가 발생하였습니다.' });
+        fireToast({
+          content: error.message ?? '문제가 발생했습니다. 다시 시도해주세요.',
+          duration: 3500,
+        });
       },
     }
   );

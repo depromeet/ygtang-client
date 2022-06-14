@@ -35,7 +35,7 @@ export default function AddImage() {
   const { fireToast } = useToast();
 
   const onMutationError = () => {
-    fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
+    fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
   };
 
   const { createInspiration, isCreateInspirationLoading } = useInspirationMutation({

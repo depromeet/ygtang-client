@@ -27,7 +27,7 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
     createTag(value, {
       onSuccess: () => {
         recordEvent({ action: '태그 생성', value, label: '설정 태그 편집 화면' });
-        fireToast({ content: '태그 저장 성공!' });
+        fireToast({ content: '태그가 저장되었습니다.' });
       },
     });
     setValue('');

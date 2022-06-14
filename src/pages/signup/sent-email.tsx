@@ -34,7 +34,7 @@ export default function SignupSentEmail() {
     if (query.email !== undefined && validator({ type: 'email', value: query.email as string })) {
       checkEmailStatusMutate({ email: query.email as string });
     } else {
-      fireToast({ content: '제공 된 이메일이 올바르지 않습니다. 다시 시도해 보세요.' });
+      fireToast({ content: '올바르지 않은 이메일입니다. 다시 시도해주세요.', duration: 3500 });
     }
   };
 
@@ -67,14 +67,15 @@ export default function SignupSentEmail() {
   useEffect(() => {
     if (emailSendingSuccess) {
       recordEvent({ action: 'Signup', value: '이메일 발송 재요청' });
-      fireToast({ content: '인증 이메일을 재전송했어요. 메일함을 확인해주세요.' });
+      fireToast({ content: '인증 메일을 재전송했습니다. 메일함을 확인해주세요.', duration: 3500 });
     }
   }, [emailSendingSuccess, fireToast]);
 
   useEffect(() => {
     if (emailSendedError) {
       fireToast({
-        content: '이메일 전송 도중 오류가 발생했어요.',
+        content: '이메일 전송 도중 오류가 발생하였습니다. 다시 시도해주세요.',
+        duration: 3500,
       });
     }
   }, [emailSendedError, fireToast]);

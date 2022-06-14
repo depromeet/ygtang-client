@@ -139,7 +139,7 @@ function useSignupWithCheckingEmail(email: string) {
         value: '가입된 이메일 가입 요청',
         category: '이메일 발송 화면',
       });
-      fireToast({ content: '이미 가입된 사용자입니다.' });
+      fireToast({ content: '이미 가입된 메일입니다.' });
       setIsLoading(false);
       return;
     }
@@ -155,7 +155,7 @@ function useSignupWithCheckingEmail(email: string) {
         value: '인증된 이메일 가입 요청',
         category: '이메일 발송 화면',
       });
-      fireToast({ content: '인증된 이메일입니다.' });
+      fireToast({ content: '이미 인증된 메일입니다.' });
       router.push({
         pathname: '/signup/email-verified',
         query: { email },

@@ -31,7 +31,10 @@ export default function Login() {
   const handleFormSubmitEvent = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (emailError !== '' || passwordError !== '') {
-      return fireToast({ content: '입력하신 값이 올바른지 확인해주세요.' });
+      return fireToast({
+        content: '올바르지 않은 입력값입니다. 다시 확인해주세요',
+        duration: 3500,
+      });
     }
     setIsPending(true);
     loginMutate({
