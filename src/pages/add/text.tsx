@@ -73,7 +73,6 @@ export default function AddText() {
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />
             </div>
-            <div>{sessionStorage.getItem('messageITEM')}</div>
             <div css={contentWrapperCss}>
               <MemoText
                 writable
