@@ -26,11 +26,7 @@ export default function AddText() {
   const { tags } = useAppliedTags(true);
   const { fireToast } = useToast();
 
-  const setInspiringTextHandler = (data: string) => {
-    inspiringText.setValue(data);
-  };
-
-  useDataShareMessage(setInspiringTextHandler);
+  useDataShareMessage(inspiringText.setValue);
 
   const onMutationError = () => {
     fireToast({ content: '영감 추가 도중 오류가 발생했습니다.' });
