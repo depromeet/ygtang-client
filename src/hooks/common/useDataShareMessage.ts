@@ -21,6 +21,7 @@ export function useDataShareMessage(setStateHandler: (data: string) => void) {
   // NOTE : document.addEventListener('message', handleMessage)에 event type 중 MessageEvent 존재하지 않아 선대처합니다.
   const handleMessage = (event: MessageEvent | any) => {
     const data = JSON.parse(event.data);
+    console.log(data);
     if (data.type !== SHARE_EXTENTION_MESSAGE_TYPE) return;
     setStateHandler(data.data);
   };
@@ -35,7 +36,7 @@ export function useDataShareMessage(setStateHandler: (data: string) => void) {
   useEffect(() => {
     if (!isAndroid() && !isIos() && !isMobile()) return;
     const target = isIos() ? window : document;
-    document.addEventListener('message', handleMessage);
+    target.addEventListener('message', handleMessage);
 
     return () => {
       target.removeEventListener('message', handleMessage);
