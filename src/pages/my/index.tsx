@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import { FilledButton } from '~/components/common/Button';
-import Dialog from '~/components/common/Dialog';
+import IllustDialog from '~/components/common/IllustDialog';
 import NavigationBar from '~/components/common/NavigationBar';
 import Menu from '~/components/my/Menu';
 import MyProfile from '~/components/my/Profile';
+import { INSPIRATION_MODAL_IMAGE } from '~/constants/assets';
 import { POLICY_URL } from '~/constants/common';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 
@@ -32,12 +33,13 @@ export default function MyPage() {
           />
         </ul>
       </section>
-      <Dialog
+      <IllustDialog
+        image={INSPIRATION_MODAL_IMAGE[2]}
         isShowing={isInitializeConfirmModalOpen}
         actionButtons={
           <>
             <FilledButton
-              colorType="dark"
+              colorType="light"
               onClick={() => {
                 deleteAllInspiration(undefined, {
                   onSettled: () => {
@@ -49,20 +51,17 @@ export default function MyPage() {
               네
             </FilledButton>
             <div css={dialogLongButtonCss}>
-              <FilledButton
-                colorType="light"
-                onClick={() => setIsInitializeConfirmModalOpen(false)}
-              >
-                아니요
+              <FilledButton colorType="dark" onClick={() => setIsInitializeConfirmModalOpen(false)}>
+                다시 생각해볼게요
               </FilledButton>
             </div>
           </>
         }
       >
-        모든 영감이 초기화됩니다.
+        영감이 모두 삭제됩니다.
         <br />
-        괜찮으신가요?
-      </Dialog>
+        괜찮으시겠어요?
+      </IllustDialog>
     </article>
   );
 }
