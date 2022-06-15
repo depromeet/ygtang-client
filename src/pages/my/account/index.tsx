@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import { FilledButton, IconButton } from '~/components/common/Button';
-import Dialog from '~/components/common/Dialog';
+import IllustDialog from '~/components/common/IllustDialog';
 import InternalLink from '~/components/common/InternalLink';
 import NavigationBar from '~/components/common/NavigationBar';
 import MyInformationMenu from '~/components/my/InformationMenu';
 import Menu from '~/components/my/Menu';
+import { INSPIRATION_MODAL_IMAGE } from '~/constants/assets';
 import useMemberSiginOutMutation from '~/hooks/api/member/useMemberSignOutMutaion';
 import { useUserInformation } from '~/store/UserInformation';
 import { fullViewHeight } from '~/styles/utils';
@@ -43,12 +44,13 @@ export default function MyAccountPage() {
           rightElement={<span css={menuTitleCss}>계정 삭제하기</span>}
         />
       </section>
-      <Dialog
+      <IllustDialog
+        image={INSPIRATION_MODAL_IMAGE[1]}
         isShowing={isDeleteAccountModalOpen}
         actionButtons={
           <>
             <FilledButton
-              colorType="dark"
+              colorType="light"
               onClick={() => {
                 siginOutMutate(undefined, {
                   onSettled: () => {
@@ -57,11 +59,11 @@ export default function MyAccountPage() {
                 });
               }}
             >
-              네
+              계정 삭제
             </FilledButton>
             <div css={dialogLongButtonCss}>
-              <FilledButton colorType="light" onClick={() => setIsDeleteAccountModalOpen(false)}>
-                아니요
+              <FilledButton colorType="dark" onClick={() => setIsDeleteAccountModalOpen(false)}>
+                다시 생각해볼게요
               </FilledButton>
             </div>
           </>
@@ -70,7 +72,7 @@ export default function MyAccountPage() {
         계정이 완전히 사라집니다.
         <br />
         다시 복구할 수 없습니다.
-      </Dialog>
+      </IllustDialog>
     </article>
   );
 }

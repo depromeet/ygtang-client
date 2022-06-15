@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import { FilledButton, IconButton } from '~/components/common/Button';
-import Dialog from '~/components/common/Dialog';
+import IllustDialog from '~/components/common/IllustDialog';
 import Menu from '~/components/my/Menu';
+import { INSPIRATION_MODAL_IMAGE } from '~/constants/assets';
 import useTagMutation from '~/hooks/api/tag/useTagMutation';
 import { useToast } from '~/store/Toast';
 import { recordEvent } from '~/utils/analytics';
@@ -25,12 +26,13 @@ export default function MyTagItem({ tag }: { tag: TagType }) {
         label={tag.content}
         rightElement={<IconButton onClick={onDelete} iconName="RemoveCircleIcon" light />}
       />
-      <Dialog
+      <IllustDialog
+        image={INSPIRATION_MODAL_IMAGE[2]}
         isShowing={isTagDeleteConfirmModalOpen}
         actionButtons={
           <>
             <FilledButton
-              colorType="dark"
+              colorType="light"
               onClick={() => {
                 deleteTag(tag.id, {
                   onSuccess: () => {
@@ -44,8 +46,8 @@ export default function MyTagItem({ tag }: { tag: TagType }) {
               네
             </FilledButton>
             <div css={dialogLongButtonCss}>
-              <FilledButton colorType="light" onClick={() => setisTagDeleteConfirmModalOpen(false)}>
-                아니요
+              <FilledButton colorType="dark" onClick={() => setisTagDeleteConfirmModalOpen(false)}>
+                다시 생각해볼게요
               </FilledButton>
             </div>
           </>
@@ -53,8 +55,8 @@ export default function MyTagItem({ tag }: { tag: TagType }) {
       >
         선택한 태그가 모든 영감에서
         <br />
-        사라집니다! 괜찮으신가요?
-      </Dialog>
+        사라집니다. 괜찮으신가요?
+      </IllustDialog>
     </>
   );
 }
