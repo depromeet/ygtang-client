@@ -82,6 +82,7 @@ export function Input({
             isPreAppend: typeof preAppend !== 'undefined',
             isAppend: typeof append !== 'undefined',
             padding,
+            inputValue: inputRef.current?.value ?? '',
           }),
           ref: inputRef,
           onBlur: onBlur,
@@ -105,11 +106,13 @@ const inputElementCss = (
     isPreAppend,
     isAppend,
     padding = 12,
+    inputValue,
   }: {
     fixedHeight?: number;
     isPreAppend?: boolean;
     isAppend?: boolean;
     padding?: number;
+    inputValue?: string;
   }
 ) => css`
   width: 100%;
@@ -144,7 +147,7 @@ const inputElementCss = (
   &:disabled {
     /* iOS에서 disabled input 텍스트 색상 자동 흐려짐 방지 */
     /* https://stackoverflow.com/questions/262158/disabled-input-text-color-on-ios */
-    -webkit-text-fill-color: ${theme.color.gray05};
+    -webkit-text-fill-color: ${inputValue !== '' ? theme.color.gray05 : theme.color.gray03};
   }
 `;
 
