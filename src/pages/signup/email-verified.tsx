@@ -100,7 +100,7 @@ export default function SignUpEmailVerified() {
     >
       <article css={containerCss}>
         <NavigationBar title={'회원가입'} />
-        <p css={introTextWrapper}>마지막 단계입니다!</p>
+        <p css={introTextWrapper}>거의 다 왔습니다!</p>
         <form css={formCss} onSubmit={handleSignupSubmit}>
           <fieldset css={fieldSetCss}>
             <TextField
