@@ -5,7 +5,14 @@ import { CTABottomButton } from '~/components/common/Button';
 import DropdownMenu from '~/components/common/DropdownMenu';
 import NavigationBar from '~/components/common/NavigationBar';
 import usePutExtraInformation from '~/hooks/api/sign-up/usePatchExtraInformation';
+import useSignupMutation from '~/hooks/api/sign-up/useSignupMutation';
+import useDidMount from '~/hooks/common/useDidMount';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
+import useRouterQuery from '~/hooks/common/useRouterQuery';
+import { useUser } from '~/hooks/common/useUser';
+import useSignupUser from '~/store/Signup/useSignupUser';
 import { fullViewHeight } from '~/styles/utils';
+import { recordEvent } from '~/utils/analytics';
 
 const GENDER_VALUES = ['남자', '여자', '기타'] as const;
 const GENDER_REQUEST_VALUES = { 남자: 'MALE', 여자: 'FEMALE', 기타: 'ETC' } as const;
@@ -30,22 +37,61 @@ const JOB_VALUES = [
 ] as const;
 
 export default function Information() {
+  const { signupUser, clearSignupUser } = useStoredSignupUserData();
+  const queryEmail = useRouterQuery('email', String);
+  const router = useInternalRouter();
+
   const [gender, setGender] = useState<typeof GENDER_VALUES[number] | null>(null);
   const [age, setAge] = useState<typeof AGE_VALUES[number] | null>(null);
   const [job, setJob] = useState<string | null>(null);
 
-  const { mutate } = usePutExtraInformation();
+  const { mutate: signupMutate } = useSignupMutation();
+  const { userLogin } = useUser();
+  const { mutate: putExtraInformationMutate } = usePutExtraInformation();
 
   const isDisabledCTAButton = !Boolean(gender && age && job);
 
   const onClickCTA = () => {
-    if (!gender || !job || !age) return;
+    if (!queryEmail || !gender || !job || !age || !signupUser) return;
 
-    mutate({
-      gender: GENDER_REQUEST_VALUES[gender],
-      age: AGE_REQUEST_VALUES[age],
-      job,
-    });
+    signupMutate(
+      {
+        email: queryEmail,
+        nickName: signupUser.nickName,
+        password: signupUser.password,
+        confirmPassword: signupUser.confirmPassword,
+      },
+      {
+        onSuccess: data => {
+          const {
+            data: { accessToken, refreshToken },
+          } = data;
+
+          recordEvent({
+            action: 'Signup',
+            value: '회원 가입 완료',
+            category: '이메일 인증 후 회원가입 화면',
+          });
+
+          userLogin({ accessToken, refreshToken });
+
+          putExtraInformationMutate(
+            {
+              email: queryEmail,
+              gender: GENDER_REQUEST_VALUES[gender],
+              age: AGE_REQUEST_VALUES[age],
+              job,
+            },
+            {
+              onSuccess: () => {
+                clearSignupUser();
+                router.push('/');
+              },
+            }
+          );
+        },
+      }
+    );
   };
 
   return (
@@ -87,3 +133,16 @@ const introTextWrapper = (theme: Theme) => css`
   margin-top: 40px;
   margin-bottom: 32px;
 `;
+
+function useStoredSignupUserData() {
+  const { signupUser, clearSignupUser } = useSignupUser();
+  const router = useInternalRouter();
+
+  useDidMount(() => {
+    if (signupUser === null) {
+      router.push('/signup');
+    }
+  });
+
+  return { signupUser, clearSignupUser };
+}
