@@ -1,4 +1,5 @@
-require('@testing-library/jest-dom');
+import { matchers } from '@emotion/jest';
+import '@testing-library/jest-dom';
 
 window.matchMedia = query => ({
   matches: false,
@@ -10,3 +11,5 @@ window.matchMedia = query => ({
   removeEventListener: jest.fn(),
   dispatchEvent: jest.fn(),
 });
+
+expect.extend(matchers);

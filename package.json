@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.7.2",
+    "@emotion/jest": "^11.9.3",
     "@next/bundle-analyzer": "^12.1.6",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
