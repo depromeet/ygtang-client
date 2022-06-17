@@ -20,12 +20,12 @@ const DropdownMenu = forwardRef(function DropdownMenu<T extends string[]>(
   ref: Ref<HTMLSelectElement>
 ) {
   const theme = useTheme();
-  const [value, setValue] = useState<string | null>(defaultValue ?? null);
+  const [value, setValue] = useState<string | undefined>(defaultValue ?? undefined);
   const [isOpen, toggleIsOpen] = useToggle(false);
 
   const onClickOption = (eachValue: string) => {
-    toggleIsOpen();
     setValue(eachValue);
+    toggleIsOpen();
   };
 
   return (
@@ -36,13 +36,7 @@ const DropdownMenu = forwardRef(function DropdownMenu<T extends string[]>(
         </label>
       )}
 
-      <select
-        data-testid="select"
-        value={value ? value : undefined}
-        disabled
-        css={selectCss}
-        ref={ref}
-      >
+      <select data-testid="select" value={value} disabled css={selectCss} ref={ref}>
         <option />
         {values.map(eachValue => (
           <option key={eachValue} value={eachValue} />
