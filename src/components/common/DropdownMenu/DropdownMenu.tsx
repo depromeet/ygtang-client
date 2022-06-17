@@ -9,14 +9,19 @@ import useToggle from '~/hooks/common/useToggle';
 import BottomSheetModal from '../BottomSheetModal';
 import { CheckIcon, ChevronIcon } from '../icons';
 
-interface DropdownMenuProps {
+interface DropdownMenuProps<T extends readonly string[]> {
   label?: string;
-  values: string[];
+  values: string[] | T;
   value: string | null;
-  setValue: Dispatch<SetStateAction<string | null>>;
+  setValue: Dispatch<SetStateAction<string | null>> | Dispatch<SetStateAction<T[number] | null>>;
 }
 
-export default function DropdownMenu({ label, values, value, setValue }: DropdownMenuProps) {
+export default function DropdownMenu<T extends readonly string[]>({
+  label,
+  values,
+  value,
+  setValue,
+}: DropdownMenuProps<T>) {
   const theme = useTheme();
   const [isOpen, toggleIsOpen] = useToggle(false);
 
