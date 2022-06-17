@@ -47,6 +47,7 @@ export default function useSignupMutation() {
           category: '이메일 인증 후 회원가입 화면',
         });
 
+        // TODO: 회원가입 로직 중단 시 대응 방법 강구
         userLogin({ accessToken, refreshToken });
         router.push('/signup/information');
       },

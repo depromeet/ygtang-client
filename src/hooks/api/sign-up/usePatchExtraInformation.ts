@@ -13,6 +13,7 @@ interface ExtraInformationParams {
 
 export default function usePatchExtraInformation() {
   const { fireToast } = useToast();
+  // NOTE: 회원가입 중단 방법 대응 후, 이메일 확인 로직 변경될 수 있음
   const { userInformation } = useUserInformation();
   const router = useInternalRouter();
 
