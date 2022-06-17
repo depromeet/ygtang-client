@@ -156,7 +156,7 @@ export default function SignUpEmailVerified() {
             </div>
           </fieldset>
           <CTABottomButton type={'submit'} disabled={signupLoading}>
-            Start Tang!
+            다음
           </CTABottomButton>
         </form>
       </article>

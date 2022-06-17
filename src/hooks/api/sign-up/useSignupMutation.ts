@@ -48,7 +48,7 @@ export default function useSignupMutation() {
         });
 
         userLogin({ accessToken, refreshToken });
-        router.push('/');
+        router.push('/signup/information');
       },
       onError: error => {
         fireToast({
