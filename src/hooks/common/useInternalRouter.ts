@@ -20,6 +20,7 @@ export type RouterPathType =
   | '/signup'
   | '/signup/sent-email'
   | '/signup/email-verified'
+  | '/signup/information'
   | '/password';
 
 export default function useInternalRouter() {
