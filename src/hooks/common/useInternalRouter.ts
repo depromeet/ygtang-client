@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { UrlObject } from 'url';
 
@@ -26,21 +25,19 @@ export type RouterPathType =
 export default function useInternalRouter() {
   const router = useRouter();
 
-  return useMemo(() => {
-    return {
-      ...router,
-      push(path: RouterPathType, as?: UrlObject | string, options?: TransitionOptions) {
-        router.push(path, as, options);
-      },
-      scrollPreventedPush(
-        path: RouterPathType,
-        as?: UrlObject | string,
-        options?: Omit<TransitionOptions, 'scroll'>
-      ) {
-        router.push(path, as, { ...options, scroll: false });
-      },
-    };
-  }, [router]);
+  return {
+    ...router,
+    push(path: RouterPathType, as?: UrlObject | string, options?: TransitionOptions) {
+      router.push(path, as, options);
+    },
+    scrollPreventedPush(
+      path: RouterPathType,
+      as?: UrlObject | string,
+      options?: Omit<TransitionOptions, 'scroll'>
+    ) {
+      router.push(path, as, { ...options, scroll: false });
+    },
+  };
 }
 
 interface TransitionOptions {
