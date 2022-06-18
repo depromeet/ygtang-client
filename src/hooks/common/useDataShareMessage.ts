@@ -15,11 +15,21 @@ const SHARE_WEB_MESSAGE_STATE = 'YgtangWebShareState';
 //        Native는 { type: SHARE_WEB_MESSAGE_STATE, data: 'READY' }를 받아 공유할 데이터를 쏘아줍니다.
 //        WebView는 setStateHandler로 데이터를 넘겨줍니다.
 
+interface ShareMessageEvent {
+  data: string;
+}
+
+function isShareMessageEvent(arg: any): arg is ShareMessageEvent {
+  return arg.data !== undefined;
+}
+
 export function useDataShareMessage(setStateHandler: (data: string) => void) {
   const { isAndroid, isIos, isMobile } = useUserAgent();
 
   // NOTE : document.addEventListener('message', handleMessage)에 event type 중 MessageEvent 존재하지 않아 선대처합니다.
-  const handleMessage = (event: MessageEvent | any) => {
+  const handleMessage = (event: MessageEvent | unknown) => {
+    if (!isShareMessageEvent(event)) return;
+
     const data = JSON.parse(event.data);
     if (data.type !== SHARE_EXTENTION_MESSAGE_TYPE) return;
     setStateHandler(data.data);
