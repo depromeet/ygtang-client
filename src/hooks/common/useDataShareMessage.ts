@@ -19,6 +19,12 @@ interface ShareMessageEvent {
   data: string;
 }
 
+interface ShareMessageEventData {
+  type: string;
+  data: string;
+  mimeType: string;
+}
+
 function isShareMessageEvent(arg: any): arg is ShareMessageEvent {
   return arg.data !== undefined;
 }
@@ -30,7 +36,7 @@ export function useDataShareMessage(setStateHandler: (data: string) => void) {
   const handleMessage = (event: MessageEvent | unknown) => {
     if (!isShareMessageEvent(event)) return;
 
-    const data = JSON.parse(event.data);
+    const data: ShareMessageEventData = JSON.parse(event.data);
     if (data.type !== SHARE_EXTENTION_MESSAGE_TYPE) return;
     setStateHandler(data.data);
   };
