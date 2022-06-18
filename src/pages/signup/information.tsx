@@ -84,6 +84,19 @@ export default function Information() {
             },
             {
               onSuccess: () => {
+                recordEvent({
+                  action: '사용자 성별',
+                  value: gender,
+                });
+                recordEvent({
+                  action: '사용자 나이',
+                  value: age,
+                });
+                recordEvent({
+                  action: '사용자 관심 직군',
+                  value: job,
+                });
+
                 clearSignupUser();
                 router.replace('/');
               },
