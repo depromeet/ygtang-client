@@ -44,7 +44,7 @@ export default function AddImage() {
   });
 
   useEffect(() => {
-    if (!uploadedImg && isDesktop) push('/');
+    if (!uploadedImg && isDesktop()) push('/');
   }, [uploadedImg, push, isDesktop]);
 
   const { tags } = useAppliedTags(true);
