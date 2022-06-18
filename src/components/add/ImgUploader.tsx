@@ -16,7 +16,7 @@ export const ImgUploader = forwardRef(
         css={imgInputCss}
         onChange={imgInputUploader}
         type="file"
-        accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.jpeg,.tiff"
+        accept=".jpg,.png,.bmp,.gif,.tif,.webp,.jpeg,.tiff"
         data-testid={IMAGE_INPUT_ID}
       />
     );
