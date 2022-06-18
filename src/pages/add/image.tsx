@@ -43,7 +43,7 @@ export default function AddImage() {
   });
 
   useEffect(() => {
-    if (!uploadedImg) push('/');
+    // if (!uploadedImg) push('/');
   }, [uploadedImg, push]);
 
   const { tags } = useAppliedTags(true);

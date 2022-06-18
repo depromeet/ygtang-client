@@ -22,34 +22,36 @@ export default function ImageContent({
   const theme = useTheme();
 
   return (
-    <div css={imgBoxCss({ width, height, theme })}>
-      {(onClickXBtn || htmlFor) && (
-        <label htmlFor={htmlFor} onClick={onClickXBtn} css={closeIconCss}>
-          <CancelIcon isUsingFill color={theme.color.gray05} />
-        </label>
+    <div css={imgBoxCss({ width, height })}>
+      {src ? (
+        <>
+          {(onClickXBtn || htmlFor) && (
+            <label htmlFor={htmlFor} onClick={onClickXBtn} css={closeIconCss}>
+              <CancelIcon isUsingFill color={theme.color.gray05} />
+            </label>
+          )}
+          <img src={src} css={imgCss} alt={alt} />
+        </>
+      ) : (
+        <div onClick={onClickXBtn} css={emptyImageCss({ theme })}></div>
       )}
-      {src && <img src={src} css={imgBoxCss({ width, height, theme })} alt={alt} />}
     </div>
   );
 }
 
-const imgBoxCss = ({
-  width,
-  height,
-  theme,
-}: {
-  width: string;
-  height?: string;
-  theme: Theme;
-}) => css`
+const imgBoxCss = ({ width, height }: { width: string; height?: string }) => css`
   position: relative;
   width: ${width};
   height: ${height};
-  min-height: '100px';
+  min-height: 100px;
   overflow: hidden;
-  border-radius: 4px;
   object-fit: cover;
-  background-color: ${theme.color.gray01};
+`;
+
+const imgCss = css`
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
 `;
 
 const closeIconCss = css`
@@ -61,4 +63,11 @@ const closeIconCss = css`
   padding: 0;
   z-index: 1;
   cursor: pointer;
+`;
+
+const emptyImageCss = ({ theme }: { theme: Theme }) => css`
+  height: 340px;
+  cursor: pointer;
+  background-color: ${theme.color.gray01};
+  border-radius: 4px;
 `;
