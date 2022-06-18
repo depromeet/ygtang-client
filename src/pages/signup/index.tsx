@@ -33,7 +33,7 @@ export default function Signup() {
 
   return (
     <article css={loginCss}>
-      <NavigationBar title={'회원가입'} />
+      <NavigationBar title={'회원가입'} backLink="/" />
       <div css={introCardCss}>
         <p css={introTextWrapper}>
           자주쓰는 이메일을

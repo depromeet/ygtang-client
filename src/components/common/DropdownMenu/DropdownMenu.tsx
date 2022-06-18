@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { forwardRef, Ref, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 
 import Menu from '~/components/my/Menu';
@@ -9,18 +9,20 @@ import useToggle from '~/hooks/common/useToggle';
 import BottomSheetModal from '../BottomSheetModal';
 import { CheckIcon, ChevronIcon } from '../icons';
 
-interface DropdownMenuProps<T extends string[]> {
+interface DropdownMenuProps<T extends readonly string[]> {
   label?: string;
-  values: [...T];
-  defaultValue?: T[number];
+  values: string[] | T;
+  value: string | null;
+  setValue: Dispatch<SetStateAction<string | null>> | Dispatch<SetStateAction<T[number] | null>>;
 }
 
-const DropdownMenu = forwardRef(function DropdownMenu<T extends string[]>(
-  { label, values, defaultValue }: DropdownMenuProps<T>,
-  ref: Ref<HTMLSelectElement>
-) {
+export default function DropdownMenu<T extends readonly string[]>({
+  label,
+  values,
+  value,
+  setValue,
+}: DropdownMenuProps<T>) {
   const theme = useTheme();
-  const [value, setValue] = useState<string | undefined>(defaultValue ?? undefined);
   const [isOpen, toggleIsOpen] = useToggle(false);
 
   const onClickOption = (eachValue: string) => {
@@ -35,13 +37,6 @@ const DropdownMenu = forwardRef(function DropdownMenu<T extends string[]>(
           {label}
         </label>
       )}
-
-      <select data-testid="select" value={value} disabled css={selectCss} ref={ref}>
-        <option />
-        {values.map(eachValue => (
-          <option key={eachValue} value={eachValue} />
-        ))}
-      </select>
 
       <button onClick={toggleIsOpen} css={buttonCss}>
         {value ?? '선택하기'}
@@ -65,9 +60,7 @@ const DropdownMenu = forwardRef(function DropdownMenu<T extends string[]>(
       </BottomSheetModal>
     </div>
   );
-});
-
-export default DropdownMenu;
+}
 
 const wrapperCss = css`
   display: flex;
@@ -79,10 +72,6 @@ const labelCss = (theme: Theme) => css`
   color: ${theme.color.gray05};
   margin-bottom: 6px;
   font-size: 14px;
-`;
-
-const selectCss = css`
-  display: none;
 `;
 
 const buttonCss = (theme: Theme) => css`
