@@ -15,12 +15,12 @@ import PortalWrapper from '../common/PortalWrapper';
 import { FixedSpinner } from '../common/Spinner';
 
 interface LinkInputProps {
-  initalLink?: string;
+  initialLink?: string;
   openGraph: OpenGraphResponse | null;
   saveOpenGraph?: (og: OpenGraphResponse | null) => void;
 }
 
-export default function LinkInput({ initalLink, openGraph, saveOpenGraph }: LinkInputProps) {
+export default function LinkInput({ initialLink, openGraph, saveOpenGraph }: LinkInputProps) {
   const { asPath } = useInternalRouter();
   const url = useInput({ useDebounce: true });
   const {
@@ -50,8 +50,8 @@ export default function LinkInput({ initalLink, openGraph, saveOpenGraph }: Link
   };
 
   useDidUpdate(() => {
-    url.setValue(initalLink || '');
-  }, [initalLink]);
+    url.setValue(initialLink || '');
+  }, [initialLink]);
 
   useEffect(() => {
     if (!og) return;

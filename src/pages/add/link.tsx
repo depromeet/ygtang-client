@@ -28,9 +28,9 @@ export default function AddLink() {
   } = useInput({ useDebounce: true });
 
   const [openGraph, setOpenGraph] = useState<OpenGraphResponse | null>(null);
-  const [initalLink, setInitalLink] = useState('');
+  const [initialLink, setInitialLink] = useState('');
 
-  useDataShareMessage(setInitalLink);
+  useDataShareMessage(setInitialLink);
   const { fireToast } = useToast();
 
   const onMutationError = () => {
@@ -74,7 +74,7 @@ export default function AddLink() {
           <section css={addLinkTopCss}>
             <div css={contentWrapperCss}>
               <LinkInput
-                initalLink={initalLink}
+                initialLink={initialLink}
                 openGraph={openGraph}
                 saveOpenGraph={saveOpenGraph}
               />
