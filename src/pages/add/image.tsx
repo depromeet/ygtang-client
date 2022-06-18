@@ -14,6 +14,7 @@ import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutati
 import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
+import { useUserAgent } from '~/hooks/common/useUserAgent';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
 import { useUploadedImg } from '~/store/UploadedImage';
@@ -28,7 +29,7 @@ export default function AddImage() {
     debouncedValue: memoDebouncedValue,
     value: memoValue,
   } = useInput({ useDebounce: true });
-
+  const { isDesktop } = useUserAgent();
   const { imgInputUploader } = useImgUpload({});
   const { push } = useInternalRouter();
   const { uploadedImg } = useUploadedImg();
@@ -43,8 +44,8 @@ export default function AddImage() {
   });
 
   useEffect(() => {
-    // if (!uploadedImg) push('/');
-  }, [uploadedImg, push]);
+    if (!uploadedImg && isDesktop) push('/');
+  }, [uploadedImg, push, isDesktop]);
 
   const { tags } = useAppliedTags(true);
 
