@@ -85,7 +85,7 @@ export default function Information() {
             {
               onSuccess: () => {
                 clearSignupUser();
-                router.push('/');
+                router.replace('/');
               },
             }
           );
