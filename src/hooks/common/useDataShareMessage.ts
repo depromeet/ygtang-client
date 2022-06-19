@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 
+import { UploadedImg } from '~/store/UploadedImage/useUploadedImg';
+import { base64ToBlob } from '~/utils/common';
+
 import useDidMount from './useDidMount';
 import { useUserAgent } from './useUserAgent';
 
@@ -29,16 +32,33 @@ function isShareMessageEvent(arg: any): arg is ShareMessageEvent {
   return arg.data !== undefined;
 }
 
-export function useDataShareMessage(setStateHandler: (data: string) => void) {
+interface ImgShareMessageProps {
+  type: 'IMAGE';
+  setStateHandler: (data: UploadedImg) => void;
+}
+
+interface DataShareMessageProps {
+  type: 'TEXT' | 'LINK';
+  setStateHandler: (data: string) => void;
+}
+
+export function useDataShareMessage({
+  type,
+  setStateHandler,
+}: ImgShareMessageProps | DataShareMessageProps) {
   const { isAndroid, isIos, isMobile } = useUserAgent();
 
   // NOTE : document.addEventListener('message', handleMessage)에 event type 중 MessageEvent 존재하지 않아 선대처합니다.
-  const handleMessage = (event: MessageEvent | unknown) => {
+  const handleMessage = async (event: MessageEvent | unknown) => {
     if (!isShareMessageEvent(event)) return;
 
     const data: ShareMessageEventData = JSON.parse(event.data);
     if (data.type !== SHARE_EXTENTION_MESSAGE_TYPE) return;
-    setStateHandler(data.data);
+    if (type === 'IMAGE') {
+      setStateHandler({ blob: await base64ToBlob(data.data, data.mimeType), base64: data.data });
+    } else {
+      setStateHandler(data.data);
+    }
   };
 
   useDidMount(() => {

@@ -30,7 +30,7 @@ export default function AddLink() {
   const [openGraph, setOpenGraph] = useState<OpenGraphResponse | null>(null);
   const [initialLink, setInitialLink] = useState('');
 
-  useDataShareMessage(setInitialLink);
+  useDataShareMessage({ type: 'LINK', setStateHandler: setInitialLink });
   const { fireToast } = useToast();
 
   const onMutationError = () => {

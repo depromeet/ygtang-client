@@ -11,6 +11,7 @@ import PortalWrapper from '~/components/common/PortalWrapper';
 import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
+import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
@@ -32,8 +33,9 @@ export default function AddImage() {
   const { isDesktop } = useUserAgent();
   const { imgInputUploader } = useImgUpload({});
   const { push } = useInternalRouter();
-  const { uploadedImg } = useUploadedImg();
+  const { uploadedImg, uploadImg } = useUploadedImg();
   const { fireToast } = useToast();
+  useDataShareMessage({ type: 'IMAGE', setStateHandler: uploadImg });
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
@@ -55,7 +57,9 @@ export default function AddImage() {
 
     const tagIds = tags.map(tag => tag.id);
     const imgData = new FormData();
-    imgData.append('file', uploadedImg.blob);
+    const fileExtension = uploadedImg.blob.type.replace('image/', '');
+
+    imgData.append('file', uploadedImg.blob, `image-${new Date().getTime()}.${fileExtension}`);
     imgData.append('memo', memoValue);
     imgData.append('type', 'IMAGE');
     imgData.append('tagIds', tagIds.toString());
@@ -84,6 +88,14 @@ export default function AddImage() {
                 alt="uploadedImg"
                 htmlFor={IMAGE_INPUT_ID}
               />
+            </div>
+            <div>
+              ????
+              <br />
+              {uploadedImg?.blob.size}
+              <br />
+              {uploadedImg?.blob.type}
+              <br />
             </div>
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />
