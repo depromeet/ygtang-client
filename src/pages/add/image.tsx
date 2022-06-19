@@ -89,14 +89,6 @@ export default function AddImage() {
                 htmlFor={IMAGE_INPUT_ID}
               />
             </div>
-            <div>
-              ????
-              <br />
-              {uploadedImg?.blob.size}
-              <br />
-              {uploadedImg?.blob.type}
-              <br />
-            </div>
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />
             </div>
