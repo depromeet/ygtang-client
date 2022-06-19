@@ -1,5 +1,5 @@
 export function viewHeight(value: number) {
-  return `calc(var(--var, 1vh) * ${value} - env(safe-area-inset-top) - env(safe-area-inset-bottom))`;
+  return `calc(var(--var, 1vh) * ${value})`;
 }
 
 export function fullViewHeight() {
