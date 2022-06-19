@@ -1,5 +1,4 @@
-
-//https://www.faqcode4u.com/faq/7580/can-i-set-file-name-in-blob-data-when-i-upload-data-to-server-using-html5
+// NOTE: 참고 https://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
 
 export function base64ToBlob(base64: string, contentType: string, chunkLength = 512) {
   const byteCharsArray = Array.from(atob(base64.substr(base64.indexOf(',') + 1)));
