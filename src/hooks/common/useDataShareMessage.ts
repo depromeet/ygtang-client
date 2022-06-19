@@ -43,6 +43,7 @@ export function useDataShareMessage(setStateHandler: (data: string) => void) {
 
   useDidMount(() => {
     if (!isAndroid() && !isIos() && !isMobile()) return;
+    if (!window.ReactNativeWebView) return;
     window.ReactNativeWebView.postMessage(
       JSON.stringify({ type: SHARE_WEB_MESSAGE_STATE, data: 'READY' })
     );
