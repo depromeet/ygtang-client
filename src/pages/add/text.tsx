@@ -9,6 +9,7 @@ import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
 import { Input } from '~/components/common/TextField/Input';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
+import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
@@ -24,6 +25,8 @@ export default function AddText() {
   const isEmptyText = !Boolean(inspiringText.debouncedValue);
   const { tags } = useAppliedTags(true);
   const { fireToast } = useToast();
+
+  useDataShareMessage(inspiringText.setValue);
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });

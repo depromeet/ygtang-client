@@ -10,6 +10,7 @@ import PortalWrapper from '~/components/common/PortalWrapper';
 import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
+import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useInput from '~/hooks/common/useInput';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
@@ -27,6 +28,9 @@ export default function AddLink() {
   } = useInput({ useDebounce: true });
 
   const [openGraph, setOpenGraph] = useState<OpenGraphResponse | null>(null);
+  const [initialLink, setInitialLink] = useState('');
+
+  useDataShareMessage(setInitialLink);
   const { fireToast } = useToast();
 
   const onMutationError = () => {
@@ -69,7 +73,11 @@ export default function AddLink() {
         <form onSubmit={submitLink} css={formCss}>
           <section css={addLinkTopCss}>
             <div css={contentWrapperCss}>
-              <LinkInput openGraph={openGraph} saveOpenGraph={saveOpenGraph} />
+              <LinkInput
+                initialLink={initialLink}
+                openGraph={openGraph}
+                saveOpenGraph={saveOpenGraph}
+              />
             </div>
             <div css={contentWrapperCss}>
               <TagContent tags={tags} />

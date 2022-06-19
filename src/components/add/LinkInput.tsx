@@ -5,6 +5,7 @@ import LinkThumbnail from '~/components/add/LinkThumbnail';
 import { PlusIcon } from '~/components/common/icons';
 import { Input } from '~/components/common/TextField/Input';
 import { useCheckLinkAvailable } from '~/hooks/api/inspiration/useCheckLinkAvailable';
+import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useToast } from '~/store/Toast';
@@ -14,11 +15,12 @@ import PortalWrapper from '../common/PortalWrapper';
 import { FixedSpinner } from '../common/Spinner';
 
 interface LinkInputProps {
+  initialLink?: string;
   openGraph: OpenGraphResponse | null;
   saveOpenGraph?: (og: OpenGraphResponse | null) => void;
 }
 
-export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) {
+export default function LinkInput({ initialLink, openGraph, saveOpenGraph }: LinkInputProps) {
   const { asPath } = useInternalRouter();
   const url = useInput({ useDebounce: true });
   const {
@@ -46,6 +48,10 @@ export default function LinkInput({ openGraph, saveOpenGraph }: LinkInputProps) 
       showErrorMessage();
     }
   };
+
+  useDidUpdate(() => {
+    url.setValue(initialLink || '');
+  }, [initialLink]);
 
   useEffect(() => {
     if (!og) return;
