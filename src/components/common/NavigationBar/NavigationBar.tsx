@@ -9,6 +9,7 @@ interface NavigationBarProps {
   backLinkScrollOption?: boolean;
   title?: string;
   rightElement?: ReactElement;
+  onClickBackButton?: VoidFunction;
 }
 
 export default function NavigationBar({
@@ -16,21 +17,24 @@ export default function NavigationBar({
   backLinkScrollOption = true,
   title,
   rightElement,
+  onClickBackButton,
 }: NavigationBarProps) {
   const router = useInternalRouter();
 
   // NOTE: 1. router option을 전체적으로 받을 수 있게? 2. onClickBackButton callback을 받을 수 있게?
-  const onClickBackButton = () => {
-    if (backLink) {
+  const handelOnClickBackButton = () => {
+    if (onClickBackButton) {
+      onClickBackButton();
+    } else if (backLink) {
       router.push(backLink, undefined, { scroll: backLinkScrollOption });
-      return;
+    } else {
+      router.back();
     }
-    router.back();
   };
 
   return (
     <nav css={navCss}>
-      <IconButton iconName="ChevronIcon" light onClick={onClickBackButton} />
+      <IconButton iconName="ChevronIcon" light onClick={handelOnClickBackButton} />
       {title && <h1 css={headingCss}>{title}</h1>}
       {rightElement && <>{rightElement}</>}
     </nav>

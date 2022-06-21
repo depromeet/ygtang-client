@@ -52,6 +52,9 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
         <div css={navigationBarWrapperCss}>
           <NavigationBar
             title="태그 등록"
+            onClickBackButton={() => {
+              onClose();
+            }}
             rightElement={
               <GhostButton
                 size="large"
