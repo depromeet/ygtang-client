@@ -43,18 +43,14 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
           <section css={addLinkTopCss}>
             <div css={contentWrapperCss}>
               <LinkInput
-                openGraph={
-                  openGraphResponse
-                    ? {
-                        description,
-                        siteName,
-                        title,
-                        url,
-                        code,
-                        image,
-                      }
-                    : null
-                }
+                openGraph={{
+                  description,
+                  siteName,
+                  title,
+                  url,
+                  code,
+                  image,
+                }}
               />
             </div>
             <div css={contentWrapperCss}>
