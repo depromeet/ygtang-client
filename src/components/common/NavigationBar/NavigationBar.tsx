@@ -4,24 +4,32 @@ import { css, Theme } from '@emotion/react';
 import { IconButton } from '~/components/common/Button';
 import useInternalRouter, { RouterPathType } from '~/hooks/common/useInternalRouter';
 
-interface NavigationBarProps {
-  backLink?: RouterPathType;
-  backLinkScrollOption?: boolean;
+interface NavigationBarBaseProps {
   title?: string;
   rightElement?: ReactElement;
-  onClickBackButton?: VoidFunction;
 }
 
-export default function NavigationBar({
-  backLink,
-  backLinkScrollOption = true,
-  title,
-  rightElement,
-  onClickBackButton,
-}: NavigationBarProps) {
-  const router = useInternalRouter();
+interface NavigationBarRouterProps extends NavigationBarBaseProps {
+  backLink?: RouterPathType;
+  backLinkScrollOption?: boolean;
+  onClickBackButton: never;
+}
+interface NavigationBarCallBackProps extends NavigationBarBaseProps {
+  backLink: never;
+  backLinkScrollOption: never;
+  onClickBackButton: VoidFunction;
+}
+type NavigationBarProps =
+  | NavigationBarBaseProps
+  | NavigationBarRouterProps
+  | NavigationBarCallBackProps;
 
-  // NOTE: 1. router option을 전체적으로 받을 수 있게? 2. onClickBackButton callback을 받을 수 있게?
+export default function NavigationBar(props: NavigationBarProps) {
+  const router = useInternalRouter();
+  const { title, rightElement } = props;
+  const { onClickBackButton } = props as NavigationBarCallBackProps;
+  const { backLink, backLinkScrollOption = true } = props as NavigationBarCallBackProps;
+
   const handelOnClickBackButton = () => {
     if (onClickBackButton) {
       onClickBackButton();
