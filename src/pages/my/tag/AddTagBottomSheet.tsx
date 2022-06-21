@@ -19,8 +19,7 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
   const { createTag } = useTagMutation();
   const { fireToast } = useToast();
 
-  const onFormReturn = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handelCreateTag = () => {
     if (!value) {
       return;
     }
@@ -31,6 +30,11 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
       },
     });
     setValue('');
+  };
+
+  const onFormReturn = (e: React.FormEvent) => {
+    e.preventDefault();
+    handelCreateTag();
   };
 
   useEffect(() => {
@@ -52,7 +56,7 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
               <GhostButton
                 size="large"
                 onClick={() => {
-                  onClose();
+                  handelCreateTag();
                 }}
               >
                 완료
