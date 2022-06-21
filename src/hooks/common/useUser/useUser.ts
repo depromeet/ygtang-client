@@ -5,11 +5,21 @@ import { localStorageUserTokenKeys } from '~/constants/localStorage';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { replaceAccessTokenForRequestInstance } from '~/libs/api/client';
 
+const SYNC_YGT_RT = 'SYNC_YGT_RT';
+
 export function useUser() {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const { push } = useInternalRouter();
   const queryClient = useQueryClient();
+
+  const postRefreshTokenReactNativeWebView = (refreshToken: string) => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: SYNC_YGT_RT, data: refreshToken })
+      );
+    }
+  };
 
   /**
    * 유저 로그인 시에 사용합니다.
@@ -30,6 +40,7 @@ export function useUser() {
       replaceAccessTokenForRequestInstance(accessToken);
       localStorage.setItem(localStorageUserTokenKeys.accessToken, accessToken);
       localStorage.setItem(localStorageUserTokenKeys.refreshToken, refreshToken);
+      postRefreshTokenReactNativeWebView(refreshToken);
       queryClient.clear();
     },
     [queryClient]
@@ -38,6 +49,7 @@ export function useUser() {
   const userLogout = () => {
     localStorage.removeItem(localStorageUserTokenKeys.accessToken);
     localStorage.removeItem(localStorageUserTokenKeys.refreshToken);
+    postRefreshTokenReactNativeWebView('');
     queryClient.clear();
     push('/login');
   };
