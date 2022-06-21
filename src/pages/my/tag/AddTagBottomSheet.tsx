@@ -37,6 +37,14 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
     handelCreateTag();
   };
 
+  const onComplete = () => {
+    if (!value) {
+      onClose();
+    } else {
+      handelCreateTag();
+    }
+  };
+
   useEffect(() => {
     setValue('');
   }, [isShowing, setValue]);
@@ -59,7 +67,7 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
               <GhostButton
                 size="large"
                 onClick={() => {
-                  handelCreateTag();
+                  onComplete();
                 }}
               >
                 완료
