@@ -4,33 +4,45 @@ import { css, Theme } from '@emotion/react';
 import { IconButton } from '~/components/common/Button';
 import useInternalRouter, { RouterPathType } from '~/hooks/common/useInternalRouter';
 
-interface NavigationBarProps {
-  backLink?: RouterPathType;
-  backLinkScrollOption?: boolean;
+interface NavigationBarBaseProps {
   title?: string;
   rightElement?: ReactElement;
 }
 
-export default function NavigationBar({
-  backLink,
-  backLinkScrollOption = true,
-  title,
-  rightElement,
-}: NavigationBarProps) {
-  const router = useInternalRouter();
+interface NavigationBarRouterProps extends NavigationBarBaseProps {
+  backLink?: RouterPathType;
+  backLinkScrollOption?: boolean;
+  onClickBackButton: never;
+}
+interface NavigationBarCallBackProps extends NavigationBarBaseProps {
+  backLink: never;
+  backLinkScrollOption: never;
+  onClickBackButton: VoidFunction;
+}
+type NavigationBarProps =
+  | NavigationBarBaseProps
+  | NavigationBarRouterProps
+  | NavigationBarCallBackProps;
 
-  // NOTE: 1. router option을 전체적으로 받을 수 있게? 2. onClickBackButton callback을 받을 수 있게?
-  const onClickBackButton = () => {
-    if (backLink) {
+export default function NavigationBar(props: NavigationBarProps) {
+  const router = useInternalRouter();
+  const { title, rightElement } = props;
+  const { onClickBackButton } = props as NavigationBarCallBackProps;
+  const { backLink, backLinkScrollOption = true } = props as NavigationBarCallBackProps;
+
+  const handelOnClickBackButton = () => {
+    if (onClickBackButton) {
+      onClickBackButton();
+    } else if (backLink) {
       router.push(backLink, undefined, { scroll: backLinkScrollOption });
-      return;
+    } else {
+      router.back();
     }
-    router.back();
   };
 
   return (
     <nav css={navCss}>
-      <IconButton iconName="ChevronIcon" light onClick={onClickBackButton} />
+      <IconButton iconName="ChevronIcon" light onClick={handelOnClickBackButton} />
       {title && <h1 css={headingCss}>{title}</h1>}
       {rightElement && <>{rightElement}</>}
     </nav>

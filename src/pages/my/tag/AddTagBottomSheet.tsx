@@ -19,8 +19,7 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
   const { createTag } = useTagMutation();
   const { fireToast } = useToast();
 
-  const onFormReturn = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handelCreateTag = () => {
     if (!value) {
       return;
     }
@@ -31,6 +30,19 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
       },
     });
     setValue('');
+  };
+
+  const onFormReturn = (e: React.FormEvent) => {
+    e.preventDefault();
+    handelCreateTag();
+  };
+
+  const onComplete = () => {
+    if (!value) {
+      onClose();
+    } else {
+      handelCreateTag();
+    }
   };
 
   useEffect(() => {
@@ -48,11 +60,14 @@ export default function AddTagBottomSheet({ isShowing, onClose }: AddTagBottomSh
         <div css={navigationBarWrapperCss}>
           <NavigationBar
             title="태그 등록"
+            onClickBackButton={() => {
+              onClose();
+            }}
             rightElement={
               <GhostButton
                 size="large"
                 onClick={() => {
-                  onClose();
+                  onComplete();
                 }}
               >
                 완료
