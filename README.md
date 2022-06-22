@@ -8,31 +8,48 @@
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/context:javascript) [![CI](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml) [![ygtang](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/tmhk21/main&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/tmhk21/runs) [![codecov](https://codecov.io/gh/depromeet/ygtang-client/branch/main/graph/badge.svg?token=OM28A5TKRR)](https://codecov.io/gh/depromeet/ygtang-client)
 
-여기저기 흩어져 넘치는 영감.
+여기저기 흩어져있는 넘치는 영감.
 
 세상의 모든 것은 영감이 될 수 있고, 영감탱에서 기억할 수 있어요.
 
 <br />
 <br />
 
-![스크린샷 2022-05-25 오전 2 02 01](https://user-images.githubusercontent.com/26461307/170092033-f78d2362-8ab1-429a-ae15-246959cc1086.png)
+![1](https://user-images.githubusercontent.com/26461307/175064698-e082af7a-31cd-4ce1-959a-d751be47fc8c.png)
 
-글, 이미지, 링크의 포맷으로 원하는 영감을 아카이빙 해요.
+웹서핑 중 발견한 영감! 빠르게 아카이빙하고 싶었던 적이 있지 않나요?
+
+휴대폰 내 ‘공유' 기능을 통해 영감탱으로 빠르게 영감을 아카이빙 하세요.
+
+물론, 앱에서 직접 추가할 수도 있답니다.
 
 <br />
 <br />
 
-![스크린샷 2022-05-25 오전 2 02 28](https://user-images.githubusercontent.com/26461307/170092055-b80edc56-ce85-49db-8deb-c1df71611292.png)
+![2](https://user-images.githubusercontent.com/26461307/175064712-bc8f1995-25a2-4158-ac3a-af3e1b9b9d92.png)
 
-태그와 필터 기능을 통해 원하는 영감을 필요할 때마다 쉽게 찾아봐요.
+글, 이미지, 링크 형태의 영감을 모아둘 수 있어요.
+
+왜 좋은 영감이라 생각했는지 간단한 메모를 통해 영감을 더 풍부하게 만들어보세요!
+
+<br />
+<br />
+
+![3](https://user-images.githubusercontent.com/26461307/175064722-bb807ce7-ea4c-487a-adef-0eb70c7fbc1d.png)
+
+영감 내용에 맞는 태그를 등록하거나 기존 태그를 달아놓으면, 필터 기능을 통해 쉽게 찾아볼 수 있어요.
+
+![4](https://user-images.githubusercontent.com/26461307/175064728-a1ec9d6a-9fa0-4f32-b03a-ab53ff05c1e4.png)
+
+자, 이제 매일매일 TANG! 해보아요 🥳
 
 <br />
 <br />
 
 ## Download
 
-| Apple App Store | Google Play Store |
-| --------------- | ----------------- |
+| Apple App Store                                                                                                                                                                                                                                                                                                                                           | Google Play Store                                                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <a href="https://apps.apple.com/us/app/%EC%98%81%EA%B0%90%ED%83%B1/id1626598770"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | <a href='https://play.google.com/store/apps/details?id=kr.ygtang'><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
 
 <br />
