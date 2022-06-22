@@ -39,6 +39,9 @@
 
 영감 내용에 맞는 태그를 등록하거나 기존 태그를 달아놓으면, 필터 기능을 통해 쉽게 찾아볼 수 있어요.
 
+<br />
+<br />
+
 ![4](https://user-images.githubusercontent.com/26461307/175064728-a1ec9d6a-9fa0-4f32-b03a-ab53ff05c1e4.png)
 
 자, 이제 매일매일 TANG! 해보아요 🥳
