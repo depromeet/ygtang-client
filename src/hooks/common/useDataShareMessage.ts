@@ -29,7 +29,9 @@ interface ShareMessageEventData {
 }
 
 function isShareMessageEvent(arg: any): arg is ShareMessageEvent {
-  return arg.data !== undefined;
+  if (arg.data === undefined || typeof arg.data !== 'string') return false;
+  const messgaeType = JSON.parse(arg.data)?.type;
+  return messgaeType ? messgaeType === SHARE_EXTENTION_MESSAGE_TYPE : false;
 }
 
 interface ImgShareMessageProps {
@@ -51,9 +53,8 @@ export function useDataShareMessage({
   // NOTE : document.addEventListener('message', handleMessage)에 event type 중 MessageEvent 존재하지 않아 선대처합니다.
   const handleMessage = async (event: MessageEvent | unknown) => {
     if (!isShareMessageEvent(event)) return;
-
     const data: ShareMessageEventData = JSON.parse(event.data);
-    if (data.type !== SHARE_EXTENTION_MESSAGE_TYPE) return;
+
     if (type === 'IMAGE') {
       setStateHandler({ blob: await base64ToBlob(data.data, data.mimeType), base64: data.data });
     } else {
