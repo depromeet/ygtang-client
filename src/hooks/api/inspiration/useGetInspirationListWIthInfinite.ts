@@ -13,6 +13,8 @@ interface InspirationResponseInterface extends PaginationInterface {
   content: InspirationInterface[];
 }
 
+const INFINITE_SCROLL_SIZE = 12;
+
 // TODO: 추가, 삭제, 수정 등 Mutation과 맞추기
 export const INSPIRATION_LIST_QUERY_KEY = 'inspirationList';
 
@@ -31,11 +33,11 @@ export default function useGetInspirationListWithInfinite({
   const fetchInsipirations = (page: number = 0) => {
     if (filteredTags.length > 0)
       return post<InspirationListResponseInterface>(
-        `/v1/inspiration/tag/?size=20&page=${page}&sort=createdDateTime,desc`,
+        `/v1/inspiration/tag/?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc`,
         filteredTagIds
       );
     return get<InspirationListResponseInterface>(
-      `/v1/inspiration/list?size=20&page=${page}&sort=createdDateTime,desc`
+      `/v1/inspiration/list?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc`
     );
   };
 
