@@ -8,6 +8,11 @@ import { Input, InputProps } from './Input';
 
 export interface TextFieldProps extends InputProps {
   /**
+   * text field value 입니다.
+   */
+  value?: string;
+
+  /**
    * label 입니다.
    *
    * `string`을 제공하는 경우 디자인 시스템의 라벨 스타일로 표시됩니다.
@@ -42,6 +47,7 @@ export interface TextFieldProps extends InputProps {
 }
 
 export function TextField({
+  value,
   label,
   isSuccess,
   feedback,
@@ -61,6 +67,7 @@ export function TextField({
           label
         ))}
       <Input
+        value={value}
         autoFocus={autoFocus}
         id={customId ?? 'input-' + id}
         {...props}

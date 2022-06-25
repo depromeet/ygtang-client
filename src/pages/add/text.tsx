@@ -22,7 +22,7 @@ const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagForm
 export default function AddText() {
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
-  const isEmptyText = !Boolean(inspiringText.debouncedValue);
+  const isEmptyText = !Boolean(inspiringText.debouncedValue.trim());
   const { tags } = useAppliedTags(true);
   const { fireToast } = useToast();
 
