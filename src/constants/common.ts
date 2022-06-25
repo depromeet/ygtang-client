@@ -10,6 +10,8 @@ export const PUBLIC_ROUTES = [
   '/password/verified',
 ];
 
+export const ADD_ROUTES = ['/add/image', '/add/text', '/add/link'];
+
 export const IS_PRODUCTION = process.env.APP_ENV === 'production';
 
 export const COOKIE_REFRESH = 'ygt_refresh';

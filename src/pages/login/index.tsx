@@ -7,6 +7,7 @@ import useMemberLoginMutation from '~/hooks/api/member/useMemberLoginMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
+import { useLoginRedirect } from '~/hooks/common/useLoginRedirect';
 import { useUser } from '~/hooks/common/useUser';
 import { useToast } from '~/store/Toast';
 import { recordEvent } from '~/utils/analytics';
@@ -21,6 +22,7 @@ export default function Login() {
   const [passwordError, setPasswordError] = useState('');
   const { userLogin } = useUser();
   const { push } = useInternalRouter();
+  const { getRedirect, goRedirect } = useLoginRedirect();
 
   const {
     mutate: loginMutate,
@@ -60,6 +62,7 @@ export default function Login() {
   }, [password.debouncedValue]);
 
   useDidUpdate(() => {
+    //
     if (loginMutationData && loginMutationData.data) {
       userLogin({
         accessToken: loginMutationData.data.accessToken,
@@ -67,7 +70,12 @@ export default function Login() {
       });
       setIsPending(false);
       recordEvent({ action: 'Login', value: '로그인 화면에서 로그인' });
-      push('/');
+
+      if (getRedirect()) {
+        goRedirect();
+      } else {
+        push('/');
+      }
     }
   }, [loginMutationData]);
 

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { PUBLIC_ROUTES } from '~/constants/common';
+import { ADD_ROUTES, PUBLIC_ROUTES } from '~/constants/common';
 import { localStorageUserTokenKeys } from '~/constants/localStorage';
 
 import useInternalRouter from './useInternalRouter';
+import { useLoginRedirect } from './useLoginRedirect';
 
 interface UseRouterGuardProps {
   isLoaded: boolean;
@@ -12,6 +13,7 @@ interface UseRouterGuardProps {
 export default function useRouterGuard({ isLoaded }: UseRouterGuardProps) {
   const [isRouterGuardPassed, setIsRouterGuardPassed] = useState<boolean>(false);
   const router = useInternalRouter();
+  const { setRedirect } = useLoginRedirect();
 
   useEffect(() => {
     const authCheck = (url: string) => {
@@ -26,6 +28,9 @@ export default function useRouterGuard({ isLoaded }: UseRouterGuardProps) {
 
       const path = url.split('?')[0];
       if (!PUBLIC_ROUTES.includes(path)) {
+        if (ADD_ROUTES.includes(path)) {
+          setRedirect(path);
+        }
         router.push('/onboard');
       } else {
         // 로그인을 하지 않았으며, 퍼블릭 route에 방문시 패스 인증
@@ -39,7 +44,7 @@ export default function useRouterGuard({ isLoaded }: UseRouterGuardProps) {
     return () => {
       router.events.off('routeChangeStart', authCheck);
     };
-  }, [isLoaded, router]);
+  }, [isLoaded, router, setRedirect]);
 
   return { isRouterGuardPassed };
 }
