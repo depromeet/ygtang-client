@@ -13,6 +13,11 @@ export interface InputProps extends InputAndTextarea {
   as?: 'input' | 'textarea';
 
   /**
+   * input value 입니다.
+   */
+  value?: string;
+
+  /**
    * input 앞에 붙을 요소입니다. 보통 아이콘 삽입을 위해 사용합니다.
    *
    * preAppend가 존재하면 input에 `padding-left: 40px` 이 주어집니다.
@@ -51,6 +56,7 @@ export interface InputProps extends InputAndTextarea {
 
 export function Input({
   as = 'input',
+  value,
   preAppend,
   append,
   fixedHeight,
@@ -82,7 +88,7 @@ export function Input({
             isPreAppend: typeof preAppend !== 'undefined',
             isAppend: typeof append !== 'undefined',
             padding,
-            inputValue: inputRef.current?.value ?? '',
+            inputValue: value ?? '',
           }),
           ref: inputRef,
           onBlur: onBlur,
