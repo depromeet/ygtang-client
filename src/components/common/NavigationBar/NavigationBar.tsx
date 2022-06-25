@@ -42,7 +42,7 @@ export default function NavigationBar(props: NavigationBarProps) {
 
   return (
     <nav css={navCss}>
-      <IconButton iconName="ChevronIcon" light onClick={handelOnClickBackButton} />
+      <IconButton size={28} iconName="ChevronIcon" light onClick={handelOnClickBackButton} />
       {title && <h1 css={headingCss}>{title}</h1>}
       {rightElement && <>{rightElement}</>}
     </nav>
