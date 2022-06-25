@@ -55,13 +55,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, [windowSize.height]);
 
-  return (
-    <div css={layoutCss}>
-      <div className="safeAreaTop" />
-      {children}
-      <div className="safeAreaBottom" />
-    </div>
-  );
+  return <div css={layoutCss}>{children}</div>;
 }
 
 const layoutCss = (theme: Theme) => css`

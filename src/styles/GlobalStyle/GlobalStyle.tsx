@@ -43,14 +43,6 @@ const globalCss = (theme: Theme) => css`
       ::-webkit-scrollbar {
         display: none !important;
       }
-      .safeAreaTop {
-        height: constant(safe-area-inset-top);
-        height: env(safe-area-inset-top);
-      }
-      .safeAreaBottom {
-        height: constant(safe-area-inset-bottom);
-        height: env(safe-area-inset-bottom);
-      }
     }
   }
 `;
