@@ -43,7 +43,7 @@ export default function AppendButton() {
 const buttonCss = (theme: Theme) => css`
   position: fixed;
   right: 16px;
-  bottom: 24px;
+  bottom: 70px;
 
   display: flex;
   justify-content: center;
