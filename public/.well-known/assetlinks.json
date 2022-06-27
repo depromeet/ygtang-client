@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "ygtang_app",
+      "package_name": "kr.ygtang",
+      "sha256_cert_fingerprints": [
+        "8C:67:B5:90:58:DA:01:C5:30:70:8F:F2:C1:0E:37:F9:F6:75:89:A1:72:B5:FA:25:90:8B:6C:ED:4B:E9:72:57"
+      ]
+    }
+  }
+]

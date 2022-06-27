@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "7FLZ9T5LU3.org.reactjs.native.example.ygt",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
+  }
+}
