@@ -33,4 +33,5 @@ export const POLICY_URL = {
 
 export const WEBVIEW_MESSAGE_TYPE = {
   CreatedInspiration: 'CreatedInspiration',
+  ClosedInspiration: 'ClosedInspiration',
 };

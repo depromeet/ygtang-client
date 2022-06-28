@@ -10,12 +10,14 @@ import NavigationBar from '~/components/common/NavigationBar';
 import PortalWrapper from '~/components/common/PortalWrapper';
 import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
+import { WEBVIEW_MESSAGE_TYPE } from '~/constants/common';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useImgUpload from '~/hooks/common/useImgUpload';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useUserAgent } from '~/hooks/common/useUserAgent';
+import { useWebViewMessage } from '~/hooks/common/useWebViewMessage';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
 import { useUploadedImg } from '~/store/UploadedImage';
@@ -36,9 +38,11 @@ export default function AddImage() {
   const { uploadedImg, uploadImg } = useUploadedImg();
   const { fireToast } = useToast();
   useDataShareMessage({ type: 'IMAGE', setStateHandler: uploadImg });
+  const { postMessage } = useWebViewMessage();
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
+    postMessage(WEBVIEW_MESSAGE_TYPE.ClosedInspiration);
   };
 
   const { createInspiration, isCreateInspirationLoading } = useInspirationMutation({
@@ -48,6 +52,12 @@ export default function AddImage() {
   useEffect(() => {
     if (!uploadedImg && isDesktop()) push('/');
   }, [uploadedImg, push, isDesktop]);
+
+  useEffect(() => {
+    return () => {
+      postMessage(WEBVIEW_MESSAGE_TYPE.ClosedInspiration);
+    };
+  }, [postMessage]);
 
   const { tags } = useAppliedTags(true);
 
