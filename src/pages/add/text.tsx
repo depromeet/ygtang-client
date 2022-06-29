@@ -30,7 +30,6 @@ export default function AddText() {
   const { fireToast } = useToast();
 
   useDataShareMessage({ type: 'TEXT', setStateHandler: inspiringText.setValue });
-  const { postMessage } = useWebViewMessage();
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
@@ -58,12 +57,6 @@ export default function AddText() {
     });
     createInspiration(textData);
   };
-
-  useEffect(() => {
-    return () => {
-      postMessage(WEBVIEW_MESSAGE_TYPE.ClosedInspiration);
-    };
-  }, [postMessage]);
 
   return (
     <>
