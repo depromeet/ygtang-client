@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
@@ -9,11 +9,9 @@ import NavigationBar from '~/components/common/NavigationBar';
 import PortalWrapper from '~/components/common/PortalWrapper';
 import { FixedSpinner } from '~/components/common/Spinner';
 import { MemoText } from '~/components/common/TextField';
-import { WEBVIEW_MESSAGE_TYPE } from '~/constants/common';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useInput from '~/hooks/common/useInput';
-import { useWebViewMessage } from '~/hooks/common/useWebViewMessage';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
 import { recordEvent } from '~/utils/analytics';
