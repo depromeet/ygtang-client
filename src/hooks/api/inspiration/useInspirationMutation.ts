@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from 'react-query';
 
+import { WEBVIEW_MESSAGE_TYPE } from '~/constants/common';
 import { INSPIRATION_BY_ID_QUERY_KEY } from '~/hooks/api/inspiration/useInspirationById';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
+import { useWebViewMessage } from '~/hooks/common/useWebViewMessage';
 import { del, post } from '~/libs/api/client';
 import { useToast } from '~/store/Toast';
 
@@ -22,6 +24,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
   const queryClient = useQueryClient();
   const { push } = useInternalRouter();
   const { fireToast } = useToast();
+  const { postMessage } = useWebViewMessage();
 
   const refreshInspirationList = () => {
     queryClient.invalidateQueries(INSPIRATION_LIST_QUERY_KEY);
@@ -49,6 +52,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
       onSuccess: () => {
         fireToast({ content: '영감을 등록했습니다.' });
         resetInspirationList();
+        postMessage(WEBVIEW_MESSAGE_TYPE.CreatedInspiration);
         push('/');
       },
       onError: (error, variable, context) => {
