@@ -34,7 +34,6 @@ export default function AddText() {
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
-    postMessage(WEBVIEW_MESSAGE_TYPE.ClosedInspiration);
   };
 
   const { createInspiration, isCreateInspirationLoading } = useInspirationMutation({
