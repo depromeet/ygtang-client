@@ -1,12 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { css } from '@emotion/react';
 
 import { SearchBar } from '~/components/common/TextField';
-import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
-import useTagMutation from '~/hooks/api/tag/useTagMutation';
-import useTagRefresh from '~/hooks/api/tag/useTagRefresh';
 import useInput from '~/hooks/common/useInput';
-import { recordEvent } from '~/utils/analytics';
 
 import AppliedTags from './AppliedTags';
 import RegisteredTagList from './RegisteredTagList';
@@ -17,6 +13,7 @@ export interface TagFormProps {
   onSave: (tag: TagType) => void;
   onRemove: (id: number) => void;
   onSearch?: (keyword: string) => void;
+  onSubmit?: VoidFunction;
   readOnly?: boolean;
 }
 
@@ -26,46 +23,19 @@ export default function TagForm({
   registeredTags = [],
   onSave,
   onRemove,
-  onSearch,
   readOnly = false,
+  onSearch,
+  onSubmit,
 }: TagFormProps) {
   const { value, setValue, onChange } = useInput({ useDebounce: false });
-  const [keyword, setKeyword] = useState('');
-  const lastKeyword = useRef<string | null>(null);
-  const { tags, isLoading } = useGetTagListWithInfinite({ keyword, isExactlySame: true });
-  const { createTag } = useTagMutation();
-  const { refresh: tagListRefresh } = useTagRefresh();
-
-  const saveCreatedTag = useCallback(
-    (keyword: string) => {
-      createTag(keyword, {
-        onSuccess: data => {
-          recordEvent({ action: '태그 생성', value: keyword, label: '영감 편집 화면' });
-          onSave(data);
-          tagListRefresh();
-        },
-      });
-    },
-    [createTag, onSave, tagListRefresh]
-  );
 
   useEffect(() => {
-    if (keyword === lastKeyword.current) return;
-    if (!isLoading) onSearch && onSearch(keyword);
-    if (!isLoading && keyword) {
-      if (!tags.length && !readOnly) {
-        saveCreatedTag(keyword);
-      } else if (tags.length) {
-        onSave(tags[0]);
-      }
-      lastKeyword.current = keyword;
-      setValue('');
-    }
-  }, [isLoading, keyword, onSave, onSearch, saveCreatedTag, setValue, tags, readOnly]);
+    onSearch && onSearch(value);
+  }, [onSearch, readOnly, value]);
 
   const onFormReturn = async (e: React.FormEvent) => {
     e.preventDefault();
-    setKeyword(value);
+    onSubmit && onSubmit();
   };
 
   return (
@@ -76,7 +46,7 @@ export default function TagForm({
           onChange={onChange}
           onRemoveClick={() => {
             setValue('');
-            setKeyword('');
+            onSearch && onSearch('');
           }}
           placeholder={readOnly ? '태그를 검색해보세요.' : '태그를 등록해보세요.'}
         />
