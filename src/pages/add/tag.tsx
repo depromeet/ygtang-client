@@ -85,8 +85,8 @@ export default function TagPage() {
             registeredTags={tags}
             onSave={addTag}
             onRemove={removeTag}
-            onSearch={keyoword => {
-              setKeyword(keyoword);
+            onSearch={keyword => {
+              setKeyword(keyword);
             }}
             onSubmit={onSubmit}
           />

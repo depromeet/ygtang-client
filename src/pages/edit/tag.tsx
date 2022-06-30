@@ -118,8 +118,8 @@ export default function EditTag() {
             registeredTags={tags}
             onSave={saveTag}
             onRemove={removeTag}
-            onSearch={keyoword => {
-              setKeyword(keyoword);
+            onSearch={keyword => {
+              setKeyword(keyword);
             }}
             onSubmit={onSubmit}
           />
