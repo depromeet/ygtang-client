@@ -102,7 +102,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
     (addTag: { id: number; tagId: number }) => post('/v1/inspiration/tag', addTag),
     {
       onSuccess: (_res, req) => {
-        fireToast({ content: '태그를 추가했습니다!' });
+        fireToast({ content: '태그를 추가했습니다.' });
         refreshInspirationById(req.id);
         refreshInspirationList();
       },
@@ -116,7 +116,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
     ({ id, tagId }: { id: number; tagId: number }) => del(`/v1/inspiration/untag/${id}/${tagId}`),
     {
       onSuccess: (_res, req) => {
-        fireToast({ content: '태그를 삭제했습니다!' });
+        fireToast({ content: '태그를 삭제했습니다.' });
         refreshInspirationById(req.id);
         refreshInspirationList();
       },
