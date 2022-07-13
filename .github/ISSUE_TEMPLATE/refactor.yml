@@ -1,0 +1,26 @@
+name: refactor
+description: 리팩터링 포인트 및 방법
+labels: ['refactor']
+body:
+  - type: input
+    id: description
+    attributes:
+      label: 설명
+      placeholder: 이 부분을 이렇게 저렇게 바꿔보는건 어떨까요 
+    validations:
+      required: false
+  - type: textarea
+    id: as-is
+    attributes:
+      label: As is
+      description: 현재 어떻게 구현되어 있는지 알려주세요
+    validations:
+      required: true
+  - type: textarea
+    id: to-be
+    attributes:
+      label: To be
+      description: 어떻게 리팩터링될 지 알려주세요
+    validations:
+      required: true
+ 
