@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { motion } from 'framer-motion';
 
+import { GhostButton } from '~/components/common/Button';
 import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
 import { FixedSpinner } from '~/components/common/Spinner';
@@ -10,6 +11,8 @@ import { defaultFadeInVariants } from '~/constants/motions';
 import { useInspirationById } from '~/hooks/api/inspiration/useInspirationById';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite';
+import useTagMutation from '~/hooks/api/tag/useTagMutation';
+import useTagRefresh from '~/hooks/api/tag/useTagRefresh';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import useQueryParam from '~/hooks/common/useRouterQuery';
@@ -59,9 +62,50 @@ export default function EditTag() {
     deleteInspirationTag({ id: Number(inspirationId), tagId });
   };
 
+  const { createTag } = useTagMutation();
+  const { refresh: tagListRefresh } = useTagRefresh();
+
+  const lastKeyword = useRef<string | null>(null);
+  const [keyword, setKeyword] = useState('');
+
+  const { tags: searchedTags, isLoading: isSeachLoading } = useGetTagListWithInfinite({
+    keyword,
+    isExactlySame: true,
+  });
+
+  const saveCreatedTag = (keyword: string) => {
+    createTag(keyword, {
+      onSuccess: data => {
+        recordEvent({ action: '태그 생성', value: keyword, label: '영감 편집 화면' });
+        saveTag(data);
+        tagListRefresh();
+      },
+    });
+  };
+
+  const onSubmit = () => {
+    if (keyword === lastKeyword.current || isSeachLoading) return;
+    if (!keyword) return;
+
+    if (!searchedTags.length) {
+      saveCreatedTag(keyword);
+    } else {
+      saveTag(searchedTags[0]);
+    }
+
+    lastKeyword.current = keyword;
+  };
+
   return (
     <article css={editTagCss}>
-      <NavigationBar title="영감 편집" />
+      <NavigationBar
+        title="영감 편집"
+        rightElement={
+          <GhostButton size="large" onClick={onSubmit}>
+            추가
+          </GhostButton>
+        }
+      />
       <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
         <motion.div
           variants={defaultFadeInVariants}
@@ -74,6 +118,10 @@ export default function EditTag() {
             registeredTags={tags}
             onSave={saveTag}
             onRemove={removeTag}
+            onSearch={keyword => {
+              setKeyword(keyword);
+            }}
+            onSubmit={onSubmit}
           />
           {hasNextPage && !isLoading && <div ref={setTarget}></div>}
         </motion.div>
