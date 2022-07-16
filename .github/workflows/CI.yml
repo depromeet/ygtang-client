@@ -113,7 +113,7 @@ jobs:
           CYPRESS_ENV_JSON: ${{ secrets.CYPRESS_ENV_JSON }}
 
       - name: E2E test - chrome
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           install: false
           start: yarn httpsdev
