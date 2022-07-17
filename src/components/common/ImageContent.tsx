@@ -1,12 +1,16 @@
+import { useCallback, useRef } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom';
 
 import { defaultFadeInVariants } from '~/constants/motions';
 import useToggle from '~/hooks/common/useToggle';
+import { fullViewHeight } from '~/styles/utils';
 
 import { CancelIcon } from './icons';
 import { dimBackdropCss } from './styles';
 
+const IMG_LAYOUT_ID = 'content_image';
 interface ImageContentProps {
   alt: string;
   src: string | null;
@@ -15,8 +19,6 @@ interface ImageContentProps {
   htmlFor?: string;
   onClickXBtn?: VoidFunction;
 }
-
-const IMG_LAYOUT_ID = 'content_image';
 
 export default function ImageContent({
   src,
@@ -49,24 +51,7 @@ export default function ImageContent({
               onClick={toggleIsOpen}
             />
 
-            {isOpen && (
-              <motion.div
-                onClick={toggleIsOpen}
-                css={dimBackdropLayoutCss}
-                variants={defaultFadeInVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-              >
-                <motion.img
-                  layoutId={IMG_LAYOUT_ID}
-                  src={src}
-                  css={opendImgCss}
-                  alt={alt}
-                  onClick={toggleIsOpen}
-                />
-              </motion.div>
-            )}
+            <OpenedImageContent isOpen={isOpen} toggleIsOpen={toggleIsOpen} src={src} alt={alt} />
           </>
         ) : (
           <div onClick={onClickXBtn} css={emptyImageCss({ theme })}></div>
@@ -97,21 +82,6 @@ const imgCss = css`
   cursor: zoom-in;
 `;
 
-const dimBackdropLayoutCss = (theme: Theme) => css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ${dimBackdropCss(theme)}
-`;
-
-const opendImgCss = css`
-  width: auto;
-  height: auto;
-
-  max-width: 100%;
-`;
-
 const closeIconCss = css`
   position: absolute;
   top: 16px;
@@ -128,4 +98,67 @@ const emptyImageCss = ({ theme }: { theme: Theme }) => css`
   cursor: pointer;
   background-color: ${theme.color.gray01};
   border-radius: 4px;
+`;
+
+interface OpenedImageContentProps {
+  isOpen: boolean;
+  toggleIsOpen: VoidFunction;
+  src: NonNullable<ImageContentProps['src']>;
+  alt: ImageContentProps['alt'];
+}
+
+function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageContentProps) {
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const onUpdate = useCallback(({ x, y, scale }: { x: number; y: number; scale: number }) => {
+    const { current: img } = imgRef;
+
+    if (img) {
+      const value = make3dTransformValue({ x, y, scale });
+
+      img.style.setProperty('transform', value);
+    }
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          onClick={toggleIsOpen}
+          css={dimBackdropLayoutCss}
+          variants={defaultFadeInVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+        >
+          <QuickPinchZoom onUpdate={onUpdate}>
+            <motion.img
+              ref={imgRef}
+              layoutId={IMG_LAYOUT_ID}
+              src={src}
+              css={opendImgCss}
+              alt={alt}
+              onClick={toggleIsOpen}
+            />
+          </QuickPinchZoom>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+const dimBackdropLayoutCss = (theme: Theme) => css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${dimBackdropCss(theme)}
+`;
+
+const opendImgCss = css`
+  width: auto;
+  height: auto;
+
+  max-width: 100%;
+  max-height: ${fullViewHeight()};
 `;
