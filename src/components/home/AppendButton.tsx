@@ -6,6 +6,7 @@ import PortalWrapper from '~/components/common/PortalWrapper';
 import { defaultEasing, defaultFadeInVariants } from '~/constants/motions';
 import useToggle from '~/hooks/common/useToggle';
 
+import { dimBackdropCss } from '../common/styles';
 import AppendTooltip from './AppendTooltip';
 
 export default function AppendButton() {
@@ -26,7 +27,7 @@ export default function AppendButton() {
 
       <PortalWrapper isShowing={isShowing}>
         <motion.div
-          css={backdropCss}
+          css={dimBackdropCss}
           onClick={toggleIsShowing}
           variants={defaultFadeInVariants}
           initial="initial"
@@ -54,16 +55,6 @@ const buttonCss = (theme: Theme) => css`
   border-radius: 50%;
   color: ${theme.color.gray06};
   z-index: 999;
-`;
-
-const backdropCss = (theme: Theme) => css`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100%;
-  background-color: ${theme.color.dim03};
-  z-index: 998;
 `;
 
 const buttonRotateVariants: Variants = {
