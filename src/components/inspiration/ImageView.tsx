@@ -38,7 +38,7 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
         <form css={formCss}>
           <section css={addImageTopCss}>
             <div css={contentWrapperCss}>
-              {<ImageContent src={content ?? null} alt="uploadedImg" />}
+              <ImageContent src={content ?? null} alt="uploadedImg" />
             </div>
             <div css={contentWrapperCss}>
               <TagContent tags={tagResponses} inspirationId={inspiration.id} />
