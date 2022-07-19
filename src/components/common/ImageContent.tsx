@@ -114,9 +114,14 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
     const { current: img } = imgRef;
 
     if (img) {
+      console.log(x, y, scale);
       const value = make3dTransformValue({ x, y, scale });
 
+      // TODO: overflow 속성 설정을 오픈소스 스펙에 추가 혹은 기여할 수 있을듯
+      img.parentElement?.style.setProperty('overflow', 'visible');
+
       img.style.setProperty('transform', value);
+      img.style.setProperty('transform-origin', '');
     }
   }, []);
 
@@ -151,6 +156,7 @@ const dimBackdropLayoutCss = (theme: Theme) => css`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: zoom-out;
 
   ${dimBackdropCss(theme)}
 `;
@@ -158,7 +164,7 @@ const dimBackdropLayoutCss = (theme: Theme) => css`
 const opendImgCss = css`
   width: auto;
   height: auto;
-
+  cursor: default;
   max-width: 100%;
   max-height: ${fullViewHeight()};
 `;
