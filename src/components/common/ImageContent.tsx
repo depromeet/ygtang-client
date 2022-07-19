@@ -117,10 +117,11 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
       console.log(x, y, scale);
       const value = make3dTransformValue({ x, y, scale });
 
-      // TODO: overflow 속성 설정을 오픈소스 스펙에 추가 혹은 기여할 수 있을듯
+      // TODO: overflow 속성 설정을 오픈소스 스펙에 추가 혹은 기여할 수 있을듯 > 현재 대기중
       img.parentElement?.style.setProperty('overflow', 'visible');
 
       img.style.setProperty('transform', value);
+      // NOTE: framer-motion override 방지
       img.style.setProperty('transform-origin', '');
     }
   }, []);
