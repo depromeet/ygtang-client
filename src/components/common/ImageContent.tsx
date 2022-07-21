@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom';
@@ -126,10 +126,10 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
     }
   }, []);
 
-  const onClickDownloadButton = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    imageDownload({ href: src });
-  };
+  // const onClickDownloadButton = (e: MouseEvent<HTMLButtonElement>) => {
+  //   e.stopPropagation();
+  //   imageDownload({ href: src });
+  // };
 
   return (
     <AnimatePresence>
@@ -151,7 +151,18 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
             exit="exit"
           >
             <button onClick={toggleIsOpen}>닫기</button>
-            <button onClick={onClickDownloadButton}>저장</button>
+            <a
+              href={src}
+              rel="nofollow"
+              download
+              onClick={e => {
+                e.preventDefault();
+                imageDownload({ href: src });
+              }}
+            >
+              저장2
+            </a>
+            {/* <button onClick={onClickDownloadButton}>저장</button> */}
           </motion.div>
 
           <QuickPinchZoom onUpdate={onUpdate}>
