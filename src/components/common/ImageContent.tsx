@@ -1,9 +1,9 @@
 import { MouseEvent, useCallback, useRef } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom';
 
-import { defaultFadeInVariants } from '~/constants/motions';
+import { defaultEasing, defaultFadeInVariants } from '~/constants/motions';
 import useToggle from '~/hooks/common/useToggle';
 import { fullViewHeight } from '~/styles/utils';
 import { imageDownload } from '~/utils/common/imageDownload';
@@ -117,7 +117,7 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
     if (img) {
       const value = make3dTransformValue({ x, y, scale });
 
-      // TODO: overflow 속성 설정을 오픈소스 스펙에 추가 혹은 기여할 수 있을듯 > 현재 대기중
+      // NOTE: QuickPinchZoom 오브젝트에 css 덮어쓸 수 있는 방향으로 개선 가능
       img.parentElement?.style.setProperty('overflow', 'visible');
 
       img.style.setProperty('transform', value);
@@ -125,6 +125,11 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
       img.style.setProperty('transform-origin', '');
     }
   }, []);
+
+  const onClickDownloadButton = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    imageDownload({ href: src });
+  };
 
   return (
     <AnimatePresence>
@@ -137,14 +142,18 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
           animate="animate"
           exit="exit"
         >
-          <button
-            onClick={(e: MouseEvent<HTMLButtonElement>) => {
-              e.preventDefault();
-              imageDownload({ href: src });
-            }}
+          <motion.div
+            onClick={e => e.stopPropagation()}
+            css={opendNavCss}
+            variants={imageOpendNavVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
           >
-            download
-          </button>
+            <button onClick={toggleIsOpen}>닫기</button>
+            <button onClick={onClickDownloadButton}>저장</button>
+          </motion.div>
+
           <QuickPinchZoom onUpdate={onUpdate}>
             <motion.img
               ref={imgRef}
@@ -170,6 +179,21 @@ const dimBackdropLayoutCss = (theme: Theme) => css`
   ${dimBackdropCss(theme)}
 `;
 
+const opendNavCss = (theme: Theme) => css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  padding: 0 16px;
+  background-color: ${theme.color.background};
+  cursor: default;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const opendImgCss = css`
   width: auto;
   height: auto;
@@ -177,3 +201,18 @@ const opendImgCss = css`
   max-width: 100%;
   max-height: ${fullViewHeight()};
 `;
+
+const imageOpendNavVariants: Variants = {
+  initial: {
+    y: -44,
+    transition: { duration: 0.3, ease: defaultEasing },
+  },
+  animate: {
+    y: 0,
+    transition: { duration: 0.3, ease: defaultEasing },
+  },
+  exit: {
+    y: -44,
+    transition: { duration: 0.3, ease: defaultEasing },
+  },
+};

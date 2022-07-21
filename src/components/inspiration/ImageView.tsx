@@ -35,7 +35,7 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
   return (
     <>
       <article css={addImageCss}>
-        <form css={formCss}>
+        <div css={formCss}>
           <section css={addImageTopCss}>
             <div css={contentWrapperCss}>
               <ImageContent src={content ?? null} alt="uploadedImg" />
@@ -56,7 +56,7 @@ export default function ImageView({ inspiration }: { inspiration: InspirationInt
               />
             </div>
           </section>
-        </form>
+        </div>
       </article>
       <AddTagFormRouteAsModal />
     </>
