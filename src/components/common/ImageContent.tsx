@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom';
@@ -126,8 +126,7 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
     }
   }, []);
 
-  const onClickDownloadButton = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
+  const onClickDownloadButton = () => {
     imageDownload({ href: src });
   };
 
