@@ -3,7 +3,7 @@ interface Props {
 }
 
 export async function imageDownload({ href }: Props) {
-  const imageResponse = await fetch(href);
+  const imageResponse = await fetch(href, { mode: 'no-cors' });
   const imageBlob = await imageResponse.blob();
   const imageObjectUrl = window.URL.createObjectURL(imageBlob);
 
