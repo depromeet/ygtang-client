@@ -151,15 +151,7 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
             exit="exit"
           >
             <button onClick={toggleIsOpen}>닫기</button>
-            <a
-              href={src}
-              rel="nofollow"
-              download
-              onClick={e => {
-                e.preventDefault();
-                imageDownload({ href: src });
-              }}
-            >
+            <a href={src} download onClick={() => imageDownload({ href: src })}>
               저장2
             </a>
             {/* <button onClick={onClickDownloadButton}>저장</button> */}
