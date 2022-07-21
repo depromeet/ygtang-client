@@ -16,7 +16,9 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@sentry/nextjs": "^6.19.7",
+    "@types/file-saver": "^2.0.5",
     "axios": "^0.26.1",
+    "file-saver": "^2.0.5",
     "framer-motion": "^6.3.3",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
