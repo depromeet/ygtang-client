@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { MouseEvent, useCallback, useRef } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom';
@@ -6,6 +6,7 @@ import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom';
 import { defaultFadeInVariants } from '~/constants/motions';
 import useToggle from '~/hooks/common/useToggle';
 import { fullViewHeight } from '~/styles/utils';
+import { imageDownload } from '~/utils/common/imageDownload';
 
 import { CancelIcon } from './icons';
 import { dimBackdropCss } from './styles';
@@ -114,7 +115,6 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
     const { current: img } = imgRef;
 
     if (img) {
-      console.log(x, y, scale);
       const value = make3dTransformValue({ x, y, scale });
 
       // TODO: overflow 속성 설정을 오픈소스 스펙에 추가 혹은 기여할 수 있을듯 > 현재 대기중
@@ -137,6 +137,14 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
           animate="animate"
           exit="exit"
         >
+          <button
+            onClick={(e: MouseEvent<HTMLButtonElement>) => {
+              e.preventDefault();
+              imageDownload({ href: src });
+            }}
+          >
+            download
+          </button>
           <QuickPinchZoom onUpdate={onUpdate}>
             <motion.img
               ref={imgRef}
