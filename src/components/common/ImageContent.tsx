@@ -150,7 +150,14 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
             exit="exit"
           >
             <button onClick={toggleIsOpen}>닫기</button>
-            <button onClick={onClickDownloadButton}>저장</button>
+            <button
+              onClick={e => {
+                onClickDownloadButton();
+                e.currentTarget.style.backgroundColor = 'red';
+              }}
+            >
+              저장
+            </button>
           </motion.div>
 
           <QuickPinchZoom onUpdate={onUpdate}>
