@@ -177,12 +177,13 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
 }
 
 const dimBackdropLayoutCss = (theme: Theme) => css`
+  ${dimBackdropCss(theme)}
+  width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: zoom-out;
-
-  ${dimBackdropCss(theme)}
 `;
 
 const opendNavCss = (theme: Theme) => css`
