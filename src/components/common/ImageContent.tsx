@@ -154,14 +154,14 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
               iconName="CloseIcon"
               onClick={toggleIsOpen}
               light
-              colorType="dark"
+              colorType="light"
               size={28}
             />
             <IconButton
               iconName="DownloadIcon"
               onClick={onClickDownloadButton}
               light
-              colorType="dark"
+              colorType="light"
               size={28}
             />
           </motion.div>
@@ -193,14 +193,13 @@ const dimBackdropLayoutCss = (theme: Theme) => css`
   cursor: zoom-out;
 `;
 
-const opendNavCss = (theme: Theme) => css`
+const opendNavCss = css`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 44px;
   padding: 0 16px;
-  background-color: ${theme.color.gray06};
   cursor: default;
 
   display: flex;
