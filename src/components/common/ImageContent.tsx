@@ -155,14 +155,14 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
               onClick={toggleIsOpen}
               light
               colorType="dark"
-              size={44}
+              size={28}
             />
             <IconButton
               iconName="DownloadIcon"
               onClick={onClickDownloadButton}
               light
               colorType="dark"
-              size={44}
+              size={28}
             />
           </motion.div>
 
@@ -185,6 +185,7 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
 const dimBackdropLayoutCss = (theme: Theme) => css`
   ${dimBackdropCss(theme)}
   width: 100%;
+  background-color: ${theme.color.gray06};
 
   display: flex;
   justify-content: center;
@@ -198,13 +199,14 @@ const opendNavCss = (theme: Theme) => css`
   left: 0;
   width: 100%;
   height: 44px;
-  padding: 0 2px;
-  background-color: ${theme.color.background};
+  padding: 0 16px;
+  background-color: ${theme.color.gray06};
   cursor: default;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1100;
 `;
 
 const opendImgCss = css`
@@ -213,6 +215,7 @@ const opendImgCss = css`
   cursor: default;
   max-width: 100%;
   max-height: ${fullViewHeight()};
+  z-index: 1000;
 `;
 
 const imageOpendNavVariants: Variants = {
