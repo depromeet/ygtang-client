@@ -4,6 +4,7 @@ export { CheckIcon } from './CheckIcon';
 export { ChevronIcon } from './ChevronIcon';
 export { CloseIcon } from './CloseIcon';
 export { DeleteIcon } from './DeleteIcon';
+export { DownloadIcon } from './DownloadIcon';
 export { EditIcon } from './EditIcon';
 export { FilterIcon } from './FilterIcon';
 export { HomeIcon } from './HomeIcon';

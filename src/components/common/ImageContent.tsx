@@ -8,6 +8,7 @@ import useToggle from '~/hooks/common/useToggle';
 import { fullViewHeight } from '~/styles/utils';
 import { imageDownload } from '~/utils/common/imageDownload';
 
+import { IconButton } from './Button';
 import { CancelIcon } from './icons';
 import { dimBackdropCss } from './styles';
 
@@ -149,15 +150,20 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
             animate="animate"
             exit="exit"
           >
-            <button onClick={toggleIsOpen}>닫기</button>
-            <button
-              onClick={e => {
-                onClickDownloadButton();
-                e.currentTarget.style.backgroundColor = 'red';
-              }}
-            >
-              저장
-            </button>
+            <IconButton
+              iconName="CloseIcon"
+              onClick={toggleIsOpen}
+              light
+              colorType="dark"
+              size={44}
+            />
+            <IconButton
+              iconName="DownloadIcon"
+              onClick={onClickDownloadButton}
+              light
+              colorType="dark"
+              size={44}
+            />
           </motion.div>
 
           <QuickPinchZoom onUpdate={onUpdate}>
@@ -192,7 +198,7 @@ const opendNavCss = (theme: Theme) => css`
   left: 0;
   width: 100%;
   height: 44px;
-  padding: 0 16px;
+  padding: 0 2px;
   background-color: ${theme.color.background};
   cursor: default;
 
