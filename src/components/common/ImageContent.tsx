@@ -4,7 +4,9 @@ import { AnimatePresence, motion, Variants } from 'framer-motion';
 import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom';
 
 import { defaultEasing, defaultFadeInVariants } from '~/constants/motions';
+import { AppMessageListener } from '~/hooks/bridge/useAppMessage';
 import useToggle from '~/hooks/common/useToggle';
+import { useToast } from '~/store/Toast';
 import { fullViewHeight } from '~/styles/utils';
 import { imageDownload } from '~/utils/common/imageDownload';
 
@@ -110,6 +112,8 @@ interface OpenedImageContentProps {
 }
 
 function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageContentProps) {
+  const { fireToast } = useToast();
+
   const imgRef = useRef<HTMLImageElement>(null);
 
   const onUpdate = useCallback(({ x, y, scale }: { x: number; y: number; scale: number }) => {
@@ -132,53 +136,61 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
   };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          onClick={toggleIsOpen}
-          css={dimBackdropLayoutCss}
-          variants={defaultFadeInVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
+    <AppMessageListener
+      targetType="SendToastMessage"
+      handler={({ data }) => {
+        // NOTE: 이미지 저장 완료 혹은 실패 시 토스트
+        fireToast({ content: data as string });
+      }}
+    >
+      <AnimatePresence>
+        {isOpen && (
           <motion.div
-            onClick={e => e.stopPropagation()}
-            css={opendNavCss}
-            variants={imageOpendNavVariants}
+            onClick={toggleIsOpen}
+            css={dimBackdropLayoutCss}
+            variants={defaultFadeInVariants}
             initial="initial"
             animate="animate"
             exit="exit"
           >
-            <IconButton
-              iconName="CloseIcon"
-              onClick={toggleIsOpen}
-              light
-              colorType="light"
-              size={28}
-            />
-            <IconButton
-              iconName="DownloadIcon"
-              onClick={onClickDownloadButton}
-              light
-              colorType="light"
-              size={28}
-            />
-          </motion.div>
+            <motion.div
+              onClick={e => e.stopPropagation()}
+              css={opendNavCss}
+              variants={imageOpendNavVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <IconButton
+                iconName="CloseIcon"
+                onClick={toggleIsOpen}
+                light
+                colorType="light"
+                size={28}
+              />
+              <IconButton
+                iconName="DownloadIcon"
+                onClick={onClickDownloadButton}
+                light
+                colorType="light"
+                size={28}
+              />
+            </motion.div>
 
-          <QuickPinchZoom onUpdate={onUpdate}>
-            <motion.img
-              ref={imgRef}
-              layoutId={IMG_LAYOUT_ID}
-              src={src}
-              css={opendImgCss}
-              alt={alt}
-              onClick={toggleIsOpen}
-            />
-          </QuickPinchZoom>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            <QuickPinchZoom onUpdate={onUpdate}>
+              <motion.img
+                ref={imgRef}
+                layoutId={IMG_LAYOUT_ID}
+                src={src}
+                css={opendImgCss}
+                alt={alt}
+                onClick={toggleIsOpen}
+              />
+            </QuickPinchZoom>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </AppMessageListener>
   );
 }
 
