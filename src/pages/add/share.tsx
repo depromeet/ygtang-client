@@ -1,11 +1,12 @@
-import { useCallback } from 'react';
-
 import { AppMessageListener } from '~/hooks/bridge/useAppMessage';
 
 export default function AddShare() {
-  const handleMessage = useCallback((action: string, data?: any) => {
-    console.log('action: ', action, ' data: ', data);
-  }, []);
-
-  return <AppMessageListener handler={handleMessage}></AppMessageListener>;
+  return (
+    <AppMessageListener
+      targetType="YgtangAppShareData"
+      handler={({ type, data }) => {
+        console.log('type: ', type, ' data: ', data);
+      }}
+    ></AppMessageListener>
+  );
 }
