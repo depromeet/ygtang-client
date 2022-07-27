@@ -4,7 +4,7 @@ interface Props {
   href: string;
 }
 
-export async function imageDownload({ href }: Props) {
+export function imageDownload({ href }: Props) {
   const { isMobile } = getMobileDetect(navigator.userAgent);
 
   if (isMobile()) {
@@ -18,8 +18,6 @@ export async function imageDownload({ href }: Props) {
 function downloadImageWhenMobile({ href }: Props) {
   const element = document.createElement('a');
   element.href = href;
-
-  element.download = getImageNameAndExtension({ href });
 
   element.click();
 }
