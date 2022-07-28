@@ -13,6 +13,7 @@ import useRouterQuery from '~/hooks/common/useRouterQuery';
 import useToggle from '~/hooks/common/useToggle';
 import useSignupUser from '~/store/Signup/useSignupUser';
 import { useToast } from '~/store/Toast';
+import { fullViewHeight } from '~/styles/utils';
 import { validator } from '~/utils/validator';
 
 export default function SignUpEmailVerified() {
@@ -162,10 +163,10 @@ export default function SignUpEmailVerified() {
 }
 
 const containerCss = css`
+  height: ${fullViewHeight()};
   display: flex;
   flex-direction: column;
-
-  height: 100%;
+  padding-bottom: 32px;
 `;
 
 const introTextWrapper = (theme: Theme) => css`
