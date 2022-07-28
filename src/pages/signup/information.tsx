@@ -128,6 +128,7 @@ const mainCss = css`
   height: ${fullViewHeight()};
   display: flex;
   flex-direction: column;
+  padding-bottom: 32px;
 `;
 
 const sectionCss = css`
