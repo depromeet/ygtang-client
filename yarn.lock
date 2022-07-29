@@ -5767,6 +5767,11 @@ react-query@^3.39.0:
     broadcast-channel "^3.4.1"
     match-sorter "^6.0.2"
 
+react-quick-pinch-zoom@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/react-quick-pinch-zoom/-/react-quick-pinch-zoom-4.4.1.tgz#2c8fbb2c6cb82731752cc2864e150e2582c2c7b3"
+  integrity sha512-nEPZi1DlMBmB8oLm7TGzHSGD33krwJKd+ihCBCoCLnXgQSZlJMsKxqWv2i32PYw4yenuTMBEMA0XLM/tXusA1Q==
+
 react@18.0.0:
   version "18.0.0"
   resolved "https://registry.npmjs.org/react/-/react-18.0.0.tgz"

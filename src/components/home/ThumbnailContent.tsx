@@ -25,6 +25,34 @@ const imageCss = css`
   object-fit: cover;
 `;
 
+const textCss = css`
+  font-size: 12px;
+  padding: 6px;
+  line-height: 150%;
+`;
+
+function LinkContent({ openGraph }: Pick<ContentThumbnailProps, 'openGraph'>) {
+  const [og, setOg] = useState<OpenGraphResponse>();
+  const { src, onImageError } = useOpenGraphImage({ url: og?.url, image: og?.image });
+
+  useDidMount(() => {
+    setOg(openGraph);
+  });
+
+  return (
+    <div css={linkWrapperCss}>
+      <div css={linkImgWrapperCss}>
+        {src && <img alt={`${og?.url} thumbnail`} src={src} onError={onImageError} />}
+      </div>
+
+      <div css={linkTextWrapperCss}>
+        <p>{og?.title}</p>
+        <p>{og?.url}</p>
+      </div>
+    </div>
+  );
+}
+
 const linkWrapperCss = css`
   width: 100%;
   height: 100%;
@@ -57,31 +85,3 @@ const linkTextWrapperCss = (theme: Theme) => css`
     ${textEllipsisCss(1)}
   }
 `;
-
-const textCss = css`
-  font-size: 12px;
-  padding: 6px;
-  line-height: 150%;
-`;
-
-function LinkContent({ openGraph }: Pick<ContentThumbnailProps, 'openGraph'>) {
-  const [og, setOg] = useState<OpenGraphResponse>();
-  const { src, onImageError } = useOpenGraphImage({ url: og?.url, image: og?.image });
-
-  useDidMount(() => {
-    setOg(openGraph);
-  });
-
-  return (
-    <div css={linkWrapperCss}>
-      <div css={linkImgWrapperCss}>
-        {src && <img alt={`${og?.url} thumbnail`} src={src} onError={onImageError} />}
-      </div>
-
-      <div css={linkTextWrapperCss}>
-        <p>{og?.title}</p>
-        <p>{og?.url}</p>
-      </div>
-    </div>
-  );
-}

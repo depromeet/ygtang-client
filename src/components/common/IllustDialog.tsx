@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import PortalWrapper from '~/components/common/PortalWrapper';
 import { defaultFadeInUpVariants, defaultFadeInVariants } from '~/constants/motions';
 
+import { dimBackdropCss } from './styles';
+
 export interface IllustDialogProps {
   isShowing?: boolean;
   image: string;
@@ -28,7 +30,7 @@ export default function IllustDialog({
     return (
       <PortalWrapper isShowing={true}>
         <motion.div
-          css={dimBackdropCss}
+          css={dimBackdropLayoutCss}
           variants={defaultFadeInVariants}
           initial="initial"
           animate="animate"
@@ -49,21 +51,12 @@ export default function IllustDialog({
   return <></>;
 }
 
-const dimBackdropCss = (theme: Theme) => css`
+const dimBackdropLayoutCss = (theme: Theme) => css`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100%;
-
-  background-color: ${theme.color.dim03};
-
-  z-index: 1000;
-  overflow: hidden;
+  ${dimBackdropCss(theme)}
 `;
 
 const IllustContentContainerCss = css`
