@@ -87,15 +87,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Caching dependencies
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
       - name: Install dependencies
         run: yarn
 
