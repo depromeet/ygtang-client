@@ -12,12 +12,6 @@ export default function HomeNavigationBar() {
   return (
     <>
       <nav css={navCss}>
-        {/* <Link href="/?modal=tag" as="/tag" scroll={false}>
-        <a>
-          <FilterIcon css={iconCss} />
-        </a>
-      </Link> */}
-
         <button onClick={toggleFilterBottomSheetModal}>
           <FilterIcon css={iconCss} />
         </button>

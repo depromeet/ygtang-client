@@ -15,7 +15,6 @@ import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import { useFilteredTags } from '~/store/FilteredTags';
 
 //TODO: 이후 내부만 살짝 바꾸어서 modal type에 따라 사용할 수 있습니다.
-const TagFormRouteAsModal = dynamic(() => import('~/components/home/TagFormRouteAsModal'));
 const InspirationViewAsModal = dynamic(
   () => import('~/components/inspiration/InspirationViewAsModal')
 );
@@ -74,7 +73,7 @@ export default function Root() {
       </motion.article>
 
       <AppendButton />
-      <TagFormRouteAsModal />
+
       <InspirationViewAsModal />
       <EditTagFormRouteAsModal />
     </>
