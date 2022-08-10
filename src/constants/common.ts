@@ -13,7 +13,6 @@ export const PUBLIC_ROUTES = [
 export const ADD_ROUTES = ['/add/image', '/add/text', '/add/link'];
 
 export const IS_PRODUCTION = process.env.APP_ENV === 'production';
-export const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 export const COOKIE_REFRESH = 'ygt_refresh';
 

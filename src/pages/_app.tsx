@@ -10,7 +10,7 @@ import { RecoilRoot } from 'recoil';
 import { ErrorBoundary } from '~/components/common/ErrorBoundary';
 import ToastSection from '~/components/common/ToastSection';
 import { UserProvider } from '~/components/common/UserProvider';
-import { IS_DEVELOPMENT } from '~/constants/common';
+import { IS_PRODUCTION } from '~/constants/common';
 import { useRecordPageview } from '~/hooks/analytics/useRecordPageview';
 import useDidMount from '~/hooks/common/useDidMount';
 import { useWindowSize } from '~/hooks/common/useWindowSize';
@@ -81,7 +81,7 @@ function Head() {
 
 function useEasterEgg() {
   useDidMount(() => {
-    if (IS_DEVELOPMENT) return;
+    if (!IS_PRODUCTION) return;
     if (typeof window !== 'undefined') {
       console.log(`
       --------------------------------------------------------------
