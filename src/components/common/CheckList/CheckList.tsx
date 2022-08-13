@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useId } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 
-import { CheckCircleIcon, ChevronIcon } from './icons';
+import { CheckCircleIcon, ChevronIcon } from '../icons';
 
 export interface CheckListProps {
   isChecked: boolean;
@@ -15,6 +15,20 @@ export default function CheckList({
   onToggle,
   externalHref,
 }: PropsWithChildren<CheckListProps>) {
+  return (
+    <div css={checkListContainerCss}>
+      <Checkbox isChecked={isChecked} onToggle={onToggle} />
+      <a css={childrenWrapperCss} href={externalHref} target="_blank" rel="noopener noreferrer">
+        {children}
+        <ChevronIcon direction="right" />
+      </a>
+    </div>
+  );
+}
+
+interface CheckboxProps extends Omit<CheckListProps, 'externalHref'> {}
+
+export function Checkbox({ isChecked, onToggle }: CheckboxProps) {
   const theme = useTheme();
   const id = useId();
 
@@ -23,7 +37,7 @@ export default function CheckList({
   };
 
   return (
-    <div css={checkListContainerCss}>
+    <>
       <input
         css={inputCheckboxHiddenCss}
         defaultChecked={isChecked}
@@ -34,11 +48,7 @@ export default function CheckList({
       <label htmlFor={`check-list-${id}`}>
         <CheckCircleIcon color={isChecked ? theme.color.gray05 : theme.color.gray01} />
       </label>
-      <a css={childrenWrapperCss} href={externalHref} target="_blank" rel="noopener noreferrer">
-        {children}
-        <ChevronIcon direction="right" />
-      </a>
-    </div>
+    </>
   );
 }
 

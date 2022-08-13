@@ -7,6 +7,7 @@ import usePreventScroll from '~/hooks/common/usePreventScroll';
 import { useFilteredTags } from '~/store/FilteredTags';
 
 import BottomSheetModal from '../common/BottomSheetModal';
+import { Checkbox } from '../common/CheckList';
 import NavigationBar from '../common/NavigationBar';
 import AppliedTags from '../common/TagForm/AppliedTags';
 
@@ -36,7 +37,7 @@ export default function FilterBottomSheetModal({
           <AppliedTags applyedTags={filteredTags} onRemove={removeTag} />
 
           {/* TODO: 영감 종류 */}
-
+          <Checkbox isChecked={false} onToggle={() => {}} />
           {/* TODO: 캘린더 */}
         </div>
       </BottomSheetModal>
