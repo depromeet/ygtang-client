@@ -226,7 +226,7 @@ const opendImgCss = css`
   cursor: default;
   max-width: 100%;
   max-height: ${fullViewHeight()};
-  z-index: 1000;
+  z-index: 1200;
 `;
 
 const imageOpendNavVariants: Variants = {
