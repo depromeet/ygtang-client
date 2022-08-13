@@ -1,23 +1,37 @@
 import { useCallback } from 'react';
 
+const WEBVIEW_MESSAGE_TYPE = {
+  CREATED_INSPIRATION: 'CreatedInspiration',
+  CLOSED_INSPIRATION: 'ClosedInspiration',
+  SEND_TOAST_MESSAGE: 'SendToastMessage',
+  SHARE_EXTENTION_MESSAGE_TYPE: 'YgtangAppShareData',
+} as const;
+
+type WebviewMessageTypeKey = keyof typeof WEBVIEW_MESSAGE_TYPE;
+
 export interface AppMessageData {
-  action: string;
-  data: any;
+  type: typeof WEBVIEW_MESSAGE_TYPE[WebviewMessageTypeKey];
+  data: unknown;
+  [key: string]: unknown;
 }
 
 export interface AppMessageArgs {
-  handler: (action: string, data?: any) => void;
+  targetType: typeof WEBVIEW_MESSAGE_TYPE[WebviewMessageTypeKey];
+  handler: ({ type, data, ...rest }: AppMessageData) => void;
 }
 
-export function useAppMessage({ handler }: AppMessageArgs) {
+export function useAppMessage({ targetType, handler }: AppMessageArgs) {
   const listener = useCallback(
     ({ data: rawData }: MessageEvent) => {
       if (handler) {
-        const { action, data } = JSON.parse(rawData) as AppMessageData;
-        handler(action, data);
+        const { type, data, ...rest } = JSON.parse(rawData) as AppMessageData;
+
+        // NOTE: 목표로하는 타입의 postMessage가 아닐 시 반환
+        if (targetType !== type) return;
+        handler({ type, data, rest });
       }
     },
-    [handler]
+    [handler, targetType]
   );
 
   const startListening = () => {

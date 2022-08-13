@@ -54,18 +54,15 @@ export const defaultFadeInScaleVariants: Variants = {
     opacity: 0,
     scale: 0.85,
     transition: { duration: 0.8, ease: defaultEasing },
-    willChange: 'opacity, transform',
   },
   animate: {
     opacity: 1,
     scale: 1,
     transition: { duration: 0.8, ease: defaultEasing },
-    willChange: 'opacity, transform',
   },
   exit: {
     opacity: 0,
     scale: 0.85,
     transition: { duration: 0.8, ease: defaultEasing },
-    willChange: 'opacity, transform',
   },
 };

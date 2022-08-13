@@ -10,3 +10,17 @@ export const labelCss = (theme: Theme) => css`
   font-weight: 500;
   line-height: 150%;
 `;
+
+export const dimBackdropCss = (theme: Theme) => css`
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100%;
+
+  background-color: ${theme.color.dim03};
+
+  overflow: hidden;
+`;

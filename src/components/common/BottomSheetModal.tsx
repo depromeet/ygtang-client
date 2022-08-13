@@ -6,6 +6,8 @@ import PortalWrapper from '~/components/common/PortalWrapper';
 import { defaultEasing, defaultFadeInVariants } from '~/constants/motions';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
 
+import { dimBackdropCss } from './styles';
+
 export interface BottomSheetModalProps {
   isShowing: boolean;
   children: ReactNode;
@@ -43,20 +45,6 @@ export default function BottomSheetModal({ isShowing, children, onClose }: Botto
     </PortalWrapper>
   );
 }
-
-const dimBackdropCss = (theme: Theme) => css`
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-
-  width: 100vw;
-  height: 100%;
-
-  background-color: ${theme.color.dim03};
-
-  overflow: hidden;
-`;
 
 const MARGIN_TOP = 54;
 const MIN_HIEGHT = 208;
