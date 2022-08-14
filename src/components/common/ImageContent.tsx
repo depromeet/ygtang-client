@@ -14,7 +14,6 @@ import { IconButton } from './Button';
 import { CancelIcon } from './icons';
 import { dimBackdropCss } from './styles';
 
-const IMG_LAYOUT_ID = 'content_image';
 interface ImageContentProps {
   alt: string;
   src: string | null;
@@ -47,13 +46,7 @@ export default function ImageContent({
               </label>
             )}
 
-            <motion.img
-              layoutId={IMG_LAYOUT_ID}
-              src={src}
-              css={imgCss}
-              alt={alt}
-              onClick={toggleIsOpen}
-            />
+            <motion.img src={src} css={imgCss} alt={alt} onClick={toggleIsOpen} />
 
             <OpenedImageContent isOpen={isOpen} toggleIsOpen={toggleIsOpen} src={src} alt={alt} />
           </>
@@ -178,14 +171,7 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
             </motion.div>
 
             <QuickPinchZoom onUpdate={onUpdate}>
-              <motion.img
-                ref={imgRef}
-                layoutId={IMG_LAYOUT_ID}
-                src={src}
-                css={opendImgCss}
-                alt={alt}
-                onClick={toggleIsOpen}
-              />
+              <img ref={imgRef} src={src} css={opendImgCss} alt={alt} onClick={toggleIsOpen} />
             </QuickPinchZoom>
           </motion.div>
         )}
