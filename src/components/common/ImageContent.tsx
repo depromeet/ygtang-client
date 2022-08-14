@@ -127,7 +127,7 @@ function OpenedImageContent({ isOpen, toggleIsOpen, src, alt }: OpenedImageConte
 
       img.style.setProperty('transform', value);
       // NOTE: framer-motion override 방지
-      img.style.setProperty('transform-origin', '');
+      img.style.setProperty('transform-origin', 'left');
     }
   }, []);
 
