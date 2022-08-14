@@ -6,6 +6,7 @@ import LoadingHandler from '~/components/common/LoadingHandler';
 import { FixedSpinner } from '~/components/common/Spinner';
 import AppliedTags from '~/components/common/TagForm/AppliedTags';
 import AppendButton from '~/components/home/AppendButton';
+import { ClipboardAppMessageListener } from '~/components/home/ClipboardAppMessageListener';
 import EmptyImageSection from '~/components/home/EmptyImageSection';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
 import Thumbnail from '~/components/home/Thumbnail';
@@ -34,7 +35,7 @@ export default function Root() {
   });
 
   return (
-    <>
+    <ClipboardAppMessageListener>
       <HomeNavigationBar />
       <motion.article layout>
         {filteredTags.length > 0 && (
@@ -76,7 +77,7 @@ export default function Root() {
 
       <InspirationViewAsModal />
       <EditTagFormRouteAsModal />
-    </>
+    </ClipboardAppMessageListener>
   );
 }
 

@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 
-const WEBVIEW_MESSAGE_TYPE = {
+export const WEBVIEW_MESSAGE_TYPE = {
   CREATED_INSPIRATION: 'CreatedInspiration',
   CLOSED_INSPIRATION: 'ClosedInspiration',
   SEND_TOAST_MESSAGE: 'SendToastMessage',
   SHARE_EXTENTION_MESSAGE_TYPE: 'YgtangAppShareData',
+  CLIPBOARD_INSPIRATION: 'ClipboardInspiration',
 } as const;
 
 type WebviewMessageTypeKey = keyof typeof WEBVIEW_MESSAGE_TYPE;
