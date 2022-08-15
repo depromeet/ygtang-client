@@ -22,13 +22,13 @@ export function useToast() {
   );
 
   const fireToast = useCallback(
-    ({ key = getKey(), content, duration = DEFAULT_DURATION }: ToastInterface) => {
-      setCurrentToast({ key, content, duration });
+    ({ key = getKey(), content, duration = DEFAULT_DURATION, clipboardConfig }: ToastInterface) => {
+      setCurrentToast({ key, content, duration, clipboardConfig });
       setTimeout(() => removeToast(key), duration);
     },
     [removeToast, setCurrentToast]
   );
-  return { currentToast, fireToast };
+  return { currentToast, fireToast, removeToast };
 }
 
 function getKey() {
