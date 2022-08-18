@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
+import Router from 'next/router';
 import { css, Theme, useTheme } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { isNil } from 'lodash';
 
 import { defaultFadeInUpVariants } from '~/constants/motions';
-import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { useToast } from '~/store/Toast';
 
 import { CloseIcon } from './icons';
 
 export default function ToastSection() {
   const { currentToast } = useToast();
-  const { push } = useInternalRouter();
   const theme = useTheme();
   const [isClipboardToastVisible, setClipboardToastVisible] = useState(true);
 
@@ -32,7 +31,11 @@ export default function ToastSection() {
             isClipboardToastVisible && (
               <motion.div
                 onClick={() =>
-                  push(currentToast.clipboardConfig?.type === 'TEXT' ? '/add/text' : '/add/link')
+                  Router.push({
+                    pathname:
+                      currentToast.clipboardConfig?.type === 'TEXT' ? '/add/text' : '/add/link',
+                    query: { isClipboard: true },
+                  })
                 }
                 key={currentToast.content}
                 variants={defaultFadeInUpVariants}
