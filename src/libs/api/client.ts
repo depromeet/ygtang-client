@@ -1,9 +1,12 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-const developmentApiUrl = process.env.API_DEVELOPMENT ?? 'https://ygtang.kr/api';
+import { IS_PRODUCTION } from '~/constants/common';
+
+const DEVELOPMENT_API_URL = 'https://api.ygtang.xyz/api';
+const PRODUCTION_API_URL = 'https://ygtang.kr/api';
 
 export const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? developmentApiUrl : 'https://ygtang.kr/api',
+  baseURL: IS_PRODUCTION ? PRODUCTION_API_URL : DEVELOPMENT_API_URL,
   withCredentials: true,
 });
 
