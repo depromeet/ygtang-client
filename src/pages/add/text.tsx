@@ -31,8 +31,9 @@ export default function AddText() {
   const { fireToast } = useToast();
 
   useEffect(() => {
-    if (isClipboard !== 'true') return;
-    inspiringText.setValue(currentToast?.clipboardConfig?.clipboardData ?? '');
+    const clipboardText = currentToast?.clipboardConfig?.clipboardData;
+    if (clipboardText === undefined || isClipboard !== 'true') return;
+    inspiringText.setValue(clipboardText);
   }, [isClipboard, currentToast, inspiringText]);
 
   useDataShareMessage({ type: 'TEXT', setStateHandler: inspiringText.setValue });

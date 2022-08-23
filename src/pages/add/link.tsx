@@ -33,8 +33,9 @@ export default function AddLink() {
   const [initialLink, setInitialLink] = useState('');
 
   useEffect(() => {
-    if (isClipboard !== 'true') return;
-    setInitialLink(currentToast?.clipboardConfig?.clipboardData ?? '');
+    const clipboardLink = currentToast?.clipboardConfig?.clipboardData;
+    if (clipboardLink === undefined || isClipboard !== 'true') return;
+    setInitialLink(clipboardLink);
   }, [isClipboard, currentToast]);
 
   useDataShareMessage({ type: 'LINK', setStateHandler: setInitialLink });

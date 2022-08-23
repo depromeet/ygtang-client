@@ -13,7 +13,7 @@ export function ClipboardAppMessageListener({ children }: ClipboardAppMessageLis
   const makeClipboardToastMessage = (clipboardData: string): string => {
     const message =
       clipboardData.length > 18 ? `${clipboardData.substring(0, 18)}...` : clipboardData;
-    const isLinkType = validator({ value: clipboardData, type: 'url' });
+    const isLinkType = validator({ value: clipboardData, type: 'exactUrl' });
     if (isLinkType) {
       return `복사한 링크 영감으로 추가하기`;
     }
@@ -28,7 +28,7 @@ export function ClipboardAppMessageListener({ children }: ClipboardAppMessageLis
           content: makeClipboardToastMessage(`${data}`),
           duration: 3000,
           clipboardConfig: {
-            type: validator({ value: `${data}`, type: 'url' }) ? 'LINK' : 'TEXT',
+            type: validator({ value: `${data}`, type: 'exactUrl' }) ? 'LINK' : 'TEXT',
             clipboardData: `${data}`,
           },
         });
