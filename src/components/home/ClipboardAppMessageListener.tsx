@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import { AppMessageListener } from '~/hooks/bridge/useAppMessage';
 import { WEBVIEW_MESSAGE_TYPE } from '~/hooks/bridge/useAppMessage/useAppMessage';
 import { useToast } from '~/store/Toast';
@@ -9,11 +11,14 @@ interface ClipboardAppMessageListenerProps {
 
 export function ClipboardAppMessageListener({ children }: ClipboardAppMessageListenerProps) {
   const { fireToast } = useToast();
+  const prevClipboardData = useRef('');
 
   const makeClipboardToastMessage = (clipboardData: string): string => {
     const message =
       clipboardData.length > 18 ? `${clipboardData.substring(0, 18)}...` : clipboardData;
     const isLinkType = validator({ value: clipboardData, type: 'exactUrl' });
+    prevClipboardData.current = clipboardData;
+
     if (isLinkType) {
       return `복사한 링크 영감으로 추가하기`;
     }
@@ -24,6 +29,8 @@ export function ClipboardAppMessageListener({ children }: ClipboardAppMessageLis
     <AppMessageListener
       targetType={WEBVIEW_MESSAGE_TYPE.CLIPBOARD_INSPIRATION}
       handler={({ data }) => {
+        if (prevClipboardData.current === data) return;
+
         fireToast({
           content: makeClipboardToastMessage(`${data}`),
           duration: 3000,
