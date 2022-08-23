@@ -14,15 +14,18 @@ export function ClipboardAppMessageListener({ children }: ClipboardAppMessageLis
   const prevClipboardData = useRef('');
 
   const makeClipboardToastMessage = (clipboardData: string): string => {
+    const clipboardDataWithoutSpace = clipboardData.replace(/\n\s+/g, ' ').trim();
     const message =
-      clipboardData.length > 18 ? `${clipboardData.substring(0, 18)}...` : clipboardData;
+      clipboardData.length > 18
+        ? `${clipboardDataWithoutSpace.substring(0, 18)}...`
+        : clipboardDataWithoutSpace;
     const isLinkType = validator({ value: clipboardData, type: 'exactUrl' });
     prevClipboardData.current = clipboardData;
 
     if (isLinkType) {
       return `복사한 링크 영감으로 추가하기`;
     }
-    return `복사한 '${message}...'<br/>글 영감으로 추가하기`;
+    return `복사한 '${message}...'\n글 영감으로 추가하기`;
   };
 
   return (

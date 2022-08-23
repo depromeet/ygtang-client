@@ -44,7 +44,7 @@ export default function ToastSection() {
                 exit="exit"
                 css={clipboardToastCss}
               >
-                <span dangerouslySetInnerHTML={{ __html: currentToast.content }} />
+                <span>{currentToast.content}</span>
                 <button onClick={onClick}>
                   <CloseIcon isUsingFill color={theme.color.background} />
                 </button>
@@ -103,5 +103,6 @@ const clipboardToastCss = (theme: Theme) => css`
     flex-grow: 1;
     text-align: left;
     line-height: 140%;
+    white-space: pre-wrap;
   }
 `;
