@@ -28,7 +28,7 @@ export function useToast() {
     },
     [removeToast, setCurrentToast]
   );
-  return { currentToast, fireToast, removeToast };
+  return { currentToast, fireToast };
 }
 
 function getKey() {

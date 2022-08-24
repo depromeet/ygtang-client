@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
 import { css, Theme, useTheme } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -18,8 +18,16 @@ export default function ToastSection() {
     setClipboardToastVisible(true);
   }, [currentToast?.content]);
 
-  const onClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    e.preventDefault();
+  const onClickClipboardToast = () => {
+    setClipboardToastVisible(false);
+    Router.push({
+      pathname: currentToast?.clipboardConfig?.type === 'TEXT' ? '/add/text' : '/add/link',
+      query: { isClipboard: true },
+    });
+  };
+
+  const onClickCloseButton = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
     setClipboardToastVisible(false);
   };
 
@@ -30,13 +38,7 @@ export default function ToastSection() {
           (!isNil(currentToast.clipboardConfig) ? (
             isClipboardToastVisible && (
               <motion.div
-                onClick={() =>
-                  Router.push({
-                    pathname:
-                      currentToast.clipboardConfig?.type === 'TEXT' ? '/add/text' : '/add/link',
-                    query: { isClipboard: true },
-                  })
-                }
+                onClick={onClickClipboardToast}
                 key={currentToast.content}
                 variants={defaultFadeInUpVariants}
                 initial="initial"
@@ -45,7 +47,7 @@ export default function ToastSection() {
                 css={clipboardToastCss}
               >
                 <span>{currentToast.content}</span>
-                <button onClick={onClick}>
+                <button onClick={onClickCloseButton}>
                   <CloseIcon isUsingFill color={theme.color.background} />
                 </button>
               </motion.div>

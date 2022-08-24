@@ -15,7 +15,7 @@ export function ClipboardAppMessageListener({ children }: ClipboardAppMessageLis
 
   const makeClipboardToastMessage = (clipboardData: string): string => {
     const clipboardDataWithoutSpace = clipboardData.replace(/\n\s+/g, ' ').trim();
-    const message =
+    const toastMessage =
       clipboardData.length > 18
         ? `${clipboardDataWithoutSpace.substring(0, 18)}...`
         : clipboardDataWithoutSpace;
@@ -25,7 +25,7 @@ export function ClipboardAppMessageListener({ children }: ClipboardAppMessageLis
     if (isLinkType) {
       return `복사한 링크 영감으로 추가하기`;
     }
-    return `복사한 '${message}...'\n글 영감으로 추가하기`;
+    return `복사한 '${toastMessage}...'\n글 영감으로 추가하기`;
   };
 
   return (
