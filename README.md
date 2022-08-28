@@ -169,20 +169,8 @@
   정도현
   </a>
   </td>
-  
-  <td align=center>
-  <a href="https://linktr.ee/kzmgy">
-  <img src="https://user-images.githubusercontent.com/26461307/171999525-9e8f67d7-94e7-40e2-af81-f5ef23d41183.png" width="100px"  />
-  <br/>
-  Design 🎨
-  <br/>
-  김자영
-  </a>
-  </td>
-
-  </tr>
-
-  <tr>
+</tr>
+<tr>
   
   <td align=center>
   <a href="https://github.com/nature1216">
@@ -213,7 +201,30 @@
   정형일
   </a>
   </td>
+  <td align=center>
+  <a href="https://github.com/junhaesung">
+  <img src="https://avatars.githubusercontent.com/junhaesung" width="100px"  />
+  <br/>
+  BE 💾
+  <br/>
+  전해성
+  </a>
+  </td>
+ 
+ 
+</tr>
   
+<tr>
+  
+  <td align=center>
+  <a href="https://linktr.ee/kzmgy">
+  <img src="https://user-images.githubusercontent.com/26461307/171999525-9e8f67d7-94e7-40e2-af81-f5ef23d41183.png" width="100px"  />
+  <br/>
+  Design 🎨
+  <br/>
+  김자영
+  </a>
+  </td>
   <td align=center>
   <a href="https://www.behance.net/sypak120c57e">
   <img src="https://user-images.githubusercontent.com/26461307/171999527-4c959b86-221a-4f5d-add1-1b536d798c01.png" width="100px"  />
@@ -233,7 +244,7 @@
   정미숙
   </a>
   </td>
- 
-</tr>
 
+</tr>
+  
 </table>
