@@ -25,7 +25,7 @@ export default function TagFilterSection() {
 
 const sectionCss = css`
   margin-top: 24px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 `;
 
 const tagFilterAnchorCss = (theme: Theme) => css`
