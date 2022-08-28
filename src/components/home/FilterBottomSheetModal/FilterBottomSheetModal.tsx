@@ -1,8 +1,13 @@
 import { ComponentProps } from 'react';
 import dynamic from 'next/dynamic';
 import { css, Theme } from '@emotion/react';
+import { useResetRecoilState } from 'recoil';
 
+import { GhostButton } from '~/components/common/Button';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
+import { filteredTagsState } from '~/store/FilteredTags';
+import { inspirationKindFilterState } from '~/store/InspirationKindFilter';
+import { viewHeight } from '~/styles/utils';
 
 import BottomSheetModal from '../../common/BottomSheetModal';
 import NavigationBar from '../../common/NavigationBar';
@@ -21,16 +26,26 @@ export default function FilterBottomSheetModal({
 }: BottomSheetModalPropsWithoutChildren) {
   usePreventScroll(isShowing);
 
+  const resetInspirationKindFilter = useResetRecoilState(inspirationKindFilterState);
+  const resetFilteredTags = useResetRecoilState(filteredTagsState);
+
+  const onClickReset = () => {
+    resetInspirationKindFilter();
+    resetFilteredTags();
+  };
+
   return (
     <>
       <BottomSheetModal isShowing={isShowing} onClose={onClose}>
         <div css={contentWrapperCss}>
-          <NavigationBar title="필터" onClickBackButton={onClose} />
+          <NavigationBar
+            title="필터"
+            onClickBackButton={onClose}
+            rightElement={<GhostButton onClick={onClickReset}>초기화</GhostButton>}
+          />
 
           <TagFilterSection />
           <InspirationKindSection />
-
-          {/* TODO: 캘린더 */}
         </div>
       </BottomSheetModal>
       <TagFormRouteAsModal />
@@ -40,5 +55,6 @@ export default function FilterBottomSheetModal({
 
 const contentWrapperCss = (theme: Theme) => css`
   width: 100%;
+  height: ${viewHeight(78)};
   padding: ${theme.size.layoutPadding};
 `;
