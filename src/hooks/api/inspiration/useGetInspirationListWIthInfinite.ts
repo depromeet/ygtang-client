@@ -3,6 +3,8 @@ import { flatten } from 'lodash';
 import { useInfiniteQuery } from 'react-query';
 
 import { get, post } from '~/libs/api/client';
+import { InspirationKindFilterType } from '~/store/InspirationKindFilter/inpirationKindFilter';
+import { useInspirationKindFilter } from '~/store/InspirationKindFilter/useInspirationKindFilter';
 
 interface InspirationListResponseInterface {
   message: string;
@@ -30,19 +32,25 @@ export default function useGetInspirationListWithInfinite({
     [filteredTags]
   );
 
+  const { inspirationKindFilter } = useInspirationKindFilter();
+
   const fetchInsipirations = (page: number = 0) => {
-    if (filteredTags.length > 0)
+    if (filteredTags.length > 0 || inspirationKindFilter !== null) {
+      const kindQuery = getInspirationTypeQuery(inspirationKindFilter);
+
       return post<InspirationListResponseInterface>(
-        `/v1/inspiration/tag/?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc`,
+        `/v1/inspiration/tag/?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc${kindQuery}`,
         filteredTagIds
       );
+    }
+
     return get<InspirationListResponseInterface>(
       `/v1/inspiration/list?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc`
     );
   };
 
   const query = useInfiniteQuery<InspirationListResponseInterface>(
-    [INSPIRATION_LIST_QUERY_KEY, ...filteredTagIds],
+    [INSPIRATION_LIST_QUERY_KEY, ...filteredTagIds, inspirationKindFilter],
     async ({ pageParam = 0 }) => await fetchInsipirations(pageParam),
     {
       getNextPageParam: lastPage => {
@@ -64,4 +72,10 @@ export default function useGetInspirationListWithInfinite({
     isEmpty,
     ...query,
   };
+}
+
+function getInspirationTypeQuery(type: InspirationKindFilterType) {
+  if (type === null) return '';
+
+  return `&types=${type}`;
 }
