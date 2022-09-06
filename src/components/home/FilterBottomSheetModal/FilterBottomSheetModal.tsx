@@ -11,6 +11,7 @@ import { viewHeight } from '~/styles/utils';
 
 import BottomSheetModal from '../../common/BottomSheetModal';
 import NavigationBar from '../../common/NavigationBar';
+import CalendarFilterSection from './CalendarFilterSection';
 import InspirationKindSection from './InspirationKindSection';
 import TagFilterSection from './TagFilterSection';
 
@@ -46,6 +47,7 @@ export default function FilterBottomSheetModal({
 
           <TagFilterSection />
           <InspirationKindSection />
+          <CalendarFilterSection />
         </div>
       </BottomSheetModal>
       <TagFormRouteAsModal />
