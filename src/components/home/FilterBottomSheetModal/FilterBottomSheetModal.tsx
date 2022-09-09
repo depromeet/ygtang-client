@@ -5,6 +5,7 @@ import { useResetRecoilState } from 'recoil';
 
 import { GhostButton } from '~/components/common/Button';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
+import { calendarFilterState } from '~/store/CalendarFilter';
 import { filteredTagsState } from '~/store/FilteredTags';
 import { inspirationKindFilterState } from '~/store/InspirationKindFilter';
 import { viewHeight } from '~/styles/utils';
@@ -29,10 +30,12 @@ export default function FilterBottomSheetModal({
 
   const resetInspirationKindFilter = useResetRecoilState(inspirationKindFilterState);
   const resetFilteredTags = useResetRecoilState(filteredTagsState);
+  const resetCalendarFilter = useResetRecoilState(calendarFilterState);
 
   const onClickReset = () => {
     resetInspirationKindFilter();
     resetFilteredTags();
+    resetCalendarFilter();
   };
 
   return (
