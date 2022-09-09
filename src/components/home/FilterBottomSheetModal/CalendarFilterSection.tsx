@@ -7,6 +7,7 @@ import { ChevronIcon } from '~/components/common/icons';
 import NavigationBar from '~/components/common/NavigationBar';
 import useToggle from '~/hooks/common/useToggle';
 import { useCalendarFilter } from '~/store/CalendarFilter';
+import { CalendarElementType } from '~/store/CalendarFilter/calendarFilter';
 
 export default function CalendarFilterSection() {
   const [isOpen, toggleIsOpen] = useToggle(false);
@@ -29,17 +30,9 @@ export default function CalendarFilterSection() {
           />
 
           <div css={calendarWrapperCss}>
-            <div
-              css={css`
-                position: absolute;
-                /* 월 navigation + gap */
-                margin-top: calc(30px + 16px);
-                width: 100%;
-                height: 36px;
-                background-color: blue;
-              `}
-            >
-              {calendarFilter[0]?.toLocaleDateString()}, {calendarFilter[1]?.toLocaleDateString()}
+            <div css={calendarInfoWrapperCss}>
+              <CalendarInfo date={calendarFilter[0]} /> ~
+              <CalendarInfo date={calendarFilter[1]} />
             </div>
 
             <Calendar
@@ -51,7 +44,9 @@ export default function CalendarFilterSection() {
               calendarType="US"
               view="month"
               selectRange
-              formatDay={(_, date) => date.getDate().toString()}
+              formatDay={(_, date) => {
+                return date.getDate().toString();
+              }}
               tileDisabled={({ date }) => date.getDay() % 2 === 0}
               prevLabel={<ChevronIcon direction="left" />}
               nextLabel={<ChevronIcon direction="right" />}
@@ -93,6 +88,19 @@ const calendarWrapperCss = css`
   width: 100%;
   position: relative;
   margin-top: 14px;
+`;
+
+const calendarInfoWrapperCss = css`
+  position: absolute;
+  /* 월 navigation + gap */
+  margin-top: calc(30px + 16px);
+  width: 100%;
+  height: 36px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 `;
 
 const calendarCss = (theme: Theme) => css`
@@ -238,4 +246,44 @@ const calendarCss = (theme: Theme) => css`
       }
     }
   }
+`;
+
+interface CalendarInfoProps {
+  /**
+   * Date | null
+   */
+  date: CalendarElementType;
+}
+
+function CalendarInfo({ date }: CalendarInfoProps) {
+  return (
+    <div css={calendarInfoCss}>
+      {date ? (
+        <span css={activeDateCss}>{date.toLocaleDateString()}</span>
+      ) : (
+        <span css={deactiveDateCss}>yyyy. mm. dd.</span>
+      )}
+    </div>
+  );
+}
+
+const calendarInfoCss = (theme: Theme) => css`
+  width: 160px;
+  height: 36px;
+  border-radius: ${theme.borderRadius.default};
+  background-color: ${theme.color.gray01};
+  padding-left: 14px;
+
+  display: flex;
+  align-items: center;
+`;
+
+const activeDateCss = (theme: Theme) => css`
+  font-size: 12px;
+  color: ${theme.color.gray05};
+`;
+
+const deactiveDateCss = (theme: Theme) => css`
+  font-size: 12px;
+  color: ${theme.color.gray03};
 `;

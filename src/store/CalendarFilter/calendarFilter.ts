@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-type CalendarElementType = Date | null;
+export type CalendarElementType = Date | null;
 
 export type CalendarFilterType = [CalendarElementType, CalendarElementType];
 
