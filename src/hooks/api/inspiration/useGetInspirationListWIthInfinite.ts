@@ -3,6 +3,8 @@ import { flatten } from 'lodash';
 import { useInfiniteQuery } from 'react-query';
 
 import { get, post } from '~/libs/api/client';
+import { useCalendarFilter } from '~/store/CalendarFilter';
+import { CalendarFilterType } from '~/store/CalendarFilter/calendarFilter';
 import { InspirationKindFilterType } from '~/store/InspirationKindFilter/inpirationKindFilter';
 import { useInspirationKindFilter } from '~/store/InspirationKindFilter/useInspirationKindFilter';
 
@@ -33,13 +35,15 @@ export default function useGetInspirationListWithInfinite({
   );
 
   const { inspirationKindFilter } = useInspirationKindFilter();
+  const { calendarFilter } = useCalendarFilter();
 
   const fetchInsipirations = (page: number = 0) => {
-    if (filteredTags.length > 0 || inspirationKindFilter !== null) {
+    if (filteredTags.length > 0 || inspirationKindFilter !== null || calendarFilter[1] !== null) {
       const kindQuery = getInspirationTypeQuery(inspirationKindFilter);
+      const calendarQuery = getCalendarFilterQuery(calendarFilter);
 
       return post<InspirationListResponseInterface>(
-        `/v1/inspiration/tag/?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc${kindQuery}`,
+        `/v1/inspiration/tag/?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc${kindQuery}${calendarQuery}`,
         filteredTagIds
       );
     }
@@ -50,7 +54,7 @@ export default function useGetInspirationListWithInfinite({
   };
 
   const query = useInfiniteQuery<InspirationListResponseInterface>(
-    [INSPIRATION_LIST_QUERY_KEY, ...filteredTagIds, inspirationKindFilter],
+    [INSPIRATION_LIST_QUERY_KEY, ...filteredTagIds, inspirationKindFilter, ...calendarFilter],
     async ({ pageParam = 0 }) => await fetchInsipirations(pageParam),
     {
       getNextPageParam: lastPage => {
@@ -78,4 +82,15 @@ function getInspirationTypeQuery(type: InspirationKindFilterType) {
   if (type === null) return '';
 
   return `&types=${type}`;
+}
+
+function getCalendarFilterQuery(date: CalendarFilterType) {
+  if (date[0] === null || date[1] === null) {
+    return '';
+  }
+
+  const fromDate = date[0].toISOString().slice(0, -5);
+  const toDate = date[1].toISOString().slice(0, -5);
+
+  return `&createdDateTimeFrom=${fromDate}&createdDateTimeTo=${toDate}`;
 }
