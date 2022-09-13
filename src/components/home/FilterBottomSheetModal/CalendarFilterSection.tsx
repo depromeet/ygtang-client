@@ -21,6 +21,13 @@ export default function CalendarFilterSection() {
         <ChevronIcon direction="right" />
       </button>
 
+      {calendarFilter[0] && calendarFilter[1] && (
+        <div css={filterInfoWrapperCss}>
+          <CalendarInfo date={calendarFilter[0]} /> ~
+          <CalendarInfo date={calendarFilter[1]} />
+        </div>
+      )}
+
       <BottomSheetModal isShowing={isOpen} onClose={toggleIsOpen}>
         <div css={contentWrapperCss}>
           <NavigationBar
@@ -47,7 +54,6 @@ export default function CalendarFilterSection() {
               formatDay={(_, date) => {
                 return date.getDate().toString();
               }}
-              tileDisabled={({ date }) => date.getDay() % 2 === 0}
               prevLabel={<ChevronIcon direction="left" />}
               nextLabel={<ChevronIcon direction="right" />}
               next2Label={null}
@@ -74,6 +80,15 @@ const filterButtonCss = (theme: Theme) => css`
   color: ${theme.color.gray05};
   font-size: 16px;
   padding: 0;
+`;
+
+const filterInfoWrapperCss = css`
+  width: 100%;
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 `;
 
 const contentWrapperCss = (theme: Theme) => css`
@@ -169,6 +184,22 @@ const calendarCss = (theme: Theme) => css`
     color: ${theme.color.gray05};
     font-size: 18px;
 
+    // 현재 날짜
+    &--now {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: ${theme.color.gray01};
+        z-index: -1;
+      }
+    }
+
     // 선택 시작과 끝
     &--rangeStart,
     &--rangeEnd {
@@ -227,22 +258,6 @@ const calendarCss = (theme: Theme) => css`
         height: 100%;
         background-color: ${theme.color.gray01};
         z-index: -2;
-      }
-    }
-
-    // 현재 날짜
-    &--now {
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background-color: ${theme.color.gray01};
-        z-index: -1;
       }
     }
   }
