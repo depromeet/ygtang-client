@@ -44,7 +44,7 @@ const wrapperCss = (theme: Theme) => css`
 const toastCss = (theme: Theme) => css`
   font-size: 14px;
   color: ${theme.color.background};
-  background-color: ${theme.color.gray05};
+  background-color: ${theme.color.gray_toast};
   padding: 16px;
   text-align: center;
   border-radius: ${theme.borderRadius.default};
