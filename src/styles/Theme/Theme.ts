@@ -11,6 +11,7 @@ const theme = {
     gray04: '#717D82',
     gray05: '#5A676A',
     gray06: '#2D2D2D', // main article text
+    gray_toast: '#424b4d',
     dim01: 'rgba(0, 0, 0, 0.1)', // main thumnail tag background
     dim02: 'rgba(0, 0, 0, 0.2)',
     dim03: 'rgba(0, 0, 0, 0.6)', //screen dim
