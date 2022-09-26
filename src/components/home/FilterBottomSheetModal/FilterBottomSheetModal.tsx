@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { css, Theme } from '@emotion/react';
 import { useResetRecoilState } from 'recoil';
 
-import { GhostButton } from '~/components/common/Button';
+import { CTABottomButton, GhostButton } from '~/components/common/Button';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
 import { calendarFilterState } from '~/store/CalendarFilter';
 import { filteredTagsState } from '~/store/FilteredTags';
@@ -38,19 +38,25 @@ export default function FilterBottomSheetModal({
     resetCalendarFilter();
   };
 
+  const closeWithReset = () => {
+    onClose();
+    onClickReset();
+  };
+
   return (
     <>
-      <BottomSheetModal isShowing={isShowing} onClose={onClose}>
+      <BottomSheetModal isShowing={isShowing} onClose={closeWithReset}>
         <div css={contentWrapperCss}>
           <NavigationBar
             title="필터"
-            onClickBackButton={onClose}
+            onClickBackButton={closeWithReset}
             rightElement={<GhostButton onClick={onClickReset}>초기화</GhostButton>}
           />
 
           <TagFilterSection />
           <InspirationKindSection />
           <CalendarFilterSection />
+          <CTABottomButton onClick={onClose}>영감 보기</CTABottomButton>
         </div>
       </BottomSheetModal>
       <TagFormRouteAsModal />
