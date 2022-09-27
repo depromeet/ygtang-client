@@ -1,5 +1,5 @@
 import { css, Theme } from '@emotion/react';
-import { Calendar } from 'react-calendar';
+import { Calendar, CalendarTileProperties } from 'react-calendar';
 
 import BottomSheetModal from '~/components/common/BottomSheetModal';
 import { GhostButton } from '~/components/common/Button';
@@ -19,6 +19,27 @@ export default function CalendarFilterSection({
   const [isOpen, toggleIsOpen] = useToggle(false);
 
   const { calendarFilter, onChangeCalendarFilter } = useCalendarFilter();
+
+  const checkDisabledTile = ({ date }: CalendarTileProperties) => {
+    const dateString = date.toISOString().slice(0, 10);
+
+    for (const eachInspiration of filteredInspirations) {
+      const eachDateString = eachInspiration.createdDatetime.slice(0, 10);
+
+      if (eachDateString === dateString) {
+        return false;
+      }
+
+      // Note: 항상 최신순의 영감이 조회되기 때문에 날짜가 지날시 비교를 멈추도록 함
+      // Todo: 오래된 순 정렬이 추가될 시 조건이 변경되어야 함
+      const eachInspirationDate = new Date(eachDateString);
+      if (date > eachInspirationDate) {
+        return true;
+      }
+    }
+
+    return true;
+  };
 
   return (
     <section css={sectionCss}>
@@ -60,13 +81,7 @@ export default function CalendarFilterSection({
               formatDay={(_, date) => {
                 return date.getDate().toString();
               }}
-              tileDisabled={({ date }) => {
-                const d = date.toISOString();
-
-                console.log(d);
-                if (date.getDay() % 2 == 0) return false;
-                return true;
-              }}
+              tileDisabled={checkDisabledTile}
               prevLabel={<ChevronIcon direction="left" />}
               nextLabel={<ChevronIcon direction="right" />}
               next2Label={null}
