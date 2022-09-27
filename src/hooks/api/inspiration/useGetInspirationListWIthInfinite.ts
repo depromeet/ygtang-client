@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
-import { flatten } from 'lodash';
+import flatten from 'lodash/flatten';
 import { useInfiniteQuery } from 'react-query';
 
 import { get, post } from '~/libs/api/client';
 import { useCalendarFilter } from '~/store/CalendarFilter';
-import { CalendarFilterType } from '~/store/CalendarFilter/calendarFilter';
-import { InspirationKindFilterType } from '~/store/InspirationKindFilter/inpirationKindFilter';
 import { useInspirationKindFilter } from '~/store/InspirationKindFilter/useInspirationKindFilter';
+
+import { getCalendarFilterQuery, getInspirationTypeQuery } from './utils';
 
 interface InspirationListResponseInterface {
   message: string;
@@ -76,21 +76,4 @@ export default function useGetInspirationListWithInfinite({
     isEmpty,
     ...query,
   };
-}
-
-function getInspirationTypeQuery(type: InspirationKindFilterType) {
-  if (type === null) return '';
-
-  return `&types=${type}`;
-}
-
-function getCalendarFilterQuery(date: CalendarFilterType) {
-  if (date[0] === null || date[1] === null) {
-    return '';
-  }
-
-  const fromDate = date[0].toISOString().slice(0, -5);
-  const toDate = date[1].toISOString().slice(0, -5);
-
-  return `&createdDateTimeFrom=${fromDate}&createdDateTimeTo=${toDate}`;
 }

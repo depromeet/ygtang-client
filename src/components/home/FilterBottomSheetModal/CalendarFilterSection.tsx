@@ -9,7 +9,13 @@ import useToggle from '~/hooks/common/useToggle';
 import { useCalendarFilter } from '~/store/CalendarFilter';
 import { CalendarElementType } from '~/store/CalendarFilter/calendarFilter';
 
-export default function CalendarFilterSection() {
+interface CalendarFilterSectionProps {
+  filteredInspirations: InspirationInterface[];
+}
+
+export default function CalendarFilterSection({
+  filteredInspirations,
+}: CalendarFilterSectionProps) {
   const [isOpen, toggleIsOpen] = useToggle(false);
 
   const { calendarFilter, onChangeCalendarFilter } = useCalendarFilter();
@@ -53,6 +59,13 @@ export default function CalendarFilterSection() {
               selectRange
               formatDay={(_, date) => {
                 return date.getDate().toString();
+              }}
+              tileDisabled={({ date }) => {
+                const d = date.toISOString();
+
+                console.log(d);
+                if (date.getDay() % 2 == 0) return false;
+                return true;
               }}
               prevLabel={<ChevronIcon direction="left" />}
               nextLabel={<ChevronIcon direction="right" />}

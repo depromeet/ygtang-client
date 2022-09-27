@@ -4,6 +4,7 @@ import { css, Theme } from '@emotion/react';
 import { useResetRecoilState } from 'recoil';
 
 import { CTABottomButton, GhostButton } from '~/components/common/Button';
+import useGetAllInspirations from '~/hooks/api/inspiration/useGetAllInspirations';
 import usePreventScroll from '~/hooks/common/usePreventScroll';
 import { calendarFilterState } from '~/store/CalendarFilter';
 import { filteredTagsState } from '~/store/FilteredTags';
@@ -43,6 +44,9 @@ export default function FilterBottomSheetModal({
     onClickReset();
   };
 
+  const { inspirations: filteredInspirations } = useGetAllInspirations({ enabled: isShowing });
+  console.log(filteredInspirations);
+
   return (
     <>
       <BottomSheetModal isShowing={isShowing} onClose={closeWithReset}>
@@ -55,8 +59,11 @@ export default function FilterBottomSheetModal({
 
           <TagFilterSection />
           <InspirationKindSection />
-          <CalendarFilterSection />
-          <CTABottomButton onClick={onClose}>영감 보기</CTABottomButton>
+          <CalendarFilterSection filteredInspirations={filteredInspirations} />
+
+          <CTABottomButton onClick={onClose}>
+            {filteredInspirations.length}개의 영감 보기
+          </CTABottomButton>
         </div>
       </BottomSheetModal>
       <TagFormRouteAsModal />
