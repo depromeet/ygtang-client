@@ -45,7 +45,6 @@ export default function FilterBottomSheetModal({
   };
 
   const { inspirations: filteredInspirations } = useGetAllInspirations({ enabled: isShowing });
-  console.log(filteredInspirations);
 
   return (
     <>
