@@ -44,7 +44,11 @@ export default function FilterBottomSheetModal({
     onClickReset();
   };
 
-  const { inspirations: filteredInspirations } = useGetAllInspirations({ enabled: isShowing });
+  const { inspirations: filteredInspirations, isLoading } = useGetAllInspirations({
+    enabled: isShowing,
+  });
+
+  const isCTADisabled = isLoading || filteredInspirations.length === 0;
 
   return (
     <>
@@ -56,11 +60,13 @@ export default function FilterBottomSheetModal({
             rightElement={<GhostButton onClick={onClickReset}>초기화</GhostButton>}
           />
 
-          <TagFilterSection />
-          <InspirationKindSection />
-          <CalendarFilterSection filteredInspirations={filteredInspirations} />
+          <div css={flexGrowWrapperCss}>
+            <TagFilterSection />
+            <InspirationKindSection />
+            <CalendarFilterSection filteredInspirations={filteredInspirations} />
+          </div>
 
-          <CTABottomButton onClick={onClose}>
+          <CTABottomButton onClick={onClose} disabled={isCTADisabled}>
             {filteredInspirations.length}개의 영감 보기
           </CTABottomButton>
         </div>
@@ -74,4 +80,12 @@ const contentWrapperCss = (theme: Theme) => css`
   width: 100%;
   height: ${viewHeight(78)};
   padding: ${theme.size.layoutPadding};
+  padding-bottom: 46px;
+
+  display: flex;
+  flex-direction: column;
+`;
+
+const flexGrowWrapperCss = css`
+  flex-grow: 1;
 `;
