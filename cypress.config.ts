@@ -10,7 +10,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config);
     },
-    baseUrl: 'https://localhost:3000/',
+    baseUrl: 'http://localhost:3000/',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
 });

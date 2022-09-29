@@ -90,13 +90,13 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Install mkcert
-        run: |
-          sudo apt install libnss3-tools
-          git clone https://github.com/FiloSottile/mkcert && cd mkcert
-          go build -ldflags "-X main.Version=$(git describe --tags)"
-          mkcert -install
-          mkcert localhost
+      # - name: Install mkcert
+      #   run: |
+      #     sudo apt install libnss3-tools
+      #     git clone https://github.com/FiloSottile/mkcert && cd mkcert
+      #     go build -ldflags "-X main.Version=$(git describe --tags)"
+      #     mkcert -install
+      #     mkcert localhost
 
       - name: Generate environment json file
         run: |
@@ -108,7 +108,7 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           install: false
-          start: yarn httpsdev
+          start: yarn dev
           browser: chrome
           record: true
         env:
