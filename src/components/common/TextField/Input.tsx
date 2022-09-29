@@ -144,7 +144,7 @@ const inputElementCss = (
   resize: none;
 
   &:focus {
-    border-color: ${theme.color.gray03};
+    border-color: ${theme.color.alert};
   }
 
   &::placeholder {

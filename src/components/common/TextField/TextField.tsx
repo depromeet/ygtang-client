@@ -92,7 +92,7 @@ const wrapperCss = css`
 `;
 
 const feedbackMessageCss = (theme: Theme) => css`
-  color: ${theme.color.gray03};
+  color: ${theme.color.alert};
   font-size: 12px;
   font-weight: 500;
   line-height: 150%;
