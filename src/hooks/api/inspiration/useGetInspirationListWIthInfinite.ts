@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
-import { flatten } from 'lodash';
+import flatten from 'lodash/flatten';
 import { useInfiniteQuery } from 'react-query';
 
 import { get, post } from '~/libs/api/client';
-import { InspirationKindFilterType } from '~/store/InspirationKindFilter/inpirationKindFilter';
+import { useCalendarFilter } from '~/store/CalendarFilter';
 import { useInspirationKindFilter } from '~/store/InspirationKindFilter/useInspirationKindFilter';
+
+import { getCalendarFilterQuery, getInspirationTypeQuery } from './utils';
 
 interface InspirationListResponseInterface {
   message: string;
@@ -33,13 +35,15 @@ export default function useGetInspirationListWithInfinite({
   );
 
   const { inspirationKindFilter } = useInspirationKindFilter();
+  const { calendarFilter } = useCalendarFilter();
 
   const fetchInsipirations = (page: number = 0) => {
-    if (filteredTags.length > 0 || inspirationKindFilter !== null) {
+    if (filteredTags.length > 0 || inspirationKindFilter !== null || calendarFilter[1] !== null) {
       const kindQuery = getInspirationTypeQuery(inspirationKindFilter);
+      const calendarQuery = getCalendarFilterQuery(calendarFilter);
 
       return post<InspirationListResponseInterface>(
-        `/v1/inspiration/tag/?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc${kindQuery}`,
+        `/v1/inspiration/tag/?size=${INFINITE_SCROLL_SIZE}&page=${page}&sort=createdDateTime,desc${kindQuery}${calendarQuery}`,
         filteredTagIds
       );
     }
@@ -50,7 +54,7 @@ export default function useGetInspirationListWithInfinite({
   };
 
   const query = useInfiniteQuery<InspirationListResponseInterface>(
-    [INSPIRATION_LIST_QUERY_KEY, ...filteredTagIds, inspirationKindFilter],
+    [INSPIRATION_LIST_QUERY_KEY, ...filteredTagIds, inspirationKindFilter, ...calendarFilter],
     async ({ pageParam = 0 }) => await fetchInsipirations(pageParam),
     {
       getNextPageParam: lastPage => {
@@ -72,10 +76,4 @@ export default function useGetInspirationListWithInfinite({
     isEmpty,
     ...query,
   };
-}
-
-function getInspirationTypeQuery(type: InspirationKindFilterType) {
-  if (type === null) return '';
-
-  return `&types=${type}`;
 }
