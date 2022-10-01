@@ -3,6 +3,7 @@ import { css, Theme } from '@emotion/react';
 import { Checkbox } from '~/components/common/CheckList';
 import { InspirationKindFilterType } from '~/store/InspirationKindFilter/inpirationKindFilter';
 import { useInspirationKindFilter } from '~/store/InspirationKindFilter/useInspirationKindFilter';
+import { recordEvent } from '~/utils/analytics';
 
 export default function InspirationKindSection() {
   return (
@@ -53,6 +54,7 @@ function CheckboxButton({ text, value }: CheckboxButtonProps) {
 
   const onClickButton = () => {
     setInspirationKindFilter(value);
+    recordEvent({ action: '영감 종류 필터링', value: text });
   };
 
   return (

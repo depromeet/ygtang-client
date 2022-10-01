@@ -10,6 +10,7 @@ import { calendarFilterState } from '~/store/CalendarFilter';
 import { filteredTagsState } from '~/store/FilteredTags';
 import { inspirationKindFilterState } from '~/store/InspirationKindFilter';
 import { viewHeight } from '~/styles/utils';
+import { recordEvent } from '~/utils/analytics';
 
 import BottomSheetModal from '../../common/BottomSheetModal';
 import NavigationBar from '../../common/NavigationBar';
@@ -37,11 +38,12 @@ export default function FilterBottomSheetModal({
     resetInspirationKindFilter();
     resetFilteredTags();
     resetCalendarFilter();
+    recordEvent({ action: '필터링 초기화' });
   };
 
-  const closeWithReset = () => {
+  const onCloseWithEvent = () => {
     onClose();
-    onClickReset();
+    recordEvent({ action: '필터링 dim으로 닫기' });
   };
 
   const { inspirations: filteredInspirations, isLoading } = useGetAllInspirations({
@@ -52,11 +54,11 @@ export default function FilterBottomSheetModal({
 
   return (
     <>
-      <BottomSheetModal isShowing={isShowing} onClose={closeWithReset}>
+      <BottomSheetModal isShowing={isShowing} onClose={onCloseWithEvent}>
         <div css={contentWrapperCss}>
           <NavigationBar
             title="필터"
-            onClickBackButton={closeWithReset}
+            onClickBackButton={onClickReset}
             rightElement={<GhostButton onClick={onClickReset}>초기화</GhostButton>}
           />
 

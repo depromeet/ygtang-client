@@ -1,6 +1,8 @@
 import { OnChangeDateRangeCallback } from 'react-calendar';
 import { useRecoilState } from 'recoil';
 
+import { recordEvent } from '~/utils/analytics';
+
 import { calendarFilterState } from './calendarFilter';
 
 export function useCalendarFilter() {
@@ -18,6 +20,7 @@ export function useCalendarFilter() {
     }
 
     setCalendarFilter(value);
+    recordEvent({ action: '영감 날짜 필터링' });
   };
 
   return { calendarFilter, onChangeCalendarFilter };
