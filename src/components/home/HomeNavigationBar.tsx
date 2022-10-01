@@ -1,23 +1,32 @@
-import Link from 'next/link';
 import { css, Theme } from '@emotion/react';
+
+import useToggle from '~/hooks/common/useToggle';
 
 import { FilterIcon, SettingsIcon } from '../common/icons';
 import InternalLink from '../common/InternalLink';
+import FilterBottomSheetModal from './FilterBottomSheetModal';
 
 export default function HomeNavigationBar() {
+  const [isFilterBottomSheetModalOpen, toggleFilterBottomSheetModal] = useToggle(false);
+
   return (
-    <nav css={navCss}>
-      <Link href="/?modal=tag" as="/tag" scroll={false}>
-        <a>
+    <>
+      <nav css={navCss}>
+        <button onClick={toggleFilterBottomSheetModal}>
           <FilterIcon css={iconCss} />
-        </a>
-      </Link>
-      <InternalLink href="/my">
-        <a>
-          <SettingsIcon css={iconCss} />
-        </a>
-      </InternalLink>
-    </nav>
+        </button>
+        <InternalLink href="/my">
+          <a>
+            <SettingsIcon css={iconCss} />
+          </a>
+        </InternalLink>
+      </nav>
+
+      <FilterBottomSheetModal
+        isShowing={isFilterBottomSheetModalOpen}
+        onClose={toggleFilterBottomSheetModal}
+      />
+    </>
   );
 }
 

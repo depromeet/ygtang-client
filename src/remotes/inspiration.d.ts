@@ -17,6 +17,6 @@ interface InspirationInterface {
   content: string;
   memo: string;
   openGraphResponse: OpenGraphResonse;
-  createDatetime: string;
+  createdDatetime: string;
   updatedDatetime: string;
 }
