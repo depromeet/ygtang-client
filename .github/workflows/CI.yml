@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Build
+        run: yarn build
+
       - name: Analyze bundle sizes
         uses: transferwise/actions-next-bundle-analyzer@master
         with:
