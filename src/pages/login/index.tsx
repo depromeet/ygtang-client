@@ -100,6 +100,7 @@ export default function Login() {
           value={email.value}
           onChange={email.onChange}
           required
+          alertWhenFocused
         />
         <TextField
           type="password"
@@ -110,6 +111,7 @@ export default function Login() {
           value={password.value}
           onChange={password.onChange}
           required
+          alertWhenFocused
         />
         <CTAButton type={'submit'} disabled={isPending}>
           로그인

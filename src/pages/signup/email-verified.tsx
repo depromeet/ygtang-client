@@ -112,6 +112,7 @@ export default function SignUpEmailVerified() {
             value={nickname.value}
             onChange={nickname.onChange}
             required
+            alertWhenFocused
           />
           <TextField
             type="password"
@@ -122,6 +123,7 @@ export default function SignUpEmailVerified() {
             value={password.value}
             onChange={password.onChange}
             required
+            alertWhenFocused
           />
           <TextField
             type="password"
@@ -138,6 +140,7 @@ export default function SignUpEmailVerified() {
             value={passwordRepeat.value}
             onChange={passwordRepeat.onChange}
             required
+            alertWhenFocused
           />
           <div css={checkListWrapperCss}>
             <CheckList
