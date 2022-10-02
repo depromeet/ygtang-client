@@ -15,6 +15,7 @@ const theme = {
     dim01: 'rgba(0, 0, 0, 0.1)', // main thumnail tag background
     dim02: 'rgba(0, 0, 0, 0.2)',
     dim03: 'rgba(0, 0, 0, 0.6)', //screen dim
+    alert: '#E9412b',
   },
   borderRadius: {
     default: '4px',

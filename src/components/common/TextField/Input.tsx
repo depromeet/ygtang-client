@@ -52,6 +52,11 @@ export interface InputProps extends InputAndTextarea {
    * input이 blur가 될 때 실행할 액션입니다.
    */
   onBlur?: VoidFunction;
+
+  /**
+   * Focus시 alert 색상을 사용합니다.
+   */
+  alertWhenFocused?: boolean;
 }
 
 export function Input({
@@ -63,6 +68,7 @@ export function Input({
   padding,
   autoFocus = false,
   onBlur,
+  alertWhenFocused = false,
   ...props
 }: InputProps) {
   const theme = useTheme();
@@ -89,6 +95,7 @@ export function Input({
             isAppend: typeof append !== 'undefined',
             padding,
             inputValue: value,
+            alertWhenFocused,
           }),
           ref: inputRef,
           onBlur,
@@ -114,12 +121,14 @@ const inputElementCss = (
     isAppend,
     padding = 12,
     inputValue,
+    alertWhenFocused,
   }: {
     fixedHeight?: number;
     isPreAppend?: boolean;
     isAppend?: boolean;
     padding?: number;
     inputValue?: string;
+    alertWhenFocused?: boolean;
   }
 ) => css`
   width: 100%;
@@ -144,7 +153,7 @@ const inputElementCss = (
   resize: none;
 
   &:focus {
-    border-color: ${theme.color.gray03};
+    border-color: ${alertWhenFocused ? theme.color.alert : theme.color.gray03};
   }
 
   &::placeholder {

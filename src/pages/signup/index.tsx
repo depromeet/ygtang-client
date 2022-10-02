@@ -51,6 +51,7 @@ export default function Signup() {
           feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
           isSuccess={email.debouncedValue.length > 0 && emailError === ''}
           required
+          alertWhenFocused
         />
         <CTAButton type={'submit'} disabled={isCTAButtonDisabled}>
           다음

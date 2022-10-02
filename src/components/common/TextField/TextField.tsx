@@ -1,5 +1,5 @@
 import { ReactNode, useId } from 'react';
-import { css, Theme } from '@emotion/react';
+import { css, Theme, useTheme } from '@emotion/react';
 
 import { CheckIcon } from '~/components/common/icons';
 import { labelCss } from '~/components/common/styles';
@@ -53,9 +53,12 @@ export function TextField({
   feedback,
   customId,
   autoFocus,
+  alertWhenFocused = false,
   ...props
 }: TextFieldProps) {
   const id = useId();
+  const theme = useTheme();
+
   return (
     <div css={wrapperCss}>
       {label &&
@@ -70,6 +73,7 @@ export function TextField({
         value={value}
         autoFocus={autoFocus}
         id={customId ?? 'input-' + id}
+        alertWhenFocused={alertWhenFocused}
         {...props}
         append={
           isSuccess && (
@@ -80,7 +84,11 @@ export function TextField({
         }
       />
       {feedback &&
-        (typeof feedback === 'string' ? <p css={feedbackMessageCss}>{feedback}</p> : feedback)}
+        (typeof feedback === 'string' ? (
+          <p css={feedbackMessageCss(theme, { alertWhenFocused })}>{feedback}</p>
+        ) : (
+          feedback
+        ))}
     </div>
   );
 }
@@ -91,8 +99,11 @@ const wrapperCss = css`
   gap: 6px;
 `;
 
-const feedbackMessageCss = (theme: Theme) => css`
-  color: ${theme.color.gray03};
+const feedbackMessageCss = (
+  theme: Theme,
+  { alertWhenFocused }: { alertWhenFocused: boolean }
+) => css`
+  color: ${alertWhenFocused ? theme.color.alert : theme.color.gray03};
   font-size: 12px;
   font-weight: 500;
   line-height: 150%;
