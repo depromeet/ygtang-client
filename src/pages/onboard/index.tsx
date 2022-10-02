@@ -26,8 +26,8 @@ export default function Onboard() {
           <SnapCarousel.Item>
             <OnboardContent
               imgSrc={ONBOARD_IMAGE[1]}
-              title="마음껏 추가하세요."
-              description="글, 사진, 링크로 된 영감을 모을 수 있어요."
+              title="빠르게 추가하세요."
+              description="앗 앱에 들어오지 않아도 돼요!<br/>공유기능을 통해 저장할 수 있어요."
             />
           </SnapCarousel.Item>
           <SnapCarousel.Item>
