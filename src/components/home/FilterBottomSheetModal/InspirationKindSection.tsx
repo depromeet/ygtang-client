@@ -11,7 +11,7 @@ export default function InspirationKindSection() {
       <span css={spanCss}>영감 종류</span>
       <div css={buttonWrapperCss}>
         <CheckboxButton text="전체" value={null} />
-        <span css={spanDividerCss} />
+        <div css={spanDividerCss}></div>
         <CheckboxButton text="이미지" value={'IMAGE'} />
         <CheckboxButton text="글" value={'TEXT'} />
         <CheckboxButton text="링크" value={'LINK'} />
@@ -32,6 +32,7 @@ const spanCss = css`
 
 const buttonWrapperCss = css`
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 12px;
   height: 36px;
@@ -71,6 +72,7 @@ const buttonCss = (theme: Theme) => css`
   align-items: center;
   font-size: 12px;
   gap: 6px;
+  padding: 0;
   color: ${theme.color.gray05};
 
   /* NOTE: Check Icon 상하 가운데 정렬 */
