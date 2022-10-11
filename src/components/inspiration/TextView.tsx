@@ -10,6 +10,7 @@ import useInput from '~/hooks/common/useInput';
 import { recordEvent } from '~/utils/analytics';
 
 import { formCss } from './ImageView';
+import InspirationTime from './InspirationTime';
 import { ViewProps } from './type';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
@@ -31,13 +32,14 @@ export default function TextView({ inspiration }: TextViewProps) {
 
   if (!inspiration) return <></>;
 
-  const { tagResponses, content } = inspiration;
+  const { tagResponses, content, updatedDatetime } = inspiration;
 
   return (
     <>
       <article css={addTextCss}>
         <form css={formCss}>
           <section css={addTextTopCss}>
+            <InspirationTime updatedDatetime={updatedDatetime} />
             <div css={contentWrapperCss}>
               <Input
                 as="textarea"

@@ -10,6 +10,7 @@ import useInput from '~/hooks/common/useInput';
 import { fullViewHeight } from '~/styles/utils';
 import { recordEvent } from '~/utils/analytics';
 
+import InspirationTime from './InspirationTime';
 import { ViewProps } from './type';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
@@ -34,13 +35,14 @@ export default function ImageView({ inspiration }: ImageViewProps) {
 
   if (!inspiration) return <></>;
 
-  const { tagResponses, content } = inspiration;
+  const { tagResponses, content, updatedDatetime } = inspiration;
 
   return (
     <>
       <article css={addImageCss}>
         <div css={formCss}>
           <section css={addImageTopCss}>
+            <InspirationTime updatedDatetime={updatedDatetime} />
             <div css={contentWrapperCss}>
               <ImageContent src={content ?? null} alt="uploadedImg" />
             </div>
