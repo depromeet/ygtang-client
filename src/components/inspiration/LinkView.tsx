@@ -10,10 +10,13 @@ import useInput from '~/hooks/common/useInput';
 import { recordEvent } from '~/utils/analytics';
 
 import { formCss } from './ImageView';
+import { ViewProps } from './type';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
-export default function LinkView({ inspiration }: { inspiration: InspirationInterface }) {
+interface LinkViewProps extends ViewProps {}
+
+export default function LinkView({ inspiration }: LinkViewProps) {
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,

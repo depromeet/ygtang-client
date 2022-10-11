@@ -10,10 +10,13 @@ import useInput from '~/hooks/common/useInput';
 import { recordEvent } from '~/utils/analytics';
 
 import { formCss } from './ImageView';
+import { ViewProps } from './type';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
-export default function TextView({ inspiration }: { inspiration: InspirationInterface }) {
+interface TextViewProps extends ViewProps {}
+
+export default function TextView({ inspiration }: TextViewProps) {
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true, initialValue: inspiration.memo });
   const { modifyInspiration } = useInspirationMutation();

@@ -10,9 +10,13 @@ import useInput from '~/hooks/common/useInput';
 import { fullViewHeight } from '~/styles/utils';
 import { recordEvent } from '~/utils/analytics';
 
+import { ViewProps } from './type';
+
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
-export default function ImageView({ inspiration }: { inspiration: InspirationInterface }) {
+interface ImageViewProps extends ViewProps {}
+
+export default function ImageView({ inspiration }: ImageViewProps) {
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
