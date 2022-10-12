@@ -10,10 +10,14 @@ import useInput from '~/hooks/common/useInput';
 import { recordEvent } from '~/utils/analytics';
 
 import { formCss } from './ImageView';
+import InspirationTime from './InspirationTime';
+import { ViewProps } from './type';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
-export default function TextView({ inspiration }: { inspiration: InspirationInterface }) {
+interface TextViewProps extends ViewProps {}
+
+export default function TextView({ inspiration }: TextViewProps) {
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true, initialValue: inspiration.memo });
   const { modifyInspiration } = useInspirationMutation();
@@ -28,13 +32,14 @@ export default function TextView({ inspiration }: { inspiration: InspirationInte
 
   if (!inspiration) return <></>;
 
-  const { tagResponses, content } = inspiration;
+  const { tagResponses, content, updatedDatetime } = inspiration;
 
   return (
     <>
       <article css={addTextCss}>
         <form css={formCss}>
           <section css={addTextTopCss}>
+            <InspirationTime updatedDatetime={updatedDatetime} />
             <div css={contentWrapperCss}>
               <Input
                 as="textarea"

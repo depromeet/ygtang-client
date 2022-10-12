@@ -10,10 +10,14 @@ import useInput from '~/hooks/common/useInput';
 import { recordEvent } from '~/utils/analytics';
 
 import { formCss } from './ImageView';
+import InspirationTime from './InspirationTime';
+import { ViewProps } from './type';
 
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
-export default function LinkView({ inspiration }: { inspiration: InspirationInterface }) {
+interface LinkViewProps extends ViewProps {}
+
+export default function LinkView({ inspiration }: LinkViewProps) {
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
@@ -30,7 +34,7 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
   };
 
   if (!inspiration) return <></>;
-  const { tagResponses, openGraphResponse } = inspiration;
+  const { tagResponses, openGraphResponse, updatedDatetime } = inspiration;
 
   if (!openGraphResponse) return <></>;
 
@@ -41,6 +45,7 @@ export default function LinkView({ inspiration }: { inspiration: InspirationInte
       <article css={addLinkCss}>
         <form css={formCss}>
           <section css={addLinkTopCss}>
+            <InspirationTime updatedDatetime={updatedDatetime} />
             <div css={contentWrapperCss}>
               <LinkInput
                 openGraph={{
