@@ -4,6 +4,8 @@ import { css, Theme } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
+import PortalWrapper from '~/components/common/PortalWrapper';
+import { FixedSpinner } from '~/components/common/Spinner';
 import TextField from '~/components/common/TextField';
 import useSendPasswordResetEmailMutation from '~/hooks/api/auth/useSendPasswordResetEmailMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
@@ -81,6 +83,9 @@ export default function PasswordReset() {
         </CTAButton>
       </form>
       <div css={signUpTextWrapperCss}>문의사항은 yeonggamt@gmail.com로 문의해 주세요.</div>
+      <PortalWrapper isShowing={isSendPasswordResetEmailLoading}>
+        <FixedSpinner opacity={0.8} />
+      </PortalWrapper>
     </article>
   );
 }
