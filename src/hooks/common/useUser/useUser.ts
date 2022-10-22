@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { localStorageUserTokenKeys } from '~/constants/localStorage';
 import useInternalRouter from '~/hooks/common/useInternalRouter';

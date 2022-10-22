@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { WEBVIEW_MESSAGE_TYPE } from '~/constants/common';
 import { INSPIRATION_BY_ID_QUERY_KEY } from '~/hooks/api/inspiration/useInspirationById';
@@ -27,15 +27,15 @@ export default function useInspirationMutation(param?: InspirationMutationParams
   const { postMessage } = useWebViewMessage();
 
   const refreshInspirationList = () => {
-    queryClient.invalidateQueries(INSPIRATION_LIST_QUERY_KEY);
+    queryClient.invalidateQueries([INSPIRATION_LIST_QUERY_KEY]);
   };
 
   const resetInspirationList = () => {
-    queryClient.resetQueries(INSPIRATION_LIST_QUERY_KEY);
+    queryClient.resetQueries([INSPIRATION_LIST_QUERY_KEY]);
   };
 
   const removeInspirationList = () => {
-    queryClient.removeQueries(INSPIRATION_LIST_QUERY_KEY, { exact: true });
+    queryClient.removeQueries([INSPIRATION_LIST_QUERY_KEY], { exact: true });
   };
 
   const refreshInspirationById = (id: number) => {
@@ -43,7 +43,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
   };
 
   const removeWholeInspirationById = () => {
-    queryClient.removeQueries(INSPIRATION_BY_ID_QUERY_KEY);
+    queryClient.removeQueries([INSPIRATION_BY_ID_QUERY_KEY]);
   };
 
   const createInspirationMutation = useMutation(

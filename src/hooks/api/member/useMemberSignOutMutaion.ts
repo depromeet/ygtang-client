@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { useUser } from '~/hooks/common/useUser';
 import { del } from '~/libs/api/client';
