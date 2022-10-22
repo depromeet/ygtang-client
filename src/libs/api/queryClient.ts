@@ -1,4 +1,4 @@
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 /**
  * 전역 QueryClientProvider에서 사용되는 QueryClient입니다.

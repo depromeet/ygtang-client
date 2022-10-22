@@ -3,8 +3,8 @@ import { AppProps } from 'next/app';
 import NextHead from 'next/head';
 import { css, Theme, ThemeProvider } from '@emotion/react';
 import { init as sentryInit } from '@sentry/nextjs';
-import { QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
 
 import { ErrorBoundary } from '~/components/common/ErrorBoundary';

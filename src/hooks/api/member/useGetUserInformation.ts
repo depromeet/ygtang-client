@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { get } from '~/libs/api/client';
 
@@ -10,7 +10,7 @@ export default function useGetUserInformation(onSuccess?: (data: UserInformation
   };
 
   const query = useQuery<UserInformationType>(
-    USER_INFORMATION_QUERY_KEY,
+    [USER_INFORMATION_QUERY_KEY],
     async () => await fetchUserInformation(),
     { onSuccess }
   );

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import flatten from 'lodash/flatten';
-import { useInfiniteQuery } from 'react-query';
 
 import { get, post } from '~/libs/api/client';
 import { useCalendarFilter } from '~/store/CalendarFilter';

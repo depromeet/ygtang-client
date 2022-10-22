@@ -1,5 +1,5 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
 import flatten from 'lodash/flatten';
-import { useInfiniteQuery } from 'react-query';
 
 import { get } from '~/libs/api/client';
 

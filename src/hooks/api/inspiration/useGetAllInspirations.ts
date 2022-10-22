@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import flatten from 'lodash/flatten';
-import { useQuery } from 'react-query';
 
 import { get, post } from '~/libs/api/client';
 import { useCalendarFilter } from '~/store/CalendarFilter';

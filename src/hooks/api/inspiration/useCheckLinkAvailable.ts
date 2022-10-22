@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
-import { useQuery } from 'react-query';
 
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import { get } from '~/libs/api/client';

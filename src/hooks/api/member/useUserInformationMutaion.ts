@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { put } from '~/libs/api/client';
 import { queryClient } from '~/libs/api/queryClient';
@@ -9,7 +9,7 @@ import { USER_INFORMATION_QUERY_KEY } from './useGetUserInformation';
 export default function useUserInformationMutation() {
   const { fireToast } = useToast();
   const resetUserInformation = () => {
-    queryClient.resetQueries(USER_INFORMATION_QUERY_KEY);
+    queryClient.resetQueries([USER_INFORMATION_QUERY_KEY]);
   };
 
   const putUserInformationNicknameMutation = useMutation(
