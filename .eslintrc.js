@@ -1,4 +1,10 @@
 module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    jest: true,
+  },
+  parser: '@typescript-eslint/parser',
   extends: ['next', 'prettier', 'plugin:import/recommended', 'plugin:import/typescript'],
   plugins: ['prettier', 'import', '@typescript-eslint', 'simple-import-sort', 'ygt-rules'],
   settings: {
