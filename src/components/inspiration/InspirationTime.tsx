@@ -9,7 +9,7 @@ const WEEK = ['일', '월', '화', '수', '목', '금', '토'];
 
 export default function InspirationTime({ updatedDatetime }: InspirationTimeProps) {
   const formattedTime = useMemo(() => {
-    const updateDate = new Date(updatedDatetime);
+    const updateDate = new Date(updatedDatetime.replace(/-/g, '/'));
 
     const year = updateDate.getFullYear();
     const month = updateDate.getMonth() + 1;
