@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
@@ -11,6 +12,7 @@ import { Input } from '~/components/common/TextField/Input';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useInput from '~/hooks/common/useInput';
+import useQueryParam from '~/hooks/common/useRouterQuery';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
 import { recordEvent } from '~/utils/analytics';
@@ -20,11 +22,19 @@ import { formCss } from './image';
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddText() {
+  const isClipboard = useQueryParam('isClipboard', String);
+  const { currentToast } = useToast();
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue.trim());
   const { tags } = useAppliedTags(true);
   const { fireToast } = useToast();
+
+  useEffect(() => {
+    const clipboardText = currentToast?.clipboardConfig?.clipboardData;
+    if (clipboardText === undefined || isClipboard !== 'true') return;
+    inspiringText.setValue(clipboardText);
+  }, [isClipboard, currentToast, inspiringText]);
 
   useDataShareMessage({ type: 'TEXT', setStateHandler: inspiringText.setValue });
 
@@ -68,6 +78,9 @@ export default function AddText() {
                 placeholder="영감을 작성해 보세요."
                 value={inspiringText.value}
                 onChange={inspiringText.onChange}
+                defaultValue={
+                  isClipboard === 'true' ? currentToast?.clipboardConfig?.clipboardData : undefined
+                }
               />
             </div>
             <div css={contentWrapperCss}>

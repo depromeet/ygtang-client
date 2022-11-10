@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 
@@ -12,6 +12,7 @@ import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useInput from '~/hooks/common/useInput';
+import useQueryParam from '~/hooks/common/useRouterQuery';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
 import { recordEvent } from '~/utils/analytics';
@@ -21,17 +22,23 @@ import { formCss } from './image';
 const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagFormRouteAsModal'));
 
 export default function AddLink() {
+  const isClipboard = useQueryParam('isClipboard', String);
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
     value: memoValue,
   } = useInput({ useDebounce: true });
-
+  const { currentToast, fireToast } = useToast();
   const [openGraph, setOpenGraph] = useState<OpenGraphResponse | null>(null);
   const [initialLink, setInitialLink] = useState('');
 
+  useEffect(() => {
+    const clipboardLink = currentToast?.clipboardConfig?.clipboardData;
+    if (clipboardLink === undefined || isClipboard !== 'true') return;
+    setInitialLink(clipboardLink);
+  }, [isClipboard, currentToast]);
+
   useDataShareMessage({ type: 'LINK', setStateHandler: setInitialLink });
-  const { fireToast } = useToast();
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
