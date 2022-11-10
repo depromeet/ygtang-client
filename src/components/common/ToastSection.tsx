@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
 import { css, Theme, useTheme } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { isNil } from 'lodash';
+import isNil from 'lodash/isNil';
 
 import { defaultFadeInUpVariants } from '~/constants/motions';
 import { useToast } from '~/store/Toast';
