@@ -129,7 +129,7 @@ jobs:
 
       - name: Generate environment json file
         run: |
-          echo $secrets.CYPRESS_ENV_JSON >> cypress.env.json
+          echo '${{ secrets.CYPRESS_ENV_JSON }}' > cypress.env.json
 
       - name: E2E test - chrome
         uses: cypress-io/github-action@v4
