@@ -128,10 +128,11 @@ jobs:
       #     mkcert localhost
 
       - name: Generate environment json file
+        env:
+            CYPRESS_ENV_JSON: ${{ secrets.CYPRESS_ENV_JSON }}
         run: |
           echo "$CYPRESS_ENV_JSON" >> cypress.env.json
-        env:
-          CYPRESS_ENV_JSON: ${{ secrets.CYPRESS_ENV_JSON }}
+        
 
       - name: E2E test - chrome
         uses: cypress-io/github-action@v4
