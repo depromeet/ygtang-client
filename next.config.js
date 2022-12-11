@@ -12,6 +12,10 @@ const nextConfig = {
     APP_ENV: process.env.NODE_ENV,
     API_DEVELOPMENT: process.env.API_DEVELOPMENT,
   },
+  swcMinify: true,
+  compiler: {
+    emotion: true,
+  },
 };
 
 const sentryWebpackPluginOptions = {
