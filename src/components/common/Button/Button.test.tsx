@@ -1,5 +1,7 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
+
+import { customRender } from '~/__test__/utils';
 
 import Button from './Button';
 
@@ -11,13 +13,13 @@ describe('components/common/Button/Button', () => {
   });
 
   it('should render children', () => {
-    render(<Button>{buttonText}</Button>);
+    customRender(<Button>{buttonText}</Button>);
     expect(screen.getByText(buttonText)).toBeInTheDocument();
   });
 
   it('onClick prop이 정상적으로 동작해야함', () => {
     const onClickMock = jest.fn();
-    render(<Button onClick={onClickMock}>{buttonText}</Button>);
+    customRender(<Button onClick={onClickMock}>{buttonText}</Button>);
 
     expect(onClickMock).not.toBeCalled();
     fireEvent.click(screen.getByText(buttonText));
