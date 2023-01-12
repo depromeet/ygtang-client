@@ -32,10 +32,13 @@ export default function AddImage() {
   } = useInput({ useDebounce: true });
   const { isDesktop } = useUserAgent();
   const { imgInputUploader } = useImgUpload({});
-  const { push } = useInternalRouter();
+  const { push, back } = useInternalRouter();
   const { uploadedImg, uploadImg } = useUploadedImg();
   const { fireToast } = useToast();
-  useDataShareMessage({ type: 'IMAGE', setStateHandler: uploadImg });
+  const { requestCompleteMessageWhenIosShare } = useDataShareMessage({
+    type: 'IMAGE',
+    setStateHandler: uploadImg,
+  });
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
@@ -71,13 +74,22 @@ export default function AddImage() {
         (memoValue.length > 0 ? '메모와 함께 영감 추가' : '메모없이 영감 추가') +
         ` 이미지 크기: ${uploadedImg.blob.size}`,
     });
-    createInspiration(imgData);
+    createInspiration(imgData, {
+      onSuccess: () => {
+        requestCompleteMessageWhenIosShare(() => push('/'));
+      },
+    });
   };
 
   return (
     <>
       <article css={addImageCss}>
-        <NavigationBar title="이미지 추가" />
+        <NavigationBar
+          title="이미지 추가"
+          onClickBackButton={() => {
+            requestCompleteMessageWhenIosShare(() => back());
+          }}
+        />
 
         <form onSubmit={submitImg} css={formCss}>
           <ImgUploader imgInputUploader={imgInputUploader} />

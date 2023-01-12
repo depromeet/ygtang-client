@@ -53,7 +53,6 @@ export default function useInspirationMutation(param?: InspirationMutationParams
         fireToast({ content: '영감을 등록했습니다.' });
         resetInspirationList();
         postMessage(WEBVIEW_MESSAGE_TYPE.CreatedInspiration);
-        push('/');
       },
       onError: (error, variable, context) => {
         onError && onError();
