@@ -72,7 +72,9 @@ export function useDataShareMessage({
 
   const requestCompleteMessageWhenIosShare = (otherAction: VoidFunction) => {
     if (isIosShareView) {
-      sendShareCompleteMessage();
+      setTimeout(() => {
+        sendShareCompleteMessage();
+      }, 1000);
     } else {
       otherAction();
     }
