@@ -55,13 +55,16 @@ export default function MyTag() {
           {hasNextPage && !isLoading && <div ref={setTarget}></div>}
         </ul>
       </LoadingHandler>
-      <CTABottomButton
-        onClick={() => {
-          setIsShowing(true);
-        }}
-      >
-        태그등록
-      </CTABottomButton>
+      <section css={addTagBottomCss}>
+        <CTABottomButton
+          onClick={() => {
+            setIsShowing(true);
+          }}
+        >
+          태그등록
+        </CTABottomButton>
+      </section>
+
       <AddTagBottomSheet
         isShowing={isShowing}
         onClose={() => {
@@ -82,4 +85,8 @@ const myTagItemListCss = css`
   margin-top: 20px;
   flex: 1;
   overflow-y: scroll;
+`;
+
+const addTagBottomCss = css`
+  margin: 8px 0 16px 0;
 `;
