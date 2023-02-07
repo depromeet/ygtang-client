@@ -93,6 +93,7 @@ export function MemoText({
 
   return (
     <TextField
+      css={[editable && editableTextFieldCss]}
       as={'textarea'}
       value={value}
       onChange={onValueChange}
@@ -129,6 +130,12 @@ export function MemoText({
   );
 }
 
+const editableTextFieldCss = css`
+  padding: 0;
+  border: 0;
+  background-color: inherit;
+`;
+
 const flexBetweenWrapper = css`
   display: flex;
   justify-content: space-between;
@@ -146,6 +153,7 @@ const textLimitCss = (theme: Theme) => css`
   font-size: 12px;
   line-height: 150%;
 `;
+
 const textLimitCurrentCss = (theme: Theme) => css`
   color: ${theme.color.gray04};
 `;
