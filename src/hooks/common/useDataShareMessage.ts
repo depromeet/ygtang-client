@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { UploadedImg } from '~/store/UploadedImage/useUploadedImg';
 import { base64ToBlob } from '~/utils/common';
@@ -49,6 +49,7 @@ export function useDataShareMessage({
   setStateHandler,
 }: ImgShareMessageProps | DataShareMessageProps) {
   const { isAndroid, isIos, isMobile } = useUserAgent();
+  const [isIosShareView, setIsIosShareView] = useState(false);
 
   // NOTE : document.addEventListener('message', handleMessage)에 event type 중 MessageEvent 존재하지 않아 선대처합니다.
   const handleMessage = async (event: MessageEvent | unknown) => {
@@ -59,6 +60,23 @@ export function useDataShareMessage({
       setStateHandler({ blob: await base64ToBlob(data.data, data.mimeType), base64: data.data });
     } else {
       setStateHandler(data.data);
+    }
+    setIsIosShareView(isIos());
+  };
+
+  const sendShareCompleteMessage = () => {
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({ type: SHARE_WEB_MESSAGE_STATE, data: 'SHARE_COMPLETE' })
+    );
+  };
+
+  const requestCompleteMessageWhenIosShare = (otherAction: VoidFunction) => {
+    if (isIosShareView) {
+      setTimeout(() => {
+        sendShareCompleteMessage();
+      }, 1000);
+    } else {
+      otherAction();
     }
   };
 
@@ -79,4 +97,8 @@ export function useDataShareMessage({
       target.removeEventListener('message', handleMessage);
     };
   });
+
+  return {
+    requestCompleteMessageWhenIosShare,
+  };
 }

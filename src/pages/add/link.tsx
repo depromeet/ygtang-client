@@ -12,6 +12,7 @@ import { MemoText } from '~/components/common/TextField';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useInput from '~/hooks/common/useInput';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
@@ -23,6 +24,7 @@ const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagForm
 
 export default function AddLink() {
   const isClipboard = useQueryParam('isClipboard', String);
+  const { push, back } = useInternalRouter();
   const {
     onChange: onMemoChange,
     debouncedValue: memoDebouncedValue,
@@ -38,7 +40,10 @@ export default function AddLink() {
     setInitialLink(clipboardLink);
   }, [isClipboard, currentToast]);
 
-  useDataShareMessage({ type: 'LINK', setStateHandler: setInitialLink });
+  const { requestCompleteMessageWhenIosShare } = useDataShareMessage({
+    type: 'LINK',
+    setStateHandler: setInitialLink,
+  });
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
@@ -69,13 +74,22 @@ export default function AddLink() {
       value: '링크 영감',
       label: memoValue.length > 0 ? '메모와 함께 영감 추가' : '메모없이 영감 추가',
     });
-    createInspiration(linkData);
+    createInspiration(linkData, {
+      onSuccess: () => {
+        requestCompleteMessageWhenIosShare(() => push('/'));
+      },
+    });
   };
 
   return (
     <>
       <article css={addLinkCss}>
-        <NavigationBar title="링크 추가" />
+        <NavigationBar
+          title="링크 추가"
+          onClickBackButton={() => {
+            requestCompleteMessageWhenIosShare(() => back());
+          }}
+        />
 
         <form onSubmit={submitLink} css={formCss}>
           <section css={addLinkTopCss}>

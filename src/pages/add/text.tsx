@@ -12,6 +12,7 @@ import { Input } from '~/components/common/TextField/Input';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import { useDataShareMessage } from '~/hooks/common/useDataShareMessage';
 import useInput from '~/hooks/common/useInput';
+import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useQueryParam from '~/hooks/common/useRouterQuery';
 import { useAppliedTags } from '~/store/AppliedTags';
 import { useToast } from '~/store/Toast';
@@ -23,6 +24,7 @@ const AddTagFormRouteAsModal = dynamic(() => import('~/components/add/AddTagForm
 
 export default function AddText() {
   const isClipboard = useQueryParam('isClipboard', String);
+  const { push, back } = useInternalRouter();
   const { currentToast } = useToast();
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
@@ -36,7 +38,10 @@ export default function AddText() {
     inspiringText.setValue(clipboardText);
   }, [isClipboard, currentToast, inspiringText]);
 
-  useDataShareMessage({ type: 'TEXT', setStateHandler: inspiringText.setValue });
+  const { requestCompleteMessageWhenIosShare } = useDataShareMessage({
+    type: 'TEXT',
+    setStateHandler: inspiringText.setValue,
+  });
 
   const onMutationError = () => {
     fireToast({ content: '오류가 발생했습니다. 다시 시도해주세요.', duration: 3500 });
@@ -62,13 +67,22 @@ export default function AddText() {
       value: '텍스트 영감',
       label: memoText.value.length > 0 ? '메모와 함께 영감 추가' : '메모없이 영감 추가',
     });
-    createInspiration(textData);
+    createInspiration(textData, {
+      onSuccess: () => {
+        requestCompleteMessageWhenIosShare(() => push('/'));
+      },
+    });
   };
 
   return (
     <>
       <article css={addTextCss}>
-        <NavigationBar title="글 추가" />
+        <NavigationBar
+          title="글 추가"
+          onClickBackButton={() => {
+            requestCompleteMessageWhenIosShare(() => back());
+          }}
+        />
 
         <form onSubmit={submitText} css={formCss}>
           <section css={addTextTopCss}>
