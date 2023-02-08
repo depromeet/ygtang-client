@@ -6,7 +6,7 @@
 
 # 영감탱
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/depromeet/11th_7team_web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/depromeet/11th_7team_web/context:javascript) [![CI](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml) [![ygtang](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/tmhk21/main&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/tmhk21/runs) [![codecov](https://codecov.io/gh/depromeet/ygtang-client/branch/main/graph/badge.svg?token=OM28A5TKRR)](https://codecov.io/gh/depromeet/ygtang-client)
+[![CodeQL](https://github.com/depromeet/ygtang-client/actions/workflows/codeql.yml/badge.svg)](https://github.com/depromeet/ygtang-client/actions/workflows/codeql.yml) [![CI](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/depromeet/11th_7team_web/actions/workflows/CI.yml) [![ygtang](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/tmhk21/main&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/tmhk21/runs) [![codecov](https://codecov.io/gh/depromeet/ygtang-client/branch/main/graph/badge.svg?token=OM28A5TKRR)](https://codecov.io/gh/depromeet/ygtang-client)
 
 여기저기 흩어져있는 넘치는 영감.
 
