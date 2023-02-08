@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 
 import { FilledButton, IconButton } from '~/components/common/Button';
-import IllustDialog from '~/components/common/IllustDialog';
 import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
 import { FixedSpinner } from '~/components/common/Spinner';
@@ -18,6 +17,7 @@ import useQueryParam from '~/hooks/common/useRouterQuery';
 import { recordEvent } from '~/utils/analytics';
 
 const EditTagFormRouteAsModal = dynamic(() => import('~/components/edit/EditTagFormRouteAsModal'));
+const IllustDialog = dynamic(() => import('~/components/common/IllustDialog'));
 
 export default function ContentPage() {
   const inspirationId = useQueryParam('id', String);
@@ -80,30 +80,31 @@ export default function ContentPage() {
             {inspiration && renderInspirationViewByType(inspiration)}
           </motion.section>
         </LoadingHandler>
-
-        <IllustDialog
-          image={`/modal_characters/2.png`}
-          isShowing={isDeleteInspirationModalOn}
-          actionButtons={
-            <>
-              <FilledButton
-                colorType="light"
-                onClick={() => inspiration && deleteInspirationById(inspiration.id)}
-              >
-                네
-              </FilledButton>
-              <FilledButton colorType="dark" onClick={() => setDeleteInspirationModalOn(false)}>
-                아니요
-              </FilledButton>
-            </>
-          }
-        >
-          영감이 삭제됩니다.
-          <br />
-          괜찮으신가요?
-        </IllustDialog>
       </article>
+
       <EditTagFormRouteAsModal />
+
+      <IllustDialog
+        image={`/modal_characters/2.png`}
+        isShowing={isDeleteInspirationModalOn}
+        actionButtons={
+          <>
+            <FilledButton
+              colorType="light"
+              onClick={() => inspiration && deleteInspirationById(inspiration.id)}
+            >
+              네
+            </FilledButton>
+            <FilledButton colorType="dark" onClick={() => setDeleteInspirationModalOn(false)}>
+              아니요
+            </FilledButton>
+          </>
+        }
+      >
+        영감이 삭제됩니다.
+        <br />
+        괜찮으신가요?
+      </IllustDialog>
     </>
   );
 }

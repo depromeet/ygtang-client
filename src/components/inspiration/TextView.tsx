@@ -42,6 +42,7 @@ export default function TextView({ inspiration }: TextViewProps) {
             <InspirationTime updatedDatetime={updatedDatetime} />
             <div css={contentWrapperCss}>
               <Input
+                css={editableInputCss}
                 as="textarea"
                 placeholder="영감을 작성해 보세요."
                 value={content}
@@ -71,6 +72,12 @@ export default function TextView({ inspiration }: TextViewProps) {
     </>
   );
 }
+
+const editableInputCss = css`
+  border: 0;
+  padding: 0;
+  background-color: inherit;
+`;
 
 const addTextCss = css`
   display: flex;
