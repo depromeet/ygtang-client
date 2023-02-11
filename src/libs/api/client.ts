@@ -1,6 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import { IS_PRODUCTION } from '~/constants/common';
+import ApiException from '~/exceptions/ApiException';
+import CustomException from '~/exceptions/CustomException';
+import { errorMessage } from '~/exceptions/messages';
+import { ApiErrorScheme } from '~/exceptions/type';
 
 const DEVELOPMENT_API_URL = 'https://api.ygtang.xyz/api';
 const PRODUCTION_API_URL = 'https://ygtang.kr/api';
@@ -8,6 +12,7 @@ const PRODUCTION_API_URL = 'https://ygtang.kr/api';
 export const instance = axios.create({
   baseURL: IS_PRODUCTION ? PRODUCTION_API_URL : DEVELOPMENT_API_URL,
   withCredentials: true,
+  timeout: 15000,
 });
 
 export function replaceAccessTokenForRequestInstance(token: string) {
@@ -23,8 +28,16 @@ function interceptorResponseFulfilled(res: AxiosResponse) {
   return Promise.reject(res.data);
 }
 
-function interceptorResponseRejected(error: AxiosError) {
-  return Promise.reject(new Error(error.response?.data?.message ?? error));
+function interceptorResponseRejected(error: AxiosError<ApiErrorScheme>) {
+  if (error.response?.data?.message) {
+    return Promise.reject(new ApiException(error.response.data, error.response.status));
+  }
+
+  if (error.request.timeout) {
+    return Promise.reject(new CustomException(errorMessage.TIMEOUT, 'NETWORK_TIMEOUT'));
+  }
+
+  return Promise.reject(new CustomException(errorMessage.UNKNOWN_400, 'NETWORK_ERROR'));
 }
 
 instance.interceptors.response.use(interceptorResponseFulfilled, interceptorResponseRejected);
