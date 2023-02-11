@@ -23,8 +23,8 @@ function interceptorResponseFulfilled(res: AxiosResponse) {
   return Promise.reject(res.data);
 }
 
-function interceptorResponseRejected(error: AxiosError) {
-  return Promise.reject(new Error(error.response?.data?.message ?? error));
+function interceptorResponseRejected(error: AxiosError<{ message: string }>) {
+  return Promise.reject(new Error(error.response?.data.message ?? error.message));
 }
 
 instance.interceptors.response.use(interceptorResponseFulfilled, interceptorResponseRejected);
