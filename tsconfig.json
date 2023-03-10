@@ -27,6 +27,6 @@
     ],
     "typeRoots": ["@types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", "cypress/**/*.*.ts"],
   "exclude": ["node_modules", "mock-server", "eslint"]
 }

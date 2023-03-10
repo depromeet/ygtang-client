@@ -35,7 +35,7 @@ describe('hooks/common/useDidMount/useDidMount', () => {
   it('called effect callback', () => {
     const effectCallback = jest.fn();
     renderHook(() => useDidMount(effectCallback));
-    expect(effectCallback).toBeCalled();
+    expect(effectCallback).toHaveBeenCalled();
   });
 
   it('called once when rerender', () => {

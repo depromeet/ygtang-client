@@ -14,7 +14,7 @@ const customJestConfig = {
     '!**/src/constants/**/*.{js,ts,jsx,tsx}',
     '!**/src/remotes/**/*.d.ts',
     '!**/src/store/**/!(use)*.{js,ts,jsx,tsx}',
-    '!**/src/styles/!(utils)/*.{js,ts,jsx,tsx}'
+    '!**/src/styles/!(utils)/*.{js,ts,jsx,tsx}',
   ],
   moduleNameMapper: {
     '~/(.*)': '<rootDir>/src/$1',

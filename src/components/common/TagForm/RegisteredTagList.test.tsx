@@ -34,13 +34,13 @@ describe('components/common/TagForm/RegisteredTagList', () => {
     const mockOnClick = jest.fn();
     customRender(<RegisteredTagList registeredTags={mockTags} onClick={mockOnClick} />);
     const tag1 = screen.getByText(`#${mockTags[0].content}`);
-    expect(mockOnClick).not.toBeCalled();
+    expect(mockOnClick).not.toHaveBeenCalled();
 
     fireEvent.click(tag1);
-    expect(mockOnClick).toBeCalled();
+    expect(mockOnClick).toHaveBeenCalled();
 
     fireEvent.click(tag1);
-    expect(mockOnClick).toBeCalledTimes(2);
+    expect(mockOnClick).toHaveBeenCalledTimes(2);
   });
 
   it('태그를 클릭할 시 각 태그를 props으로 사용합니다', () => {
@@ -57,13 +57,13 @@ describe('components/common/TagForm/RegisteredTagList', () => {
     fireEvent.click(tag1);
     expect(list.length).toBe(1);
     expect(list[0]).toBe(mockTags[0].id);
-    expect(mockOnClick).toBeCalledTimes(1);
-    expect(mockOnClick).toBeCalledWith(mockTags[0]);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
+    expect(mockOnClick).toHaveBeenCalledWith(mockTags[0]);
 
     fireEvent.click(tag2);
     expect(list.length).toBe(2);
     expect(list[1]).toBe(mockTags[1].id);
-    expect(mockOnClick).toBeCalledTimes(2);
-    expect(mockOnClick).toBeCalledWith(mockTags[1]);
+    expect(mockOnClick).toHaveBeenCalledTimes(2);
+    expect(mockOnClick).toHaveBeenCalledWith(mockTags[1]);
   });
 });
