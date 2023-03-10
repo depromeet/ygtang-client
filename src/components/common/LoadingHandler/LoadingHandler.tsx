@@ -14,7 +14,7 @@ function LoadingHandler({
   const id = useId();
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       {isLoading ? <React.Fragment key={id}>{loadingComponent}</React.Fragment> : children}
     </AnimatePresence>
   );
