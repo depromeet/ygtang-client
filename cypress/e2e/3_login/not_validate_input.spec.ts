@@ -4,7 +4,7 @@ const NOT_PASSWORD = 'foo';
 const EMAIL_ERROR_MESSAGE = '올바른 이메일을 입력해주세요.';
 const PASSWORD_ERROR_MESSAGE = '비밀번호는 6자리 이상이여야 합니다.';
 
-describe('3_login/not validate input', () => {
+describe('3_login/not validate input', { testIsolation: false }, () => {
   it('이메일란에 비 이메일 입력시 에러 메세지가 보여야 합니다', () => {
     cy.visit('/login');
 
