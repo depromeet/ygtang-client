@@ -79,11 +79,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:13.2.4"],\
             ["next-router-mock", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:0.9.2"],\
             ["prettier", "npm:2.8.4"],\
+            ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-calendar", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.0.0"],\
             ["react-dom", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:18.2.0"],\
             ["react-quick-pinch-zoom", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.6.0"],\
             ["recoil", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:0.7.7"],\
+            ["tslib", "npm:2.5.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
           ],\
           "linkType": "SOFT"\
@@ -12099,7 +12101,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/tslib", null],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:18.2.0"],\
-            ["tslib", null]\
+            ["tslib", "npm:2.5.0"]\
           ],\
           "packagePeers": [\
             "@types/react-dom",\
@@ -14579,11 +14581,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:13.2.4"],\
             ["next-router-mock", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:0.9.2"],\
             ["prettier", "npm:2.8.4"],\
+            ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-calendar", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.0.0"],\
             ["react-dom", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:18.2.0"],\
             ["react-quick-pinch-zoom", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.6.0"],\
             ["recoil", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:0.7.7"],\
+            ["tslib", "npm:2.5.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
           ],\
           "linkType": "SOFT"\
