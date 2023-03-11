@@ -136,7 +136,7 @@ jobs:
           browser: chrome
           record: true
           start: yarn dev
-          command-prefix: yarn
+          command: yarn cypress:headless
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.HYESUNG_GITHUB_TOKEN }}
