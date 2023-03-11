@@ -5,12 +5,10 @@ on:
     branches:
       - main
       - develop
-      - test
   pull_request:
     branches:
       - main
       - develop
-      - test
 
 jobs:
   run-bundle-analysis:
