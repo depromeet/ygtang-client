@@ -130,12 +130,14 @@ jobs:
           echo '${{ secrets.CYPRESS_ENV_JSON }}' > cypress.env.json
 
       - name: E2E test - chrome
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           install: false
           start: yarn dev
           browser: chrome
           record: true
+          command-prefix: yarn dlx
+          wait-on: 'http://localhost:3000'
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.HYESUNG_GITHUB_TOKEN }}
