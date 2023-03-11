@@ -5,12 +5,10 @@ on:
     branches:
       - main
       - develop
-      - preproduction
   pull_request:
     branches:
       - main
       - develop
-      - preproduction
 
 jobs:
   run-bundle-analysis:

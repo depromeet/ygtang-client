@@ -15,10 +15,10 @@ describe('components/common/Button/CTABottomButton', () => {
     const onClickMock = jest.fn();
     customRender(<CTABottomButton onClick={onClickMock}>{MOCK_TEXT}</CTABottomButton>);
 
-    expect(onClickMock).not.toBeCalled();
+    expect(onClickMock).not.toHaveBeenCalled();
     fireEvent.click(screen.getByText(MOCK_TEXT));
-    expect(onClickMock).toBeCalled();
-    expect(onClickMock).toBeCalledTimes(1);
+    expect(onClickMock).toHaveBeenCalled();
+    expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 
   // TODO: 테스트 CSS 환경 적용 이후, isIos에 따른 padding 값 확인

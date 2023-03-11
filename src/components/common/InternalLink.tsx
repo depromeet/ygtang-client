@@ -27,5 +27,9 @@ interface InternalLinkProps extends ComponentProps<typeof Link> {
  * ```
  */
 export default function InternalLink(props: InternalLinkProps) {
-  return <Link {...props}>{props.children}</Link>;
+  return (
+    <Link {...props} legacyBehavior>
+      {props.children}
+    </Link>
+  );
 }

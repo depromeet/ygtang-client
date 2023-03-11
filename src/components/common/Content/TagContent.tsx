@@ -46,9 +46,7 @@ export default function TagContent({
             as={inspirationId ? `/edit/tag?id=${inspirationId}` : '/add/tag'}
             scroll={false}
           >
-            <a>
-              <IconButton iconName="PlusIcon" />
-            </a>
+            <IconButton iconName="PlusIcon" />
           </Link>
         </div>
       </div>

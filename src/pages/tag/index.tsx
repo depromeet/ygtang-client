@@ -11,6 +11,7 @@ import useGetTagListWithInfinite from '~/hooks/api/tag/useGetTagListWithInfinite
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import useIntersectionObserver from '~/hooks/common/useIntersectionObserver';
 import { useFilteredTags } from '~/store/FilteredTags';
+import { recordEvent } from '~/utils/analytics';
 
 export default function TagPage() {
   const { filteredTags, addTag, removeTag } = useFilteredTags({});
@@ -27,6 +28,10 @@ export default function TagPage() {
   const router = useInternalRouter();
 
   const onClickComplete = () => {
+    recordEvent({
+      action: '태그 필터 화면 완료 클릭',
+      value: `${filteredTags.length}개의 태그 선택`,
+    });
     router.scrollPreventedPush('/');
   };
 

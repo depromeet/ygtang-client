@@ -1,4 +1,4 @@
-describe('3_login/route buttons', () => {
+describe('3_login/route buttons', { testIsolation: false }, () => {
   it('비밀번호 찾기 버튼 클릭시 올바른 route로 이동해야함', () => {
     cy.visit('/login');
     cy.wait(2000).get('button').contains('비밀번호 찾기').should('be.visible').click();

@@ -20,13 +20,13 @@ describe('components/common/Tag', () => {
     const mockOnClick = jest.fn();
     customRender(<Tag content={mockContent} onClick={mockOnClick} />);
     const wrapper = screen.getByText(`#${mockContent}`);
-    expect(mockOnClick).not.toBeCalled();
+    expect(mockOnClick).not.toHaveBeenCalled();
 
     fireEvent.click(wrapper);
-    expect(mockOnClick).toBeCalled();
+    expect(mockOnClick).toHaveBeenCalled();
 
     fireEvent.click(wrapper);
-    expect(mockOnClick).toBeCalledTimes(2);
+    expect(mockOnClick).toHaveBeenCalledTimes(2);
   });
 
   it('deletable일 시, 삭제 버튼이 있어야 합니다', () => {
@@ -38,12 +38,12 @@ describe('components/common/Tag', () => {
     const mockOnDelete = jest.fn();
     customRender(<Tag content={mockContent} deletable onDelete={mockOnDelete} />);
     const deleteButton = screen.getByRole('button');
-    expect(mockOnDelete).not.toBeCalled();
+    expect(mockOnDelete).not.toHaveBeenCalled();
 
     fireEvent.click(deleteButton);
-    expect(mockOnDelete).toBeCalled();
+    expect(mockOnDelete).toHaveBeenCalled();
 
     fireEvent.click(deleteButton);
-    expect(mockOnDelete).toBeCalledTimes(2);
+    expect(mockOnDelete).toHaveBeenCalledTimes(2);
   });
 });

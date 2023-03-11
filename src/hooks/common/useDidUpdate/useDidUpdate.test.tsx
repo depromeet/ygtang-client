@@ -38,12 +38,12 @@ describe('hooks/common/useDidUpdate/useDidUpdate', () => {
   it('not called callback when mounted', () => {
     const mockCallback = jest.fn();
     renderHook(() => useDidUpdate(mockCallback, []));
-    expect(mockCallback).not.toBeCalled();
+    expect(mockCallback).not.toHaveBeenCalled();
   });
 
   it('called when dependency list update', () => {
     render(<App />);
-    expect(mockCallback).not.toBeCalled();
+    expect(mockCallback).not.toHaveBeenCalled();
     const setStateButton = screen.getByText(STATE_BUTTON);
     fireEvent.click(setStateButton);
     expect(mockCallback).toHaveBeenCalledTimes(1);

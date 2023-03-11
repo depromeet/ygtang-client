@@ -41,8 +41,8 @@ export default function Information() {
   const queryEmail = useRouterQuery('email', String);
   const router = useInternalRouter();
 
-  const [gender, setGender] = useState<typeof GENDER_VALUES[number] | null>(null);
-  const [age, setAge] = useState<typeof AGE_VALUES[number] | null>(null);
+  const [gender, setGender] = useState<(typeof GENDER_VALUES)[number] | null>(null);
+  const [age, setAge] = useState<(typeof AGE_VALUES)[number] | null>(null);
   const [job, setJob] = useState<string | null>(null);
 
   const { mutate: signupMutate } = useSignupMutation();

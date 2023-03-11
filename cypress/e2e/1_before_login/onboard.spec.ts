@@ -8,13 +8,14 @@ function hexToRGB(hex: string) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-describe('1_before_login/onboard', () => {
+describe('1_before_login/onboard', { testIsolation: false }, () => {
   it('비로그인, root 접근 시 onboard로 이동', () => {
     cy.visit('/');
     cy.url().should('include', '/onboard');
   });
 
   it('온보드 이미지는 가로 슬라이드가 되어야 하며, 슬라이드 시 이전 요소가 보이지 않아야 합니다', () => {
+    cy.visit('/');
     // 첫 번째 온보딩 이미지가 보여야 합니다.
     cy.get('section > article').first().should('be.visible');
     // 첫 번째 인디케이터가 강조되어 있어야 합니다.
@@ -42,6 +43,7 @@ describe('1_before_login/onboard', () => {
   });
 
   it('하단의 버튼을 클릭할 시 로그인 화면으로 이동합니다', () => {
+    cy.visit('/');
     cy.get('button')
       .contains('시작하기')
       .should('have.css', 'background-color', hexToRGB(theme.color.primary));
