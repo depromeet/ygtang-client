@@ -21,9 +21,9 @@ describe('components/common/Button/Button', () => {
     const onClickMock = jest.fn();
     customRender(<Button onClick={onClickMock}>{buttonText}</Button>);
 
-    expect(onClickMock).not.toBeCalled();
+    expect(onClickMock).not.toHaveBeenCalled();
     fireEvent.click(screen.getByText(buttonText));
-    expect(onClickMock).toBeCalled();
-    expect(onClickMock).toBeCalledTimes(1);
+    expect(onClickMock).toHaveBeenCalled();
+    expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 });

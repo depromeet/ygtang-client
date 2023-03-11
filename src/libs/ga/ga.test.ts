@@ -25,8 +25,8 @@ describe('libs/ga', () => {
     const mockUrl = '/';
 
     gaPageview(mockUrl);
-    expect(gtag).toBeCalled();
-    expect(gtag).toBeCalledWith('config', undefined, { page_path: mockUrl });
+    expect(gtag).toHaveBeenCalled();
+    expect(gtag).toHaveBeenCalledWith('config', undefined, { page_path: mockUrl });
   });
 
   it('gaEvent는 props와 함께 event로 호출됩니다', () => {
@@ -36,8 +36,8 @@ describe('libs/ga', () => {
     const mockValue = 'value';
 
     gaEvent({ action: mockAction, category: mockCategory, label: mockLabel, value: mockValue });
-    expect(gtag).toBeCalled();
-    expect(gtag).toBeCalledWith('event', mockAction, {
+    expect(gtag).toHaveBeenCalled();
+    expect(gtag).toHaveBeenCalledWith('event', mockAction, {
       event_category: mockCategory,
       event_label: mockLabel,
       value: mockValue,

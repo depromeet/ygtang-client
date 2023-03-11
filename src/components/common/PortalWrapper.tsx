@@ -13,10 +13,7 @@ export default function PortalWrapper({
   const container = typeof window !== 'undefined' && document.body;
 
   return container ? (
-    createPortal(
-      <AnimatePresence exitBeforeEnter>{isShowing && children}</AnimatePresence>,
-      container
-    )
+    createPortal(<AnimatePresence mode="wait">{isShowing && children}</AnimatePresence>, container)
   ) : (
     <></>
   );

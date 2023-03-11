@@ -11,13 +11,13 @@ export const WEBVIEW_MESSAGE_TYPE = {
 type WebviewMessageTypeKey = keyof typeof WEBVIEW_MESSAGE_TYPE;
 
 export interface AppMessageData {
-  type: typeof WEBVIEW_MESSAGE_TYPE[WebviewMessageTypeKey];
+  type: (typeof WEBVIEW_MESSAGE_TYPE)[WebviewMessageTypeKey];
   data: unknown;
   [key: string]: unknown;
 }
 
 export interface AppMessageArgs {
-  targetType: typeof WEBVIEW_MESSAGE_TYPE[WebviewMessageTypeKey];
+  targetType: (typeof WEBVIEW_MESSAGE_TYPE)[WebviewMessageTypeKey];
   handler: ({ type, data, ...rest }: AppMessageData) => void;
 }
 

@@ -26,9 +26,9 @@ describe('components/common/Button/GhostButton', () => {
     const onClickMock = jest.fn();
     customRender(<GhostButton onClick={onClickMock}>{MOCK_TEXT}</GhostButton>);
 
-    expect(onClickMock).not.toBeCalled();
+    expect(onClickMock).not.toHaveBeenCalled();
     fireEvent.click(screen.getByText(MOCK_TEXT));
-    expect(onClickMock).toBeCalled();
-    expect(onClickMock).toBeCalledTimes(1);
+    expect(onClickMock).toHaveBeenCalled();
+    expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 });

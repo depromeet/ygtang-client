@@ -25,7 +25,7 @@ describe('components/common/SnapCarousel', () => {
     customRender(<SnapCarousel.Wrapper ref={mockSetRef}>{mockChildren}</SnapCarousel.Wrapper>);
 
     expect(screen.getByTestId(CAROUSEL_WARPPER_TEST_ID)).toBeInTheDocument();
-    expect(mockSetRef).toBeCalled();
+    expect(mockSetRef).toHaveBeenCalled();
   });
 
   it('Item은 children을 렌더링합니다', () => {

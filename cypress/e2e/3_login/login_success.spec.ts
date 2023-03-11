@@ -1,4 +1,4 @@
-describe('3_login/login success', () => {
+describe('3_login/login success', { testIsolation: false }, () => {
   it('이메일란에 올바른 이메일 입력시 확인 아이콘이 보여야 합니다', () => {
     cy.visit('/login');
 

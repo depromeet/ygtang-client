@@ -10,11 +10,8 @@ export default function TagFilterSection() {
 
   return (
     <section css={sectionCss}>
-      <Link href="/?modal=tag" as="/tag" scroll={false} passHref>
-        <a css={tagFilterAnchorCss}>
-          태그
-          <ChevronIcon direction="right" />
-        </a>
+      <Link href="/?modal=tag" as="/tag" scroll={false} passHref css={tagFilterAnchorCss}>
+        태그 <ChevronIcon direction="right" />
       </Link>
       {Boolean(filteredTags.length) && (
         <AppliedTags applyedTags={filteredTags} onRemove={removeTag} />

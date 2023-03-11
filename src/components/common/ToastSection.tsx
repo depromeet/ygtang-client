@@ -33,7 +33,7 @@ export default function ToastSection() {
 
   return (
     <div css={wrapperCss}>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {currentToast &&
           (!isNil(currentToast.clipboardConfig) ? (
             isClipboardToastVisible && (

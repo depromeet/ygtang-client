@@ -1,4 +1,3 @@
-const withPlugins = require('next-compose-plugins');
 const { withSentryConfig } = require('@sentry/nextjs');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -12,26 +11,27 @@ const nextConfig = {
     APP_ENV: process.env.NODE_ENV,
     API_DEVELOPMENT: process.env.API_DEVELOPMENT,
   },
-  swcMinify: true,
   compiler: {
     emotion: true,
+  },
+  compress: true,
+  webpack(config) {
+    const plugins = [...config.plugins, new CompressionPlugin()];
+    return { ...config, plugins };
+  },
+  sentry: {
+    hideSourceMaps: true,
+    disableServerWebpackPlugin: process.env.SENTRY_WEBPACK_PLUGIN_ENABLE !== 'true',
+    disableClientWebpackPlugin: process.env.SENTRY_WEBPACK_PLUGIN_ENABLE !== 'true',
   },
 };
 
 const sentryWebpackPluginOptions = {
-  silent: process.env.NODE_ENV === 'development' ? true : false,
+  silent: true,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
 };
 
-module.exports = withPlugins(
-  [
-    withSentryConfig({ nextConfig }, sentryWebpackPluginOptions),
-    withBundleAnalyzer({
-      compress: true,
-      webpack(config) {
-        const plugins = [...config.plugins, new CompressionPlugin()];
-        return { ...config, plugins };
-      },
-    }),
-  ],
-  nextConfig
-);
+module.exports = () => {
+  const plugins = [[withSentryConfig, sentryWebpackPluginOptions], [withBundleAnalyzer]];
+  return plugins.reduce((acc, cur) => cur[0](acc, cur[1] ?? undefined), nextConfig);
+};

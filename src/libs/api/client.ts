@@ -33,7 +33,7 @@ function interceptorResponseRejected(error: AxiosError<ApiErrorScheme>) {
     return Promise.reject(new ApiException(error.response.data, error.response.status));
   }
 
-  if (error.request.timeout) {
+  if (error.message.startsWith('timeout')) {
     return Promise.reject(new CustomException(errorMessage.TIMEOUT, 'NETWORK_TIMEOUT'));
   }
 
