@@ -8,6 +8,7 @@ import NavigationBar from '~/components/common/NavigationBar';
 import useToggle from '~/hooks/common/useToggle';
 import { useCalendarFilter } from '~/store/CalendarFilter';
 import { CalendarElementType } from '~/store/CalendarFilter/calendarFilter';
+import { recordEvent } from '~/utils/analytics';
 
 interface CalendarFilterSectionProps {
   filteredInspirations: InspirationInterface[];
@@ -19,6 +20,11 @@ export default function CalendarFilterSection({
   const [isOpen, toggleIsOpen] = useToggle(false);
 
   const { calendarFilter, onChangeCalendarFilter } = useCalendarFilter();
+
+  const onClickLink = () => {
+    toggleIsOpen();
+    recordEvent({ action: '기간 필터 클릭' });
+  };
 
   const checkDisabledTile = ({ date }: CalendarTileProperties) => {
     const dateString = date.toISOString().slice(0, 10);
@@ -43,7 +49,7 @@ export default function CalendarFilterSection({
 
   return (
     <section css={sectionCss}>
-      <button onClick={toggleIsOpen} css={filterButtonCss}>
+      <button onClick={onClickLink} css={filterButtonCss}>
         기간
         <ChevronIcon direction="right" />
       </button>

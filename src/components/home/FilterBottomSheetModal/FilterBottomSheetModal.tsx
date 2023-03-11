@@ -52,6 +52,14 @@ export default function FilterBottomSheetModal({
 
   const isCTADisabled = isLoading || filteredInspirations.length === 0;
 
+  const onClickCTA = () => {
+    recordEvent({
+      action: '필터링 바텀시트 CTA 클릭',
+      value: `${filteredInspirations.length}개의 영감 보기`,
+    });
+    onClose();
+  };
+
   return (
     <>
       <BottomSheetModal isShowing={isShowing} onClose={onCloseWithEvent}>
@@ -68,7 +76,7 @@ export default function FilterBottomSheetModal({
             <CalendarFilterSection filteredInspirations={filteredInspirations} />
           </div>
 
-          <CTABottomButton onClick={onClose} disabled={isCTADisabled}>
+          <CTABottomButton onClick={onClickCTA} disabled={isCTADisabled}>
             {filteredInspirations.length}개의 영감 보기
           </CTABottomButton>
         </div>
