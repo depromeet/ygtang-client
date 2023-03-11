@@ -130,7 +130,7 @@ jobs:
           echo '${{ secrets.CYPRESS_ENV_JSON }}' > cypress.env.json
 
       - name: E2E test - chrome
-        uses: cypress-io/github-action@v3.1.0
+        uses: cypress-io/github-action@v3.1.0 ## NOTE: need fix version. rel issue: https://github.com/cypress-io/github-action/issues/430
         with:
           install: false
           browser: chrome
