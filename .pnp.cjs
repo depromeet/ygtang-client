@@ -49,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.28"],\
             ["@types/react-calendar", "npm:3.9.0"],\
             ["@types/react-dom", "npm:18.0.11"],\
+            ["@types/testing-library__jest-dom", "npm:5.14.5"],\
             ["@typescript-eslint/eslint-plugin", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:5.54.1"],\
             ["@typescript-eslint/parser", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:5.54.1"],\
             ["axios", "npm:1.3.4"],\
@@ -3224,6 +3225,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-testing-library__jest-dom-npm-5.14.3-0aa35d2c00-203443d0e7.zip/node_modules/@types/testing-library__jest-dom/",\
           "packageDependencies": [\
             ["@types/testing-library__jest-dom", "npm:5.14.3"],\
+            ["@types/jest", "npm:27.4.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:5.14.5", {\
+          "packageLocation": "./.yarn/cache/@types-testing-library__jest-dom-npm-5.14.5-251c4c9d75-dcb0541675.zip/node_modules/@types/testing-library__jest-dom/",\
+          "packageDependencies": [\
+            ["@types/testing-library__jest-dom", "npm:5.14.5"],\
             ["@types/jest", "npm:27.4.1"]\
           ],\
           "linkType": "HARD"\
@@ -14551,6 +14560,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.28"],\
             ["@types/react-calendar", "npm:3.9.0"],\
             ["@types/react-dom", "npm:18.0.11"],\
+            ["@types/testing-library__jest-dom", "npm:5.14.5"],\
             ["@typescript-eslint/eslint-plugin", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:5.54.1"],\
             ["@typescript-eslint/parser", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:5.54.1"],\
             ["axios", "npm:1.3.4"],\
