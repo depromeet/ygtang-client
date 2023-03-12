@@ -70,7 +70,7 @@ export default function Information() {
           recordEvent({
             action: 'Signup',
             value: '회원 가입 완료',
-            category: '이메일 인증 후 회원가입 화면',
+            label: '이메일 인증 후 회원가입 화면',
           });
 
           userLogin({ accessToken, refreshToken });
