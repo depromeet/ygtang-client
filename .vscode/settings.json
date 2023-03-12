@@ -5,4 +5,5 @@
   },
   "eslint.nodePath": ".yarn/sdks",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
 }
