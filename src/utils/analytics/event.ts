@@ -1,4 +1,3 @@
-import p from '~/../package.json';
 import { IS_PRODUCTION } from '~/constants/common';
 import { gaEvent } from '~/libs/ga';
 import { mixpanelTrack } from '~/libs/mixpanel';
@@ -8,6 +7,6 @@ type Props = Omit<GaEventProps, 'category'>;
 
 export function recordEvent({ action, label, value }: Props) {
   if (!IS_PRODUCTION) return;
-  gaEvent({ action, category: p.version, label, value });
-  mixpanelTrack(action, { category: p.version, label, value });
+  gaEvent({ action, category: process.env.WEB_VERSION, label, value });
+  mixpanelTrack(action, { category: process.env.WEB_VERSION, label, value });
 }
