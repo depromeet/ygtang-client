@@ -2,6 +2,15 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: ['next', 'prettier', 'plugin:import/recommended', 'plugin:import/typescript'],
   plugins: ['prettier', 'import', '@typescript-eslint', 'simple-import-sort', 'ygt-rules'],
+  ignorePatterns: [
+    '.next/',
+    'node_modules/',
+    '.pnp.cjs',
+    '.pnp.loader.mjs',
+    'public',
+    '.yarn',
+    '@types',
+  ],
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
