@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { motion } from 'framer-motion';
 
 import LoadingHandler from '~/components/common/LoadingHandler';
-import { FixedSpinner } from '~/components/common/Spinner';
+import Spinner, { FixedSpinner } from '~/components/common/Spinner';
 import AppliedTags from '~/components/common/TagForm/AppliedTags';
 import AppendButton from '~/components/home/AppendButton';
 import { ClipboardAppMessageListener } from '~/components/home/ClipboardAppMessageListener';
@@ -23,7 +23,7 @@ const EditTagFormRouteAsModal = dynamic(() => import('~/components/edit/EditTagF
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
-  const { inspirations, isEmpty, isLoading, hasNextPage, fetchNextPage } =
+  const { inspirations, isEmpty, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetInspirationListWithInfinite({
       filteredTags,
     });
@@ -68,8 +68,13 @@ export default function Root() {
                 memo={memo}
               />
             ))}
-            {hasNextPage && !isLoading && <div ref={setTarget}></div>}
           </motion.section>
+          {isFetchingNextPage && (
+            <section css={spinnerSectionCss}>
+              <Spinner />
+            </section>
+          )}
+          {hasNextPage && !isLoading && !isFetchingNextPage && <div ref={setTarget}></div>}
         </LoadingHandler>
       </motion.article>
 
@@ -80,6 +85,12 @@ export default function Root() {
     </ClipboardAppMessageListener>
   );
 }
+
+const spinnerSectionCss = css`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
 
 const thumbnailWrapperCss = css`
   width: 100%;
