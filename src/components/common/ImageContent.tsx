@@ -42,7 +42,7 @@ export default function ImageContent({
           <>
             {(onClickXBtn || htmlFor) && (
               <label htmlFor={htmlFor} onClick={onClickXBtn} css={closeIconCss}>
-                <CancelIcon isUsingFill color={theme.color.gray05} />
+                <CancelIcon />
               </label>
             )}
 
