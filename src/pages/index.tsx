@@ -23,7 +23,7 @@ const EditTagFormRouteAsModal = dynamic(() => import('~/components/edit/EditTagF
 
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
-  const { inspirations, isEmpty, isLoading, hasNextPage, fetchNextPage } =
+  const { inspirations, isEmpty, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetInspirationListWithInfinite({
       filteredTags,
     });
@@ -68,7 +68,8 @@ export default function Root() {
                 memo={memo}
               />
             ))}
-            {hasNextPage && !isLoading && <div ref={setTarget}></div>}
+            {isFetchingNextPage && <FixedSpinner />}
+            {hasNextPage && !isLoading && !isFetchingNextPage && <div ref={setTarget}></div>}
           </motion.section>
         </LoadingHandler>
       </motion.article>
