@@ -72,6 +72,9 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
       isFetchedWith.current.http = true;
       return `http://${link}`;
     }
+
+    isFetchedWith.current.http = true;
+    isFetchedWith.current.https = true;
   };
 
   const fetchOpenGraph = (link: string): Promise<AxiosResponse<OpenGraphResponse>> => {
@@ -81,7 +84,6 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
 
   useDidUpdate(() => {
     if (!openGraph) return;
-
     // NOTE: openGraph가 재시도되면서 url 값이 있을 시 종료
     if (openGraph.url) {
       setIsCheckingLinkWithAllProtocol(true);
