@@ -28,6 +28,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
 
   const refreshInspirationList = () => {
     queryClient.invalidateQueries([INSPIRATION_LIST_QUERY_KEY]);
+    queryClient.refetchQueries([INSPIRATION_LIST_QUERY_KEY]);
   };
 
   const resetInspirationList = () => {
@@ -51,7 +52,8 @@ export default function useInspirationMutation(param?: InspirationMutationParams
     {
       onSuccess: () => {
         fireToast({ content: '영감을 등록했습니다.' });
-        resetInspirationList();
+
+        refreshInspirationList();
         postMessage(WEBVIEW_MESSAGE_TYPE.CreatedInspiration);
       },
       onError: (error, variable, context) => {
@@ -65,7 +67,7 @@ export default function useInspirationMutation(param?: InspirationMutationParams
     (id: number) => del(`/v1/inspiration/remove/${id}`),
     {
       onSuccess: () => {
-        resetInspirationList();
+        refreshInspirationList();
         push('/');
       },
       onError: (error, variable, context) => {
