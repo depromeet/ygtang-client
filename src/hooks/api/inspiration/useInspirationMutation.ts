@@ -27,7 +27,6 @@ export default function useInspirationMutation(param?: InspirationMutationParams
   const { postMessage } = useWebViewMessage();
 
   const refreshInspirationList = () => {
-    queryClient.invalidateQueries([INSPIRATION_LIST_QUERY_KEY]);
     queryClient.refetchQueries([INSPIRATION_LIST_QUERY_KEY]);
   };
 
