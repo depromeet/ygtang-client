@@ -19,7 +19,6 @@ interface InspirationResponseInterface extends PaginationInterface {
 
 const INFINITE_SCROLL_SIZE = 12;
 
-// TODO: 추가, 삭제, 수정 등 Mutation과 맞추기
 export const INSPIRATION_LIST_QUERY_KEY = 'inspirationList';
 
 interface UseGetInspirationListWithInfiniteProps {
