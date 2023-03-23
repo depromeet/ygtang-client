@@ -49,7 +49,7 @@ export default function SignupSentEmail() {
         recordEvent({
           action: 'Signup',
           value: '이메일 인증 버튼 클릭 후 성공',
-          category: '이메일 인증 화면',
+          label: '이메일 인증 화면',
         });
 
         push({

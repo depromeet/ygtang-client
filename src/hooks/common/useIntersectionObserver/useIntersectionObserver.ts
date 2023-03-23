@@ -23,7 +23,8 @@ export default function useIntersectionObserver({
     observer.observe(target);
 
     return () => observer.unobserve(target);
-  }, [onIntersect, root, rootMargin, target, threshold]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target]);
 
   return { setTarget };
 }

@@ -112,7 +112,7 @@ function useSignupWithCheckingEmail(email: string) {
 
   const { mutate: emailSendMutate } = useSignupSendEmailMutation({
     onSuccess: () => {
-      recordEvent({ action: 'Signup', value: '이메일 인증 요청', category: '이메일 발송 화면' });
+      recordEvent({ action: 'Signup', value: '이메일 인증 요청', label: '이메일 발송 화면' });
       router.push({
         pathname: '/signup/sent-email',
         query: {
@@ -138,7 +138,7 @@ function useSignupWithCheckingEmail(email: string) {
       recordEvent({
         action: 'Signup',
         value: '가입된 이메일 가입 요청',
-        category: '이메일 발송 화면',
+        label: '이메일 발송 화면',
       });
       fireToast({ content: '이미 가입된 메일입니다.' });
       setIsLoading(false);
@@ -154,7 +154,7 @@ function useSignupWithCheckingEmail(email: string) {
       recordEvent({
         action: 'Signup',
         value: '인증된 이메일 가입 요청',
-        category: '이메일 발송 화면',
+        label: '이메일 발송 화면',
       });
       fireToast({ content: '이미 인증된 메일입니다.' });
       router.push({
