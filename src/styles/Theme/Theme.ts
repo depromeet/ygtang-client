@@ -37,4 +37,6 @@ const theme = {
   },
 };
 
+export type ThemeColor = keyof typeof theme.color;
+
 export default theme;
