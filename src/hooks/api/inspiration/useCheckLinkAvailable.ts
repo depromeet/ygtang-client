@@ -4,6 +4,7 @@ import { AxiosResponse } from 'axios';
 
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import { get } from '~/libs/api/client';
+import { useToast } from '~/store/Toast';
 
 const INSPIRATION_LINK_OG_QUERY_KEY = 'opengraph';
 
@@ -12,17 +13,27 @@ interface UseCheckLinkAvailableProps {
 }
 
 export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
+  const { fireToast } = useToast();
+
   const {
     data: openGraph,
     refetch,
     remove,
     isFetching,
-  } = useQuery<OpenGraphResponse>(
+  } = useQuery<OpenGraphResponse, { message?: string }>(
     [INSPIRATION_LINK_OG_QUERY_KEY, link],
     () => fetchOpenGraph(link).then(res => res.data),
     {
       enabled: false,
       keepPreviousData: true,
+      onError: error => {
+        if (error) {
+          fireToast({
+            content: '서버에서 에러가 발생했습니다. 링크를 확인해주세요.',
+            duration: 2500,
+          });
+        }
+      },
     }
   );
 
@@ -61,6 +72,9 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
       isFetchedWith.current.http = true;
       return `http://${link}`;
     }
+
+    isFetchedWith.current.http = true;
+    isFetchedWith.current.https = true;
   };
 
   const fetchOpenGraph = (link: string): Promise<AxiosResponse<OpenGraphResponse>> => {
@@ -70,7 +84,6 @@ export function useCheckLinkAvailable({ link }: UseCheckLinkAvailableProps) {
 
   useDidUpdate(() => {
     if (!openGraph) return;
-
     // NOTE: openGraph가 재시도되면서 url 값이 있을 시 종료
     if (openGraph.url) {
       setIsCheckingLinkWithAllProtocol(true);
