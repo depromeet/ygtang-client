@@ -72,7 +72,9 @@ export default function Root() {
               />
             ))}
             {isFetchingNextPage && thumbnailSkeletonKeys.map(id => <SkeletonThumbnail key={id} />)}
-            {hasNextPage && !isLoading && !isFetchingNextPage && <div ref={setTarget}></div>}
+            {hasNextPage && !isLoading && !isFetchingNextPage && (
+              <div css={nextPageTriggerCss} ref={setTarget}></div>
+            )}
           </motion.section>
         </LoadingHandler>
       </motion.article>
@@ -88,9 +90,14 @@ export default function Root() {
 const thumbnailWrapperCss = css`
   width: 100%;
   padding-top: 16px;
+  padding-bottom: 5px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+`;
+
+const nextPageTriggerCss = css`
+  margin-top: -5px;
 `;
 
 const filteredSectionCss = css`
