@@ -8,6 +8,7 @@ import { FixedSpinner } from '~/components/common/Spinner';
 import AppliedTags from '~/components/common/TagForm/AppliedTags';
 import AppendButton from '~/components/home/AppendButton';
 import { ClipboardAppMessageListener } from '~/components/home/ClipboardAppMessageListener';
+import EmptyImageSection from '~/components/home/EmptyImageSection';
 import HomeNavigationBar from '~/components/home/HomeNavigationBar';
 import Thumbnail from '~/components/home/Thumbnail';
 import { staggerHalf } from '~/constants/motions';
@@ -27,7 +28,7 @@ const thumbnailSkeletonKeys = [nounce, nounce + 1];
 export default function Root() {
   const { filteredTags, removeTag } = useFilteredTags({});
 
-  const { inspirations, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
+  const { inspirations, isEmpty, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetInspirationListWithInfinite({
       filteredTags,
     });
@@ -51,6 +52,7 @@ export default function Root() {
         <LoadingHandler isLoading={isLoading} loadingComponent={<FixedSpinner />}>
           {/* NOTE: exit 애니메이션을 위해 삼항 연산자 사용 혹은 썸네일 섹션을 컨디셔널하게 렌더링할 시 */}
           {/* 해당 이미지 섹션이 렌더링되지 않음 */}
+          {isEmpty && <EmptyImageSection key="loading section" />}
           <motion.section
             css={thumbnailWrapperCss}
             layout
