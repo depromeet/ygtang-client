@@ -5,7 +5,6 @@ import { useToast } from '~/store/Toast';
 
 export interface ExtraInformationParams {
   email: string;
-  age: string;
   job: string;
   gender: string;
 }
