@@ -17,15 +17,6 @@ import { recordEvent } from '~/utils/analytics';
 const GENDER_VALUES = ['남자', '여자', '기타'] as const;
 const GENDER_REQUEST_VALUES = { 남자: 'MALE', 여자: 'FEMALE', 기타: 'ETC' } as const;
 
-const AGE_VALUES = ['20세 미만', '20~24세', '25~29세', '30~34세', '35세 이상'] as const;
-const AGE_REQUEST_VALUES = {
-  '20세 미만': 'UNDER_20S',
-  '20~24세': 'EARLY_20S',
-  '25~29세': 'LATE_20S',
-  '30~34세': 'EARLY_30S',
-  '35세 이상': 'OLDER_35',
-} as const;
-
 const JOB_VALUES = [
   '디자인, 예술',
   'IT, 개발, 데이터',
@@ -42,17 +33,16 @@ export default function Information() {
   const router = useInternalRouter();
 
   const [gender, setGender] = useState<(typeof GENDER_VALUES)[number] | null>(null);
-  const [age, setAge] = useState<(typeof AGE_VALUES)[number] | null>(null);
   const [job, setJob] = useState<string | null>(null);
 
   const { mutate: signupMutate } = useSignupMutation();
   const { userLogin } = useUser();
   const { mutate: putExtraInformationMutate } = usePutExtraInformation();
 
-  const isDisabledCTAButton = !Boolean(gender && age && job);
+  const isDisabledCTAButton = !Boolean(gender && job);
 
   const onClickCTA = () => {
-    if (!queryEmail || !gender || !job || !age || !signupUser) return;
+    if (!queryEmail || !gender || !job || !signupUser) return;
 
     signupMutate(
       {
@@ -79,7 +69,6 @@ export default function Information() {
             {
               email: queryEmail,
               gender: GENDER_REQUEST_VALUES[gender],
-              age: AGE_REQUEST_VALUES[age],
               job,
             },
             {
@@ -87,10 +76,6 @@ export default function Information() {
                 recordEvent({
                   action: '사용자 성별',
                   value: gender,
-                });
-                recordEvent({
-                  action: '사용자 나이',
-                  value: age,
                 });
                 recordEvent({
                   action: '사용자 관심 직군',
@@ -113,7 +98,6 @@ export default function Information() {
       <p css={introTextWrapper}>마지막 단계입니다!</p>
       <section css={sectionCss}>
         <DropdownMenu label="성별" values={GENDER_VALUES} value={gender} setValue={setGender} />
-        <DropdownMenu label="나이" values={AGE_VALUES} value={age} setValue={setAge} />
         <DropdownMenu label="관심 직무" values={JOB_VALUES} value={job} setValue={setJob} />
       </section>
 
