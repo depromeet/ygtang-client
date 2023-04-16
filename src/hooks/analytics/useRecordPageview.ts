@@ -11,7 +11,7 @@ export function useRecordPageview() {
   useEffect(() => {
     const recordPageview = (url: string) => {
       gaPageview(url);
-      mixpanelTrack('Page view', { url });
+      mixpanelTrack('Page view', { url, category: process.env.WEB_VERSION });
     };
 
     if (IS_PRODUCTION) router.events.on('routeChangeComplete', recordPageview);
