@@ -31,7 +31,6 @@ export function UserProvider({ children }: PropsWithChildren<unknown>) {
 
   const { isRouterGuardPassed } = useRouterGuard({ isLoaded });
 
-  // 컴포넌트 마운트 시
   useDidMount(() => {
     if (isLoaded) return;
 
