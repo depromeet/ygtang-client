@@ -9,7 +9,6 @@ function callWhenMixpanelReady(callback: VoidFunction) {
 }
 
 export function mixpanelTrack(event_name: string, ...props: any) {
-  console.log('trak');
   callWhenMixpanelReady(() => {
     window.mixpanel.track(event_name, props);
   });
