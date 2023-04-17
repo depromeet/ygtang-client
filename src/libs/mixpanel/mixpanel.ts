@@ -1,9 +1,22 @@
-export function mixpanelTrack(event_name: string, ...props: any) {
+function callWhenMixpanelReady(callback: VoidFunction) {
   try {
-    if ((window as any).mixpanel) {
-      (window as any).mixpanel.track(event_name, props);
+    if (window?.mixpanel) {
+      callback();
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
+}
+
+export function mixpanelTrack(event_name: string, ...props: any) {
+  console.log('trak');
+  callWhenMixpanelReady(() => {
+    window.mixpanel.track(event_name, props);
+  });
+}
+
+export function setMixpanelIdentify(userId: string) {
+  callWhenMixpanelReady(() => {
+    window.mixpanel.identify(userId);
+  });
 }
