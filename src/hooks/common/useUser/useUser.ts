@@ -2,8 +2,10 @@ import { useCallback, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { localStorageUserTokenKeys } from '~/constants/localStorage';
+import { fetchUserInformation } from '~/hooks/api/member/useGetUserInformation';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 import { replaceAccessTokenForRequestInstance } from '~/libs/api/client';
+import { setMixpanelIdentify } from '~/libs/mixpanel';
 
 const SYNC_YGT_RT = 'SYNC_YGT_RT';
 
@@ -19,6 +21,13 @@ export function useUser() {
         JSON.stringify({ type: SYNC_YGT_RT, data: refreshToken })
       );
     }
+  };
+
+  const setMixpanelIdentifyWhenLogedIn = async () => {
+    const { nickName, email } = await fetchUserInformation();
+    if (!nickName || !email) return;
+
+    setMixpanelIdentify(`${nickName} - ${email}`);
   };
 
   /**
@@ -42,6 +51,8 @@ export function useUser() {
       localStorage.setItem(localStorageUserTokenKeys.refreshToken, refreshToken);
       postRefreshTokenReactNativeWebView(refreshToken);
       queryClient.clear();
+
+      setMixpanelIdentifyWhenLogedIn();
     },
     [queryClient]
   );
