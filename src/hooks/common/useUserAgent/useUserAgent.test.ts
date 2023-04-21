@@ -8,7 +8,11 @@ describe('hooks/common/useUserAgent', () => {
   const { navigator } = window;
 
   afterEach(() => {
-    global.window.navigator = navigator;
+    Object.defineProperty(window, 'navigator', {
+      value: navigator,
+      configurable: true,
+      writable: true,
+    });
   });
 
   it('정의되어 있어야함', () => {
