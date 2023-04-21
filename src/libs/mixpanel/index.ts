@@ -1,1 +1,1 @@
-export { mixpanelTrack } from './mixpanel';
+export { mixpanelTrack, setMixpanelIdentify } from './mixpanel';

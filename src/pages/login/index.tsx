@@ -62,7 +62,6 @@ export default function Login() {
   }, [password.debouncedValue]);
 
   useDidUpdate(() => {
-    //
     if (loginMutationData && loginMutationData.data) {
       userLogin({
         accessToken: loginMutationData.data.accessToken,
