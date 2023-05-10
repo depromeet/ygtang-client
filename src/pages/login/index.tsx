@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton, GhostButton } from '~/components/common/Button';
+import SEO from '~/components/common/SEO';
 import TextField from '~/components/common/TextField';
 import useMemberLoginMutation from '~/hooks/api/member/useMemberLoginMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
@@ -86,44 +87,47 @@ export default function Login() {
   }, [fireToast, loginMutationError]);
 
   return (
-    <article css={loginCss}>
-      <div css={navMockupCss} />
-      <div css={loginIntroCardCss}></div>
-      <form css={loginFieldSetCss} onSubmit={handleFormSubmitEvent}>
-        <TextField
-          type="email"
-          label={'이메일 아이디'}
-          placeholder={'이메일을 입력해주세요'}
-          feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={email.debouncedValue.length > 0 && emailError === ''}
-          value={email.value}
-          onChange={email.onChange}
-          required
-          alertWhenFocused
-        />
-        <TextField
-          type="password"
-          label={'비밀번호'}
-          placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
-          feedback={password.debouncedValue !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={password.debouncedValue.length > 0 && passwordError === ''}
-          value={password.value}
-          onChange={password.onChange}
-          required
-          alertWhenFocused
-        />
-        <CTAButton type={'submit'} disabled={isPending}>
-          로그인
-        </CTAButton>
-      </form>
-      <GhostButton onClick={() => push('/password')}>비밀번호 찾기</GhostButton>
-      <div css={signUpTextWrapperCss}>
-        계정이 없으신가요?{' '}
-        <GhostButton size={'small'} onClick={() => push('/signup')}>
-          빠르게 가입하기
-        </GhostButton>
-      </div>
-    </article>
+    <>
+      <SEO title="로그인" />
+      <article css={loginCss}>
+        <div css={navMockupCss} />
+        <div css={loginIntroCardCss}></div>
+        <form css={loginFieldSetCss} onSubmit={handleFormSubmitEvent}>
+          <TextField
+            type="email"
+            label={'이메일 아이디'}
+            placeholder={'이메일을 입력해주세요'}
+            feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
+            isSuccess={email.debouncedValue.length > 0 && emailError === ''}
+            value={email.value}
+            onChange={email.onChange}
+            required
+            alertWhenFocused
+          />
+          <TextField
+            type="password"
+            label={'비밀번호'}
+            placeholder={'영문, 숫자 포함 6자 이상의 비밀번호'}
+            feedback={password.debouncedValue !== '' ? passwordError || <>&nbsp;</> : <>&nbsp;</>}
+            isSuccess={password.debouncedValue.length > 0 && passwordError === ''}
+            value={password.value}
+            onChange={password.onChange}
+            required
+            alertWhenFocused
+          />
+          <CTAButton type={'submit'} disabled={isPending}>
+            로그인
+          </CTAButton>
+        </form>
+        <GhostButton onClick={() => push('/password')}>비밀번호 찾기</GhostButton>
+        <div css={signUpTextWrapperCss}>
+          계정이 없으신가요?{' '}
+          <GhostButton size={'small'} onClick={() => push('/signup')}>
+            빠르게 가입하기
+          </GhostButton>
+        </div>
+      </article>
+    </>
   );
 }
 

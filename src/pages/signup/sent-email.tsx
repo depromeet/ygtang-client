@@ -6,6 +6,7 @@ import { CTAButton, FilledButton } from '~/components/common/Button';
 import Dialog from '~/components/common/Dialog';
 import LoadingHandler from '~/components/common/LoadingHandler';
 import NavigationBar from '~/components/common/NavigationBar';
+import SEO from '~/components/common/SEO';
 import { FixedSpinner } from '~/components/common/Spinner';
 import useCheckEmailVerifiedStatusMutation from '~/hooks/api/auth/useCheckEmailVerifiedStatusMutation';
 import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
@@ -89,55 +90,58 @@ export default function SignupSentEmail() {
   }, [checkEmailStatusError, fireToast]);
 
   return (
-    <LoadingHandler
-      isLoading={!query || !Boolean(query.email) || query.email === undefined}
-      loadingComponent={<FixedSpinner />}
-    >
-      <article css={loginCss}>
-        <NavigationBar title={'회원가입'} />
-        <div css={introCardCss}>
-          <p css={introTextWrapper}>
-            회원님의 이메일로
-            <br />
-            인증 링크가 전송되었습니다
-            <br />
-            확인 후 아래의 &apos;인증완료&apos; 버튼을 눌러주세요.
-          </p>
-        </div>
-        <div css={emailWrapperCss}>
-          <p css={emailText}>{query.email}</p>
-          <CTAButton
-            onClick={handleEmailChecking}
-            disabled={checkEmailStatusLoading || emailSendingLoading}
-          >
-            인증완료
-          </CTAButton>
-        </div>
-        <Dialog
-          isShowing={isModalOpen}
-          actionButtons={
-            <>
-              <FilledButton colorType="light" onClick={() => setIsModalOpen(false)}>
-                취소
-              </FilledButton>
-              <div css={dialogLongButtonCss}>
-                <FilledButton
-                  colorType="dark"
-                  onClick={handleEmailResend}
-                  disabled={emailSendingLoading}
-                >
-                  다시 전송
+    <>
+      <SEO title="회원가입" />
+      <LoadingHandler
+        isLoading={!query || !Boolean(query.email) || query.email === undefined}
+        loadingComponent={<FixedSpinner />}
+      >
+        <article css={loginCss}>
+          <NavigationBar title={'회원가입'} />
+          <div css={introCardCss}>
+            <p css={introTextWrapper}>
+              회원님의 이메일로
+              <br />
+              인증 링크가 전송되었습니다
+              <br />
+              확인 후 아래의 &apos;인증완료&apos; 버튼을 눌러주세요.
+            </p>
+          </div>
+          <div css={emailWrapperCss}>
+            <p css={emailText}>{query.email}</p>
+            <CTAButton
+              onClick={handleEmailChecking}
+              disabled={checkEmailStatusLoading || emailSendingLoading}
+            >
+              인증완료
+            </CTAButton>
+          </div>
+          <Dialog
+            isShowing={isModalOpen}
+            actionButtons={
+              <>
+                <FilledButton colorType="light" onClick={() => setIsModalOpen(false)}>
+                  취소
                 </FilledButton>
-              </div>
-            </>
-          }
-        >
-          이메일 인증이 완료되지 않았습니다.
-          <br />
-          인증을 다시 받으시겠어요?
-        </Dialog>
-      </article>
-    </LoadingHandler>
+                <div css={dialogLongButtonCss}>
+                  <FilledButton
+                    colorType="dark"
+                    onClick={handleEmailResend}
+                    disabled={emailSendingLoading}
+                  >
+                    다시 전송
+                  </FilledButton>
+                </div>
+              </>
+            }
+          >
+            이메일 인증이 완료되지 않았습니다.
+            <br />
+            인증을 다시 받으시겠어요?
+          </Dialog>
+        </article>
+      </LoadingHandler>
+    </>
   );
 }
 
