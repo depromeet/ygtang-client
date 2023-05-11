@@ -34,6 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@emotion/jest", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:11.10.5"],\
             ["@emotion/react", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:11.10.6"],\
             ["@next/bundle-analyzer", "npm:13.2.4"],\
+            ["@next/env", "npm:13.4.1"],\
             ["@sentry/nextjs", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:7.44.2"],\
             ["@tanstack/react-query", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.28.0"],\
             ["@tanstack/react-query-devtools", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.28.0"],\
@@ -79,6 +80,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash", "npm:4.17.21"],\
             ["next", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:13.2.4"],\
             ["next-router-mock", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:0.9.3"],\
+            ["next-sitemap", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.0.9"],\
             ["prettier", "npm:2.8.6"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
@@ -1154,6 +1156,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@corex/deepmerge", [\
+        ["npm:4.0.43", {\
+          "packageLocation": "./.yarn/cache/@corex-deepmerge-npm-4.0.43-390ed1175e-f0103bfcfb.zip/node_modules/@corex/deepmerge/",\
+          "packageDependencies": [\
+            ["@corex/deepmerge", "npm:4.0.43"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@cspotcode/source-map-support", [\
         ["npm:0.8.1", {\
           "packageLocation": "./.yarn/cache/@cspotcode-source-map-support-npm-0.8.1-964f2de99d-5718f26708.zip/node_modules/@cspotcode/source-map-support/",\
@@ -2109,6 +2120,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@next-env-npm-13.2.4-fafa35e4a8-4123e08a79.zip/node_modules/@next/env/",\
           "packageDependencies": [\
             ["@next/env", "npm:13.2.4"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:13.4.1", {\
+          "packageLocation": "./.yarn/cache/@next-env-npm-13.4.1-f0b7da3756-4736c9c6f7.zip/node_modules/@next/env/",\
+          "packageDependencies": [\
+            ["@next/env", "npm:13.4.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10376,6 +10394,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["next-sitemap", [\
+        ["npm:4.0.9", {\
+          "packageLocation": "./.yarn/cache/next-sitemap-npm-4.0.9-2198b8b52f-3c9fa402e2.zip/node_modules/next-sitemap/",\
+          "packageDependencies": [\
+            ["next-sitemap", "npm:4.0.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.0.9", {\
+          "packageLocation": "./.yarn/__virtual__/next-sitemap-virtual-1049cd5d2e/0/cache/next-sitemap-npm-4.0.9-2198b8b52f-3c9fa402e2.zip/node_modules/next-sitemap/",\
+          "packageDependencies": [\
+            ["next-sitemap", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.0.9"],\
+            ["@corex/deepmerge", "npm:4.0.43"],\
+            ["@next/env", "npm:13.4.1"],\
+            ["@types/next", null],\
+            ["@types/next__env", null],\
+            ["minimist", "npm:1.2.8"],\
+            ["next", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:13.2.4"]\
+          ],\
+          "packagePeers": [\
+            "@next/env",\
+            "@types/next",\
+            "@types/next__env",\
+            "next"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["nice-try", [\
         ["npm:1.0.5", {\
           "packageLocation": "./.yarn/cache/nice-try-npm-1.0.5-963856b16f-0b4af3b5bb.zip/node_modules/nice-try/",\
@@ -13717,6 +13763,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@emotion/jest", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:11.10.5"],\
             ["@emotion/react", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:11.10.6"],\
             ["@next/bundle-analyzer", "npm:13.2.4"],\
+            ["@next/env", "npm:13.4.1"],\
             ["@sentry/nextjs", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:7.44.2"],\
             ["@tanstack/react-query", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.28.0"],\
             ["@tanstack/react-query-devtools", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.28.0"],\
@@ -13762,6 +13809,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash", "npm:4.17.21"],\
             ["next", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:13.2.4"],\
             ["next-router-mock", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:0.9.3"],\
+            ["next-sitemap", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:4.0.9"],\
             ["prettier", "npm:2.8.6"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
