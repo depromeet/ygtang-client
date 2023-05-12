@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton, GhostButton } from '~/components/common/Button';
+import SEO from '~/components/common/SEO';
 import { Indicator, SnapCarousel } from '~/components/common/SnapCarousel';
 import { OnboardContent } from '~/components/onboard';
 import { ONBOARD_IMAGE } from '~/constants/assets';
@@ -13,45 +14,48 @@ export default function Onboard() {
   const [carouselWrapperRef, setCarouselWrapperRef] = useState<HTMLDivElement | null>(null);
 
   return (
-    <article css={wrapperCss}>
-      <div css={onboardContentWrapperCss}>
-        <SnapCarousel.Wrapper ref={setCarouselWrapperRef}>
-          <SnapCarousel.Item>
-            <OnboardContent
-              imgSrc={ONBOARD_IMAGE[0]}
-              title="거기, 영감 있나요?"
-              description="혹시, 여기저기서 수집한 영감들이<br/>어딘가에 흩어져 있지 않나요?"
-            />
-          </SnapCarousel.Item>
-          <SnapCarousel.Item>
-            <OnboardContent
-              imgSrc={ONBOARD_IMAGE[1]}
-              title="빠르게 추가하세요."
-              description="앗 앱에 들어오지 않아도 돼요!<br/>공유기능을 통해 저장할 수 있어요."
-            />
-          </SnapCarousel.Item>
-          <SnapCarousel.Item>
-            <OnboardContent
-              imgSrc={ONBOARD_IMAGE[2]}
-              title="나의 영감이 Tang!"
-              description="언제든 찾아볼 수 있도록 나만의 태그를 추가하고,<br/> 메모를 남겨보세요. 그리고, Tang!"
-            />
-          </SnapCarousel.Item>
-        </SnapCarousel.Wrapper>
+    <>
+      <SEO />
+      <article css={wrapperCss}>
+        <div css={onboardContentWrapperCss}>
+          <SnapCarousel.Wrapper ref={setCarouselWrapperRef}>
+            <SnapCarousel.Item>
+              <OnboardContent
+                imgSrc={ONBOARD_IMAGE[0]}
+                title="거기, 영감 있나요?"
+                description="혹시, 여기저기서 수집한 영감들이<br/>어딘가에 흩어져 있지 않나요?"
+              />
+            </SnapCarousel.Item>
+            <SnapCarousel.Item>
+              <OnboardContent
+                imgSrc={ONBOARD_IMAGE[1]}
+                title="빠르게 추가하세요."
+                description="앗 앱에 들어오지 않아도 돼요!<br/>공유기능을 통해 저장할 수 있어요."
+              />
+            </SnapCarousel.Item>
+            <SnapCarousel.Item>
+              <OnboardContent
+                imgSrc={ONBOARD_IMAGE[2]}
+                title="나의 영감이 Tang!"
+                description="언제든 찾아볼 수 있도록 나만의 태그를 추가하고,<br/> 메모를 남겨보세요. 그리고, Tang!"
+              />
+            </SnapCarousel.Item>
+          </SnapCarousel.Wrapper>
 
-        <div css={indicatorWrapperCss}>
-          <Indicator wrapperRef={carouselWrapperRef} />
+          <div css={indicatorWrapperCss}>
+            <Indicator wrapperRef={carouselWrapperRef} />
+          </div>
         </div>
-      </div>
 
-      <CTAButton onClick={onClickCTA}>시작하기</CTAButton>
-      <div css={signUpTextWrapperCss}>
-        계정이 없으신가요?{' '}
-        <GhostButton size={'small'} onClick={onClickSignUp}>
-          빠르게 가입하기
-        </GhostButton>
-      </div>
-    </article>
+        <CTAButton onClick={onClickCTA}>시작하기</CTAButton>
+        <div css={signUpTextWrapperCss}>
+          계정이 없으신가요?{' '}
+          <GhostButton size={'small'} onClick={onClickSignUp}>
+            빠르게 가입하기
+          </GhostButton>
+        </div>
+      </article>
+    </>
   );
 }
 
