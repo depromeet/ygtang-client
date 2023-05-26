@@ -38,7 +38,7 @@ export default function DropdownMenu<T extends readonly string[]>({
         </label>
       )}
 
-      <button onClick={toggleIsOpen} css={buttonCss}>
+      <button type="button" onClick={toggleIsOpen} css={buttonCss}>
         {value ?? '선택하기'}
 
         <ChevronIcon direction="down" />
