@@ -66,12 +66,7 @@ export default function EmailFeild({
           alertWhenFocused
         />
       </div>
-      <DropdownMenu
-        css={domainSelectorCss}
-        values={DOMAIN_VALUES}
-        value={selectedDomain}
-        setValue={setSelectedDomain}
-      />
+      <DropdownMenu values={DOMAIN_VALUES} value={selectedDomain} setValue={setSelectedDomain} />
       {feedback &&
         (typeof feedback === 'string' ? (
           <p css={feedbackMessageCss(theme, { alertWhenFocused: true })}>{feedback}</p>
@@ -98,5 +93,3 @@ const textFieldContainerCss = css`
     height: 54px;
   }
 `;
-
-const domainSelectorCss = css``;
