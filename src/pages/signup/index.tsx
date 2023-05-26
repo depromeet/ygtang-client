@@ -7,7 +7,7 @@ import NavigationBar from '~/components/common/NavigationBar';
 import PortalWrapper from '~/components/common/PortalWrapper';
 import SEO from '~/components/common/SEO';
 import { FixedSpinner } from '~/components/common/Spinner';
-import TextField from '~/components/common/TextField';
+import EmailFeild from '~/components/signup/EmailFeild';
 import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
 import useInput from '~/hooks/common/useInput';
 import { get } from '~/libs/api/client';
@@ -46,15 +46,9 @@ export default function Signup() {
           </p>
         </div>
         <form css={fieldSetCss} onSubmit={onSubmit}>
-          <TextField
-            placeholder={'이메일을 입력해주세요'}
-            type="email"
-            value={email.value}
-            onChange={email.onChange}
+          <EmailFeild
+            setEmail={email.setValue}
             feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
-            isSuccess={email.debouncedValue.length > 0 && emailError === ''}
-            required
-            alertWhenFocused
           />
           <CTAButton type={'submit'} disabled={isCTAButtonDisabled}>
             다음
