@@ -1,4 +1,6 @@
-export const resetCss = `
+import { css } from '@emotion/react';
+
+export const resetCss = css`
   html,
   body,
   div,
@@ -128,5 +130,9 @@ export const resetCss = `
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+  svg,
+  img {
+    vertical-align: top;
   }
 `;
