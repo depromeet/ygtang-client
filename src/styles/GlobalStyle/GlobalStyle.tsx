@@ -44,10 +44,5 @@ const globalCss = (theme: Theme) => css`
         display: none !important;
       }
     }
-
-    svg,
-    img {
-      vertical-align: top;
-    }
   }
 `;

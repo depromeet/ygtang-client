@@ -129,4 +129,7 @@ export const resetCss = `
     border-collapse: collapse;
     border-spacing: 0;
   }
+  svg,img {
+      vertical-align: top;
+  }
 `;
