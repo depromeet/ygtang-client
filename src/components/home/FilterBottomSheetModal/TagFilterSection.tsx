@@ -26,7 +26,9 @@ export default function TagFilterSection() {
         태그 <ChevronIcon direction="right" />
       </Link>
       {Boolean(filteredTags.length) && (
-        <AppliedTags applyedTags={filteredTags} onRemove={removeTag} />
+        <div css={tagListContainerCss}>
+          <AppliedTags applyedTags={filteredTags} onRemove={removeTag} />
+        </div>
       )}
     </section>
   );
@@ -48,4 +50,10 @@ const tagFilterAnchorCss = (theme: Theme) => css`
   text-decoration: none;
 
   margin-bottom: 4px;
+`;
+
+const tagListContainerCss = css`
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;

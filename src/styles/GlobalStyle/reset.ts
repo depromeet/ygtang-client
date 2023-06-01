@@ -123,6 +123,7 @@ export const resetCss = `
     background-color: unset;
   }
   a {
+    text-decoration: none;
     cursor: pointer;
   }
   table {

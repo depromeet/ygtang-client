@@ -29,7 +29,7 @@ export default function AddText() {
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true });
   const isEmptyText = !Boolean(inspiringText.debouncedValue.trim());
-  const { tags } = useAppliedTags(true);
+  const { tags, removeTag } = useAppliedTags(true);
   const { fireToast } = useToast();
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export default function AddText() {
               />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tags} />
+              <TagContent tags={tags} onRemoveTag={removeTag} />
             </div>
             <div css={contentWrapperCss}>
               <MemoText
