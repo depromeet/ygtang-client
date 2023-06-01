@@ -99,7 +99,7 @@ const wrapperCss = css`
   gap: 6px;
 `;
 
-const feedbackMessageCss = (
+export const feedbackMessageCss = (
   theme: Theme,
   { alertWhenFocused }: { alertWhenFocused: boolean }
 ) => css`
