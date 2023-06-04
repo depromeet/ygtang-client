@@ -52,7 +52,7 @@ export default function AddImage() {
     if (!uploadedImg && isDesktop()) push('/');
   }, [uploadedImg, push, isDesktop]);
 
-  const { tags } = useAppliedTags(true);
+  const { tags, removeTag } = useAppliedTags(true);
 
   const submitImg = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -102,7 +102,7 @@ export default function AddImage() {
               />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tags} />
+              <TagContent tags={tags} onRemoveTag={removeTag} />
             </div>
             <div css={contentWrapperCss}>
               <MemoText

@@ -97,5 +97,8 @@ const thumbnailWrapperCss = css`
 `;
 
 const filteredSectionCss = css`
+  width: 100%;
   margin: 2px 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;

@@ -20,7 +20,7 @@ interface TextViewProps extends ViewProps {}
 export default function TextView({ inspiration }: TextViewProps) {
   const inspiringText = useInput({ useDebounce: true });
   const memoText = useInput({ useDebounce: true, initialValue: inspiration.memo });
-  const { modifyInspiration } = useInspirationMutation();
+  const { modifyInspiration, deleteInspirationTag } = useInspirationMutation();
   const [isWriting, setWriting] = useState(false);
 
   const saveMemo = () => {
@@ -28,6 +28,11 @@ export default function TextView({ inspiration }: TextViewProps) {
     modifyInspiration({ id: inspiration.id, memo: memoText.value });
     recordEvent({ action: '메모 수정' });
     setWriting(false);
+  };
+
+  const removeTag = (tagId: number) => {
+    recordEvent({ action: '영감에서 태그 삭제' });
+    deleteInspirationTag({ id: inspiration.id, tagId });
   };
 
   if (!inspiration) return <></>;
@@ -51,7 +56,11 @@ export default function TextView({ inspiration }: TextViewProps) {
               />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tagResponses} inspirationId={inspiration.id} />
+              <TagContent
+                tags={tagResponses}
+                inspirationId={inspiration.id}
+                onRemoveTag={removeTag}
+              />
             </div>
             <div css={contentWrapperCss}>
               <MemoText
