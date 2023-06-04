@@ -23,7 +23,7 @@ export default function ImageView({ inspiration }: ImageViewProps) {
     debouncedValue: memoDebouncedValue,
     value: modifiedMemo,
   } = useInput({ useDebounce: true, initialValue: inspiration.memo });
-  const { modifyInspiration } = useInspirationMutation();
+  const { modifyInspiration, deleteInspirationTag } = useInspirationMutation();
   const [isWriting, setWriting] = useState(false);
 
   const saveMemo = () => {
@@ -31,6 +31,11 @@ export default function ImageView({ inspiration }: ImageViewProps) {
     modifyInspiration({ id: inspiration.id, memo: modifiedMemo });
     recordEvent({ action: '메모 수정' });
     setWriting(false);
+  };
+
+  const removeTag = (tagId: number) => {
+    recordEvent({ action: '영감에서 태그 삭제' });
+    deleteInspirationTag({ id: inspiration.id, tagId });
   };
 
   if (!inspiration) return <></>;
@@ -47,7 +52,11 @@ export default function ImageView({ inspiration }: ImageViewProps) {
               <ImageContent src={content ?? null} alt="uploadedImg" />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tagResponses} inspirationId={inspiration.id} />
+              <TagContent
+                tags={tagResponses}
+                inspirationId={inspiration.id}
+                onRemoveTag={removeTag}
+              />
             </div>
             <div css={contentWrapperCss}>
               <MemoText

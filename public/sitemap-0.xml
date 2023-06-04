@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://app.ygtang.kr</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/add/image</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/add/link</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/add/share</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/add/tag</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/add/text</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/content</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/edit/tag</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/login</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/my</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/my/account</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/my/account/change-nickname</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/my/account/change-password</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/my/tag</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/my/tag/AddTagBottomSheet</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/onboard</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/password</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/password/sent-email</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/password/verified</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/privacy</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/signup</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/signup/email-verified</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/signup/information</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/signup/sent-email</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://app.ygtang.kr/tag</loc><lastmod>2023-05-11T03:47:21.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>

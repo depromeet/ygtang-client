@@ -4,6 +4,7 @@ import { css, Theme } from '@emotion/react';
 import { CTABottomButton } from '~/components/common/Button';
 import DropdownMenu from '~/components/common/DropdownMenu';
 import NavigationBar from '~/components/common/NavigationBar';
+import SEO from '~/components/common/SEO';
 import usePutExtraInformation from '~/hooks/api/sign-up/usePatchExtraInformation';
 import useSignupMutation from '~/hooks/api/sign-up/useSignupMutation';
 import useDidMount from '~/hooks/common/useDidMount';
@@ -93,18 +94,21 @@ export default function Information() {
   };
 
   return (
-    <main css={mainCss}>
-      <NavigationBar title="회원가입" />
-      <p css={introTextWrapper}>마지막 단계입니다!</p>
-      <section css={sectionCss}>
-        <DropdownMenu label="성별" values={GENDER_VALUES} value={gender} setValue={setGender} />
-        <DropdownMenu label="관심 직무" values={JOB_VALUES} value={job} setValue={setJob} />
-      </section>
+    <>
+      <SEO title="회원가입" />
+      <main css={mainCss}>
+        <NavigationBar title="회원가입" />
+        <p css={introTextWrapper}>마지막 단계입니다!</p>
+        <section css={sectionCss}>
+          <DropdownMenu label="성별" values={GENDER_VALUES} value={gender} setValue={setGender} />
+          <DropdownMenu label="관심 직무" values={JOB_VALUES} value={job} setValue={setJob} />
+        </section>
 
-      <CTABottomButton onClick={onClickCTA} disabled={isDisabledCTAButton}>
-        Start Tang!
-      </CTABottomButton>
-    </main>
+        <CTABottomButton onClick={onClickCTA} disabled={isDisabledCTAButton}>
+          Start Tang!
+        </CTABottomButton>
+      </main>
+    </>
   );
 }
 

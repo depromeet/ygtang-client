@@ -5,8 +5,9 @@ import { css, Theme } from '@emotion/react';
 import { CTAButton } from '~/components/common/Button';
 import NavigationBar from '~/components/common/NavigationBar';
 import PortalWrapper from '~/components/common/PortalWrapper';
+import SEO from '~/components/common/SEO';
 import { FixedSpinner } from '~/components/common/Spinner';
-import TextField from '~/components/common/TextField';
+import EmailFeild from '~/components/signup/EmailFeild';
 import useSignupSendEmailMutation from '~/hooks/api/auth/useSignupSendEmailMutation';
 import useInput from '~/hooks/common/useInput';
 import { get } from '~/libs/api/client';
@@ -32,40 +33,37 @@ export default function Signup() {
   const isCTAButtonDisabled = emailError !== '' || isLoading;
 
   return (
-    <article css={loginCss}>
-      <NavigationBar title={'회원가입'} backLink="/" />
-      <div css={introCardCss}>
-        <p css={introTextWrapper}>
-          자주쓰는 이메일을
-          <br />딱 한번만 인증하면,
+    <>
+      <SEO title="회원가입" />
+      <article css={loginCss}>
+        <NavigationBar title={'회원가입'} backLink="/" />
+        <div css={introCardCss}>
+          <p css={introTextWrapper}>
+            자주쓰는 이메일을
+            <br />딱 한번만 인증하면,
+            <br />
+            영감을 차곡차곡 쌓아갈 수 있어요.
+          </p>
+        </div>
+        <form css={fieldSetCss} onSubmit={onSubmit}>
+          <EmailFeild
+            setEmail={email.setValue}
+            feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
+          />
+          <CTAButton type={'submit'} disabled={isCTAButtonDisabled}>
+            다음
+          </CTAButton>
+        </form>
+        <div css={signUpTextWrapperCss}>
+          입력한 이메일은 홍보/마케팅 용으로 사용되지 않고,
           <br />
-          영감을 차곡차곡 쌓아갈 수 있어요.
-        </p>
-      </div>
-      <form css={fieldSetCss} onSubmit={onSubmit}>
-        <TextField
-          placeholder={'이메일을 입력해주세요'}
-          type="email"
-          value={email.value}
-          onChange={email.onChange}
-          feedback={email.debouncedValue !== '' ? emailError || <>&nbsp;</> : <>&nbsp;</>}
-          isSuccess={email.debouncedValue.length > 0 && emailError === ''}
-          required
-          alertWhenFocused
-        />
-        <CTAButton type={'submit'} disabled={isCTAButtonDisabled}>
-          다음
-        </CTAButton>
-      </form>
-      <div css={signUpTextWrapperCss}>
-        입력한 이메일은 홍보/마케팅 용으로 사용되지 않고,
-        <br />
-        로그인과 회원가입, 비밀번호 찾기에만 사용되니 안심하세요.
-      </div>
-      <PortalWrapper isShowing={isLoading}>
-        <FixedSpinner opacity={0.8} />
-      </PortalWrapper>
-    </article>
+          로그인과 회원가입, 비밀번호 찾기에만 사용되니 안심하세요.
+        </div>
+        <PortalWrapper isShowing={isLoading}>
+          <FixedSpinner opacity={0.8} />
+        </PortalWrapper>
+      </article>
+    </>
   );
 }
 

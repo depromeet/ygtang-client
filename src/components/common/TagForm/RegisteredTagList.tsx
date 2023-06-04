@@ -10,23 +10,27 @@ function RegisteredTagList({
   registeredTags: TagType[];
   onClick: (tag: TagType) => void;
 }) {
+  const isRegisteredTagExist = Boolean(registeredTags.length);
+
   return (
-    <section css={registeredTagsCss}>
-      <h2 css={userTagsTitleCss}>등록된 태그 목록</h2>
-      {Boolean(registeredTags.length) ? (
-        registeredTags.map(tag => (
-          <Tag
-            key={tag.id}
-            content={tag.content}
-            onClick={() => {
-              onClick(tag);
-            }}
-          />
-        ))
-      ) : (
-        <div css={notHaveUserTagsCss}>등록된 태그가 없습니다.</div>
-      )}
-    </section>
+    <>
+      <h2 css={userTagsTitleCss}>내 영감에 쓰인 태그</h2>
+      <section css={registeredTagsCss}>
+        {isRegisteredTagExist ? (
+          registeredTags.map(tag => (
+            <Tag
+              key={tag.id}
+              content={tag.content}
+              onClick={() => {
+                onClick(tag);
+              }}
+            />
+          ))
+        ) : (
+          <div css={notHaveUserTagsCss}>등록된 태그가 없습니다.</div>
+        )}
+      </section>
+    </>
   );
 }
 
@@ -34,12 +38,14 @@ export default React.memo(RegisteredTagList);
 
 const registeredTagsCss = css`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   padding: 16px 0;
-  row-gap: 8px;
+  gap: 16px 8px;
 `;
 
 const userTagsTitleCss = (theme: Theme) => css`
+  margin: 16px 0 4px;
   font-size: 12px;
   color: ${theme.color.gray05};
 `;

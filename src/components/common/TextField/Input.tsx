@@ -57,6 +57,11 @@ export interface InputProps extends InputAndTextarea {
    * Focus시 alert 색상을 사용합니다.
    */
   alertWhenFocused?: boolean;
+
+  /**
+   * background 색상을 설정할 수 있습니다.
+   */
+  background?: string;
 }
 
 export function Input({
@@ -69,6 +74,7 @@ export function Input({
   autoFocus = false,
   onBlur,
   alertWhenFocused = false,
+  background,
   ...props
 }: InputProps) {
   const theme = useTheme();
@@ -96,6 +102,7 @@ export function Input({
             padding,
             inputValue: value,
             alertWhenFocused,
+            background,
           }),
           ref: inputRef,
           onBlur,
@@ -113,7 +120,7 @@ const inputWrapperCss = css`
   position: relative;
 `;
 
-const inputElementCss = (
+export const inputElementCss = (
   theme: Theme,
   {
     fixedHeight,
@@ -122,6 +129,7 @@ const inputElementCss = (
     padding = 12,
     inputValue,
     alertWhenFocused,
+    background = theme.color.gray01,
   }: {
     fixedHeight?: number;
     isPreAppend?: boolean;
@@ -129,6 +137,7 @@ const inputElementCss = (
     padding?: number;
     inputValue?: string;
     alertWhenFocused?: boolean;
+    background?: string;
   }
 ) => css`
   width: 100%;
@@ -137,7 +146,7 @@ const inputElementCss = (
   ${isPreAppend && `padding-left: 40px;`}
   ${isAppend && `padding-right: 40px;`}
 
-  background: ${theme.color.gray01};
+  background: ${background};
   border: 1px solid transparent;
   border-radius: ${theme.borderRadius.default};
   color: ${theme.color.gray05};
@@ -153,7 +162,8 @@ const inputElementCss = (
   resize: none;
 
   &:focus {
-    border-color: ${alertWhenFocused ? theme.color.alert : theme.color.gray03};
+    ${background !== 'transparent' &&
+    `border-color: ${alertWhenFocused ? theme.color.alert : theme.color.gray03};`}
   }
 
   &::placeholder {

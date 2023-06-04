@@ -53,7 +53,7 @@ export default function AddLink() {
     onError: onMutationError,
   });
 
-  const { tags } = useAppliedTags(true);
+  const { tags, removeTag } = useAppliedTags(true);
 
   const saveOpenGraph = useCallback((og: OpenGraphResponse | null) => {
     setOpenGraph(og);
@@ -101,7 +101,7 @@ export default function AddLink() {
               />
             </div>
             <div css={contentWrapperCss}>
-              <TagContent tags={tags} />
+              <TagContent tags={tags} onRemoveTag={removeTag} />
             </div>
             <div css={contentWrapperCss}>
               <MemoText

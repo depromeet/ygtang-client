@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 
 import { GhostButton } from '~/components/common/Button';
@@ -15,6 +16,7 @@ import { useAppliedTags } from '~/store/AppliedTags';
 import { recordEvent } from '~/utils/analytics';
 
 export default function TagPage() {
+  const router = useRouter();
   const { tags, isLoading, hasNextPage, fetchNextPage } = useGetTagListWithInfinite({});
   const { tags: appliedTags, removeTag, addTag } = useAppliedTags();
 
@@ -67,8 +69,13 @@ export default function TagPage() {
         title="태그 추가"
         backLinkScrollOption={false}
         rightElement={
-          <GhostButton size="large" onClick={onSubmit}>
-            추가
+          <GhostButton
+            size="large"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            완료
           </GhostButton>
         }
       />

@@ -12,6 +12,8 @@ module.exports = {
     '@types',
   ],
   settings: {
+    'import/resolver': 'node',
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
@@ -59,6 +61,7 @@ module.exports = {
     'simple-import-sort/exports': 'error',
     'import/default': 'off',
     'import/namespace': 'off',
+    'import/no-unresolved': 'off',
     '@next/next/no-img-element': 'off',
 
     'ygt-rules/internal-router-passhref': 'warn',

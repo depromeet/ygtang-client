@@ -20,6 +20,7 @@ import { useToast } from '~/store/Toast';
 import { recordEvent } from '~/utils/analytics';
 
 export default function EditTag() {
+  const router = useInternalRouter();
   const { fireToast } = useToast();
   const inspirationId = useQueryParam('id', String);
   const { push } = useInternalRouter();
@@ -101,8 +102,13 @@ export default function EditTag() {
       <NavigationBar
         title="영감 편집"
         rightElement={
-          <GhostButton size="large" onClick={onSubmit}>
-            추가
+          <GhostButton
+            size="large"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            완료
           </GhostButton>
         }
       />

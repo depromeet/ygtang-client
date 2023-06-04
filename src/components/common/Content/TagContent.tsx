@@ -3,52 +3,48 @@ import { css, Theme } from '@emotion/react';
 
 import { MODAL_TYPE } from '~/constants/common';
 
-import { IconButton } from '../Button';
 import { labelCss } from '../styles';
-import Tag from '../Tag';
+import AppliedTags from '../TagForm/AppliedTags';
 
 export interface TagContentProps {
   label?: string;
   tags: TagType[];
-  /**
-   * 단일 Tag 클릭 할 경우, Action을 넘겨 줍니다.
-   */
-  onClickTag?: (tagId: number) => void;
+  onRemoveTag?: (tagId: number) => void;
   inspirationId?: number;
 }
 
 export default function TagContent({
   tags,
   label = '태그',
-  onClickTag,
   inspirationId,
+  onRemoveTag,
 }: TagContentProps) {
   return (
     <>
       <div css={tagContentWrapperCss}>
         <span css={tagContentLabelCss}>{label}</span>
-        <div css={tagContentCss}>
-          {tags.map(tag => (
-            <Tag
-              content={tag.content}
-              key={tag.id}
-              onClick={() => {
-                onClickTag && onClickTag(tag.id);
-              }}
-            />
-          ))}
-          <Link
-            href={`${
-              inspirationId
-                ? `?modal=${MODAL_TYPE.editTag}&id=${inspirationId}`
-                : `?modal=${MODAL_TYPE.addTag}`
-            }`}
-            as={inspirationId ? `/edit/tag?id=${inspirationId}` : '/add/tag'}
-            scroll={false}
-          >
-            <IconButton iconName="PlusIcon" />
-          </Link>
-        </div>
+        <Link
+          href={`${
+            inspirationId
+              ? `?modal=${MODAL_TYPE.editTag}&id=${inspirationId}`
+              : `?modal=${MODAL_TYPE.addTag}`
+          }`}
+          as={inspirationId ? `/edit/tag?id=${inspirationId}` : '/add/tag'}
+          scroll={false}
+        >
+          <div css={tagContentCss}>
+            <div css={innerContainerCss}>
+              <AppliedTags
+                applyedTags={tags}
+                onRemove={id => {
+                  onRemoveTag && onRemoveTag(id);
+                }}
+              />
+            </div>
+
+            {tags.length === 0 && <span css={placeholderCss}>태그를 입력해주세요.</span>}
+          </div>
+        </Link>
       </div>
     </>
   );
@@ -63,9 +59,24 @@ const tagContentLabelCss = (theme: Theme) => css`
   margin-bottom: 12px;
 `;
 
-const tagContentCss = css`
+const tagContentCss = (theme: Theme) => css`
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+
   width: 100%;
+  padding: 8px 12px;
+  height: 49px;
+
+  background: ${theme.color.gray01};
+  border-radius: ${theme.borderRadius.default};
+`;
+
+const innerContainerCss = css`
+  width: fit-content;
+  overflow-x: scroll;
+  overflow-y: hidden;
+`;
+
+const placeholderCss = (theme: Theme) => css`
+  color: ${theme.color.gray03};
 `;

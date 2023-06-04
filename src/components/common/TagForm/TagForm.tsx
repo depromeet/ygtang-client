@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { css } from '@emotion/react';
 
-import { SearchBar } from '~/components/common/TextField';
 import useInput from '~/hooks/common/useInput';
 
-import AppliedTags from './AppliedTags';
 import RegisteredTagList from './RegisteredTagList';
+import TagSearchBar from './TagSearchBar';
 
 export interface TagFormProps {
   applyedTags: TagType[];
@@ -36,22 +35,19 @@ export default function TagForm({
   const onFormReturn = async (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit && onSubmit();
+    setValue('');
   };
 
   return (
     <div css={formTagCss}>
       <form css={formCss} onSubmit={onFormReturn}>
-        <SearchBar
+        <TagSearchBar
           value={value}
           onChange={onChange}
-          onRemoveClick={() => {
-            setValue('');
-            onSearch && onSearch('');
-          }}
-          placeholder={readOnly ? '태그를 검색해보세요.' : '태그를 등록해보세요.'}
+          applyedTags={applyedTags}
+          onRemove={onRemove}
         />
       </form>
-      {applyedTags.length > 0 && <AppliedTags applyedTags={applyedTags} onRemove={onRemove} />}
       <RegisteredTagList registeredTags={registeredTags} onClick={onSave} />
     </div>
   );
