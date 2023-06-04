@@ -45,6 +45,7 @@ const registeredTagsCss = css`
 `;
 
 const userTagsTitleCss = (theme: Theme) => css`
+  margin: 16px 0 4px;
   font-size: 12px;
   color: ${theme.color.gray05};
 `;
