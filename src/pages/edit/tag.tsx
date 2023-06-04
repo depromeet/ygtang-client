@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { motion } from 'framer-motion';
 
@@ -21,7 +20,7 @@ import { useToast } from '~/store/Toast';
 import { recordEvent } from '~/utils/analytics';
 
 export default function EditTag() {
-  const router = useRouter();
+  const router = useInternalRouter();
   const { fireToast } = useToast();
   const inspirationId = useQueryParam('id', String);
   const { push } = useInternalRouter();

@@ -10,11 +10,13 @@ function RegisteredTagList({
   registeredTags: TagType[];
   onClick: (tag: TagType) => void;
 }) {
+  const isRegisteredTagExist = Boolean(registeredTags.length);
+
   return (
     <>
       <h2 css={userTagsTitleCss}>내 영감에 쓰인 태그</h2>
       <section css={registeredTagsCss}>
-        {Boolean(registeredTags.length) ? (
+        {isRegisteredTagExist ? (
           registeredTags.map(tag => (
             <Tag
               key={tag.id}
