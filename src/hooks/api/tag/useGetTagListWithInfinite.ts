@@ -52,6 +52,8 @@ export default function useGetTagListWithInfinite({ keyword, isExactlySame = fal
         if (firstPage.data.first) return undefined;
         return firstPage.data.number - 1 ?? undefined;
       },
+      staleTime: 5000,
+      cacheTime: 5000,
     }
   );
 
