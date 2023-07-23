@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
+import { INSPIRATION_EMPTY_IMAGE_SRC } from '~/constants/assets';
 import useDidMount from '~/hooks/common/useDidMount';
 import useOpenGraphImage from '~/hooks/common/useOpenGraphImage';
 import { textEllipsisCss } from '~/styles/utils';
@@ -33,7 +34,10 @@ const textCss = css`
 
 function LinkContent({ openGraph }: Pick<ContentThumbnailProps, 'openGraph'>) {
   const [og, setOg] = useState<OpenGraphResponse>();
-  const { src, onImageError } = useOpenGraphImage({ url: og?.url, image: og?.image });
+  const { src, onImageError } = useOpenGraphImage({
+    url: og?.url,
+    image: og?.image || INSPIRATION_EMPTY_IMAGE_SRC,
+  });
 
   useDidMount(() => {
     setOg(openGraph);
