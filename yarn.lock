@@ -4829,8 +4829,8 @@ __metadata:
 
 "eslint-plugin-ygt-rules@file:eslint::locator=ygtang-client%40workspace%3A.":
   version: 1.0.0
-  resolution: "eslint-plugin-ygt-rules@file:eslint#eslint::hash=b24a63&locator=ygtang-client%40workspace%3A."
-  checksum: b746c02d5868ab81a2445a3b39b0f3c239c45b63e09ddb11f19294adce26caf885f528da0a444a872474fa1b8ed29c88eefbf5d4da6f02f13068baa66f358686
+  resolution: "eslint-plugin-ygt-rules@file:eslint#eslint::hash=077430&locator=ygtang-client%40workspace%3A."
+  checksum: d28a559cde1f2c65d9894635fd3ec72106f74772b0d1a70209532cfd87812f24f709fab57dfc65fb8718fa6024d89156c4a64d70c647f45db7836af856fd08e3
   languageName: node
   linkType: hard
 
