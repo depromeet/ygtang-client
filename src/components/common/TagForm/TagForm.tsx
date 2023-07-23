@@ -48,7 +48,11 @@ export default function TagForm({
           onRemove={onRemove}
         />
       </form>
-      <RegisteredTagList registeredTags={registeredTags} onClick={onSave} />
+      <RegisteredTagList
+        applyedTags={applyedTags}
+        registeredTags={registeredTags}
+        onClick={onSave}
+      />
     </div>
   );
 }
