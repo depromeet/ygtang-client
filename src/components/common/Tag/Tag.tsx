@@ -8,6 +8,7 @@ import { selectRandomColor } from '~/utils/selectRandomColor';
 import { CloseIcon } from '../icons';
 
 export interface TagProps extends Pick<TagInterface, 'content'> {
+  count?: number;
   deletable?: boolean;
   selected?: boolean;
   onDelete?: VoidFunction;
@@ -16,6 +17,7 @@ export interface TagProps extends Pick<TagInterface, 'content'> {
 
 function Tag({
   content,
+  count,
   deletable = false,
   onDelete = () => {},
   onClick = () => {},
@@ -41,6 +43,7 @@ function Tag({
       onClick={onClick}
     >
       #{content}
+      {count && <span css={countCss}>{count}개</span>}
       {deletable && (
         <button type="button" css={closeButtonCss} onClick={onClickCloseIcon}>
           <CloseIcon size={15} />
@@ -73,4 +76,12 @@ const closeButtonCss = css`
   padding: 0;
   line-height: 0;
   margin-left: 4px;
+`;
+
+const countCss = (theme: Theme) => css`
+  margin-left: 6px;
+  color: ${theme.color.gray05};
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 150%;
 `;
