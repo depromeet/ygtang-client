@@ -42,7 +42,7 @@ export default function TagPage() {
       createTag(keyword, {
         onSuccess: data => {
           recordEvent({ action: '태그 생성', value: keyword, label: '영감 편집 화면' });
-          addTag(data);
+          addTag({ ...data, count: 1 });
           tagListRefresh();
         },
       });
