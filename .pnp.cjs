@@ -53,7 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/testing-library__jest-dom", "npm:5.14.5"],\
             ["@typescript-eslint/eslint-plugin", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:5.56.0"],\
             ["@typescript-eslint/parser", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:5.56.0"],\
-            ["axios", "npm:1.3.4"],\
+            ["axios", "npm:1.6.1"],\
             ["compression-webpack-plugin", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:10.0.0"],\
             ["cypress", "npm:12.7.0"],\
             ["esbuild", "npm:0.17.12"],\
@@ -4159,11 +4159,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["axios", [\
-        ["npm:1.3.4", {\
-          "packageLocation": "./.yarn/cache/axios-npm-1.3.4-01ea685178-7440edefcf.zip/node_modules/axios/",\
+        ["npm:1.6.1", {\
+          "packageLocation": "./.yarn/cache/axios-npm-1.6.1-ffaff76449-573f03f59b.zip/node_modules/axios/",\
           "packageDependencies": [\
-            ["axios", "npm:1.3.4"],\
-            ["follow-redirects", "virtual:01ea6851789e289a01b796f810de178bac6d56a5415f6812163a8c36f06eaa64bb9993c92dc00329a5b2f936da5273a082f393404924adfde56b26b8e581ef5e#npm:1.15.2"],\
+            ["axios", "npm:1.6.1"],\
+            ["follow-redirects", "virtual:ffaff76449f02e83712a7d24e03c564489516739c78ebeffb0fbcdb3893ad9a0e48504f9acfa70fe6f16debe9c8dabde3679d63bf648278ea98a5ff38cf77a9e#npm:1.15.2"],\
             ["form-data", "npm:4.0.0"],\
             ["proxy-from-env", "npm:1.1.0"]\
           ],\
@@ -7029,10 +7029,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:01ea6851789e289a01b796f810de178bac6d56a5415f6812163a8c36f06eaa64bb9993c92dc00329a5b2f936da5273a082f393404924adfde56b26b8e581ef5e#npm:1.15.2", {\
-          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-a4bd585993/0/cache/follow-redirects-npm-1.15.2-1ec1dd82be-faa66059b6.zip/node_modules/follow-redirects/",\
+        ["virtual:ffaff76449f02e83712a7d24e03c564489516739c78ebeffb0fbcdb3893ad9a0e48504f9acfa70fe6f16debe9c8dabde3679d63bf648278ea98a5ff38cf77a9e#npm:1.15.2", {\
+          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-c2d5794c26/0/cache/follow-redirects-npm-1.15.2-1ec1dd82be-faa66059b6.zip/node_modules/follow-redirects/",\
           "packageDependencies": [\
-            ["follow-redirects", "virtual:01ea6851789e289a01b796f810de178bac6d56a5415f6812163a8c36f06eaa64bb9993c92dc00329a5b2f936da5273a082f393404924adfde56b26b8e581ef5e#npm:1.15.2"],\
+            ["follow-redirects", "virtual:ffaff76449f02e83712a7d24e03c564489516739c78ebeffb0fbcdb3893ad9a0e48504f9acfa70fe6f16debe9c8dabde3679d63bf648278ea98a5ff38cf77a9e#npm:1.15.2"],\
             ["@types/debug", null],\
             ["debug", null]\
           ],\
@@ -13882,7 +13882,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/testing-library__jest-dom", "npm:5.14.5"],\
             ["@typescript-eslint/eslint-plugin", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:5.56.0"],\
             ["@typescript-eslint/parser", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:5.56.0"],\
-            ["axios", "npm:1.3.4"],\
+            ["axios", "npm:1.6.1"],\
             ["compression-webpack-plugin", "virtual:9833fc3d04000f572a78698c2f42972b979034014a7719bb2984c188db51c352b18ae405e4c82b2670b8d086293a66f6b98f799d24ad3ce9f427d54bb778014c#npm:10.0.0"],\
             ["cypress", "npm:12.7.0"],\
             ["esbuild", "npm:0.17.12"],\
