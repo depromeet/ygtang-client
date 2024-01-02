@@ -78,7 +78,7 @@ export default function EditTag() {
     createTag(keyword, {
       onSuccess: data => {
         recordEvent({ action: '태그 생성', value: keyword, label: '영감 편집 화면' });
-        saveTag(data);
+        saveTag({ ...data, count: 1 });
         tagListRefresh();
       },
     });

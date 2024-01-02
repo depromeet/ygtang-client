@@ -1,3 +1,13 @@
+<br />
+
+<h3 align='center'>
+
+ `디프만 11기 대상 수상작 🎉`
+
+</h3>
+
+<br />
+
 ![Github-readme](https://user-images.githubusercontent.com/26461307/172001186-f07cfa73-8f3d-4329-bafc-389e2c70dc7d.png)
 
 <br />
@@ -53,7 +63,7 @@
 
 | Apple App Store                                                                                                                                                                                                                                                                                                                                           | Google Play Store                                                                                                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="https://apps.apple.com/us/app/%EC%98%81%EA%B0%90%ED%83%B1/id1626598770"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | <a href='https://play.google.com/store/apps/details?id=kr.ygtang'><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
+| <a href="https://apps.apple.com/us/app/%EC%98%81%EA%B0%90%ED%83%B1/id1626598770"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px; "></a> | <a href='https://play.google.com/store/apps/details?id=kr.ygtang'><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
 
 <br />
 <br />

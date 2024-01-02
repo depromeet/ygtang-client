@@ -4,9 +4,11 @@ import { css, Theme } from '@emotion/react';
 import Tag from '~/components/common/Tag';
 
 function RegisteredTagList({
+  applyedTags = [],
   registeredTags = [],
   onClick,
 }: {
+  applyedTags: TagType[];
   registeredTags: TagType[];
   onClick: (tag: TagType) => void;
 }) {
@@ -20,7 +22,9 @@ function RegisteredTagList({
           registeredTags.map(tag => (
             <Tag
               key={tag.id}
+              count={tag.count}
               content={tag.content}
+              selected={applyedTags.some(applyedTag => applyedTag.id === tag.id)}
               onClick={() => {
                 onClick(tag);
               }}
