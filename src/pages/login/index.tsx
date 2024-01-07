@@ -93,24 +93,6 @@ export default function Login() {
         <div css={navMockupCss} />
         <div css={loginIntroCardCss}></div>
 
-        <p
-          css={css`
-            line-height: 1.5;
-            margin-bottom: 20px;
-
-            small {
-              display: block;
-              font-size: 14px;
-              color: #999;
-            }
-          `}
-        >
-          현재 서버 비용 이슈가 있어 접근이 불가합니다.
-          <br />
-          최대한 빠르게 수정해 보겠습니다. 죄송합니다.
-          <small>1월 두 번째 주까지 정상적으로 접근될 예정입니다.</small>
-        </p>
-
         <form css={loginFieldSetCss} onSubmit={handleFormSubmitEvent}>
           <TextField
             type="email"
