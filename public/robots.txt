@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://app.ygtang.kr
-
-# Sitemaps
-Sitemap: https://app.ygtang.kr/sitemap.xml

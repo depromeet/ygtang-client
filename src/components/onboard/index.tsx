@@ -1,1 +1,0 @@
-export { OnboardContent } from './OnboardContent';

@@ -1,1 +1,0 @@
-export { textEllipsisCss } from './textEllipsisCss';
