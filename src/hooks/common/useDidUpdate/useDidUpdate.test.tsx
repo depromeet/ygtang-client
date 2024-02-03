@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { cleanup as hookCleanup, renderHook } from '@testing-library/react-hooks';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
 
 import useDidUpdate from './useDidUpdate';
 
@@ -24,11 +24,6 @@ describe('hooks/common/useDidUpdate/useDidUpdate', () => {
         </div>
       );
     };
-  });
-
-  afterAll(() => {
-    cleanup();
-    hookCleanup();
   });
 
   it('should defined', () => {

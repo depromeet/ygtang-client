@@ -53,8 +53,8 @@ const iconButtonCss = (theme: Theme, colorType: ColorType, light: boolean, size:
   background-color: ${light
     ? 'inherit'
     : colorType === 'dark'
-    ? theme.color.gray05
-    : theme.color.gray02};
+      ? theme.color.gray05
+      : theme.color.gray02};
 `;
 
 const nonLightColorType = (theme: Theme, colorType: ColorType) => {

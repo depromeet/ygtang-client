@@ -32,14 +32,13 @@ export default function MyInformationMenu({
   );
 }
 
-const wrapperCss = (align: MyInformationAlignType) => (theme: Theme) =>
-  css`
-    display: flex;
-    align-items: ${align === 'top' ? 'flex-start' : 'flex-end'};
-    height: 78px;
-    padding: 16px 0;
-    border-bottom: solid 1px ${theme.color.gray01};
-  `;
+const wrapperCss = (align: MyInformationAlignType) => (theme: Theme) => css`
+  display: flex;
+  align-items: ${align === 'top' ? 'flex-start' : 'flex-end'};
+  height: 78px;
+  padding: 16px 0;
+  border-bottom: solid 1px ${theme.color.gray01};
+`;
 const informationCss = css`
   flex: 1;
   padding-right: 14px;
