@@ -17,6 +17,7 @@ export default function MyAccountChangeNickame() {
   const { userInformation } = useUserInformation();
   const nickname = useInput({ useDebounce: true, initialValue: userInformation.nickName });
   const [nicknameError, setNicknameError] = useState('변경될 이름을 입력해주세요.');
+
   const { callMuation, onFormReturn, isValidateNickname } = useChangeNickname({
     nickname,
     nicknameError,
@@ -70,6 +71,9 @@ interface UseChangeNicknameProps {
   userInformation: UserInformationType;
 }
 
+const NICKNAME_MIN_LENGTH = 3;
+const NICKNAME_MAX_LENGTH = 20;
+
 function useChangeNickname({
   nickname,
   nicknameError,
@@ -86,7 +90,8 @@ function useChangeNickname({
   }, [userInformation.nickName]);
 
   const isNicknameNotValidateForLength =
-    nickname.debouncedValue.trim().length < 4 || 20 < nickname.debouncedValue.trim().length;
+    nickname.debouncedValue.trim().length < NICKNAME_MIN_LENGTH ||
+    NICKNAME_MAX_LENGTH < nickname.debouncedValue.trim().length;
 
   const isNicknameSameWithPrev = userInformation.nickName === nickname.debouncedValue.trim();
 
@@ -94,7 +99,9 @@ function useChangeNickname({
 
   useDidUpdate(() => {
     if (isNicknameNotValidateForLength) {
-      setNicknameError('닉네임은 4자 이상 20자 이하여야 합니다.');
+      setNicknameError(
+        `닉네임은 ${NICKNAME_MIN_LENGTH}자 이상 ${NICKNAME_MAX_LENGTH}자 이하여야 합니다.`
+      );
       return;
     }
 
