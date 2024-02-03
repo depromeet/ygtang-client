@@ -4915,9 +4915,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-ygt-rules@file:eslint::locator=ygtang-client%40workspace%3A.":
+"eslint-plugin-ygt-rules@file:./eslint::locator=ygtang-client%40workspace%3A.":
   version: 1.0.0
-  resolution: "eslint-plugin-ygt-rules@file:eslint#eslint::hash=881f1a&locator=ygtang-client%40workspace%3A."
+  resolution: "eslint-plugin-ygt-rules@file:./eslint#./eslint::hash=881f1a&locator=ygtang-client%40workspace%3A."
   checksum: 10/017b5a4750bc8719d5499096fcac41f37e5943b7bcf6bb6cdb7a404346f38b0303da88f75e63679d618d61bebb2879d9722d48b726271db9d79f1e30a272330e
   languageName: node
   linkType: hard
@@ -11496,7 +11496,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.1.3"
     eslint-plugin-simple-import-sort: "npm:^10.0.0"
     eslint-plugin-testing-library: "npm:^6.2.0"
-    eslint-plugin-ygt-rules: "file:eslint"
+    eslint-plugin-ygt-rules: "file:./eslint"
     framer-motion: "npm:^11.0.3"
     husky: "npm:^9.0.10"
     identity-obj-proxy: "npm:^3.0.0"
