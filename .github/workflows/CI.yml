@@ -13,6 +13,7 @@ on:
 jobs:
   run-bundle-analysis:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -42,6 +43,7 @@ jobs:
 
   run-lint:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -62,6 +64,7 @@ jobs:
 
   run-jest:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -83,6 +86,7 @@ jobs:
 
   run-codecov:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -110,6 +114,7 @@ jobs:
 
   run-cypress:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - name: Checkout
         uses: actions/checkout@v2
