@@ -26,6 +26,7 @@ const nextConfig = {
     disableServerWebpackPlugin: process.env.SENTRY_WEBPACK_PLUGIN_ENABLE !== 'true',
     disableClientWebpackPlugin: process.env.SENTRY_WEBPACK_PLUGIN_ENABLE !== 'true',
   },
+  output: 'export',
 };
 
 // const sentryWebpackPluginOptions = {
