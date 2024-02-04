@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
@@ -111,12 +111,13 @@ function useSignupWithCheckingEmail(email: string) {
   const { mutate: emailSendMutate } = useSignupSendEmailMutation({
     onSuccess: () => {
       recordEvent({ action: 'Signup', value: '이메일 인증 요청', label: '이메일 발송 화면' });
-      router.push({
-        pathname: '/signup/sent-email',
-        query: {
-          email: email,
-        },
-      });
+      router &&
+        router.push({
+          pathname: '/signup/sent-email',
+          query: {
+            email: email,
+          },
+        });
     },
     onError: data => {
       if (data.message) fireToast({ content: data.message });
@@ -155,10 +156,11 @@ function useSignupWithCheckingEmail(email: string) {
         label: '이메일 발송 화면',
       });
       fireToast({ content: '이미 인증된 메일입니다.' });
-      router.push({
-        pathname: '/signup/email-verified',
-        query: { email },
-      });
+      router &&
+        router.push({
+          pathname: '/signup/email-verified',
+          query: { email },
+        });
     } else {
       emailSendMutate({ email });
     }

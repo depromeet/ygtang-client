@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
@@ -8,7 +8,9 @@ import { FixedSpinner } from '~/components/common/Spinner';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
 
 export default function SentPasswordResetEmail() {
-  const { query } = useRouter();
+  const router = useRouter();
+  if (!router) throw new Error('No router');
+  const { query } = router;
   const { push } = useInternalRouter();
 
   return (

@@ -36,7 +36,9 @@ export default function NavigationBar(props: NavigationBarProps) {
     } else if (backLink) {
       router.push(backLink, undefined, { scroll: backLinkScrollOption });
     } else {
-      router.back();
+      if (router.back) {
+        router.back();
+      }
     }
   };
 

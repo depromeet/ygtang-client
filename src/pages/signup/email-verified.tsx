@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { css, Theme } from '@emotion/react';
 
 import { CTABottomButton } from '~/components/common/Button';
@@ -19,6 +19,7 @@ import { validator } from '~/utils/validator';
 
 export default function SignUpEmailVerified() {
   const { fireToast } = useToast();
+  const router = useRouter();
   const queryEmail = useRouterQuery('email', String);
 
   const nickname = useInput({ useDebounce: true });
@@ -56,8 +57,7 @@ export default function SignUpEmailVerified() {
       confirmPassword: passwordRepeat.value,
     });
 
-    // NOTE: 이렇게 작성하지 않으면 router.push가 되지않는 이슈
-    Router.push({ pathname: '/signup/information', query: { email: queryEmail } });
+    router && router.push({ pathname: '/signup/information', query: { email: queryEmail } });
   };
 
   // NOTE: 닉네임 에러 메세지 설정 이펙트

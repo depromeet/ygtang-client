@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton, FilledButton } from '~/components/common/Button';
@@ -15,7 +15,7 @@ import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function SignupSentEmail() {
-  const { query, push } = useRouter();
+  const router = useRouter();
   const { fireToast } = useToast();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
@@ -30,6 +30,9 @@ export default function SignupSentEmail() {
     isSuccess: emailSendingSuccess,
     isLoading: emailSendingLoading,
   } = useSignupSendEmailMutation({});
+
+  if (!router) throw new Error('router is not defined');
+  const { query, push } = router;
 
   const handleEmailChecking = () => {
     if (query.email !== undefined && validator({ type: 'email', value: query.email as string })) {

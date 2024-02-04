@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { css, Theme } from '@emotion/react';
 
 import { CTAButton } from '~/components/common/Button';
@@ -16,17 +16,18 @@ import { validator } from '~/utils/validator';
 export default function PasswordReset() {
   const { fireToast } = useToast();
   const email = useInput({ useDebounce: true });
-  const { push } = useRouter();
+  const router = useRouter();
   const [emailError, setEmailError] = useState('');
   const { mutate: sendPasswordResetEmailMutation, isLoading: isSendPasswordResetEmailLoading } =
     useSendPasswordResetEmailMutation({
       onSuccess: () => {
-        push({
-          pathname: '/password/sent-email',
-          query: {
-            email: email.value,
-          },
-        });
+        router &&
+          router.push({
+            pathname: '/password/sent-email',
+            query: {
+              email: email.value,
+            },
+          });
       },
       onError: () => {
         fireToast({

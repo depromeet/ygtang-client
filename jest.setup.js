@@ -3,7 +3,7 @@ import { matchers } from '@emotion/jest';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 
-jest.mock('next/router', () => require('next-router-mock'));
+jest.mock('next/compat/router', () => require('next-router-mock'));
 
 window.matchMedia = query => ({
   matches: false,

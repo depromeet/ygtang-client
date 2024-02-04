@@ -1,7 +1,7 @@
-const { withSentryConfig } = require('@sentry/nextjs');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
+// const { withSentryConfig } = require('@sentry/nextjs');
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true',
+// });
 const CompressionPlugin = require('compression-webpack-plugin');
 const { version } = require('./package.json');
 
@@ -26,14 +26,17 @@ const nextConfig = {
     disableServerWebpackPlugin: process.env.SENTRY_WEBPACK_PLUGIN_ENABLE !== 'true',
     disableClientWebpackPlugin: process.env.SENTRY_WEBPACK_PLUGIN_ENABLE !== 'true',
   },
+  output: 'export',
 };
 
-const sentryWebpackPluginOptions = {
-  silent: true,
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-};
+// const sentryWebpackPluginOptions = {
+//   silent: true,
+//   authToken: process.env.SENTRY_AUTH_TOKEN,
+// };
 
-module.exports = () => {
-  const plugins = [[withSentryConfig, sentryWebpackPluginOptions], [withBundleAnalyzer]];
-  return plugins.reduce((acc, cur) => cur[0](acc, cur[1] ?? undefined), nextConfig);
-};
+module.exports = nextConfig;
+
+// module.exports = () => {
+//   const plugins = [[withSentryConfig, sentryWebpackPluginOptions], [withBundleAnalyzer]];
+//   return plugins.reduce((acc, cur) => cur[0](acc, cur[1] ?? undefined), nextConfig);
+// };
