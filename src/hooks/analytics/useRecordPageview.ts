@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 
 import { IS_PRODUCTION } from '~/constants/common';
 import { gaPageview } from '~/libs/ga';
@@ -14,9 +14,11 @@ export function useRecordPageview() {
       mixpanelTrack('Page view', { url, category: process.env.WEB_VERSION });
     };
 
-    if (IS_PRODUCTION) router.events.on('routeChangeComplete', recordPageview);
-    return () => {
-      if (IS_PRODUCTION) router.events.off('routeChangeComplete', recordPageview);
-    };
-  }, [router.events]);
+    if (router) {
+      if (IS_PRODUCTION) router.events.on('routeChangeComplete', recordPageview);
+      return () => {
+        if (IS_PRODUCTION) router.events.off('routeChangeComplete', recordPageview);
+      };
+    }
+  }, [router]);
 }

@@ -64,7 +64,7 @@ export default function LinkInput({ initialLink, openGraph, saveOpenGraph }: Lin
 
   return (
     <div css={LinkInputCss}>
-      {openGraph ? (
+      {openGraph && asPath ? (
         <LinkThumbnail
           edit={asPath.includes('add')}
           openGraph={openGraph}
