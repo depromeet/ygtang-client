@@ -1,0 +1,12 @@
+{
+  "extends": "@ygtang/typescript-config/vite.json",
+  "compilerOptions": {
+    "types": ["vite/client", "node", "@emotion/react/types/css-prop"],
+    "paths": {
+      "~/*": ["./src/*"],
+    },
+    "moduleResolution": "node",
+    "jsxImportSource": "@emotion/react",
+  },
+  "include": ["src", "utils", "vite.config.ts", "node_modules/@types"],
+}
