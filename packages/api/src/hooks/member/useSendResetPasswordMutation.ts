@@ -1,0 +1,42 @@
+import { useMutation } from "@tanstack/react-query";
+import { post } from "@ygtang/http";
+
+interface SendResetPasswordMutationProps {
+  onSuccess?: (
+    data: unknown,
+    variables: SendResetPasswordMutationParams,
+    context: unknown,
+  ) => void | Promise<unknown>;
+  onError?: (
+    data: { message?: string },
+    variables: SendResetPasswordMutationParams,
+    context: unknown,
+  ) => void | Promise<unknown>;
+}
+
+export interface SendResetPasswordMutationParams {
+  email: string;
+}
+
+/**
+ * `/api/v1/members/sends-email/reset-passwords`
+ *
+ * 초기화된 비밀번호를 이메일로 전송한다.
+ */
+export default function useSendResetPasswordMutation({
+  onSuccess,
+  onError,
+}: SendResetPasswordMutationProps) {
+  return useMutation<
+    undefined,
+    { message?: string },
+    SendResetPasswordMutationParams
+  >({
+    mutationFn: ({ email }: SendResetPasswordMutationParams) =>
+      post<undefined>(`/v1/members/sends-email/reset-passwords`, {
+        email,
+      }),
+    onSuccess,
+    onError,
+  });
+}

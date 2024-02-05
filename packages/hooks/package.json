@@ -1,0 +1,14 @@
+{
+  "name": "@ygtang/hooks",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@ygtang/eslint-config": "workspace:*",
+    "@ygtang/typescript-config": "workspace:*"
+  }
+}

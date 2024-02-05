@@ -1,0 +1,15 @@
+{
+  "name": "@ygtang/http",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@ygtang/constants": "workspace:*",
+    "axios": "1.6.7"
+  },
+  "devDependencies": {
+    "@ygtang/eslint-config": "workspace:*",
+    "@ygtang/typescript-config": "workspace:*"
+  }
+}
