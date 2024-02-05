@@ -7,6 +7,7 @@
     },
     "moduleResolution": "node",
     "jsxImportSource": "@emotion/react",
+    "allowSyntheticDefaultImports": true,
   },
   "include": ["src", "utils", "vite.config.ts", "node_modules/@types"],
 }

@@ -1,5 +1,5 @@
 import packageJson from "../package.json";
-import { ManifestType } from "@src/manifest-type";
+import { ManifestType } from "./manifest-type";
 
 const manifest: ManifestType = {
   manifest_version: 3,
