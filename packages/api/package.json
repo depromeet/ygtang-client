@@ -1,0 +1,17 @@
+{
+  "name": "@ygtang/api",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@types/lodash": "^4.14.202",
+    "@ygtang/eslint-config": "workspace:*",
+    "@ygtang/typescript-config": "workspace:*"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "5.18.1",
+    "@ygtang/http": "workspace:^",
+    "lodash": "^4.17.21"
+  }
+}

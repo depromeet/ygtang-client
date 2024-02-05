@@ -1,0 +1,15 @@
+{
+  "name": "@ygtang/constants",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "eslint **/*.ts*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@ygtang/eslint-config": "workspace:*",
+    "@ygtang/typescript-config": "workspace:*"
+  }
+}
