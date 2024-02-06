@@ -5,14 +5,18 @@
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "dev": "nodemon",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx"
   },
-  "type": "module",
   "dependencies": {
     "@emotion/css": "11.11.2",
     "@emotion/react": "11.11.3",
     "@tanstack/react-query": "^4",
     "@vespaiach/axios-fetch-adapter": "0.3.1",
+    "@ygtang/api": "workspace:^",
+    "@ygtang/http": "workspace:^",
+    "@ygtang/ui-components": "workspace:^",
+    "@ygtang/ui-styles": "workspace:^",
     "axios": "1.6.7",
     "mime2ext": "2.0.0",
     "react": "18.2.0",
@@ -26,6 +30,8 @@
     "@types/react": "18.2.52",
     "@types/react-dom": "18.2.18",
     "@vitejs/plugin-react": "4.2.1",
+    "@ygtang/eslint-config": "workspace:^",
+    "@ygtang/typescript-config": "workspace:^",
     "fs-extra": "11.2.0",
     "nodemon": "3.0.3",
     "sass": "1.70.0",

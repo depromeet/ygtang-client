@@ -1,7 +1,12 @@
 {
   "extends": "@ygtang/typescript-config/vite.json",
   "compilerOptions": {
-    "types": ["vite/client", "node", "@emotion/react/types/css-prop"],
+    "types": [
+      "vite/client",
+      "node",
+      "@emotion/react/types/css-prop",
+      "@ygtang/ui-styles/emotion-theme"
+    ],
     "paths": {
       "~/*": ["./src/*"],
     },

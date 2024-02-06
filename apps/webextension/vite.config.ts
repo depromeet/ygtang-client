@@ -49,7 +49,7 @@ export default defineConfig({
           ? "assets/js/[name].js"
           : "assets/js/[name].[hash].js",
         assetFileNames: (assetInfo) => {
-          const { dir, name: _name } = path.parse(assetInfo.name);
+          const { dir, name: _name } = path.parse(assetInfo.name as string);
           const assetFolder = getLastElement(dir.split("/"));
           const name = assetFolder + firstUpperCase(_name);
           return `assets/[ext]/${name}.chunk.[ext]`;
@@ -60,9 +60,12 @@ export default defineConfig({
 });
 
 function getLastElement<T>(array: ArrayLike<T>): T {
+  if (!array) {
+    throw new TypeError("array is empty or has only one element.");
+  }
   const length = array.length;
   const lastIndex = length - 1;
-  return array[lastIndex];
+  return array[lastIndex] as T;
 }
 
 function firstUpperCase(str: string) {
