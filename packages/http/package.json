@@ -5,6 +5,7 @@
   "license": "MIT",
   "main": "src/index.ts",
   "dependencies": {
+    "@vespaiach/axios-fetch-adapter": "0.3.1",
     "@ygtang/constants": "workspace:*",
     "axios": "1.6.7"
   },

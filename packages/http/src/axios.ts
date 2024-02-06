@@ -1,3 +1,4 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import {
   API_URL_DEVELOPMENT,
   API_URL_PRODUCTION,
@@ -15,8 +16,13 @@ export const instance = axios.create({
   timeout: 15000,
 });
 
-export function replaceAccessTokenForRequestInstance(token: string) {
+export function setAccessToken(token: string) {
   instance.defaults.headers.common["accessToken"] = token;
+}
+
+export { fetchAdapter };
+export function setUsingFetchAdapter() {
+  instance.defaults.adapter = fetchAdapter;
 }
 
 // Response interceptor
