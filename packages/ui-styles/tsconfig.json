@@ -1,0 +1,9 @@
+{
+  "extends": "@ygtang/typescript-config/react-library.json",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "emotion-theme.d.ts"
+  ],
+  "exclude": ["node_modules"],
+}

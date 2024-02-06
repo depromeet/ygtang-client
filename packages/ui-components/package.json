@@ -1,0 +1,10 @@
+{
+  "name": "@ygtang/ui-components",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@ygtang/eslint-config": "workspace:*",
+    "@ygtang/typescript-config": "workspace:*"
+  }
+}
