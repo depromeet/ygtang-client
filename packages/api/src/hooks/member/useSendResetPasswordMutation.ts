@@ -23,7 +23,7 @@ export interface SendResetPasswordMutationParams {
  *
  * 초기화된 비밀번호를 이메일로 전송한다.
  */
-export default function useSendResetPasswordMutation({
+export function useSendResetPasswordMutation({
   onSuccess,
   onError,
 }: SendResetPasswordMutationProps) {

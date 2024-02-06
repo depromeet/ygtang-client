@@ -13,7 +13,7 @@ export interface MemberLoginMutationResponse {
   data: AuthTokenResponseInterface;
 }
 
-export default function useMemberLoginMutation() {
+export function useMemberLoginMutation() {
   return useMutation<
     MemberLoginMutationResponse,
     { message?: string },

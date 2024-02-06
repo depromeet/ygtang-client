@@ -23,7 +23,7 @@ interface SendPasswordResetEmailMutationProps {
  *
  * 비밀번호 변경을 위해 이메일에 인증 링크를 요청한다
  */
-export default function useSendPasswordResetEmailMutation({
+export function useSendPasswordResetEmailMutation({
   onSuccess,
   onError,
 }: SendPasswordResetEmailMutationProps) {

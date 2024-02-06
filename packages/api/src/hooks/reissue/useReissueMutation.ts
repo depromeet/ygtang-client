@@ -25,7 +25,7 @@ interface UseReissueMutationProps {
   ) => void | Promise<unknown>;
 }
 
-export default function useReissueMutation({
+export function useReissueMutation({
   onSuccess,
   onError,
 }: UseReissueMutationProps) {

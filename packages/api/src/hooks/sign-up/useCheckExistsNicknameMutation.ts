@@ -10,7 +10,7 @@ export interface CheckExistsNicknameMutationResponse {
   data: null;
 }
 
-export default function useCheckExistsNicknameMutation() {
+export function useCheckExistsNicknameMutation() {
   return useMutation<
     CheckExistsNicknameMutationResponse,
     { message?: string },

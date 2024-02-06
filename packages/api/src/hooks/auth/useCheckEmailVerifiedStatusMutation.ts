@@ -15,7 +15,7 @@ export interface CheckEmailVerifiedStatusMutationResponse {
  *
  * 해당 이메일의 인증 상태 여부 반환
  */
-export default function useCheckEmailVerifiedStatusMutation() {
+export function useCheckEmailVerifiedStatusMutation() {
   return useMutation({
     mutationFn: ({ email }: CheckEmailVerifiedStatusMutationParams) =>
       get<CheckEmailVerifiedStatusMutationResponse>(
