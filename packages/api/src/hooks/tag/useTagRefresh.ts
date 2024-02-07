@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export const TAG_LIST_QUERY_KEY = "tags";
 
-export default function useTagRefresh() {
+export function useTagRefresh() {
   const queryClient = useQueryClient();
 
   const refresh = () => {

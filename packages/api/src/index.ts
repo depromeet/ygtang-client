@@ -50,6 +50,8 @@ export { usePatchExtraInformation } from "./hooks/sign-up/usePatchExtraInformati
 export { useSignupMutation } from "./hooks/sign-up/useSignupMutation";
 
 // hooks (tag)
+export { useGetTagListWithInfinite } from "./hooks/tag/useGetTagListWithInfinite";
+export { useTagRefresh } from "./hooks/tag/useTagRefresh";
 
 // types
 export type {

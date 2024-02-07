@@ -29,7 +29,7 @@ interface Props {
   isExactlySame?: boolean;
 }
 
-export default function useGetTagListWithInfinite({
+export function useGetTagListWithInfinite({
   keyword,
   isExactlySame = false,
 }: Props) {
