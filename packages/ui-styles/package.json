@@ -2,16 +2,10 @@
   "name": "@ygtang/ui-styles",
   "version": "0.0.0",
   "private": true,
-  "main": "src/index.ts",
-  "exports": {
-    ".": {
-      "import": "./src/index.ts"
-    },
-    "./emotion-theme": {
-      "types": "./emotion-theme.d.ts"
-    },
-    "./package.json": "./package.json"
-  },
+  "main": "./src/index.ts",
+  "files": [
+    "./emotion-theme.d.ts"
+  ],
   "devDependencies": {
     "@types/react": "^18.2.55",
     "@ygtang/eslint-config": "workspace:*",
