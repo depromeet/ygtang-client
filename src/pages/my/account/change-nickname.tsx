@@ -71,7 +71,7 @@ interface UseChangeNicknameProps {
   userInformation: UserInformationType;
 }
 
-const NICKNAME_MIN_LENGTH = 3;
+const NICKNAME_MIN_LENGTH = 2;
 const NICKNAME_MAX_LENGTH = 20;
 
 function useChangeNickname({
