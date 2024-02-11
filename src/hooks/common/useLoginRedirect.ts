@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 
 import { sessionStorageRedirectKey } from '~/constants/sessionStorage';
 
@@ -15,7 +15,7 @@ export function useLoginRedirect() {
   const goRedirect = () => {
     const redirect = getRedirect();
     if (!redirect) return;
-    router.replace(redirect);
+    router && router.replace(redirect);
     sessionStorage.removeItem(sessionStorageRedirectKey);
   };
 

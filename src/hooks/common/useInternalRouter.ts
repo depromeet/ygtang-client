@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { UrlObject } from 'url';
 
 export type RouterPathType =
@@ -24,6 +24,10 @@ export type RouterPathType =
 
 export default function useInternalRouter() {
   const router = useRouter();
+
+  if (!router) {
+    throw new Error('useInternalRouter must be used under Next.js Pages Router');
+  }
 
   return {
     ...router,

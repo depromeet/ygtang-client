@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/no-node-access */
 import { type PropsWithChildren, type ReactElement } from 'react';
-import { cleanup, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import SEO from './SEO';
 
@@ -21,8 +21,6 @@ describe('components/SEO/SEO', () => {
   test('정의되어 있어야 한다', () => {
     expect(SEO).toBeDefined();
   });
-
-  afterEach(cleanup);
 
   describe('title', () => {
     const DEFAULT_TITLE = '영감탱';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
@@ -17,22 +17,23 @@ export interface ContentThumbnailProps
 }
 
 function Thumbnail({ id, type, tags, content, openGraph }: ContentThumbnailProps) {
-  const { push } = useRouter();
+  const router = useRouter();
 
   const moveToInspirationView = (id: number) => {
     recordEvent({ action: '영감 상세 조회', value: type });
-    push(
-      {
-        query: {
-          modal: 'inspirationView',
-          id,
+    router &&
+      router.push(
+        {
+          query: {
+            modal: 'inspirationView',
+            id,
+          },
         },
-      },
-      { pathname: 'content', query: { id } },
-      {
-        scroll: false,
-      }
-    );
+        { pathname: 'content', query: { id } },
+        {
+          scroll: false,
+        }
+      );
   };
 
   return (

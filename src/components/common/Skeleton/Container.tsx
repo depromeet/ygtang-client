@@ -57,34 +57,32 @@ const shineVariants: Variants = {
   },
 };
 
-const skeletonContainerCss = (theme: Theme) =>
-  css`
-    position: relative;
-    border-radius: ${theme.borderRadius.default};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 6px;
-    width: 100%;
-    height: 100%;
-  `;
+const skeletonContainerCss = (theme: Theme) => css`
+  position: relative;
+  border-radius: ${theme.borderRadius.default};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+`;
 
-const shineCss = (backgroundRGB: RGB) =>
-  css`
-    z-index: 1;
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: -100px;
-    width: 100px;
-    height: 100%;
-    background: ${`linear-gradient(
+const shineCss = (backgroundRGB: RGB) => css`
+  z-index: 1;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -100px;
+  width: 100px;
+  height: 100%;
+  background: ${`linear-gradient(
           90deg,
           rgba(${backgroundRGB.red}, ${backgroundRGB.green}, ${backgroundRGB.blue}, 0),
           rgba(${backgroundRGB.red}, ${backgroundRGB.green}, ${backgroundRGB.blue}, 0.5),
           70%,
           rgba(${backgroundRGB.red}, ${backgroundRGB.green}, ${backgroundRGB.blue}, 0) 90%
         )`};
-    background-repeat: no-repeat;
-  `;
+  background-repeat: no-repeat;
+`;

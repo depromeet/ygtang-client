@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { css, Theme, useTheme } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import isNil from 'lodash/isNil';
@@ -12,6 +12,7 @@ import { CloseIcon } from './icons';
 export default function ToastSection() {
   const { currentToast } = useToast();
   const theme = useTheme();
+  const router = useRouter();
   const [isClipboardToastVisible, setClipboardToastVisible] = useState(true);
 
   useEffect(() => {
@@ -20,10 +21,11 @@ export default function ToastSection() {
 
   const onClickClipboardToast = () => {
     setClipboardToastVisible(false);
-    Router.push({
-      pathname: currentToast?.clipboardConfig?.type === 'TEXT' ? '/add/text' : '/add/link',
-      query: { isClipboard: true },
-    });
+    router &&
+      router.push({
+        pathname: currentToast?.clipboardConfig?.type === 'TEXT' ? '/add/text' : '/add/link',
+        query: { isClipboard: true },
+      });
   };
 
   const onClickCloseButton = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {

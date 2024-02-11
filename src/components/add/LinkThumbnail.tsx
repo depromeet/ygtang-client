@@ -77,12 +77,11 @@ const linkThumbnailBoxCss = () => css`
   border-radius: 4px;
 `;
 
-const linkThumbnailContentCss = (hasImage: boolean) => (theme: Theme) =>
-  css`
-    padding: 16px;
-    background-color: ${theme.color.gray01};
-    width: calc(100% - ${hasImage ? linkThumbnailUrlSize : 0}px);
-  `;
+const linkThumbnailContentCss = (hasImage: boolean) => (theme: Theme) => css`
+  padding: 16px;
+  background-color: ${theme.color.gray01};
+  width: calc(100% - ${hasImage ? linkThumbnailUrlSize : 0}px);
+`;
 
 const linkThumbnailTitleCss = css`
   width: 100%;

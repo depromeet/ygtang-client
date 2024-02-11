@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { motion } from 'framer-motion';
 
 import { GhostButton } from '~/components/common/Button';
@@ -72,7 +72,7 @@ export default function TagPage() {
           <GhostButton
             size="large"
             onClick={() => {
-              router.back();
+              router && router.back();
             }}
           >
             완료
