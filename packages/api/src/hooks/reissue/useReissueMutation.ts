@@ -30,8 +30,8 @@ export function useReissueMutation({
   onError,
 }: UseReissueMutationProps) {
   return useMutation({
-    mutationFn: (data: ReissueMutationRequest) =>
-      post<ReissueMutationResponse>("/v1/reissue", undefined, {
+    mutationFn: async (data: ReissueMutationRequest) =>
+      await post<ReissueMutationResponse>("v1/reissue", {
         headers: {
           "REFRESH-TOKEN": data.refreshToken,
         },

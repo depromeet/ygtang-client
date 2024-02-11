@@ -17,7 +17,9 @@ export function usePatchExtraInformation() {
     ExtraInformationParams
   >({
     mutationFn: (data: ExtraInformationParams) =>
-      patch(`/v1/signup/extra-informations?email=${data.email}`, data),
+      patch(`/v1/signup/extra-informations?email=${data.email}`, {
+        json: data,
+      }),
   });
 
   return mutation;

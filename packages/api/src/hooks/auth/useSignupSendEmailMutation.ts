@@ -28,7 +28,7 @@ export function useSignupSendEmailMutation({
 }: UseSignupSendEmailMutationProps) {
   return useMutation({
     mutationFn: (data: SignupSendEmailMutationParams) =>
-      post<undefined>("/v1/auth/sends-email/signup", data),
+      post<undefined>("v1/auth/sends-email/signup", { json: data }),
     onSuccess,
     onError,
   });

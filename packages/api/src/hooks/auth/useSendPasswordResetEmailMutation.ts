@@ -30,7 +30,7 @@ export function useSendPasswordResetEmailMutation({
   return useMutation({
     mutationFn: ({ email }: SendPasswordResetEmailMutationParams) =>
       post<undefined>(`/v1/auth/sends-email/passwords/reset`, {
-        email,
+        json: { email },
       }),
     onSuccess,
     onError,

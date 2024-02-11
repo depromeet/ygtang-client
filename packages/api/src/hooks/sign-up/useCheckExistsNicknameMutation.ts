@@ -16,8 +16,8 @@ export function useCheckExistsNicknameMutation() {
     { message?: string },
     CheckExistsNicknameMutationParams
   >({
-    mutationFn: ({ nickname }: CheckExistsNicknameMutationParams) =>
-      post<CheckExistsNicknameMutationResponse>(
+    mutationFn: async ({ nickname }: CheckExistsNicknameMutationParams) =>
+      await post<CheckExistsNicknameMutationResponse>(
         `/v1/signup/nicknames/${nickname}/exists`,
       ),
   });

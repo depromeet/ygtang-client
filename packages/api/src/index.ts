@@ -70,3 +70,6 @@ export type {
 } from "./types/member";
 export type { PaginationInterface, SortInterface } from "./types/pagination";
 export type { TagInterface, TagType } from "./types/tag";
+
+// utils
+export { queryClient } from "./utils/queryClient";

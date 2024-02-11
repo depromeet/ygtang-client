@@ -11,7 +11,8 @@
     "@ygtang/eslint-config": "workspace:*",
     "@ygtang/typescript-config": "workspace:*",
     "prettier": "3.2.4",
-    "turbo": "1.12.2"
+    "turbo": "1.12.2",
+    "typescript": "5.3.3"
   },
   "packageManager": "pnpm@8.9.0",
   "engines": {

@@ -1,6 +1,5 @@
 export interface ApiHelperDefaultItems {
   accessToken?: string;
-  isUsingFetch?: boolean;
 }
 
 export type ApiHelper<T = unknown, R = unknown> = (

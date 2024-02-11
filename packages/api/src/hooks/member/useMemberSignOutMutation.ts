@@ -16,7 +16,7 @@ export function useMemberSignOutMutation({
   onError,
 }: UseMemberSignOutMutationProps) {
   return useMutation({
-    mutationFn: () => del("/v1/auth/signout"),
+    mutationFn: () => del("v1/auth/signout"),
     onSuccess,
     onError,
   });

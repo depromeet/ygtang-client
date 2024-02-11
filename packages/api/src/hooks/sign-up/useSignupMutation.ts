@@ -31,8 +31,8 @@ export function useSignupMutation() {
     { message?: string },
     SignupMutationParams
   >({
-    mutationFn: (data: SignupMutationParams) =>
-      post<SignupMutationResponse>(`/v1/signup`, data),
+    mutationFn: async (data: SignupMutationParams) =>
+      await post<SignupMutationResponse>(`/v1/signup`, { json: data }),
   });
 
   return mutation;

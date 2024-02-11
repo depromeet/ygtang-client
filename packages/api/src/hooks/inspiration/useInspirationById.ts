@@ -16,7 +16,7 @@ export function useInspirationById({
 }) {
   const { data: inspiration, isLoading } = useQuery({
     queryKey: [INSPIRATION_BY_ID_QUERY_KEY, inspirationId],
-    queryFn: () => fetchInspirationById(inspirationId).then((res) => res.data),
+    queryFn: () => fetchInspirationById(inspirationId).then((res) => res),
     enabled: Boolean(inspirationId),
   });
 

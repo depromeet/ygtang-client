@@ -32,9 +32,9 @@ export function useSendResetPasswordMutation({
     { message?: string },
     SendResetPasswordMutationParams
   >({
-    mutationFn: ({ email }: SendResetPasswordMutationParams) =>
-      post<undefined>(`/v1/members/sends-email/reset-passwords`, {
-        email,
+    mutationFn: async ({ email }: SendResetPasswordMutationParams) =>
+      await post<undefined>(`/v1/members/sends-email/reset-passwords`, {
+        json: { email },
       }),
     onSuccess,
     onError,
