@@ -3,8 +3,20 @@
   "version": "0.0.0",
   "private": true,
   "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint **/*.ts*"
+  },
   "devDependencies": {
+    "@types/react": "^18.2.55",
     "@ygtang/eslint-config": "workspace:*",
     "@ygtang/typescript-config": "workspace:*"
+  },
+  "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "11.11.3",
+    "@ygtang/hooks": "workspace:^",
+    "@ygtang/ui-styles": "workspace:^",
+    "react": "18.2.0"
   }
 }
