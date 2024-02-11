@@ -21,7 +21,6 @@ export const handleLink = async (
     await createInspiration({
       accessToken,
       data: imgData,
-      isUsingFetch: true,
     });
     sendToast(tab.id, "링크를 성공적으로 보냈어요.", "success");
   } catch (e) {

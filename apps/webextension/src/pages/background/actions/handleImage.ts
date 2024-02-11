@@ -31,7 +31,6 @@ export const handleImage = async (
     await createInspiration({
       accessToken,
       data: imgData,
-      isUsingFetch: true,
     });
     sendToast(tab.id, "이미지를 성공적으로 보냈어요.", "success");
   } catch (e) {

@@ -1,14 +1,17 @@
-import logo from "@assets/img/logo.svg";
-import { Input } from "@src/components/TextField";
-import { css, Theme } from "@emotion/react";
-import Button, { FilledButton } from "@src/components/Button";
-import NavigationBar from "@src/components/NavigationBar";
-import { useUserData } from "./hooks/useUserData";
-import useInput from "./hooks/useInput";
 import { FormEvent } from "react";
-import { Spacing } from "@src/components/Spacing/Spacing";
+import { css } from "@emotion/react";
+import { useInput } from "@ygtang/hooks";
+import { Button, FilledButton, Input, Spacing } from "@ygtang/ui-components";
+import { useTheme, YgtangTheme } from "@ygtang/ui-styles";
+
+import logo from "~/assets/img/logo.svg";
+import NavigationBar from "~/components/NavigationBar";
+
+import { useUserData } from "./hooks/useUserData";
 
 export function PopupApp() {
+  const theme = useTheme();
+
   const emailInput = useInput({});
   const passwordInput = useInput({});
 
@@ -41,15 +44,15 @@ export function PopupApp() {
               <>
                 <Spacing top={8} />
                 <div css={loginStateCss}>
-                  <p css={infoTextCss}>로그인되었습니다.</p>
+                  <p css={infoTextCss(theme)}>로그인되었습니다.</p>
                   <Button onClick={handleLogout}>로그아웃</Button>
                 </div>
                 <Spacing bottom={16} />
               </>
             ) : (
               <form onSubmit={handleLogin} css={formCss}>
-                <p css={infoTextCss}>영감탱 계정으로 로그인해주세요.</p>
-                {error && <div css={alertBoxCss}>{error}</div>}
+                <p css={infoTextCss(theme)}>영감탱 계정으로 로그인해주세요.</p>
+                {error && <div css={alertBoxCss(theme)}>{error}</div>}
                 <Input
                   placeholder="이메일 주소"
                   value={emailInput.value}
@@ -105,7 +108,7 @@ const loginStateCss = css`
   gap: 8px;
 `;
 
-const infoTextCss = (theme: Theme) => css`
+const infoTextCss = (theme: YgtangTheme) => css`
   font-size: 14px;
   font-weight: 500;
   text-align: center;
@@ -124,7 +127,7 @@ const logoWrapperCss = css`
   }
 `;
 
-const alertBoxCss = (theme: Theme) => css`
+const alertBoxCss = (theme: YgtangTheme) => css`
   display: flex;
   padding: 12px 16px;
   background: ${theme.color.gray04};

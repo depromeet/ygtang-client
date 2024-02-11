@@ -1,16 +1,15 @@
 import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@ygtang/api";
+import { ThemeProvider } from "@ygtang/ui-styles";
 
-import { YgtThemeProvider } from "@src/styles/Theme/YgtThemeProvider";
-
-import { queryClient } from "@src/libs/api/queryClient";
 import { PopupApp } from "./App";
 
 const Popup = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <YgtThemeProvider>
+      <ThemeProvider>
         <PopupApp />
-      </YgtThemeProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };

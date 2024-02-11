@@ -1,6 +1,7 @@
 {
   "extends": "@ygtang/typescript-config/vite.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "types": [
       "vite/client",
       "node",
@@ -13,6 +14,9 @@
     "moduleResolution": "node",
     "jsxImportSource": "@emotion/react",
     "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "declarationMap": false,
+    "skipLibCheck": true,
   },
   "include": ["src", "utils", "vite.config.ts", "node_modules/@types"],
 }
