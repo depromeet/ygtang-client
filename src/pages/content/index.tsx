@@ -9,7 +9,7 @@ import { FixedSpinner } from '~/components/common/Spinner';
 import ImageView from '~/components/inspiration/ImageView';
 import LinkView from '~/components/inspiration/LinkView';
 import TextView from '~/components/inspiration/TextView';
-import { defaultFadeInScaleVariants, defaultFadeInVariants } from '~/constants/motions';
+import { defaultFadeInVariants } from '~/constants/motions';
 import { useInspirationById } from '~/hooks/api/inspiration/useInspirationById';
 import useInspirationMutation from '~/hooks/api/inspiration/useInspirationMutation';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
