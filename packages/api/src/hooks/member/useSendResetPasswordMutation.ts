@@ -23,7 +23,7 @@ export interface SendResetPasswordMutationParams {
  *
  * 초기화된 비밀번호를 이메일로 전송한다.
  */
-export default function useSendResetPasswordMutation({
+export function useSendResetPasswordMutation({
   onSuccess,
   onError,
 }: SendResetPasswordMutationProps) {
@@ -32,9 +32,9 @@ export default function useSendResetPasswordMutation({
     { message?: string },
     SendResetPasswordMutationParams
   >({
-    mutationFn: ({ email }: SendResetPasswordMutationParams) =>
-      post<undefined>(`/v1/members/sends-email/reset-passwords`, {
-        email,
+    mutationFn: async ({ email }: SendResetPasswordMutationParams) =>
+      await post<undefined>(`/v1/members/sends-email/reset-passwords`, {
+        json: { email },
       }),
     onSuccess,
     onError,

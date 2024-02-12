@@ -29,7 +29,7 @@ interface Props {
   isExactlySame?: boolean;
 }
 
-export default function useGetTagListWithInfinite({
+export function useGetTagListWithInfinite({
   keyword,
   isExactlySame = false,
 }: Props) {
@@ -53,18 +53,18 @@ export default function useGetTagListWithInfinite({
     queryFn: ({ pageParam = 0 }: { pageParam: number }) => fetchTags(pageParam),
     initialPageParam: 0,
     getNextPageParam: ({ data }) => {
-      if (data.data.last) return undefined;
-      return data.data.number + 1 ?? undefined;
+      if (data.last) return undefined;
+      return data.number + 1 ?? undefined;
     },
     getPreviousPageParam: ({ data }) => {
-      if (data.data.first) return undefined;
-      return data.data.number - 1 ?? undefined;
+      if (data.first) return undefined;
+      return data.number - 1 ?? undefined;
     },
   });
 
   return {
     tags: query.data
-      ? flatten(query.data.pages.map((page) => page.data.data.content))
+      ? flatten(query.data.pages.map((page) => page.data.content))
       : [],
     ...query,
   };

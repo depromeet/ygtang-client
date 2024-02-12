@@ -25,14 +25,14 @@ interface SignupMutationResponse {
  *
  * NOTE: @ddarkr - 이전 과정에서 api fetching을 다루지 않는 로직이 제거되었습니다. 이전 시 확인 부탁드립니다.
  */
-export default function useSignupMutation() {
+export function useSignupMutation() {
   const mutation = useMutation<
     SignupMutationResponse,
     { message?: string },
     SignupMutationParams
   >({
-    mutationFn: (data: SignupMutationParams) =>
-      post<SignupMutationResponse>(`/v1/signup`, data),
+    mutationFn: async (data: SignupMutationParams) =>
+      await post<SignupMutationResponse>(`/v1/signup`, { json: data }),
   });
 
   return mutation;

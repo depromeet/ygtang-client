@@ -1,0 +1,18 @@
+{
+  "name": "@ygtang/ui-styles",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "files": [
+    "./emotion-theme.d.ts"
+  ],
+  "devDependencies": {
+    "@types/react": "^18.2.55",
+    "@ygtang/eslint-config": "workspace:*",
+    "@ygtang/typescript-config": "workspace:*"
+  },
+  "peerDependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "11.11.3"
+  }
+}

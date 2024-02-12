@@ -1,0 +1,7 @@
+{
+  "extends": "@ygtang/eslint-config/react.js",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": true
+  }
+}

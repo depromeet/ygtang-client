@@ -22,13 +22,13 @@ interface UseSignupSendEmailMutationProps {
 /**
  * 회원가입을 위해 이메일에 인증 링크를 요청한다
  */
-export default function useSignupSendEmailMutation({
+export function useSignupSendEmailMutation({
   onSuccess,
   onError,
 }: UseSignupSendEmailMutationProps) {
   return useMutation({
     mutationFn: (data: SignupSendEmailMutationParams) =>
-      post<undefined>("/v1/auth/sends-email/signup", data),
+      post<undefined>("v1/auth/sends-email/signup", { json: data }),
     onSuccess,
     onError,
   });

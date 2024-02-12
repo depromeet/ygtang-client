@@ -10,14 +10,14 @@ export interface CheckExistsNicknameMutationResponse {
   data: null;
 }
 
-export default function useCheckExistsNicknameMutation() {
+export function useCheckExistsNicknameMutation() {
   return useMutation<
     CheckExistsNicknameMutationResponse,
     { message?: string },
     CheckExistsNicknameMutationParams
   >({
-    mutationFn: ({ nickname }: CheckExistsNicknameMutationParams) =>
-      post<CheckExistsNicknameMutationResponse>(
+    mutationFn: async ({ nickname }: CheckExistsNicknameMutationParams) =>
+      await post<CheckExistsNicknameMutationResponse>(
         `/v1/signup/nicknames/${nickname}/exists`,
       ),
   });

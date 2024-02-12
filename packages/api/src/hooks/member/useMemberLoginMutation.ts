@@ -13,13 +13,23 @@ export interface MemberLoginMutationResponse {
   data: AuthTokenResponseInterface;
 }
 
-export default function useMemberLoginMutation() {
+export function useMemberLoginMutation({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: (data: MemberLoginMutationResponse) => void;
+  onError?: (data: { message?: string }) => void;
+}) {
   return useMutation<
     MemberLoginMutationResponse,
     { message?: string },
     MemberLoginMutationRequest
   >({
-    mutationFn: (data: MemberLoginMutationRequest) =>
-      post<MemberLoginMutationResponse>("/v1/auth/login", data),
+    mutationFn: async (data: MemberLoginMutationRequest) =>
+      await post<MemberLoginMutationResponse>("v1/auth/login", {
+        json: data,
+      }),
+    onSuccess,
+    onError,
   });
 }

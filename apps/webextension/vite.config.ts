@@ -1,12 +1,12 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path, { resolve } from "path";
-import makeManifest from "./utils/plugins/make-manifest";
+import { defineConfig } from "vite";
+
 import customDynamicImport from "./utils/plugins/custom-dynamic-import";
+import makeManifest from "./utils/plugins/make-manifest";
 
 const root = resolve(__dirname, "src");
 const pagesDir = resolve(root, "pages");
-const assetsDir = resolve(root, "assets");
 const outDir = resolve(__dirname, "dist");
 const publicDir = resolve(__dirname, "public");
 
@@ -15,9 +15,7 @@ const isDev = process.env.__DEV__ === "true";
 export default defineConfig({
   resolve: {
     alias: {
-      "@src": root,
-      "@assets": assetsDir,
-      "@pages": pagesDir,
+      "~": root,
     },
   },
   plugins: [
@@ -49,7 +47,7 @@ export default defineConfig({
           ? "assets/js/[name].js"
           : "assets/js/[name].[hash].js",
         assetFileNames: (assetInfo) => {
-          const { dir, name: _name } = path.parse(assetInfo.name);
+          const { dir, name: _name } = path.parse(assetInfo.name as string);
           const assetFolder = getLastElement(dir.split("/"));
           const name = assetFolder + firstUpperCase(_name);
           return `assets/[ext]/${name}.chunk.[ext]`;
@@ -60,9 +58,12 @@ export default defineConfig({
 });
 
 function getLastElement<T>(array: ArrayLike<T>): T {
+  if (!array) {
+    throw new TypeError("array is empty or has only one element.");
+  }
   const length = array.length;
   const lastIndex = length - 1;
-  return array[lastIndex];
+  return array[lastIndex] as T;
 }
 
 function firstUpperCase(str: string) {

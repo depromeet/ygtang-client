@@ -1,13 +1,22 @@
 {
   "extends": "@ygtang/typescript-config/vite.json",
   "compilerOptions": {
-    "types": ["vite/client", "node", "@emotion/react/types/css-prop"],
+    "baseUrl": ".",
+    "types": [
+      "vite/client",
+      "node",
+      "@emotion/react/types/css-prop",
+      "@ygtang/ui-styles/emotion-theme"
+    ],
     "paths": {
       "~/*": ["./src/*"],
     },
     "moduleResolution": "node",
     "jsxImportSource": "@emotion/react",
     "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "declarationMap": false,
+    "skipLibCheck": true,
   },
   "include": ["src", "utils", "vite.config.ts", "node_modules/@types"],
 }

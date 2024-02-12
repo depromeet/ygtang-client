@@ -31,7 +31,9 @@ export function useChangePassword({
     ChangePasswordRequest
   >({
     mutationFn: (data: ChangePasswordRequest) =>
-      put<ChangePasswordResponse>("/v1/members/passwords/change", data),
+      put<ChangePasswordResponse>("v1/members/passwords/change", {
+        json: data,
+      }),
     onSuccess,
     onError,
   });

@@ -22,7 +22,7 @@ export interface CheckPasswordResetEmailVerifiedMutationResponse {
  *
  * 비밀번호 초기화를 위한 해당 이메일의 인증 상태 여부를 반환한다.
  */
-export default function useCheckPasswordResetEmailVerifiedMutation({
+export function useCheckPasswordResetEmailVerifiedMutation({
   onSuccess,
   onError,
 }: UseCheckPasswordResetEmailVerifiedMutationProps) {

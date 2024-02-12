@@ -3,12 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
+  "main": "src/index.ts",
   "devDependencies": {
-    "@types/node": "^20.11.16",
+    "@types/js-cookie": "3.0.6",
+    "@types/lodash": "4.14.202",
+    "@types/node": "20.11.16",
+    "@types/react": "18.2.55",
     "@ygtang/eslint-config": "workspace:*",
     "@ygtang/typescript-config": "workspace:*"
+  },
+  "dependencies": {
+    "@ygtang/constants": "workspace:^",
+    "js-cookie": "3.0.5",
+    "lodash": "4.17.21"
+  },
+  "peerDependencies": {
+    "react": "18.2.0"
   }
 }

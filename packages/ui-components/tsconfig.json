@@ -1,0 +1,15 @@
+{
+  "extends": "@ygtang/typescript-config/react-library.json",
+  "compilerOptions": {
+    "jsxImportSource": "@emotion/react",
+    "types": [
+      "@emotion/react/types/css-prop",
+      "@ygtang/ui-styles/emotion-theme"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": ["node_modules"],
+}
