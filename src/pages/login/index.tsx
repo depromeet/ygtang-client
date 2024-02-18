@@ -1,10 +1,13 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
-import { CTAButton, GhostButton } from '~/components/common/Button';
+import { CTAButton, FilledButton, GhostButton } from '~/components/common/Button';
+import Dialog from '~/components/common/Dialog';
 import SEO from '~/components/common/SEO';
 import TextField from '~/components/common/TextField';
+import { localStorageExtensionKeys } from '~/constants/localStorage';
 import useMemberLoginMutation from '~/hooks/api/member/useMemberLoginMutation';
+import useReissueMutation from '~/hooks/api/reissue/useReissueMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
@@ -19,6 +22,7 @@ export default function Login() {
   const email = useInput({});
   const password = useInput({});
   const [isPending, setIsPending] = useState(false);
+  const [canExtensionLogin, setCanExtensionLogin] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const { userLogin } = useUser();
@@ -30,6 +34,27 @@ export default function Login() {
     data: loginMutationData,
     error: loginMutationError,
   } = useMemberLoginMutation();
+  const { mutate: reissueMutate } = useReissueMutation({
+    onSuccess: ({ data }) => {
+      userLogin({
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      });
+      setIsPending(false);
+      recordEvent({ action: 'Login', value: '로그인 화면에서 익스텐션 계정으로 로그인' });
+
+      if (getRedirect()) {
+        goRedirect();
+      } else {
+        push('/');
+      }
+    },
+    onError: () => {
+      fireToast({ content: '익스텐션 계정으로 로그인하는데 실패했습니다.' });
+      setCanExtensionLogin(false);
+      setIsPending(false);
+    },
+  });
 
   const handleFormSubmitEvent = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +69,14 @@ export default function Login() {
       email: email.value,
       password: password.value,
     });
+  };
+
+  const handleExtensionLogin = () => {
+    setIsPending(true);
+    const token = localStorage.getItem(localStorageExtensionKeys.refreshToken);
+    if (token) {
+      reissueMutate({ refreshToken: token });
+    }
   };
 
   useDidUpdate(() => {
@@ -86,6 +119,16 @@ export default function Login() {
     }
   }, [fireToast, loginMutationError]);
 
+  useEffect(() => {
+    if (
+      localStorage &&
+      localStorage.getItem(localStorageExtensionKeys.use) &&
+      localStorage.getItem(localStorageExtensionKeys.refreshToken)
+    ) {
+      setCanExtensionLogin(true);
+    }
+  }, []);
+
   return (
     <>
       <SEO title="로그인" />
@@ -127,6 +170,30 @@ export default function Login() {
             빠르게 가입하기
           </GhostButton>
         </div>
+        <Dialog
+          isShowing={canExtensionLogin}
+          dialogWidth={300}
+          actionButtons={
+            <>
+              <FilledButton
+                colorType="light"
+                onClick={() => setCanExtensionLogin(false)}
+                disabled={isPending}
+              >
+                다른 계정
+              </FilledButton>
+              <div css={dialogLongButtonCss}>
+                <FilledButton colorType="dark" onClick={handleExtensionLogin} disabled={isPending}>
+                  익스텐션 계정
+                </FilledButton>
+              </div>
+            </>
+          }
+        >
+          영감탱 익스텐션에 로그인되어 있습니다.
+          <br />
+          익스텐션 계정으로 로그인할까요?
+        </Dialog>
       </article>
     </>
   );
@@ -165,4 +232,9 @@ const signUpTextWrapperCss = (theme: Theme) => css`
   font-weight: ${theme.font.weight.regular};
   font-size: 10px;
   line-height: 150%;
+`;
+
+const dialogLongButtonCss = css`
+  width: 160px;
+  flex-shrink: 0;
 `;
