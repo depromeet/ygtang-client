@@ -120,13 +120,18 @@ export default function Login() {
   }, [fireToast, loginMutationError]);
 
   useEffect(() => {
-    if (
-      localStorage &&
-      localStorage.getItem(localStorageExtensionKeys.use) &&
-      localStorage.getItem(localStorageExtensionKeys.refreshToken)
-    ) {
-      setCanExtensionLogin(true);
-    }
+    const checkLoginAvailable = () => {
+      if (localStorage.getItem(localStorageExtensionKeys.refreshToken)) {
+        setCanExtensionLogin(true);
+      } else {
+        setCanExtensionLogin(false);
+      }
+    };
+    checkLoginAvailable();
+    const interval = setInterval(checkLoginAvailable, 3000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
