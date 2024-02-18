@@ -16,8 +16,8 @@ import { validator } from '~/utils/validator';
 
 export default function Login() {
   const { fireToast } = useToast();
-  const email = useInput({ useDebounce: true });
-  const password = useInput({ useDebounce: true });
+  const email = useInput({});
+  const password = useInput({});
   const [isPending, setIsPending] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -47,20 +47,20 @@ export default function Login() {
   };
 
   useDidUpdate(() => {
-    if (!validator({ type: 'email', value: email.debouncedValue })) {
+    if (!validator({ type: 'email', value: email.value })) {
       setEmailError('올바른 이메일을 입력해주세요.');
     } else {
       setEmailError('');
     }
-  }, [email.debouncedValue]);
+  }, [email.value]);
 
   useDidUpdate(() => {
-    if (password.debouncedValue.length >= 6) {
+    if (password.value.length >= 6) {
       setPasswordError('');
     } else {
       setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
     }
-  }, [password.debouncedValue]);
+  }, [password.value]);
 
   useDidUpdate(() => {
     if (loginMutationData && loginMutationData.data) {
