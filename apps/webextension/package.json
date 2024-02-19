@@ -1,10 +1,10 @@
 {
   "name": "webextension",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "build": "tsc --noEmit && vite build",
-    "dev": "nodemon",
+    "dev": "nodemon --exec pnpm -F webextension build --watch src --watch vite.config.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx"
   },
@@ -14,6 +14,7 @@
     "@tanstack/react-query": "5.18.1",
     "@vespaiach/axios-fetch-adapter": "0.3.1",
     "@ygtang/api": "workspace:^",
+    "@ygtang/constants": "workspace:^",
     "@ygtang/hooks": "workspace:^",
     "@ygtang/http": "workspace:^",
     "@ygtang/ui-components": "workspace:^",

@@ -1,4 +1,9 @@
-export const API_URL_DEVELOPMENT = "https://api.ygtang.xyz/api";
-export const API_URL_PRODUCTION = "https://ygtang.kr/api";
-
-export const IS_PRODUCTION = process.env.NODE_ENV === "production";
+export {
+  API_URL_DEVELOPMENT,
+  API_URL_PRODUCTION,
+  IS_PRODUCTION,
+} from "./common";
+export {
+  localStorageExtensionKeys,
+  localStorageUserTokenKeys,
+} from "./localStorage";
