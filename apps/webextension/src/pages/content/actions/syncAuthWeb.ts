@@ -1,3 +1,5 @@
+import { localStorageExtensionKeys } from "@ygtang/constants";
+
 export function syncAuthWeb() {
   if (
     window.location.hostname !== "app.ygtang.kr" &&
@@ -5,14 +7,17 @@ export function syncAuthWeb() {
   ) {
     return;
   }
-  localStorage.setItem("use-ygtang-extension", "true");
+  localStorage.setItem(localStorageExtensionKeys.use, "true");
   chrome.storage.onChanged.addListener((changes) => {
     for (const [key, { newValue }] of Object.entries(changes)) {
-      if (key === "ygtang-refresh") {
+      if (key === localStorageExtensionKeys.refreshToken) {
         if (newValue === "undefined" || newValue === undefined) {
-          localStorage.removeItem("ygte-refresh");
+          localStorage.removeItem(localStorageExtensionKeys.refreshToken);
         } else {
-          localStorage.setItem("ygte-refresh", newValue);
+          localStorage.setItem(
+            localStorageExtensionKeys.refreshToken,
+            newValue,
+          );
         }
       }
     }

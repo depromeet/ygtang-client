@@ -78,6 +78,9 @@ importers:
       '@ygtang/api':
         specifier: workspace:^
         version: link:../../packages/api
+      '@ygtang/constants':
+        specifier: workspace:^
+        version: link:../../packages/constants
       '@ygtang/hooks':
         specifier: workspace:^
         version: link:../../packages/hooks
@@ -90,9 +93,6 @@ importers:
       '@ygtang/ui-styles':
         specifier: workspace:^
         version: link:../../packages/ui-styles
-      axios:
-        specifier: 1.6.7
-        version: 1.6.7
       mime2ext:
         specifier: 2.0.0
         version: 2.0.0

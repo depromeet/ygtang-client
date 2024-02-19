@@ -14,6 +14,7 @@
     "@tanstack/react-query": "5.18.1",
     "@vespaiach/axios-fetch-adapter": "0.3.1",
     "@ygtang/api": "workspace:^",
+    "@ygtang/constants": "workspace:^",
     "@ygtang/hooks": "workspace:^",
     "@ygtang/http": "workspace:^",
     "@ygtang/ui-components": "workspace:^",
