@@ -18,126 +18,18 @@ import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function Login() {
-  const { fireToast } = useToast();
-  const email = useInput({});
-  const password = useInput({});
   const [isPending, setIsPending] = useState(false);
-  const [canExtensionLogin, setCanExtensionLogin] = useState(false);
-  const [userCancelExtensionLogin, setUserCancelExtensionLogin] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const { userLogin } = useUser();
   const { push } = useInternalRouter();
-  const { getRedirect, goRedirect } = useLoginRedirect();
 
-  const {
-    mutate: loginMutate,
-    data: loginMutationData,
-    error: loginMutationError,
-  } = useMemberLoginMutation();
-  const { mutate: reissueMutate } = useReissueMutation({
-    onSuccess: ({ data }) => {
-      userLogin({
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
-      });
-      setIsPending(false);
-      recordEvent({ action: 'Login', value: '로그인 화면에서 익스텐션 계정으로 로그인' });
-
-      if (getRedirect()) {
-        goRedirect();
-      } else {
-        push('/');
-      }
-    },
-    onError: () => {
-      fireToast({ content: '익스텐션 계정으로 로그인하는데 실패했습니다.' });
-      setCanExtensionLogin(false);
-      setIsPending(false);
-    },
+  const { handleFormSubmitEvent, email, password, emailError, passwordError } = useLoginPage({
+    setIsPending,
   });
-
-  const handleFormSubmitEvent = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (emailError !== '' || passwordError !== '') {
-      return fireToast({
-        content: '올바르지 않은 입력값입니다. 다시 확인해주세요',
-        duration: 3500,
-      });
-    }
-    setIsPending(true);
-    loginMutate({
-      email: email.value,
-      password: password.value,
-    });
-  };
-
-  const handleExtensionLogin = () => {
-    setIsPending(true);
-    const token = localStorage.getItem(localStorageExtensionKeys.refreshToken);
-    if (token) {
-      reissueMutate({ refreshToken: token });
-    }
-  };
-
-  useDidUpdate(() => {
-    if (!validator({ type: 'email', value: email.value })) {
-      setEmailError('올바른 이메일을 입력해주세요.');
-    } else {
-      setEmailError('');
-    }
-  }, [email.value]);
-
-  useDidUpdate(() => {
-    if (password.value.length >= 6) {
-      setPasswordError('');
-    } else {
-      setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
-    }
-  }, [password.value]);
-
-  useDidUpdate(() => {
-    if (loginMutationData && loginMutationData.data) {
-      userLogin({
-        accessToken: loginMutationData.data.accessToken,
-        refreshToken: loginMutationData.data.refreshToken,
-      });
-      setIsPending(false);
-      recordEvent({ action: 'Login', value: '로그인 화면에서 로그인' });
-
-      if (getRedirect()) {
-        goRedirect();
-      } else {
-        push('/');
-      }
-    }
-  }, [loginMutationData]);
-
-  useEffect(() => {
-    if (loginMutationError) {
-      setIsPending(false);
-      fireToast({ content: loginMutationError.message ?? '알 수 없는 오류가 발생했습니다.' });
-    }
-  }, [fireToast, loginMutationError]);
-
-  useEffect(() => {
-    const checkLoginAvailable = () => {
-      if (userCancelExtensionLogin) {
-        return;
-      }
-      if (localStorage.getItem(localStorageExtensionKeys.refreshToken)) {
-        setCanExtensionLogin(true);
-      } else {
-        setCanExtensionLogin(false);
-      }
-    };
-    checkLoginAvailable();
-    const interval = setInterval(checkLoginAvailable, 3000);
-    return () => {
-      clearInterval(interval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const {
+    canExtensionLogin,
+    handleExtensionLogin,
+    setUserCancelExtensionLogin,
+    userCancelExtensionLogin,
+  } = useExtensionAuth({ setIsPending });
 
   return (
     <>
@@ -207,6 +99,147 @@ export default function Login() {
       </article>
     </>
   );
+}
+
+function useLoginPage({ setIsPending }: { setIsPending: (value: boolean) => void }) {
+  const { fireToast } = useToast();
+  const email = useInput({});
+  const password = useInput({});
+  const { push } = useInternalRouter();
+  const { getRedirect, goRedirect } = useLoginRedirect();
+  const { userLogin } = useUser();
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const {
+    mutate: loginMutate,
+    data: loginMutationData,
+    error: loginMutationError,
+  } = useMemberLoginMutation();
+
+  const handleFormSubmitEvent = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (emailError !== '' || passwordError !== '') {
+      return fireToast({
+        content: '올바르지 않은 입력값입니다. 다시 확인해주세요',
+        duration: 3500,
+      });
+    }
+    setIsPending(true);
+    loginMutate({
+      email: email.value,
+      password: password.value,
+    });
+  };
+
+  useDidUpdate(() => {
+    if (!validator({ type: 'email', value: email.value })) {
+      setEmailError('올바른 이메일을 입력해주세요.');
+    } else {
+      setEmailError('');
+    }
+  }, [email.value]);
+
+  useDidUpdate(() => {
+    if (password.value.length >= 6) {
+      setPasswordError('');
+    } else {
+      setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
+    }
+  }, [password.value]);
+
+  useDidUpdate(() => {
+    if (loginMutationData && loginMutationData.data) {
+      userLogin({
+        accessToken: loginMutationData.data.accessToken,
+        refreshToken: loginMutationData.data.refreshToken,
+      });
+      setIsPending(false);
+      recordEvent({ action: 'Login', value: '로그인 화면에서 로그인' });
+
+      if (getRedirect()) {
+        goRedirect();
+      } else {
+        push('/');
+      }
+    }
+  }, [loginMutationData]);
+
+  useEffect(() => {
+    if (loginMutationError) {
+      setIsPending(false);
+      fireToast({ content: loginMutationError.message ?? '알 수 없는 오류가 발생했습니다.' });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fireToast, loginMutationError]);
+
+  return { handleFormSubmitEvent, email, password, emailError, passwordError };
+}
+
+function useExtensionAuth({ setIsPending }: { setIsPending: (value: boolean) => void }) {
+  const { getRedirect, goRedirect } = useLoginRedirect();
+  const { push } = useInternalRouter();
+  const { fireToast } = useToast();
+  const { userLogin } = useUser();
+  const [canExtensionLogin, setCanExtensionLogin] = useState(false);
+  const [userCancelExtensionLogin, setUserCancelExtensionLogin] = useState(false);
+
+  const { mutate: reissueMutate } = useReissueMutation({
+    onSuccess: ({ data }) => {
+      userLogin({
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      });
+      setIsPending(false);
+      recordEvent({ action: 'Login', value: '로그인 화면에서 익스텐션 계정으로 로그인' });
+
+      if (getRedirect()) {
+        goRedirect();
+      } else {
+        push('/');
+      }
+    },
+    onError: () => {
+      fireToast({ content: '익스텐션 계정으로 로그인하는데 실패했습니다.' });
+      setCanExtensionLogin(false);
+      setIsPending(false);
+    },
+  });
+
+  const handleExtensionLogin = () => {
+    setIsPending(true);
+    const token = localStorage.getItem(localStorageExtensionKeys.refreshToken);
+    if (token) {
+      reissueMutate({ refreshToken: token });
+    }
+  };
+
+  useEffect(() => {
+    const checkLoginAvailable = () => {
+      if (userCancelExtensionLogin) {
+        return;
+      }
+      if (localStorage.getItem(localStorageExtensionKeys.refreshToken)) {
+        setCanExtensionLogin(true);
+      } else {
+        setCanExtensionLogin(false);
+      }
+    };
+    checkLoginAvailable();
+    const interval = setInterval(checkLoginAvailable, 3000);
+    return () => {
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return {
+    canExtensionLogin,
+    handleExtensionLogin,
+    setUserCancelExtensionLogin,
+    userCancelExtensionLogin,
+  };
 }
 
 const navMockupCss = css`
