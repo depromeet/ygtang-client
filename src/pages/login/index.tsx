@@ -23,6 +23,7 @@ export default function Login() {
   const password = useInput({});
   const [isPending, setIsPending] = useState(false);
   const [canExtensionLogin, setCanExtensionLogin] = useState(false);
+  const [userCancelExtensionLogin, setUserCancelExtensionLogin] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const { userLogin } = useUser();
@@ -121,6 +122,9 @@ export default function Login() {
 
   useEffect(() => {
     const checkLoginAvailable = () => {
+      if (userCancelExtensionLogin) {
+        return;
+      }
       if (localStorage.getItem(localStorageExtensionKeys.refreshToken)) {
         setCanExtensionLogin(true);
       } else {
@@ -132,6 +136,7 @@ export default function Login() {
     return () => {
       clearInterval(interval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -176,13 +181,13 @@ export default function Login() {
           </GhostButton>
         </div>
         <Dialog
-          isShowing={canExtensionLogin}
+          isShowing={!userCancelExtensionLogin && canExtensionLogin}
           dialogWidth={300}
           actionButtons={
             <>
               <FilledButton
                 colorType="light"
-                onClick={() => setCanExtensionLogin(false)}
+                onClick={() => setUserCancelExtensionLogin(true)}
                 disabled={isPending}
               >
                 다른 계정
