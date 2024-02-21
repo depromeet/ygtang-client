@@ -10,6 +10,7 @@
   "devDependencies": {
     "@types/node": "^20.11.16",
     "@ygtang/eslint-config": "workspace:*",
-    "@ygtang/typescript-config": "workspace:*"
+    "@ygtang/typescript-config": "workspace:*",
+    "framer-motion": "*"
   }
 }

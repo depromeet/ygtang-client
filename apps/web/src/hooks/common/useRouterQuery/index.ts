@@ -1,0 +1,1 @@
+export { useQueryParam } from "./useRouterQuery";

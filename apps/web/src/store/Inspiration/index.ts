@@ -1,0 +1,1 @@
+export { inspirationDetailState } from './InspirationDetailState';

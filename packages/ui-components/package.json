@@ -9,14 +9,18 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.55",
+    "@types/react-dom": "18.2.18",
     "@ygtang/eslint-config": "workspace:*",
     "@ygtang/typescript-config": "workspace:*"
   },
   "dependencies": {
     "@emotion/core": "^11.0.0",
     "@emotion/react": "11.11.3",
+    "@ygtang/constants": "workspace:^",
     "@ygtang/hooks": "workspace:^",
     "@ygtang/ui-styles": "workspace:^",
-    "react": "18.2.0"
+    "framer-motion": "^11.0.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }
