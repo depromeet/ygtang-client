@@ -19,5 +19,4 @@
 혜성 : hyesungoh
 도현 : ddarkr
 대윤 : SenseCodeValue
-은정 : positiveko
 -->
