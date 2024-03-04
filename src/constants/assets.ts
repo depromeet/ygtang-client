@@ -1,4 +1,4 @@
-export const INSPIRATION_EMPTY_IMAGE_SRC = '/InspirationEmpty.png';
+export const INSPIRATION_EMPTY_IMAGE_SRC = '/insp-empty.webp';
 export const INSPIRATION_EMPTY_TEXT_IMAGE_SRC = '/InspirationEmptyText.png';
 export const USER_PROFILE_IMAGE_SRC = '/UserProfile.png';
 
