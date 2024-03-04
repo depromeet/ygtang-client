@@ -75,10 +75,11 @@ const MenuCss = (theme: Theme) => css`
   height: 54px;
   padding: 16px 0;
   border-bottom: solid 1px ${theme.color.gray01};
+  cursor: pointer;
 `;
 
 const menuTitleCss = css`
-  font-size: 12px;
+  font-size: 14px;
 `;
 
 const hiddenCss = css`

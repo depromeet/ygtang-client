@@ -6,7 +6,7 @@ import CustomException from '~/exceptions/CustomException';
 import { errorMessage } from '~/exceptions/messages';
 import { ApiErrorScheme } from '~/exceptions/type';
 
-const DEVELOPMENT_API_URL = 'https://api.ygtang.xyz/api';
+const DEVELOPMENT_API_URL = 'https://ygtang.kr/api'; // TODO: 개발 서버 사망에 따른 개발 버전에서도 프로덕션 사용
 const PRODUCTION_API_URL = 'https://ygtang.kr/api';
 
 export const instance = axios.create({

@@ -1,10 +1,13 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { css, Theme } from '@emotion/react';
 
-import { CTAButton, GhostButton } from '~/components/common/Button';
+import { CTAButton, FilledButton, GhostButton } from '~/components/common/Button';
+import Dialog from '~/components/common/Dialog';
 import SEO from '~/components/common/SEO';
 import TextField from '~/components/common/TextField';
+import { localStorageExtensionKeys } from '~/constants/localStorage';
 import useMemberLoginMutation from '~/hooks/api/member/useMemberLoginMutation';
+import useReissueMutation from '~/hooks/api/reissue/useReissueMutation';
 import useDidUpdate from '~/hooks/common/useDidUpdate';
 import useInput from '~/hooks/common/useInput';
 import useInternalRouter from '~/hooks/common/useInternalRouter';
@@ -15,76 +18,18 @@ import { recordEvent } from '~/utils/analytics';
 import { validator } from '~/utils/validator';
 
 export default function Login() {
-  const { fireToast } = useToast();
-  const email = useInput({ useDebounce: true });
-  const password = useInput({ useDebounce: true });
   const [isPending, setIsPending] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const { userLogin } = useUser();
   const { push } = useInternalRouter();
-  const { getRedirect, goRedirect } = useLoginRedirect();
 
+  const { handleFormSubmitEvent, email, password, emailError, passwordError } = useLoginPage({
+    setIsPending,
+  });
   const {
-    mutate: loginMutate,
-    data: loginMutationData,
-    error: loginMutationError,
-  } = useMemberLoginMutation();
-
-  const handleFormSubmitEvent = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (emailError !== '' || passwordError !== '') {
-      return fireToast({
-        content: '올바르지 않은 입력값입니다. 다시 확인해주세요',
-        duration: 3500,
-      });
-    }
-    setIsPending(true);
-    loginMutate({
-      email: email.value,
-      password: password.value,
-    });
-  };
-
-  useDidUpdate(() => {
-    if (!validator({ type: 'email', value: email.debouncedValue })) {
-      setEmailError('올바른 이메일을 입력해주세요.');
-    } else {
-      setEmailError('');
-    }
-  }, [email.debouncedValue]);
-
-  useDidUpdate(() => {
-    if (password.debouncedValue.length >= 6) {
-      setPasswordError('');
-    } else {
-      setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
-    }
-  }, [password.debouncedValue]);
-
-  useDidUpdate(() => {
-    if (loginMutationData && loginMutationData.data) {
-      userLogin({
-        accessToken: loginMutationData.data.accessToken,
-        refreshToken: loginMutationData.data.refreshToken,
-      });
-      setIsPending(false);
-      recordEvent({ action: 'Login', value: '로그인 화면에서 로그인' });
-
-      if (getRedirect()) {
-        goRedirect();
-      } else {
-        push('/');
-      }
-    }
-  }, [loginMutationData]);
-
-  useEffect(() => {
-    if (loginMutationError) {
-      setIsPending(false);
-      fireToast({ content: loginMutationError.message ?? '알 수 없는 오류가 발생했습니다.' });
-    }
-  }, [fireToast, loginMutationError]);
+    canExtensionLogin,
+    handleExtensionLogin,
+    setUserCancelExtensionLogin,
+    userCancelExtensionLogin,
+  } = useExtensionAuth({ setIsPending });
 
   return (
     <>
@@ -127,9 +72,174 @@ export default function Login() {
             빠르게 가입하기
           </GhostButton>
         </div>
+        <Dialog
+          isShowing={!userCancelExtensionLogin && canExtensionLogin}
+          dialogWidth={300}
+          actionButtons={
+            <>
+              <FilledButton
+                colorType="light"
+                onClick={() => setUserCancelExtensionLogin(true)}
+                disabled={isPending}
+              >
+                다른 계정
+              </FilledButton>
+              <div css={dialogLongButtonCss}>
+                <FilledButton colorType="dark" onClick={handleExtensionLogin} disabled={isPending}>
+                  익스텐션 계정
+                </FilledButton>
+              </div>
+            </>
+          }
+        >
+          영감탱 익스텐션에 로그인되어 있습니다.
+          <br />
+          익스텐션 계정으로 로그인할까요?
+        </Dialog>
       </article>
     </>
   );
+}
+
+function useLoginPage({ setIsPending }: { setIsPending: (value: boolean) => void }) {
+  const { fireToast } = useToast();
+  const email = useInput({});
+  const password = useInput({});
+  const { push } = useInternalRouter();
+  const { getRedirect, goRedirect } = useLoginRedirect();
+  const { userLogin } = useUser();
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const {
+    mutate: loginMutate,
+    data: loginMutationData,
+    error: loginMutationError,
+  } = useMemberLoginMutation();
+
+  const handleFormSubmitEvent = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (emailError !== '' || passwordError !== '') {
+      return fireToast({
+        content: '올바르지 않은 입력값입니다. 다시 확인해주세요',
+        duration: 3500,
+      });
+    }
+    setIsPending(true);
+    loginMutate({
+      email: email.value,
+      password: password.value,
+    });
+  };
+
+  useDidUpdate(() => {
+    if (!validator({ type: 'email', value: email.value })) {
+      setEmailError('올바른 이메일을 입력해주세요.');
+    } else {
+      setEmailError('');
+    }
+  }, [email.value]);
+
+  useDidUpdate(() => {
+    if (password.value.length >= 6) {
+      setPasswordError('');
+    } else {
+      setPasswordError('비밀번호는 6자리 이상이여야 합니다.');
+    }
+  }, [password.value]);
+
+  useDidUpdate(() => {
+    if (loginMutationData && loginMutationData.data) {
+      userLogin({
+        accessToken: loginMutationData.data.accessToken,
+        refreshToken: loginMutationData.data.refreshToken,
+      });
+      setIsPending(false);
+      recordEvent({ action: 'Login', value: '로그인 화면에서 로그인' });
+
+      if (getRedirect()) {
+        goRedirect();
+      } else {
+        push('/');
+      }
+    }
+  }, [loginMutationData]);
+
+  useEffect(() => {
+    if (loginMutationError) {
+      setIsPending(false);
+      fireToast({ content: loginMutationError.message ?? '알 수 없는 오류가 발생했습니다.' });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fireToast, loginMutationError]);
+
+  return { handleFormSubmitEvent, email, password, emailError, passwordError };
+}
+
+function useExtensionAuth({ setIsPending }: { setIsPending: (value: boolean) => void }) {
+  const { getRedirect, goRedirect } = useLoginRedirect();
+  const { push } = useInternalRouter();
+  const { fireToast } = useToast();
+  const { userLogin } = useUser();
+  const [canExtensionLogin, setCanExtensionLogin] = useState(false);
+  const [userCancelExtensionLogin, setUserCancelExtensionLogin] = useState(false);
+
+  const { mutate: reissueMutate } = useReissueMutation({
+    onSuccess: ({ data }) => {
+      userLogin({
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      });
+      setIsPending(false);
+      recordEvent({ action: 'Login', value: '로그인 화면에서 익스텐션 계정으로 로그인' });
+
+      if (getRedirect()) {
+        goRedirect();
+      } else {
+        push('/');
+      }
+    },
+    onError: () => {
+      fireToast({ content: '익스텐션 계정으로 로그인하는데 실패했습니다.' });
+      setCanExtensionLogin(false);
+      setIsPending(false);
+    },
+  });
+
+  const handleExtensionLogin = () => {
+    setIsPending(true);
+    const token = localStorage.getItem(localStorageExtensionKeys.refreshToken);
+    if (token) {
+      reissueMutate({ refreshToken: token });
+    }
+  };
+
+  useEffect(() => {
+    const checkLoginAvailable = () => {
+      if (userCancelExtensionLogin) {
+        return;
+      }
+      if (localStorage.getItem(localStorageExtensionKeys.refreshToken)) {
+        setCanExtensionLogin(true);
+      } else {
+        setCanExtensionLogin(false);
+      }
+    };
+    checkLoginAvailable();
+    const interval = setInterval(checkLoginAvailable, 3000);
+    return () => {
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return {
+    canExtensionLogin,
+    handleExtensionLogin,
+    setUserCancelExtensionLogin,
+    userCancelExtensionLogin,
+  };
 }
 
 const navMockupCss = css`
@@ -165,4 +275,9 @@ const signUpTextWrapperCss = (theme: Theme) => css`
   font-weight: ${theme.font.weight.regular};
   font-size: 10px;
   line-height: 150%;
+`;
+
+const dialogLongButtonCss = css`
+  width: 160px;
+  flex-shrink: 0;
 `;

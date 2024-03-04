@@ -22,11 +22,12 @@ export default function MyPage() {
         <ul css={menuListCss}>
           <Menu label="내 계정" internalHref="/my/account" />
           <Menu label="태그관리" internalHref="/my/tag" />
+          <Menu label="영감탱에 피드백 보내기" externalHref={POLICY_URL.FEEDBACK} />
           <Menu label="이용약관" externalHref={POLICY_URL.TOS} />
           <Menu label="개인정보 정책" externalHref={POLICY_URL.PRIVACY} />
           <Menu
             css={initializeMenuCss}
-            label="정보초기화"
+            label="정보 초기화"
             onClick={() => {
               setIsInitializeConfirmModalOpen(true);
             }}

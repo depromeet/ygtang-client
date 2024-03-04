@@ -26,9 +26,10 @@ export const MODAL_TYPE = {
 };
 
 export const POLICY_URL = {
-  PRIVACY: 'https://gifted-puffin-352.notion.site/94ac34de4c97467fb1f21a8bbed26eab',
+  PRIVACY: 'https://slashpage.com/ygtang/7vgjr4m1rkpdk2dwpy86',
   // NOTE: Terms of service 줄여서 TOS라고 많이 쓴다고하네요!
-  TOS: 'https://gifted-puffin-352.notion.site/e75b7f51da7944508f37071f5345cc46',
+  TOS: 'https://slashpage.com/ygtang/ndvwx728g8vdxm3z6jpg ',
+  FEEDBACK: 'https://slashpage.com/ygtang/ndvwx728gewqgm3z6jpg',
 };
 
 export const WEBVIEW_MESSAGE_TYPE = {

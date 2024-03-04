@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
-import { css, Theme } from '@emotion/react';
+import { css, Theme, useTheme } from '@emotion/react';
 import { motion } from 'framer-motion';
 
 import PortalWrapper from '~/components/common/PortalWrapper';
@@ -10,13 +10,16 @@ import { dimBackdropCss } from './styles';
 export interface DialogProps {
   isShowing?: boolean;
   actionButtons: ReactNode;
+  dialogWidth?: number;
 }
 
 export default function Dialog({
   isShowing,
   children,
   actionButtons,
+  dialogWidth,
 }: PropsWithChildren<DialogProps>) {
+  const theme = useTheme();
   const [isSSR, setIsSSR] = useState(true);
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export default function Dialog({
           animate="animate"
           exit="exit"
         >
-          <motion.div css={dialogCss} variants={defaultFadeInUpVariants}>
+          <motion.div css={dialogCss(theme, dialogWidth)} variants={defaultFadeInUpVariants}>
             <div css={dialogContentWrapperCss}>{children}</div>
             <div css={dialogButtonWrapperCss}>{actionButtons}</div>
           </motion.div>
@@ -54,14 +57,14 @@ const dimBackdropLayoutCss = (theme: Theme) => css`
   ${dimBackdropCss(theme)}
 `;
 
-const dialogCss = (theme: Theme) => css`
+const dialogCss = (theme: Theme, width = 311) => css`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
 
-  width: 311px;
+  width: ${width}px;
   min-height: 200px;
 
   background-color: ${theme.color.background};
