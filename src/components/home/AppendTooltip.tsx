@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useRef } from 'react';
 import { css, Theme } from '@emotion/react';
 import { motion, Variants } from 'framer-motion';
 
@@ -12,6 +12,7 @@ import { IMAGE_INPUT_ID, ImgUploader } from '../add/ImgUploader';
 
 export default function AppendTooltip() {
   const { imgInputUploader } = useImgUpload({ isUploadPage: false });
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <motion.div css={wrapperCss} variants={tooltipVariants}>
@@ -20,9 +21,9 @@ export default function AppendTooltip() {
         href="/add/image"
         icon={<ImageIcon />}
         title="이미지"
-        htmlFor={IMAGE_INPUT_ID}
+        onClick={() => inputRef.current?.click()}
       />
-      <ImgUploader imgInputUploader={imgInputUploader} />
+      <ImgUploader imgInputUploader={imgInputUploader} ref={inputRef} />
       <AnchorElement href="/add/link" icon={<LinkIcon />} title="링크" />
     </motion.div>
   );
@@ -46,12 +47,13 @@ interface AnchorElementProps {
   icon: ReactNode;
   title: string;
   htmlFor?: string;
+  onClick?: () => void;
 }
 
-function AnchorElement({ href, icon, title, htmlFor }: AnchorElementProps) {
-  if (htmlFor) {
+function AnchorElement({ href, icon, title, htmlFor, onClick }: AnchorElementProps) {
+  if (htmlFor || onClick) {
     return (
-      <label css={anchorCss} htmlFor={htmlFor}>
+      <label css={anchorCss} htmlFor={htmlFor} onClick={onClick}>
         {icon}
         <span>{title}</span>
       </label>
