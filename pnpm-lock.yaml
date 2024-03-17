@@ -26,6 +26,33 @@ importers:
 
   apps/web:
     dependencies:
+      '@emotion/react':
+        specifier: 11.11.3
+        version: 11.11.3(@types/react@18.2.46)(react@18.2.0)
+      '@tanstack/react-query':
+        specifier: 5.18.1
+        version: 5.18.1(react@18.2.0)
+      '@ygtang/api':
+        specifier: workspace:^
+        version: link:../../packages/api
+      '@ygtang/constants':
+        specifier: workspace:*
+        version: link:../../packages/constants
+      '@ygtang/http':
+        specifier: workspace:^
+        version: link:../../packages/http
+      '@ygtang/ui-components':
+        specifier: workspace:*
+        version: link:../../packages/ui-components
+      '@ygtang/ui-styles':
+        specifier: workspace:*
+        version: link:../../packages/ui-styles
+      framer-motion:
+        specifier: ^11.0.5
+        version: 11.0.5(react-dom@18.2.0)(react@18.2.0)
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       next:
         specifier: 14.0.4
         version: 14.0.4(react-dom@18.2.0)(react@18.2.0)
@@ -35,10 +62,19 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
+      react-quick-pinch-zoom:
+        specifier: ^5.1.0
+        version: 5.1.0(react-dom@18.2.0)(react@18.2.0)
+      recoil:
+        specifier: ^0.7.7
+        version: 0.7.7(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@types/eslint':
         specifier: 8.56.1
         version: 8.56.1
+      '@types/lodash':
+        specifier: ^4.14.202
+        version: 4.14.202
       '@types/node':
         specifier: 20.10.6
         version: 20.10.6
@@ -185,6 +221,9 @@ importers:
       '@ygtang/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      framer-motion:
+        specifier: '*'
+        version: 11.0.5(react-dom@18.2.0)(react@18.2.0)
 
   packages/eslint-config:
     devDependencies:
@@ -306,19 +345,31 @@ importers:
       '@emotion/react':
         specifier: 11.11.3
         version: 11.11.3(@types/react@18.2.55)(react@18.2.0)
+      '@ygtang/constants':
+        specifier: workspace:^
+        version: link:../constants
       '@ygtang/hooks':
         specifier: workspace:^
         version: link:../hooks
       '@ygtang/ui-styles':
         specifier: workspace:^
         version: link:../ui-styles
+      framer-motion:
+        specifier: ^11.0.5
+        version: 11.0.5(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
     devDependencies:
       '@types/react':
         specifier: ^18.2.55
         version: 18.2.55
+      '@types/react-dom':
+        specifier: 18.2.18
+        version: 18.2.18
       '@ygtang/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
@@ -627,8 +678,41 @@ packages:
     resolution: {integrity: sha512-gJB6HLm5rYwSLI6PQa+X1t5CFGrv1J1TWG+sOyMCeKz2ojaj6Fnl/rZEspogG+cvqbt4AE/2eIyD2QfLKTBNlQ==}
     dev: false
 
+  /@emotion/is-prop-valid@0.8.8:
+    resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
+    requiresBuild: true
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    optional: true
+
+  /@emotion/memoize@0.7.4:
+    resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    requiresBuild: true
+    optional: true
+
   /@emotion/memoize@0.8.1:
     resolution: {integrity: sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==}
+    dev: false
+
+  /@emotion/react@11.11.3(@types/react@18.2.46)(react@18.2.0):
+    resolution: {integrity: sha512-Cnn0kuq4DoONOMcnoVsTOR8E+AdnKFf//6kUWc4LCdnxj31pZWn7rIULd6Y7/Js1PiPHzn7SKCM9vB/jBni8eA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: '>=16.8.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.9
+      '@emotion/babel-plugin': 11.11.0
+      '@emotion/cache': 11.11.0
+      '@emotion/serialize': 1.1.3
+      '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
+      '@emotion/utils': 1.2.1
+      '@emotion/weak-memoize': 0.3.1
+      '@types/react': 18.2.46
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
     dev: false
 
   /@emotion/react@11.11.3(@types/react@18.2.52)(react@18.2.0):
@@ -1402,7 +1486,6 @@ packages:
       '@types/prop-types': 15.7.11
       '@types/scheduler': 0.16.8
       csstype: 3.1.3
-    dev: true
 
   /@types/react@18.2.52:
     resolution: {integrity: sha512-E/YjWh3tH+qsLKaUzgpZb5AY0ChVa+ZJzF7ogehVILrFpdQk6nC/WXOv0bfFEABbXbgNxLBGU7IIZByPKb6eBw==}
@@ -2834,6 +2917,23 @@ packages:
       mime-types: 2.1.35
     dev: false
 
+  /framer-motion@11.0.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Lb0EYbQcSK/pgyQUJm+KzsQrKrJRX9sFRyzl9hSr9gFG4Mk8yP7BjhuxvRXzblOM/+JxycrJdCDVmOQBsjpYlw==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.6.2
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+
   /fs-extra@11.2.0:
     resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
     engines: {node: '>=14.14'}
@@ -2993,6 +3093,10 @@ packages:
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
+
+  /hamt_plus@1.0.2:
+    resolution: {integrity: sha512-t2JXKaehnMb9paaYA7J0BX8QQAY8lwfQ9Gjf4pg/mk4krt+cmwmU652HOoWonf+7+EQV97ARPMhhVgU1ra2GhA==}
+    dev: false
 
   /has-bigints@1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
@@ -3839,6 +3943,25 @@ packages:
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
+  /react-quick-pinch-zoom@5.1.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-c8iOBrhbWwuJkUgbM0itkxhYHN3Zc15fvwYclo52scuicPidOuXJxwoVboNtccgtG24w33EhpuKVA7aLt93oSA==}
+    peerDependencies:
+      prop-types: '>=15.0.0'
+      react: '>=16.4.0'
+      react-dom: '>=16.4.0'
+    peerDependenciesMeta:
+      prop-types:
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.6.2
+    dev: false
+
   /react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
@@ -3856,6 +3979,23 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /recoil@0.7.7(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-8Og5KPQW9LwC577Vc7Ug2P0vQshkv1y3zG3tSSkWMqkWSwHmE+by06L8JtnGocjW6gcCvfwB3YtrJG6/tWivNQ==}
+    peerDependencies:
+      react: '>=16.13.1'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      hamt_plus: 1.0.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /reflect.getprototypeof@1.0.5:
     resolution: {integrity: sha512-62wgfC8dJWrmxv44CA36pLDnP6KKl3Vhxb7PL+8+qrrFMMoJij4vgiMP8zV4O8+CBMXY1mHxI5fITGHXFHVmQQ==}

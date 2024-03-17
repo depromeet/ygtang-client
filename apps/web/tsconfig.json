@@ -4,6 +4,10 @@
     "paths": {
       "~/*": ["./src/*"],
     },
+    "types": [
+      "@emotion/react/types/css-prop",
+      "@ygtang/ui-styles/emotion-theme"
+    ],
     "plugins": [
       {
         "name": "next",
@@ -17,6 +21,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "./.eslintrc.js",
+    "./types/**/*.d.ts",
   ],
   "exclude": ["node_modules"],
 }
